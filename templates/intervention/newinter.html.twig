@@ -1,0 +1,58 @@
+{% extends template %}
+
+{% block title %}Nouvelle demande
+{% endblock %}
+{% block pageAccueil %}
+	<h4>Nouvelle demande d'intervention</h4>
+{% endblock %}
+{% block titreSection %}Determinez l'intervention
+{% endblock %}
+{% block titrePage %}Determinez l'intervention
+{% endblock %}
+
+{% block contenu %}
+
+	<div class="row pb-4 pt-2 bg-white">
+		<div class="col-12 contact-us animate">
+			<div class="row">
+				<div class="col-sm-12 text-center">
+					<p class="h5">Choisissez votre type d'intervention</p>
+				</div>
+
+				<div class="col-sm-3 col-6 text-center liste">
+					<input type="radio" id="listeInter_0" value="{{listeInters[0].id}}" name="listeinter" class="listeinter" data-inter>
+
+					<label class="h6" for="listeInter_0"></label>
+
+
+				</div>
+				<div class="col-sm-3 col-6 text-center liste">
+					<input type="radio" id="listeInter_1" value="{{listeInters[1].id}}" name="listeinter" class="listeinter" data-inter>
+					<label class="h6" for="listeInter_1"></label>
+
+
+				</div>
+				<div class="col-sm-3 col-6 text-center liste">
+					<input type="radio" id="listeInter_2" value="{{listeInters[2].id}}" name="listeinter" class="listeinter radio" data-inter>
+
+					<label class="h6" for="listeInter_2"></label>
+				</div>
+				<div class="col-sm-3 col-6 text-center liste">
+					<input type="radio" id="listeInter_3" value="diag" name="listeinter" class="listeinter radio" data-inter>
+
+					<label class="h6" for="listeInter_3"><br>Diagnostics <br> immobiliers</label>
+				</div>
+
+			</div>
+			<div class="col-sm-12 text-center mb-4 mt-4">
+				<p class="h5 titre2"></p>
+			</div>
+
+			<div class="row type"></div>
+			<div class="row">
+				<div class="col-sm-12 text-right mt-2 boutton"></div>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

@@ -1,0 +1,21 @@
+.shortcode-service {
+  &.owl-carousel{
+    .owl-stage-outer{
+      margin-bottom: -10px;
+      .owl-stage{
+        margin-bottom: 10px;
+      }
+    }
+  }
+  .item-service{
+    &.with-icon{
+      padding-top: 40px;
+      @media(max-width: 1199px){
+        padding-top: 30px;
+      }
+      .item-content{
+        padding-top: 20px;
+      }
+    }
+  }
+}

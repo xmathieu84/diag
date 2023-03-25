@@ -1,0 +1,27 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <section
+            class="ds s-overlay s-pt-xl-250 s-pt-lg-210 s-pt-md-170 s-pt-150 s-pb-xl-150 s-pb-lg-130 s-pb-md-90 s-pb-60 page_404 c-gutter-60">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-12 text-center text-sm-left">
+                    <h3 class="color-main">Erreur interne</h3>
+
+                    <h2 class=" text-404-second">
+						<span class="">
+							L'adresse n'existe pas ou la page demandée n'a pas pu êtré chargée
+						</span>
+                    </h2>
+
+                    <div class="fw-divider-space divider-30 divider-lg-55"></div>
+                    <div class="many-buttons">
+                        <a class="btn btn-maincolor medium-btn" href="{{ path('home') }}">Accueil</a>
+                        <a id="back-btn" class="btn btn-outline-maincolor medium-btn">Retour en arrière</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

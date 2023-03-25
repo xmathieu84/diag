@@ -1,0 +1,38 @@
+{% extends template %}
+{% block title %}Liste Rapport
+{% endblock %}
+{% block contenu %}
+	<div class="row bg-white pt-5">
+
+		<div class="col-sm-6 mb-5">
+			<label for="idRapport"class="h6">Séléctionner un rapport</label>
+			<select name="" id="idRapport" class="form-control form-control-lg">
+				<option value="0">Selectionnez un rapport</option>
+				{% for rapport in rapports %}
+					<option value="{{rapport.id}}">Intervention du
+						{{rapport.intervention.rdvAt|format_datetime('short', 'none', locale='fr')}} {{ rapport.archive }}</option>
+				{% endfor %}
+			</select>
+		</div>
+		<div class="col-sm-6">
+			<label for="refDossier" class="h6">Référence du dossier (le cas échéant)</label>
+			<input type="text" name="" id="refDossier">
+		</div>
+		<div class="col-sm-3"></div>
+		<div class="col-sm-12 text-center">
+			<label for="mail" class="h6">Adresse Email du destinataire</label>
+			<p class="h7">Appuyer sur Entrée pour valider chaque adresse email</p>
+			<input type="email" name="mail" id="tag-input1" class=" bg-white">
+
+		</div>
+		<div class="col-sm-3"></div>
+		<div class="col-sm-12 text-center mt-5">
+
+			<button type="button" class="btn btn-outline-maincolor">Envoyer</button>
+		</div>
+		<div class="col-sm-12 mt-5">
+			<p class="h4 message"></p>
+		</div>
+	</div>
+
+{% endblock %}

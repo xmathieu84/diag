@@ -1,0 +1,31 @@
+{% extends "administrateur/baseA.html.twig" %}
+
+{% block body %}
+
+	<div class="table-responsive">
+
+		<table class="table align-items-center table-flush table-bordered">
+
+			<tr>
+				<th>Code promotionnel</th>
+				<th>Avantage</th>
+				<th>Cible</th>
+				<th>Fin de validité</th>
+				<th>Nombre d'utlisateur du code</th>
+			</tr>
+
+			{% for codePromo in codePromos %}
+				<tr>
+					<td>{{codePromo.nom}}</td>
+					<td>{{codePromo.avantage}}</td>
+					<td>{{codePromo.cible}}</td>
+					<td>{{codePromo.validite|format_datetime('short', 'none', locale='fr')}}</td>
+
+					<td>{{codePromo.entreprise|length}}</td>
+				</tr>
+			{% endfor %}
+		</table>
+
+	</div>
+
+{% endblock %}

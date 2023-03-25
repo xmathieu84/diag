@@ -1,0 +1,22 @@
+
+
+<div class="content">
+    <div class="notes">
+        {% for note in notes %}
+            <table class="annotation">
+                <tr>
+                    <td>{{ note.titre }}</td>
+                    <td>{{ note.auteur }}</td>
+                    <td>{{ note.date|format_datetime('short','none',locale="fr") }}</td>
+                    <td>{{ note.docSousDossier.libelle }}<br>
+                    ({{ note.docSousDossier.fichier }})</td>
+                </tr>
+            </table>
+            <div class="texte">
+                <p>{{ note.texte }}</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+

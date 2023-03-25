@@ -1,0 +1,64 @@
+{% extends 'administrateur/baseA.html.twig' %}
+
+{% block body %}
+    <div class="table-responsive">
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Adresse</th>
+                <th>Numéro de télephone</th>
+                <th>Mail du contact</th>
+                <th>Détail des mandats reçu</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for institution in institutions %}
+                <tr>
+                    <td>{{ institution.profil }} {{ institution.nom }}</td>
+                    <td>{{ institution.adresse.numero }} {{ institution.adresse.nomVoie }} <br>
+                        {{ institution.adresse.codePostal }} {{ institution.adresse.ville }}</td>
+                    <td>{{ institution.telephon.numero }}</td>
+                    <td>{{ institution.agents[0].user.email }}</td>
+                    <td><a href="{{ path("voirMandat",{id:institution.id}) }}"
+                           class="btn btn-outline-success">Factures</a></td>
+                    <td><button class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#modalPrelev{{ loop.index }}">Mandats de prélèvement</button></td>
+                </tr>
+                <div class="modal fade" id="modalPrelev{{ loop.index }}" tabindex="-1" aria-labelledby="modalPrelev{{ loop.index }}" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="labelPrelev{{ loop.index }}">Liste des mandat de prélèvement  de {{ institution.nom }}</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                {% for banque  in institution.banques %}
+                                    <div class="col-3">
+                                        <a href="/uploads/sepa/{{ banque.sepaSigne}}" target="_blank">
+                                            <figure>
+                                                <img src="/css/css_site/images/fichier52.png" alt="">
+                                                <figcaption>{{ banque.sepaSigne }}</figcaption>
+                                            </figure>
+                                        </a>
+                                    </div>
+                                {% endfor %}
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+{% endblock %}

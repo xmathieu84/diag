@@ -1,0 +1,62 @@
+{% extends 'institution/baseInsti.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/core@4.1.0/main.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@4.1.0/main.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@4.1.0/main.min.css"/>
+{% endblock %}
+{% block title %}Planning{% endblock %}
+{% block titrePage %}Planning{% endblock %}
+
+
+
+{% block contenu %}
+        <div class="table-responsive">
+            <table class="text-center table-planning">
+                <thead>
+                    <tr>
+                        {% if is_granted('ROLE_GRANDCOMPTE') %}
+                            <th  class="resp">Collaborateur</th>
+                            <th class="resp">Mail</th>
+                            <th></th>
+                            {% else %}
+                                <th  class="resp">Agent</th>
+                                <th class="resp">Mail</th>
+                                <th></th>
+                        {% endif %}
+
+                    </tr>
+                </thead>
+                <tbody>
+                {% for employe in employes %}
+                    <tr class="color-dark">
+                        <td class="resp">{{ employe.civilite.prenom }} {{ employe.civilite.nom }}</td>
+                        <td class="resp">{{ employe.user.email }}</td>
+                        <td class="'boutonPlanning"><a href="{{ path('creationPlanning',{id:employe.id,code:code}) }}" class="btn btn-outline-maincolor">Planning</a></td>
+                    </tr>
+                {% endfor %}
+                {% for responsable in responsables %}
+                        <tr class="table-primary" >
+                            <td class="resp text-dark">{{ responsable.civilite.prenom }} {{ responsable.civilite.nom }}</td>
+                            <td class="resp text-dark">{{ responsable.user.email }}</td>
+                            <td class="'boutonPlanning"><a href="{{ path('creationPlanning',{id:responsable.id,code:code})}}" class="btn btn-light">Planning</a></td>
+                        </tr>
+                    {% for employe in responsable.chef %}
+                        <tr class="color-dark">
+                            <td class="resp text-dark">{{ employe.civilite.prenom }} {{ employe.civilite.nom }}</td>
+                            <td class="resp">{{ employe.user.email }}</td>
+                            <td class="boutonPlanning"><a href="{{ path('creationPlanning',{id:responsable.id,code:code})}}" class="btn btn-outline-maincolor">Planning</a></td>
+                        </tr>
+                    {% endfor %}
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+{% endblock %}
+{% block js %}
+    {{ encore_entry_script_tags('app') }}
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@4.1.0/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@4.1.0/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@4.1.0/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@4.1.0/main.min.js"></script>
+{% endblock %}

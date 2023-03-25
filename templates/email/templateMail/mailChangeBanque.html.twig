@@ -1,0 +1,14 @@
+{% extends "email/templateMail/baseMail.html.twig" %}
+
+{% block sujet %}Changement d'informations bancaires{% endblock %}
+{% block body %}
+    <p style="font-size: 14px; line-height: 140%;">Expediateur : {{ expediteur }},</p>
+
+    <p style="font-size: 14px; line-height: 140%;">&nbsp;</p>
+    <p style="font-size: 14px; line-height: 140%;">Entreprise : {{ entreprise }}</p>
+    <p style="font-size: 14px; line-height: 140%;">&nbsp;</p>
+    <p style="font-size: 14px; line-height: 140%;">{{ contenu }}</p>
+
+
+
+{% endblock %}

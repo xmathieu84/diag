@@ -1,0 +1,54 @@
+{% extends "demandeur/basedemandeur.html.twig" %}
+
+{% block contenu %}
+
+	<div class="row text-center">
+
+
+		{{form_start(form,{'attr':{'id':'formDemandeur'}})}}
+		<p class="h5">Prix de l'intervention:{{intervention.prix}}€</p>
+		<p class="h5">
+			Acompte déjà versé :
+			{{intervention.acommpte}}€</p>
+		<p class="h5">A payer :
+			{{(intervention.prix - intervention.acommpte)|number_format(2)}}€</p>
+
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="form-group has-placeholder">
+					<p class="h6">Titulaire de la carte</p>
+					{{form_row(form.nom_titulaire,{'label': ' ','attr':{'class':'form-control form-control-lg ','placeholder':'Nom du titulaire de la carte'}})}}
+				</div>
+			</div>
+			<div class="col-sm-12">
+				<div class="form-group has-placeholder">
+					<p class="h6">Numéro de la carte</p>
+					{{form_row(form.numero,{'label': ' ','attr':{'class':'form-control form-control-lg ','placeholder':'Numéro de la carte','minlength':'16','maxlength':'16'}})}}
+				</div>
+			</div>
+
+
+			<div class="col-sm-4">
+				<div class="form-group has-placeholder">
+					{{form_row(form.mois,{'label': ' ','attr':{'class':'form-control form-control-lg '}})}}
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<div class="form-group has-placeholder">
+					{{form_row(form.annee,{'label': ' ','attr':{'class':'form-control form-control-lg '}})}}
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<div class="form-group has-placeholder">
+					{{form_row(form.crypto,{'label': ' ','attr':{'class':'form-control form-control-lg ','placeholder':'cryptogramme'}})}}
+				</div>
+			</div>
+			<div class="col-sm-12">
+				<button type="submit" class="btn btn-maincolor">Valider</button>
+			</div>
+			{{form_end(form)}}
+		</div>
+	</div>
+
+
+{% endblock %}

@@ -1,0 +1,96 @@
+.feuilleDevis{
+    background : white;
+    min-height: 60em;
+}
+.logo,.titreDevis{
+    height: auto;
+}
+.titreDevis{
+    padding: 4em 0em 0em 2.5em;
+}
+.infoClient{
+    color : black;
+    
+}
+
+.infoClient:hover,.titreDevis:hover{
+    background: silver;
+}
+.refDevis{
+    width: 20%;
+}
+.designDevis{
+    width: 30%;
+}
+.quantiteDevis{
+    width: 10%;
+}
+.prixdevis{
+    width: 10%;
+}
+.tvaDevis{
+    width: 10%;
+}
+.montantDevis{
+    width: 20%;
+}
+.infoEntreprise{
+    color : black
+}
+
+.totalHT,.totalTva,.totalTtc{
+    width: 18em;
+    height: 3em;
+    border:1px solid black;
+}
+
+
+.conditionPaiement:hover{
+    background-color: silver;
+}
+.conditionL{
+    font-size: 0.5em;
+}
+
+.zonePrix .totalHT, .zonePrix .totalTva, .zonePrix .totalTtc {
+    padding-left: 1rem;
+    padding-top: .7rem;
+}
+
+@media only screen and (min-width: 768px) {
+    .conditionPaiement{
+        height: 10em;
+    }
+
+    .conditionL{
+        position: absolute;
+        bottom: 15px;
+        height: 10em;
+    }
+    .bdp{
+        position: absolute;
+        bottom: 90px;
+        height: 10em;
+    }
+
+}
+
+
+/* pour aérer les contenus en version ipad/mobile */
+
+@media only screen and (max-width: 768px) {
+    .bdp {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+    .conditionPaiement {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .titreDevis {
+        padding: 1rem;
+    }
+
+
+}

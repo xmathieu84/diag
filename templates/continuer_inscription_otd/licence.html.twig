@@ -1,0 +1,125 @@
+{% extends template %}
+{% block title %}Licence
+{% endblock %}
+{% block contenu %}
+
+	<div class="container bg-white">
+		<div class="row">
+			{% if salarie.entreprise.cgv == false %}
+				<div class="col-sm-2"></div>
+				<div class="col-sm-8 text-center mt-3">
+					<h5>Progression de votre Inscription</h5>
+					<div class="progress">
+						<div class="progress-bar" role="progressbar" style="width: 35%;" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100">35%</div>
+					</div>
+
+
+				</div>
+				<div class="col-sm-2"></div>
+
+			{% endif %}
+			<div class="col-sm-12 text-center">
+				<p class="h7">Les champs marqués d'une * sont obligatoires</p>
+			</div>
+
+			<div class="col-sm-12 text-center">
+				<br><br>
+				<p class="h2">Ajouter votre Certificat d'Aptitude CATT
+				</p>
+
+				<br><br>
+			</div>
+			<div class="col-sm-5">
+				<label for="numeroLicence" style="margin-bottom: 1.4em">Numéro de Certificat d'Aptitude CATT *</label>
+
+
+				<input type="text" class='form-control form-control-sm numeroLicence ' id="numeroLicence">
+			</div>
+			<div class="col-sm-7">
+				<label for="realLicence">Télécharger votre Certificat d'Aptitude CATT (format PDF) *</label>
+
+				<button id="licence">
+					{% if salarie.licenceDgac %}
+						{{salarie.licenceDgac.fichierLicence}}
+					{% else %}
+						Certificat d'Aptitude CATT
+
+					{% endif %}
+				</button>
+				<input type="file" name="" id="realLicence" accept='.pdf'>
+
+				<br><br>
+			</div>
+			<div class="col-12 mt-3 mb-3 text-center">
+				<p class="h2">Votre numéro d'exploitant *</p>
+				<div class="row">
+					<div class="col-3"></div>
+					<div class="col-6 mt-3">
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text" id="basic-addon1">FRA</span>
+							</div>
+
+							<input type="text" class="form-control" placeholder="Numéro d'exploitant" aria-label="exploitant" aria-describedby="basic-addon1" id="exploitant" minlength="13" maxlength="13">
+						</div>
+
+					</div>
+					<div class="col-3"></div>
+				</div>
+			</div>
+			<div class="col-sm-6 mt-5">
+				<p class="h6">Justificatif de formation Alpha Tango *</p>
+				<button id="justificatif">
+
+					{% if salarie.alphaTango and salarie.alphaTango.attestationFormation %}
+
+
+						{{salarie.alphaTango.attestationFormation}}
+
+					{% else %}
+						Justificatif de formation Alpha Tango
+
+
+					{% endif %}
+
+				</button>
+				<input type="file" class='form-control form-control-sm justificatifAT' accept='.pdf'>
+
+			</div>
+			<div class="col-sm-6 mt-5">
+				<p class="h6">Fin de validité *</p>
+				<input type="date" class="form-control form-control-sm validite" min="{{ limite }}">
+
+
+			</div>
+			<div class="col-sm-12 text-center">
+				<br><br>
+				<p class="h2">AlphaTango</p>
+			</div>
+			<div class="col-sm-12">
+
+
+				<br><br><p class="h6">Indiquer ici vos identifiants de connexion au service Alpha Tango. Ces éléments permettront à DIAG-DRONE de gérer pour vous et si vous le souhaitez toutes vos démarches auprès de la DSAC. Ces informations ne sont pas obligatoires pour finaliser votre inscription à notre service. Elles peuvent être modifiées à tout moment depuis votre espace personnel</p>
+
+				<br><br></div>
+
+			<div class="col-sm-6">
+				<p class="h6">Identifiant</p>
+				<input type="text" name="" class='form-control form-control-sm identifiantAT'>
+
+			</div>
+			<div class="col-sm-6">
+				<p class="h6">Mot de passe</p>
+				<input type="text" name="" class='form-control form-control-sm passwordAT'>
+
+			</div>
+
+			<div class="col-sm-12 text-center btnAt">
+				<button class='btn btn-maincolor' data-salarie="{{salarie.id}}">Valider</button>
+			</div>
+			<div class="col-12 mt--50">
+				<p class="h5">Vous souhaitez une assistance pour vous inscrire, prenons rendez-vous par <span class="h4 "><a class="color_blue" href="mailto:assistance@diag-drone.com">E-mail</a></span> ou par <span class="h4 color_blue"><a class="color_blue"	href="tel:0665628541">téléphone</a></span>.</p>
+			</div>
+		</div>
+	</div>
+{% endblock %}

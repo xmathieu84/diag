@@ -1,0 +1,77 @@
+{% extends 'administrateur/baseA.html.twig' %}
+
+{% block title %}Cerfa Administrateur
+{% endblock %}
+
+{% block body %}
+	<section class="wrapper">
+		<div class="row mt">
+			<div class="col-lg-12">
+				<table class="table table-bordered table-striped table-condensed">
+					<tr>
+						<th>Date de l'intervention</th>
+
+						<th>Adresse</th>
+						<th>Agglomération</th>
+						<th>Salarie</th>
+						<th>Drone</th>
+						<th></th>
+						<th></th>
+					</tr>
+					{% for mandat in mandats %}
+						<tr>
+							<td class="dateCerfa">{{mandat.intervention.rdvAT|format_datetime('full', 'short', locale='fr')}}</td>
+
+
+							<td class="adresseCerfa">{{mandat.intervention.adresse.numero}}
+
+								{{mandat.intervention.adresse.nomVoie}}
+								{{mandat.intervention.adresse.codePostal}}
+								{{mandat.intervention.adresse.ville}}</td>
+
+
+
+							<td class="salarieCerfa">{{mandat.intervention.reservation.salarie.civilite.nom}}
+								{{mandat.intervention.reservation.salarie.civilite.prenom}}</td>
+
+							<td class="droneCerfa">
+								<p>Fabriquant:
+									{{mandat.intervention.drone.nomFabriquant}}</p>
+								<p>Type :{{mandat.intervention.drone.typeDrone}}</p>
+								<p>Nuemero DGAC:{{mandat.intervention.drone.numeroDgac}}</p>
+								<p>Poids :
+									{{mandat.intervention.drone.poidDrone}}</p>
+								<p>Captif :
+									{% if mandat.intervention.drone.captif == 1 %}
+										oui
+									{% else %}
+										non
+									{% endif %}
+								</p>
+								<p>Classe :
+									{{mandat.intervention.drone.classe}}</p>
+
+
+							</td>
+
+							<td class="voirCerfa">
+								<a href="{{path('voirCerfa',{id:mandat.intervention.reservation.id})}}" target="_blank">
+									<button class="btn btn-voir">Voir/Modifier</button>
+								</a>
+
+							</td>
+							<td class="envoyerCerfa">
+								<a href="{{path('envoieCerfa',{id:mandat.intervention.reservation.id})}}" >
+									<button class="btn btn-envoie">Envoyer</button>
+								</a>
+
+
+							</td>
+						</tr>
+					{% endfor %}
+
+				</table>
+			</div>
+		</div>
+	</section>
+{% endblock %}

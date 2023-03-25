@@ -1,0 +1,66 @@
+{% extends 'administrateur/baseA.html.twig' %}
+
+{% block body %}
+<div class="row">
+    <div class="col-12">
+        <p class="h4">Packs supplémentaire disponible pour {{ profil }} compris entre {{ limiteB }} et {{ limiteH }}
+        </p>
+    </div>
+    <div class="col-12 table-responsive">
+        <table class="table-bordered table">
+            <tr>
+                <th>Nom</th>
+                <th>Prix</th>
+                <th>Utlisateurs</th>
+                <th>Habitants minimum</th>
+                <th>Habitants Maximum</th>
+            </tr>
+            {% for pack in packs %}
+                <tr class="idpack" data-id="{{ pack.id }}">
+                    <td><input type="text" class="form-control form-control-sm nomPack"value="{{ pack.nom }}"></td>
+                    <td><input type="text" class="form-control form-control-sm prixPack"value="{{ pack.prix }}"></td>
+                    <td><input type="text" class="form-control form-control-sm userPack"value="{{ pack.employe }}"></td>
+                    <td><input type="text" class="form-control form-control-sm limiteBPack"value="{{ pack.limiteB }}"></td>
+                    <td><input type="text" class="form-control form-control-sm limiteHPack"value="{{ pack.limiteH }}"></td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div class="col-12 mt-5 table-responsive">
+        <table class="table-bordered table">
+            <tr>
+                <th>Nom</th>
+                <th>Prix</th>
+                <th>Utlisateurs</th>
+                <th>Profil</th>
+                <th>Habitants minimum</th>
+                <th>Habitants Maximum</th>
+            </tr>
+            <tr>
+                <td><input type="text" class="form-control form-control-sm newNom"></td>
+                <td><input type="text" class="form-control form-control-sm newPrix"></td>
+                <td><input type="text" class="form-control form-control-sm newUser"></td>
+                <td><select name="" id="newProfil" class="form-control form-control-sm">
+                        <option value="insti">Mairie,Région,departement, communauté de communes</option>
+                        <option value="Communautés religieuses">Communautés religieuses</option>
+                        <option value="Établissement public">Établissement public</option>
+                        <option value="Société d''Économie Mixte">Société d''Économie Mixte</option>
+                        <option value="Société Coopérative d'Intérêt Collectif">Société Coopérative d'Intérêt Collectif</option>
+                    </select>
+                </td>
+
+                <td><input type="text" class="form-control form-control-sm newlimiteB"></td>
+                <td><input type="text" class="form-control form-control-sm newlimiteH"></td>
+            </tr>
+        </table>
+        <div class="mt-5 text-center">
+            <button class="btn btn-success">Valider</button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block title %}
+Packs supplémentaires institution
+{% endblock %}
+

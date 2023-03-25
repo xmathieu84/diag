@@ -1,0 +1,92 @@
+{% extends 'institution/baseInsti.html.twig' %}
+{% block titreSection %}Constat{% endblock %}
+{% block titrePage %}Constat{% endblock %}
+
+{% block title %}Constat{% endblock %}
+{% block contenu %}
+    <div class="row mb-5 bg-white pr-5 pt-5 pb-5 pl-5">
+        <div class="col-sm-12 text-center">
+            <p class="h5">Les champs marqués d'une * sont obligatoires</p>
+        </div>
+    </div>
+
+    <div class="row bg-white">
+        <div class="col-sm-6">
+            <p class="h6">Date de la constatation *</p>
+            <input type="date" name="" id="dateConstat" class="form-control form-control-sm">
+            
+
+        </div>
+        <div class="col-sm-6">
+        <p class="h6">Choisissez le bâtiment *</p>
+            <select name="" id="batiment" class="form-control form-control-lg">
+                <option value=null>Choisissez le bâtiment</option>
+                {% for batiment in batiments %}
+                <option value="{{ batiment.id }}">{{ batiment.nom }}</option>
+                {% endfor %}
+            </select>
+
+        </div>
+        <div class="col-sm-12 mt-5">
+            <p class="h6">Commentaires *</p>
+            <textarea name="" id="constat_constatation" cols="30" rows="5"></textarea>
+        </div>
+        <div class="col-sm-6">
+            <p class="h6">Ajoutez des photos</p>
+            <button class="btn-photoRapport" type="button">Ajoutez des fichiers</button>
+            <input type="file" name="" id="constat_photo_nom" multiple>
+        </div>
+        <div class="col-sm-6">
+            <p class="h6">Ajoutez des vidéos</p>
+            <button class="btn-videoRapport" type="button">Ajoutez des fichiers</button>
+            <input type="file" name="" id="constat_video" multiple>
+        </div>
+        <div class="col-sm-12 mt-5 text-center">
+            <button class="btn btn-maincolor" type="button">Envoyer</button>
+        </div>
+    </div>
+    <button type="button" class="btn btnmodal" data-toggle="modal" data-target="#exampleModal">
+
+    </button>
+    {# <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Understood</button>
+                </div>
+            </div>
+        </div>
+    </div>#}
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Progression du téléchargement</h5>
+
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="progress">
+                                <div class="progress-bar download" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

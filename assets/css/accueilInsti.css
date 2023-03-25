@@ -1,0 +1,13 @@
+.bg-orange{
+    background-color: #ffb61f;
+    font-size: 1.5em;
+    text-transform: uppercase;
+
+}
+#tableResp,#interProxi{
+    width: 50%;
+    border: 1px solid black;
+}
+#tableResp th,#tableResp td{
+    border: none;
+}

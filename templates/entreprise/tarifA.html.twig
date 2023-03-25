@@ -1,0 +1,203 @@
+{% extends template %}
+{% block title %}
+	{% if entreprise.cgv == true %}
+		Tarifs disponibles
+	{% else %}
+		Phase 4 choix des tarifs
+
+	{% endif %}
+{% endblock %}
+{% block TitreEntreprise %}
+
+	<h1>Vos tarifs d'intervention</h1>
+
+
+{% endblock  %}
+{% block titreSection %}Vos tarifs d'interventions
+{% endblock %}
+
+{% block pageAccueil %}
+	<h4>Vos tarifs
+		<span class="color_blue">d'intervention</span>
+
+	</h4>
+
+{% endblock %}
+{% block titrePage %}Vos tarifs d'interventions
+{% endblock %}
+
+{% block contenu %}
+
+
+	<div class="container bg-white">
+
+		<div class="row">
+
+			{% if entreprise.cgv == false %}
+				<div class="col-sm-2"></div>
+				<div class="col-sm-8 text-center">
+					<h5>Progression de votre Inscription</h5>
+					<div class="progress">
+						<div class="progress-bar" role="progressbar" style="width: 45%;" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100">45%</div>
+					</div>
+
+
+				</div>
+				<div class="col-sm-2"></div>
+
+			{% endif %}
+
+			<div class="col-sm-12 mb-5">
+				<div class="row">
+					<div class="col-sm-12 mb-5 pt-35">
+						<p class="h3 mt-1 mb-4">Vos indemnités kilométriques</p>
+						<p class="h6">Indiquez ici votre forfait kilométrique concernant vos déplacements.</p>
+						<p class="h6">L'adresse indiquée dans le profil de l'OTD materiailse le point de départ .</p>
+						<p class="h6">Par défaut, nous avons retenu un taux moyen(0,6 €/km).Vous pouvez le modifier maintenant ou à tout moment depuis votre espace personnel.</p>
+						<p class="h6">Ces frais seront ajoutés à vos tarifs d'intervention.</p>
+						<p class="h6">Attention tout demandeur aura connaissance de ces informations.</p>
+
+					</div>
+
+					<div class="col-sm-4"></div>
+					<div class="col-sm-4 text-center mb-5">
+						<div class="input-group">
+
+							<input type="text" class="form-control form-control-sm indemnite" value="{{entreprise.indeminiteKilometre}}">
+
+
+							<div class="input-group-prepend">
+								<span class="input-group-text">€/km</span>
+							</div>
+						</div>
+
+
+					</div>
+					<div class="col-sm-4"></div>
+					<div class="col-sm-12 mt-3 mb-5">
+						<p class="h6">Indiquez, ici, les tarifs des interventions que vous proposez.</p>
+						<p class="h6">Pour chaque type d'intervention, vous devez indiquer au moins un tarif à savoir un taux horaire ou un tarif "à partir de...".</p>
+						<p class="h6">Vous avez aussi la possibilité de renseigner les deux types de tarif.</p>
+						<p class="h6">Ces informations seront indiquées au demandeur ce qui lui permettra d'opérer son choix entre les différentes propositions qu'il aura reçu.</p>
+						<p class="h6">À savoir : Les tarifs doivent être indiqués TTC ( Toutes taxes comprises)</p>
+
+					</div>
+					{% for salarie in salaries %}
+						{% if is_granted('ROLE_OTD') %}
+
+
+						<div class="col-sm-12 text-center mb-5">
+							<p class="h4">Tarifs d'intervention de
+								{{salarie.civilite.prenom|upper}}
+								{{salarie.civilite.nom|upper}}</p>
+
+						</div>
+						<div class="col-4 tableAccueil  bg-primary text-white">Nom de l'intervention</div>
+						<div class="col-4 tableAccueil bg-primary text-white">Taux horaire</div>
+						<div class="col-4 tableAccueil bg-primary text-white">A partir de :</div>
+						{% for taux in salarie.TauxHoraires %}
+
+						<div class="col-4 tableAccueil text-dark">
+							<span class="h6">{{taux.inter.listeInter.nom}}
+										</span><br>
+							<span class="h6">{{taux.inter.typeInter.nom}}</span>
+						</div>
+						<div class="col-4 tableAccueil text-dark">
+							<div class="input-group	mb-3">
+
+								<input type="text" class="form-control  tauxHoraire price" data-id="{{taux.id}}" value="{{taux.taux}}">
+								<div class="input-group-prepend">
+									<span class="input-group-text input-table">€</span>
+								</div>
+							</div>
+						</div>
+						<div class="col-4 tableAccueil text-dark">
+							<div class="input-group mb-3">
+								<input type="text" class="form-control  prixMinimum price" data-id="{{taux.id}}" value="{{taux.prixMinimum}}">
+
+								<div class="input-group-prepend input-table">
+									<span class="input-group-text">€</span>
+								</div>
+							</div>
+						</div>
+
+
+						{% endfor %}
+						{%else%}
+							<div class="col-12">
+								<div class="row pr-2 pl-2">
+									<div class="col-sm-8 col-6 text-center tableAccueil">
+										<p class="h5">{{salarie.civilite.fullName}}</p>
+									</div>
+									<div class="col-sm-4 col-6 tableAccueil">
+										<a href="{{path('tarifOdi',{id:salarie.id})}}">
+											<button class="btn btn-maincolor btn-block ">Voir les tarifs</button>
+										</a>
+									</div>
+								</div>
+							</div>
+
+						{% endif %}
+					{% endfor %}
+
+
+					{% if  entreprise.cgv == false %}
+						<div class="col-sm-12 text-center">
+
+							<a href="{{path('finalisation')}}">
+
+								<button type="button" class="btn btn-maincolor">Étape suivante</button>
+							</a>
+
+						</div>
+						<div class="col-12 mt-4">
+							<p class="h5">Vous souhaitez une assistance pour vous inscrire, prenons rendez-vous par <span class="h4 "><a class="color_blue" href="mailto:assistance@diag-drone.com">E-mail</a></span> ou par <span class="h4 color_blue"><a class="color_blue"	href="tel:0665628541">téléphone</a></span>.</p>
+						</div>
+
+
+					{% elseif entreprise.cgv == true and is_granted('ROLE_OTD') %}
+						<div class="col-sm-12 text-center">
+
+							<a href="{{path('changeValid')}}">
+
+								<button type="button" class="btn btn-maincolor">Valider</button>
+							</a>
+
+
+						</div>
+					{% else %}
+						<div class="col-sm-12 text-center button"></div>
+
+					{% endif %}
+				</div>
+			</div>
+
+			{% if entreprise.cgv == false %}
+				<div class="modal" tabindex="-1">
+					<div class="modal-dialog">
+						<div class="modal-content">
+
+							<div class="modal-body">
+								<p class="h6">Afin de proposer le meilleur service à vos futurs clients ("les demandeurs"), nous vous conseillons d'indiquer vos tarifs le plus précisément possible. Deux solutions s'offrent à vous :</p>
+								<p class="h6">1 - Vous indiquez un montant précis par type d'intervention. Vos indemnités kilométriques seront ajoutées à ce tarif. Vous avez la possibilité de modifier ces indemnités à tout moment.</p>
+								<p class="h6">2 - Vous indiquez un tarif "À partir de" et vous aurez la possibilité d'affiner le montant au moment de la réception d'une proposition d'intervention. Le fonctionnement des indemnités kilométriques reste le même.</p>
+								<p class="h6">Attention ! Vous devez indiquer
+									<b>au moins</b>
+									un tarif (fixe ou "À partir de") pour chaque type d'intervention que vous proposez. Sans cette information, vos services ne seront pas proposés aux demandeurs.</p>
+
+								<br>
+								<p class="h6">Toutes vos informations tarifaires sont modifiables à tout moment depuis votre espace personnel.</p>
+
+
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			{% endif %}
+		</div>
+	</div>
+{% endblock %}

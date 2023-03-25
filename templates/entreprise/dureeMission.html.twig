@@ -1,0 +1,103 @@
+{% extends 'entreprise/baseAE.html.twig' %}
+
+{% block title %}
+Durée mission
+{% endblock %}
+
+{% block contenu %}
+    {% if id %}
+        <input type="hidden" name="" value="{{ id }}">
+    {% endif %}
+
+  <div class="row bg-white">
+      <div class="row">
+          <div class="col-12 text-center pl-5 pt-3 pb-3">
+              <p class="h5">Le temps d'intervention doit être renseigné en centième de minutes (ex : 1h30 = 90 minutes) .</p>
+          </div>
+      </div>
+      <!--Ici vous trouverez les onglets, pour chaque nouvel onglet, rajouter une ligne <li> en changeant le numero de l'onglet-->
+      <ul class="nav nav-tabs" role="tablist">
+          {% for type in types %}
+              {% if loop.index==1 %}
+                  <li class="nav-item">
+                      <a class="nav-link active show" id="tab{{ loop.index }}" data-toggle="tab" href="#onglet{{ loop.index }}" role="tab" aria-controls="tab{{ loop.index }}_pane" aria-expanded="true" aria-selected="false">{{ type.nom }}</a>
+                  </li>
+
+              {% else %}
+                  <li class="nav-item">
+                      <a class="nav-link" id="tab{{ loop.index }}" data-toggle="tab" href="#onglet{{ loop.index }}" role="tab" aria-controls="tab{{ loop.index }}_pane" aria-selected="false">{{ type.nom }}</a>
+                  </li>
+
+              {% endif %}
+
+          {% endfor %}
+      </ul>
+      <!--La box qui contient les contenu des onglets-->
+      <div class="tab-content ">
+          {% for type in types %}
+              {% if loop.index ==1 %}
+            <div class="tab-pane fade in active show" id="onglet{{ loop.index }}" role="tabpanel" aria-labelledby="tab{{ loop.index }}">
+
+
+                      <table>
+                          <tr>
+                              <th></th>
+                              {% for taille in type.taille %}
+                                  <th>{{ taille.taille }}</th>
+                              {% endfor %}
+                          </tr>
+                          {% for mission in missions %}
+                              <tr>
+                                  <td>{{ mission.nom }}</td>
+                                  {% for taille in type.taille %}
+
+                                      {% if mission not in taille.missionExclues %}
+                                          <td><input type="number" name="" id="" class="tempsMission" data-bien="{{ taille.id }}" data-mission="{{ mission.id }}"></td>
+                                      {% endif %}
+
+                                  {% endfor %}
+                              </tr>
+                          {% endfor %}
+                      </table>
+
+                  </div>
+              {% else %}
+            <div class="tab-pane fade" id="onglet{{ loop.index }}" role="tabpanel" aria-labelledby="tab{{ loop.index }}">
+
+                      <table>
+                          <tr>
+                              <th></th>
+                              {% for taille in type.taille %}
+                                  <th>{{ taille.taille }}</th>
+                              {% else %}
+                                  <td></td>
+                              {% endfor %}
+                          </tr>
+                          {% for mission in missions %}
+                              <tr>
+                                  <td>{{ mission.nom }}</td>
+                                  {% for taille in type.taille %}
+                                  {% if mission not in taille.missionExclues %}
+                                  <td>
+                                      <input type="number" name="" id="" class="tempsMission" data-bien="{{ taille.id }}" data-mission="{{ mission.id }}">
+                                  </td>
+                                      {% else %}
+                                      <td></td>
+                                  {% endif %}
+                                  {% endfor %}
+                              </tr>
+                          {% endfor %}
+                      </table>
+                  </div>
+              {% endif %}
+
+          {% endfor %}
+
+      </div>
+      <div class="col-12 mt-5 text-right">
+          <button class=" btn btn-maincolor pl-5 pr-5">Valider</button>
+      </div>
+  </div>
+
+{% endblock %}
+

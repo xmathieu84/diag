@@ -1,0 +1,199 @@
+{% extends 'administrateur/baseA.html.twig' %}
+
+{% block title %}Facture Admin
+{% endblock %}
+
+{% block body %}
+
+	<section class="wrapper site-min-height">
+		<div class="row mt">
+			<div class="col-sm-4"></div>
+			<div class="col-sm-4 mb-5 text-center">
+				<label for="typeDoc" class="control-label">Type de document</label>
+				<select name="" id="typeDoc" class="form-control">
+					<option value="">Choisisssez le type de document</option>
+					<option value="devis">Devis</option>
+					<option value="facture">Facture</option>
+				</select>
+			</div>
+			<div class="col-sm-4"></div>
+			<div class="col-sm-1"></div>
+			<div class="col-sm-10">
+				<div class="row">
+					<div class="col-sm-6 mb-3">
+						<label for="societe" class="control-label">Nom complet de la société</label>
+						<input type="text" id="societe" class="form-control form-control-sm">
+					</div>
+
+					<div class="col-sm-6">
+						<label for="dirigeant" class="control-label">Nom complet du dirigeant</label>
+						<input type="text" id="dirigeant" class="form-control form-control-sm">
+
+					</div>
+					<div class="col-sm-6 mb-3">
+						<label for="adresse" class="control-label">Adresse</label>
+
+						<input type="text" id="adresse" class="form-control form-control-sm">
+
+					</div>
+					<div class="col-sm-6">
+						<label for="ville" class="control-label">Code postal + ville</label>
+						<input type="text" id="ville" class="form-control form-control-sm">
+
+					</div>
+
+					<div class="col-sm-6">
+						<label for="numeroFact">Numéro
+							<span class="type"></span>
+						</label>
+						<input type="text" id="numeroFact" class="form-control form-control-sm">
+					</div>
+
+					<div class="col-sm-6 mb-5">
+						<label for="date">Date
+							<span class="type"></span>
+						</label>
+
+						<input type="text" name="" id="date" class="form-control form-control-sm date">
+
+					</div>
+				</div>
+
+
+				<div class="row mt">
+					<div class="col-sm-12 text-center">
+						<h3>Référence</h3>
+
+					</div>
+					<div class="col-sm-6">
+
+						<p>Référence code
+						</p>
+						<select name="" id="refe" class="form-control form-control-sm optionRef fact">
+
+							<option value="null">Référence</option>
+							<option value="OTD">OTD</option>
+							<option value='{"ref":"PRT-DIV0","designation":"Prestation diverse"}'>PRT-DIV
+							</option>
+							<option value='{"ref":"VTE-DR","designation":"Vente de drone"}'>VTE-DR</option>
+							<option value='{"ref":"VTE-ESP-PUB","designation":"Vente d espace publicitaire"}'>VTE-ESP-PUB</option>
+						</select>
+					</div>
+
+					<div class="col-sm-6 OTD">
+
+						<p>Référence OTD</p>
+						<select class="form-control form-control-sm optionOTD fact">
+							<option value="null">Référence OTD</option>
+							<option value='{"ref":"OTD-ABO-CL","designation":"Abonnement classique"}'>OTD-ABO-CL</option>
+							<option value='{"ref":"OTD-ABO-PR","designation":"Abonnement premium"}'>OTD-ABO-PR
+							</option>
+							<option value='{"ref":"OTD-ABO-CL-CS","designation":"Abonnement classique sous convention spéciale"}'>OTD-ABO-CL-CS
+							</option>
+							<option value='{"ref":"OTD-ABO-PR-CS","designation":"Abonnement premium sous convention spéciale"}'>OTD-ABO-PR-CS
+							</option>
+							<option value='{"ref":"OTD-COM","designation":"Commissions"}'>OTD-COM
+							</option>
+							<option value='{"ref":"OTD-COM-CS","designation":"Commissions sous conventions spéciales"}'>OTD-COM-CS</option>
+							<option value='{"ref":"OTD-DECL","designation":"Déclaration DGAC"}' data-ref="OTD-DECL" data-designation="Déclaration DGAC">OTD-DECL
+							</option>
+							<option value='{"ref":"OTD-DECL-CS","designation":"Déclaration DGAC sous convention spéciale"}'>OTD-DECL-CS</option>
+
+						</select>
+					</div>
+					<div class="col-sm-12 text-center mt-3">
+						<h3>Désignations</h3>
+					</div>
+					<div class="col-sm-6">
+						<p>ligne1</p><input type="text" class="form-control form-control-sm ligneDesignation fact">
+
+					</div>
+					<div class="col-sm-6">
+						<p>ligne2</p><input type="text" class="form-control form-control-sm ligneDesignation fact">
+
+					</div>
+					<div class="col-sm-6">
+						<p>ligne3</p><input type="text" class="form-control form-control-sm ligneDesignation fact">
+
+					</div>
+					<div class="col-sm-6">
+						<p>ligne4</p><input type="text" class="form-control form-control-sm ligneDesignation fact">
+
+					</div>
+					<div class="col-sm-6">
+						<p>ligne5</p><input type="text" class="form-control form-control-sm ligneDesignation fact">
+
+					</div>
+					<div class="col-sm-6">
+						<p>ligne6</p><input type="text" class="form-control form-control-sm ligneDesignation fact">
+
+					</div>
+					<div class="col-sm-12 text-center">
+
+						<h3>Prix</h3>
+
+					</div>
+					<div class="col-sm-6">
+						<p>PU vente</p><input type="number" class="form-control form-control-sm Punitaire fact">
+
+
+					</div>
+					<div class="col-sm-6">
+						<p>Montant HT</p><input type="number" class="form-control form-control-sm montantHt fact">
+
+
+					</div>
+					<div class="col-sm-12">
+						<br><br>
+						<button class="ajouter btn btn-warning">ajouter</button>
+						<button class="retirer btn btn-danger">retirer</button>
+
+					</div>
+
+				</div>
+			</div>
+			<div class="col-sm-1"></div>
+			<div class="col-lg-12">
+				<h1>Création de Factures</h1>
+				<table class="table-facture">
+					<tr>
+						<th class="reference">
+							Réference</th>
+						<th class="design">Désignation</th>
+						<th class="quant">Quantité</th>
+						<th class="unit">Unité</th>
+						<th class="PUV">PU vente</th>
+						<th class="TVA">TVA</th>
+						<th class="mHT">Montant HT</th>
+					</tr>
+
+				</table>
+				<div class="row">
+
+					<div class="col-lg-4"></div>
+					<div class="col-lg-4"></div>
+
+					<div class="col-lg-4">
+						<p>Total HT :
+							<span class="horstaxe"></span>
+						</p>
+						<p>TVA :<span class="TVAvaleur"></span>
+						</p>
+						<p>Total TTC :
+							<span class="ttc"></span>
+						</p>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+	</section>
+	<div class="row">
+		<div class="col-sm-2"></div>
+		<div class="col-sm-8">
+			<button class="btn-pdf">Exporter au format PDF</button>
+		</div>
+		<div class="col-sm-2"></div>
+	</div>
+{% endblock %}

@@ -1,0 +1,43 @@
+.video-shortcode {
+  &.static{
+    &:before{
+      display: none;
+    }
+  }
+  .embed-responsive-3by2{
+    padding-bottom: 51%;
+  }
+    & > img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  &:before{
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: $darkgreyColor;
+    opacity: 0.4;
+  }
+  .photoswipe-link{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    background-color: $colorMain;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-Size: 10px;
+    &:hover{
+      color: $darkgreyColor !important;
+    }
+  }
+}
+

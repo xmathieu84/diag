@@ -1,0 +1,62 @@
+{% extends "administrateur/baseA.html.twig" %}
+{% block title %}
+	Admin intervention
+{% endblock %}
+{% block body %}
+	<section class="wrapper">
+		<div class="row">
+			<div class="col-12">
+				<h3>Ajouter une mission</h3>
+			</div>
+			<div class="col-3">
+				<label for="type">Type d'intervention</label>
+				<select name="" id="type" class="form-control form-control-sm">
+					<option value="" disabled selected>Type d'intervention</option>
+					{% for type in type %}
+						<option value="{{ type.id }}">{{ type.nom }}</option>
+					{% endfor %}
+				</select>
+			</div>
+			<div class="col-3">
+				<label for="mission">Mission</label>
+				<input type="text" class="form-control form-control-sm" id="mission">
+			</div>
+			<div class="col-4">
+				<label for="description">Description</label>
+				<textarea name="" id="description" cols="30" rows="10" class="form-control"></textarea>
+			</div>
+
+			<div class="col-12 text-center mt-5">
+				<button class="btn btn-success btn-lg">Valider</button>
+			</div>
+		</div>
+		
+		<h3>Liste des interventions disponibles</h3>
+		<table class="table table-bordered table-striped table-condensed">
+			<thead>
+				<tr>
+					<th>Type d'intervention</th>
+					<th>Type de mission</th>
+					<th>Description</th>
+					<th>Actif</th>
+				</tr>
+
+			</thead>
+			{% for liste in listes %}
+				<tr>
+					<td>{{ liste.listeInter.nom }}</td>
+					<td>{{ liste.typeInter.nom }}</td>
+					<td>{{ liste.description }}</td>
+					<td>{% if liste.actif %}
+							<input type="checkbox" name="" id="" checked="checked" class="missionActif" value="{{ liste.id }}">
+							{% else %}
+								<input type="checkbox" name="" id="" class="missionActif" value="{{ liste.id }}">
+						{% endif %}</td>
+
+
+				</tr>
+			{% endfor %}
+		</table>
+	
+	</section>
+{% endblock  %}

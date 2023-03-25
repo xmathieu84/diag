@@ -1,0 +1,33 @@
+<div class="content">
+    <table class="dossierRange">
+    {% for dossierR in dossierRange %}
+        <tr class="dr">
+            <td class="rd">
+                <span>Type :  {{ dossierR.type }}</span><br>
+                <span>Nom :  {{ dossierR.nom }} </span><br>
+                <span>Date d'enregistrement : {{ dossierR.piece.date|format_datetime('short','none',locale='fr') }}</span><br>
+                <span>Date derniere annotation : {{ dossierR.date|format_datetime('short','none',locale='fr') }}</span><br>
+                <span>Nom du dernier intervenant : {{ dossierR.nom }}</span>
+                <span></span>
+            </td>
+            <td>{% if dossierR.alerte %}
+                <span>Alerte :
+                        OUI</span><br>
+               <span>Date de l'alerte : {{ dossierR.dateA|format_datetime('short','none',locale='fr') }} </span><br>
+                    <span>{% for contact in dossierR.piece.contact %}
+                    Nom : {{ contact.nom }} {{ contact.prenom }}
+                    <span>
+                {% endfor %}
+                        {% else %}
+                        <span>NON</span>
+
+
+
+                {% endif %}
+
+            </td>
+
+        </tr>
+    {% endfor %}
+    </table>
+</div>

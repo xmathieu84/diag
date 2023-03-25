@@ -1,0 +1,41 @@
+{% extends 'entreprise/baseAE.html.twig' %}
+
+{% block title %}Consulter mon solde{% endblock %}
+{% block titreSection %}Consulter mon solde{% endblock %}
+{% block titrePage %}Consulter mon solde{% endblock %}
+{% block contenu %}
+    <div class="row bg-white">
+    
+        <div class="col-sm-12 text-center mb-5">
+            <p class="h4">Vous disposez actuellement de :</p>
+            <p class="h4">{{wallet.Balance.Amount / 100}} €</p>
+        </div>
+        <div class="col-sm-12 text-center mt-5">
+            <p class="h3">Retrait</p>
+            <label for="retraitMontant">Entrez le montant que vous souhaitez retirer : </label>
+            <div class="row">
+                <div class="col-sm-2"></div>
+                <div class="col-8">
+                    <div class="input-group">
+                        <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)"id="retraitMontant">
+                        <div class="input-group-append">
+                            <span class="input-group-text">€</span>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-sm-2"></div>
+            </div>
+            <div class="col-sm-12 text-center mt-3">
+                <button class="btn btn-maincolor">Retirer</button>
+            </div>
+
+            <div class="col-sm-12 message">
+            
+            </div>          
+
+            
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,189 @@
+{% extends "demandeur/basedemandeur.html.twig" %}
+{% block title %}Intervention en attente de paiement
+{% endblock %}
+{% block titreSection %}Intervention en attente de paiement
+{% endblock %}
+{% block titrePage %}Intervention en attente de paiement
+{% endblock %}
+
+{% block stylesheets %}
+	<style type="text/css">
+		[data-toggle="collapse"]:after {
+    		font-size: 13px;
+    		top: unset;
+    		margin-top: unset;
+		}
+	</style>
+{% endblock %}
+
+{% block contenu %}
+
+<div role="tablist">
+	<div class="card w-100">
+	<div class="card-header" role="tab" id="collapse01_header">
+		<h5>
+			<a data-toggle="collapse" href="#collapse01" aria-expanded="true" aria-controls="collapse01" class="">
+				Intervention en attente de paiement par CB
+				<span class="h7 float-right color_blue mr-3">({{ (resaApayers|length) + (diagCns|length)}})</span>
+			</a>
+		</h5>
+	</div>
+
+	<div id="collapse01" class="collapse" role="tabpanel" aria-labelledby="collapse01_header" data-parent="#accordion01" style="">
+		<div class="card-body">
+			<div class="row">
+				{% if resaApayers is not empty %}
+				{% for resaApayer in resaApayers %}
+
+				<div class="col-12 col-md-6 mb-3">
+					<div class="card">
+						<div class="card-header">
+							<p class="card-titre p-3 bg-maincolor mb-3">Intervention le
+							{{resaApayer.intervention.rdvAt|format_datetime('full', 'none', locale='fr')}}</p>
+
+
+						</div>
+						<div class="card-body">
+							<h6 class="card-title souligne">Adresse :
+							</h6>
+							<p class="card-text">{{resaApayer.intervention.adresse.numero}}
+
+								{{resaApayer.intervention.adresse.nomVoie}}
+
+								{{resaApayer.intervention.adresse.codePostal}}
+
+							{{resaApayer.intervention.adresse.ville}}</p>
+
+							<h6 class="souligne">Type d'intervention :
+
+							</h6>
+							<p class="card-text">{{resaApayer.intervention.listeInter.nom}}
+
+
+							{{resaApayer.intervention.typeInter.nom}}</p>
+							<div class="row justify-content-center">
+								<a href="/uploads/factureDD/{{ resaApayer.intervention.devis }}" target="_blank" class="btn btn-maincolor2">Facture de l'acompte</a>
+							<a href="{{ path('paiement',{type:'acompte',id: resaApayer.intervention.id})}}">
+
+								<button class="btn btn-maincolor" type="button">Paiement de l'acompte</button>
+							</a>
+							</div>
+							
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+				<div class="col-sm-12">{{ knp_pagination_render(resaApayers) }}</div>
+				{% else %}
+						<p class="h5 ml-5">Vous n'avez aucune intervention en attente de paiement par CB.</p>
+				{% endif %}
+
+					{% for diag in diagCns %}
+						<div class="col-12 col-md-6 mb-3">
+							<div class="card">
+								<div class="card-header">
+									<p class="card-titre p-3 bg-maincolor mb-3">Diagnostic prévu le
+										{{diag.dateRdv|format_datetime('full', 'none', locale='fr')}}</p>
+
+
+								</div>
+								<div class="card-body">
+									<h6 class="card-title souligne">Adresse :
+									</h6>
+									<p class="card-text">{{diag.adresse.numero}}
+
+										{{diag.adresse.nomVoie}}
+
+										{{diag.adresse.codePostal}}
+
+										{{diag.adresse.ville}}</p>
+
+									<h6 class="souligne">Détails des diagnostics :
+									</h6>
+									<ul class="list-group">
+										{% for mission in diag.missions %}
+											<li class="list-group-item">{{ mission.nom|capitalize }}</li>
+										{% endfor %}
+									</ul>
+									<div class="row justify-content-center">
+										<a href="/uploads/factureDD/{{ diag.factureAcompte }}" target="_blank" class="btn btn-maincolor2">Facture de l'acompte</a>
+										<a href="{{ path('paiementDiag',{type:'acompte',uuid: diag.identifiat})}}">
+
+											<button class="btn btn-maincolor" type="button">Paiement de l'acompte</button>
+										</a>
+									</div>
+
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+
+			</div>
+
+		</div>
+	</div>
+
+</div>
+
+<hr id="demande">
+
+<div class="card w-100">
+	<div class="card-header" role="tab" id="collapse02_header">
+		<h5>
+			<a data-toggle="collapse" href="#collapse02" aria-expanded="true" aria-controls="collapse02" class="">
+				Intervention en attente de paiement par virement
+				<span class="h7 color_blue float-right mr-3">({{ resaVirements|length }})</span>
+			</a>
+		</h5>
+	</div>
+
+	<div id="collapse02" class="collapse" role="tabpanel" aria-labelledby="collapse02_header" data-parent="#accordion01" style="">
+		<div class="card-body">
+			<div class="row">
+				{% if resaApayers is not empty %}
+				{% for resaVirement in resaVirements %}
+				<div class="col-12 col-md-6 mb-3">
+					<div class="card">
+						<div class="card-header">
+							<p class="card-titre p-3 bg-maincolor mb-3">Intervention le
+							{{resaVirement.intervention.rdvAt|format_datetime('full', 'none', locale='fr')}}</p>
+
+
+						</div>
+						<div class="card-body">
+							<h6 class="card-title souligne">Adresse :
+							</h6>
+							<p class="card-text">{{resaVirement.intervention.adresse.numero}}
+
+								{{resaVirement.intervention.adresse.nomVoie}}
+
+								{{resaVirement.intervention.adresse.codePostal}}
+
+							{{resaVirement.intervention.adresse.ville}}</p>
+
+							<h6 class="souligne">Type d'intervention :
+
+							</h6>
+							<p class="card-text">{{resaVirement.intervention.listeInter.nom}}
+
+
+							{{resaVirement.intervention.typeInter.nom}}</p>
+
+
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+				<div class="col-sm-12">{{ knp_pagination_render(resaVirements) }}</div>
+				{% else %}
+						<p class="h5 ml-5">Vous n'avez aucune intervention en attente de paiement par virement.</p>
+				{% endif %}
+				
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+
+	
+{% endblock %}

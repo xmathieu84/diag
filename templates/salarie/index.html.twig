@@ -1,0 +1,60 @@
+{% extends 'salarie/basesalarie.html.twig' %}
+
+{% block title %}
+	{{salarie.civilite.prenom}}
+	{{salarie.civilite.nom}}
+{% endblock %}
+{% block titreSection %}Information générales
+{% endblock %}
+{% block titrePage %}Information générales
+{% endblock %}
+{% block contenu %}
+
+	<div class="row">
+		<div class="col-lg-1 col-md-6"></div>
+		<div class="col-lg-8 col-md-6">
+			<div class="pricing-plan box-shadow with-features cs">
+				<div class="plan-header">
+					<div class="plan-name">
+						<h5>
+							{{ salarie.civilite.prenom }}
+							{{ salarie.civilite.nom}}
+						</h5>
+					</div>
+					<div class="plan-name">
+						<h6>
+							Email :
+							{{ salarie.user.email }}
+						</h6>
+					</div>
+				</div>
+				<div class="price-wrap color-darkgrey"></div>
+				<p class="h4">
+					<i class="fas fa-Téléphone"></i>
+					{{salarie.telephone.numero}}</p>
+				<div class="plan-features">
+					<p>
+						<i class="fas fa-map-marker-alt"></i>
+						{{ salarie.adresse.numero }}
+						{{ salarie.adresse.nomVoie }}
+						{{ salarie.adresse.codePostal }}
+						{{ salarie.adresse.ville }}
+					</p>
+				</div>
+				<div class="presentation">
+					<a href="{{path('desinscription')}}">
+						<button class="btn-sm btn-danger">Se désincrire</button>
+					</a>
+					<a href="">
+						<button class="btn-sm btn-darkgrey">Modifier</button>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+{% endblock %}
+{% block javascripts %}
+	{{ encore_entry_script_tags('app') }}
+{% endblock  %}

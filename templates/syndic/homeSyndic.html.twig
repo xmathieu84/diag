@@ -1,0 +1,25 @@
+{% extends 'syndic/baseSyndic.hml.twig' %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block contenu %}
+    <div class="table-responsive bg-white pl-5 pt-5 pr-5 pb-5">
+        <table>
+            <tr>
+                <th width="20%"></th>
+                <th class="text-center" width="50%" >Nom</th>
+                <th width="30%"></th>
+            </tr>
+            {% for superieur in agent.superieur %}
+                <tr>
+                    <td class="text-center text-dark">{{ loop.index }}</td>
+                    <td class="text-center text-dark">{{ superieur.demandeur.nom }}</td>
+                    <td><a href="{{ path('homeInsti',{code:superieur.identifiant}) }}" class="btn btn-maincolor2">Accéder à l'interface</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}
+

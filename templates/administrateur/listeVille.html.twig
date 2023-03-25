@@ -1,0 +1,23 @@
+{% extends 'administrateur/baseA.html.twig' %}
+
+{% block body %}
+
+    <div class="table-responsive">
+        <table class="table-bordered table">
+            <tr>
+                <td>Nom</td>
+                <td>Code Postal</td>
+                <td>Email</td>
+                <td>Téléphone</td>
+            </tr>
+            {% for ville in villes %}
+                <tr>
+                    <td>{{ ville.nom }}</td>
+                    <td>{{ ville.codePostal }}</td>
+                    <td>{{ ville.email }}</td>
+                    <td>{{ ville.telephone }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

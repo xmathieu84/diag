@@ -1,0 +1,74 @@
+.categorie{
+    height: 8em;
+    background-color : #ddecff;
+    border:1px solid black;
+    width: 20%;
+    margin-right: 30px;
+    margin-left: 30px;
+    margin-bottom: 15px;
+    padding: 3.5em 1em 0 0 ;
+}
+.sujet{
+    background-color: rgb(116, 196, 196);
+    margin-top: 2em;
+}
+.pagination{
+    font-size: 1.2em;
+}
+.next,.last{
+    margin-left: 0.5em;
+    box-sizing: border-box;
+}
+span.previous,span.first,span.next,span.last{
+    margin-right: 0.5em;
+    box-sizing: border-box;
+    border: 1px solid teal;
+    border-radius: 100%;
+    width: 3em;
+    height: 3em;
+    padding-top: 0.8em;    
+    background-color: teal;
+    font-weight: 800;
+}
+.page{
+    margin-right: 0.5em;
+    box-sizing: border-box;
+    border: 1px solid teal;
+    border-radius: 100%;
+    width: 3em;
+    height: 3em;
+    padding-top: 0.8em;    
+    background-color: teal;
+    font-weight: 800;
+}
+span.current{
+    margin-right: 0.5em;
+    box-sizing: border-box;
+    border: 1px solid teal;
+    border-radius: 100%;
+    width: 3em;
+    height: 3em;
+    padding-top: 0.8em;    
+    background-color: white;
+    font-weight: 800;
+    color: black;
+}
+.reponse{
+    border: 1px dotted black;
+    margin-top: 2em;
+    padding: 2%;
+    background-color: wheat;
+}
+textarea.form-control{
+    resize: none;
+}
+.sujetReponse{
+    background-color: bisque;
+}
+.chemin{
+    margin-top : 1.5em
+}
+.chemin>a:first-child{
+    padding-top: 1.5em;
+    padding-left: 3.5em;
+}

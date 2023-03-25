@@ -1,0 +1,29 @@
+{% extends 'entreprise/baseAE.html.twig' %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block contenu %}
+    <div class="row">
+        <div class="col-12">
+            <span class="h5">
+                Choisissez à qui attribuer les packs :
+            </span>
+        </div>
+        {% for salarie in app.user.salarie.entreprise.salaries %}
+            <div class="col-sm-4 col-12 mt-4">
+                <a href="{{ path('listePackEnt',{id:salarie.id}) }}">
+                    <button class="btn btn-maincolor btn-block">{{ salarie.civilite.fullName }}</button>
+                </a>
+            </div>
+        {% endfor %}
+        <div class="col-sm-4 col-12 mt-4">
+            <a href="{{ path('listePack') }}">
+                <button class="btn btn-maincolor btn-block">Tout les ODI</button>
+            </a>
+
+        </div>
+    </div>
+{% endblock %}
+

@@ -1,0 +1,53 @@
+{% extends template %}
+
+{% block body %}
+	<section class="ls ms s-py-xl-150 s-py-lg-130 s-py-md-90 s-py-60">
+		<div class="container">
+			<div class="row">
+				<div class="col-12 contact-us animate" data-animation="scaleAppear">
+
+					{{form_start(form)}}
+					<div class="row">
+						<div class="col-sm-6">
+							<div class="form-group has-placeholder">
+								{{form_row(form.prenomSalarie,{'label':' ' ,'attr':{'class':'form-control border-dark',"placeholder":"Prénom"}})}}
+							</div>
+						</div>
+						<div class="col-sm-6 ">
+							<div class="form-group has-placeholder">
+								{{form_row(form.nomSalarie,{'label':' ' ,'attr':{'class':'form-control border-dark',"placeholder":"Nom"}})}}
+							</div>
+						</div>
+						<div class="col-sm-6 ">
+							<div class="form-group has-placeholder">
+								{{form_row(form.telephone.numero,{'label':' ' ,'attr':{'class':'form-control border-dark',"placeholder":"Numéro de téléphone"}})}}
+							</div>
+						</div>
+						<div class="col-sm-6 ">
+							<div class="form-group has-placeholder">
+								{{form_row(form.user.email,{'label':' ' ,'attr':{'class':'form-control border-dark',"placeholder":"Email"}})}}
+							</div>
+						</div>
+
+
+						<div class="col-sm-6 ">
+							<div class="form-group has-placeholder">
+								{{form_row(form.user.password,{'label':' ' ,'attr':{'class':'form-control border-dark',"placeholder":"Mot de passe"}})}}
+							</div>
+						</div>
+						<div class="col-sm-6 ">
+							<div class="form-group has-placeholder">
+								{{form_row(form.user.confirmPassword,{'label':' ' ,'attr':{'class':'form-control border-dark',"placeholder":"Confimez le mot de passe"}})}}
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-12">
+						<button type="submit" class="btn btn-maincolor">Modifier mes identifiants</button>
+					</div>
+
+					{{form_end(form)}}
+				</div>
+			</div>
+		</div>
+	</section>
+{% endblock  %}

@@ -1,0 +1,136 @@
+{% extends "accueil/baseaccueil.html.twig" %}
+{% block title %}Effectuer un paiement
+{% endblock %}
+{% block titrePage %}
+	<h1>Effectuer un paiement</h1>
+
+{% endblock %}
+{% block nomPage %}Effectuer un paiement
+{% endblock %}
+
+{% block bodyAccueil %}
+<div class="row text-center pt-5">
+	<div class="col-sm-12 mt-5">
+		<img src="/css/css_site/images/paiement/mangopay.png" alt="" height="80%" width="75%">
+	</div>
+	<div class="col-4">
+		<picture>
+		<source srcset="/css/css_site/images/paiement/masterCard.png" type="image/webp">
+		<source srcset="/css/css_site/images/paiement/masterCard.png" type="image/jpeg">
+		<img src="/css/css_site/images/paiement/masterCard.png" alt="Alt Text!" width="25%" height="25%">
+		</picture>
+
+	</div>
+	<div class="col-4">
+		<picture>
+			<source srcset="/css/css_site/images/paiement/visa.png" type="image/webp">
+			<source srcset="/css/css_site/images/paiement/visa.png" type="image/jpeg">
+			<img src="/css/css_site/images/paiement/visa.png" alt="Alt Text!" width="25%" height="25%">
+		</picture>
+	</div>
+	<div class="col-4">
+		<picture>
+			<source srcset="/css/css_site/images/paiement/maestro.png" type="image/webp">
+			<source srcset="/css/css_site/images/paiement/maestro.png" type="image/jpeg">
+			<img src="/css/css_site/images/paiement/maestro.png" alt="Alt Text!" width="25%" height="25%">
+		</picture>
+	</div>
+	<div class="col-sm-2"></div>
+	<div class="col-sm-8 mt-3">
+		<br><br>
+		<p class="h2">Paiement de l'intervention.</p>
+		<p class="h3">Règlement de votre commande Montant : {{paiement.montant}} € .</p>
+	</div>
+	<div class="col-sm-2"></div>
+	<div class="col-sm-2"></div>
+	<div class="col-sm-8 bg-silver">
+		<div class="row">
+			<div class="col-sm-6">
+				<label for="prenom">Prénom</label>
+				<input type="text" class="form-control form-control-sm" id="prenom"></div>
+			<div class="col-sm-6">
+				<label for="">Nom</label>
+				<input type="text" class="form-control form-control-sm" id="nom"></div>
+			<div class="col-sm-12 mt-2">
+				<label for="email">Adresse Email</label>
+				<input type="email" name="" id="Email" class="form-control form-control-sm">
+			</div>
+			<div class="col-sm-12 text-center mt-3">
+
+				<button class="btn btn-outline-maincolor">Valider</button>
+			</div>
+		</div>
+
+
+		<div class="infoPaiement">
+			<div class="row mt-5">
+				<div class="col-sm-4">
+					<input type="radio" name="typeCard" id="visa" value="CB_VISA_MASTERCARD">
+					<label for="visa" id="labelVisa"></label>
+
+					<p class="h6">Visa</p>
+
+				</div>
+				<div class="col-sm-4">
+					<input type="radio" name="typeCard" id="mastercard" value="CB_VISA_MASTERCARD">
+					<label for="mastercard" id="labelMastercard"></label>
+
+					<p class="h6">Mastercard</p>
+
+				</div>
+				<div class="col-sm-4">
+					<input type="radio" name="typeCard" id="maestro" value="MAESTRO">
+					<label for="maestro" id="labelMaestro"></label>
+					<p class="h6">Maestro</p>
+					<input type="hidden" name="idUser" class="idUser" data-paiement="{{paiement.id}}">
+
+				</div>
+
+
+				<div class="col-sm-12 mb-5 mt-5 text-center">
+					{{form_start(form,{'action':'https://homologation-webpayment.payline.com/webpayment/getToken','attr':{'class':'bg-white pr-5 pl-5'}})}}
+
+
+					<div class="row">
+						<div class="col-sm-12 mt-4">
+							{% set lien = url %}
+							{{form_row(form.returnURL,{'value':lien})}}
+
+							{{form_row(form.accessKeyRef,{'label': ' ','attr':{'class':'form-control form-control-lg '}})}}
+							{{form_row(form.data,{'label': ' ','attr':{'class':'form-control form-control-lg ','placeholder':'cryptogramme'}})}}
+
+							{{form_row(form.cardNumber,{'label': 'Numéro de la carte ','attr':{'class':'form-control form-control-lg ','placeholder':'Numéro de la carte','minlength':'16','maxlength':'16'},"label_attr":{"class":"h6"}})}}
+
+						</div>
+						<div class="col-sm-6 mt-4">
+
+							{{form_row(form.cardExpirationDate,{'label': "Date d'expiration (format MMYY)",'attr':{'class':'form-control form-control-lg ','placeholder':'Date d\'expiration'},'label_attr':{"class":"h6"}})}}
+
+					</div>
+						<div class="col-sm-6 mt-4">
+
+							{{form_row(form.cardCvx,{'label': 'Numéro de securité ','attr':{'class':'form-control form-control-lg '},'label_attr':{"class":"h6"}})}}
+
+						</div>
+						<div class="col-12">
+							<p class="h5">En validant votre paiement , vous accepter les conditions générales de notre prestataire MANGOPAY disponible <span class="h3"><b><a href="https://www.mangopay.com/terms/end-user-terms-and-conditions/Mangopay_Terms-FR.pdf" target="_blank">ICI</a></b></span></p>
+						</div>
+					</div>
+					<div class="col-sm-12 text-center zoneBouton mt-4"></div>
+				</div>
+				
+
+				{{form_end(form)}}
+
+			</div>
+			
+
+		</div>
+
+		
+		</div>
+
+	</div>
+	<div class="col-sm-2"></div>
+</div>
+{% endblock %}

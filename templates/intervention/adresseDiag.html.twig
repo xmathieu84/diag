@@ -1,0 +1,68 @@
+{% extends template%}
+{% block title %}
+Adresse du diagnostic
+{% endblock %}
+
+{% block bodyAccueil %}
+<section class="ls service-single s-py-xl-150 s-py-lg-130 s-py-md-90 s-py-60 bg-white">
+    <div class="container pb-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <p class="h3">Adresse du diagnostic</p>
+            </div>
+        {{form_start(form,{'attr':{'id':'formInter'}})}}
+
+        <div class="row align-items-end">
+            <div class="col-12">
+                {% if adresseFact %}
+                    <p class="h5">L'adresse d'intervention est-elle la même que l'adresse de facturation ? <br> (Adresse de facturation : {{ adresseFact.adresseComplete }}) </p>
+                {% endif %}
+
+            </div>
+            <div class="col-12 text-center mb-4">
+                {% if app.user != null %}
+                    {{ form_row(form.sameFact,{'label':' '}) }}
+                {% endif %}
+
+            </div>
+            <div class="col-sm-3 col-12 mb-4">
+
+                {{ form_row (form.numero,{'label':'Numéro de la voie : ','label_attr':{'class':'h6'},'attr':{'placeholder' : 'N° de la voie','class': 'form-control form-control border-dark',}})}}
+
+
+            </div>
+
+            <div class="col-sm-9 col-12 mb-4">
+
+                {{ form_row (form.nomVoie,{'label': 'Nom de la voie* :  ','label_attr':{'class':'h6'},'attr':{'placeholder' : 'Nom de la voie *','class': 'form-control form-control-lg border-dark'}})}}
+
+            </div>
+
+            <div class="col-6 mb-4">
+
+
+                {{ form_row (form.codePostal,{'label': 'Code postal* : ','label_attr':{'class':'h6'},'attr':{'placeholder' : 'Code postal *','class': 'form-control form-control-lg border-dark'}})}}
+
+            </div>
+
+
+            <div class="col-6 mb-4">
+
+                {{ form_row (form.ville,{'label': "Ville*(indiquez d'abord le code postal):",'label_attr':{'class':'h6'},'attr':{'placeholder' : "Indiquez d'abord le code postal *",'class': 'form-control form-control-lg border-dark','list':"city"}})}}
+                <datalist id="city"></datalist>
+
+            </div>
+
+            <div class="col-12 text-right">
+
+                <button type="submit" class="btn btn-maincolor">Page suivante</button>
+            </div>
+        </div>
+
+    </div>
+        {{ form_widget(form._token) }}
+        {{ form_end(form) }}
+    </div>
+</section>
+{% endblock %}
+

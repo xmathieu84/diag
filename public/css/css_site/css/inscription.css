@@ -1,0 +1,24 @@
+#regForm {
+  background-color: #ffffff;
+  margin: 30px auto;
+  padding: 40px;
+  width: 100%;
+  min-width: 300px;
+}
+
+.togglePassword {
+  cursor: pointer;
+  margin-top: -3em;
+  margin-right: 0.5em;
+  position: relative;
+}
+
+/* Mark input boxes that gets an error on validation: */
+input.invalid, select.invalid {
+  background-color: #ffdddd;
+}
+
+/* Hide all steps by default: */
+.tab {
+  display: none;
+}

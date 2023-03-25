@@ -1,0 +1,69 @@
+{% extends template %}
+
+{% block title %}
+Contacter Pro-Btp
+{% endblock %}
+
+{% block contenu %}
+<div class="row bg-white">
+    <input type="hidden" value="{{ destinataire.id }}">
+    <div class="col-sm-4 col-12">
+        <label for="titre">Titre de l'email</label>
+        <input type="text" id="titre">
+    </div>
+    <div class="col-sm-4 col-12">
+        <label for="expediteur">Expediteur</label>
+        <input type="email" id="expediteur" disabled value="{{ expediteur.email }}" style="color: black">
+    </div>
+    <div class="col-sm-4 col-12">
+        <label for="proBtp">Destinataire</label>
+        <input type="text" id="proBtp" value="{{ destinataire.demandeur.nom }}" disabled>
+    </div>
+    
+    <div class="col-12">
+        <label for="texte">Votre message</label>
+        <textarea name="" id="texte" cols="30" rows="10" autocapitalize="sentences" spellcheck="true" wrap="hard"></textarea>
+    </div>
+    <div class="col-12 mt-5 mb-5 text-right">
+        <button class="btn btn-maincolor" data-toggle="modal" data-target="#modaleAlerte">Envoyer</button>
+    </div>
+</div>
+    <div class="modal fade" id="modaleAlerte" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Continuer ?</h5>
+
+                </div>
+                <div class="modal-body">
+                   <p class="h6">Vos coordonnées ( nom, prénom , numéro de téléphone, email) seront transmise à notre partenaire.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary fermerAlert" data-dismiss="modal">Fermer</button>
+                    <button type="button" class="btn btn-primary btnEnvoie">Envoyer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="d-none">
+        <button class="btnModalMail" data-toggle="modal" data-target="#modaleReusssite" ></button>
+    </div>
+    <div class="modal fade" id="modaleReusssite" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+
+
+                </div>
+                <div class="modal-body">
+                    <p class="h6">Votre email a bien été envoyé .</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

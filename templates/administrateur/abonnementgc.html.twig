@@ -1,0 +1,67 @@
+{% extends 'administrateur/baseA.html.twig' %}
+
+{% block body %}
+<div class="row">
+    <div class="col-12 text-center">
+        <p class="h4">Tout les changements effectués sur cette page se font en temps réel sur l'application ! </p>
+    </div>
+    <div class="col-12 table-responsive">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Durée</th>
+                <th>Prix</th>
+                <th>Profil</th>
+                <th>Utlisateurs</th>
+                <th></th>
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for abonnement in abonnements %}
+                <tr class="aboGc" data-id="{{ abonnement.id }}">
+                    <td><input type="text" class="form-control nomAbo" value="{{ abonnement.nom }}"></td>
+                    <td class="text-center">{{ abonnement.duree|date(" %y année %m mois ") }}</td>
+                    <td><input type="text" class="form-control prixAbo" value="{{ abonnement.prix }}"></td>
+                    <td><input type="text"disabled="disabled" class="form-control profil" value="{{ abonnement.profil }}"></td>
+                    <td><input type="text" class="form-control utlisateur" disabled="disabled" value="{{ abonnement.utlisateur }}"></td>
+                    <td><a href="{{ path('packSupplementaire',{type:abonnement.cible,profil:abonnement.profil}) }}" class="btn btn-outline-success">Packs utilisateurs</a></td>
+                </tr>
+            {% endfor %}
+
+            </tbody>
+
+        </table>
+        <div class="col-12 text-center">
+            <table class="table table-bordered">
+                <tr>
+                    <th>Nom</th>
+                    <th>Prix</th>
+                    <th>Profil</th>
+                    <th>Utlisateurs</th>
+
+                </tr>
+                <tr>
+                    <td><input type="text" class="form-control newAbo" placeholder="nom de l'abonnement"></td>
+                    <td><input type="text" class="form-control newPrix" placeholder="prix"></td>
+                    <td><input type="text" class="form-control newProfil" placeholder="profil"></td>
+                    <td><select name="" id="utilisateur" class="form-control">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-12 text-center">
+            <button class="btn btn-success">Valider</button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block title %}
+Abonnements grand compte
+{% endblock %}
+

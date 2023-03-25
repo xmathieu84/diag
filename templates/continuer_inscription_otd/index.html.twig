@@ -1,0 +1,238 @@
+{% extends template %}
+
+{% block title %}
+	{% if entreprise.cgv == true %}
+		Modifiez vos information techniques
+	{% else %}
+		Phase 2 de votre inscription
+	{% endif %}
+{% endblock %}
+
+{% block contenu %}
+
+
+	<div class="container">
+		<div class="row">
+			{% if entreprise.cgv == false %}
+				<div class="col-sm-2"></div>
+				<div class="col-sm-8 text-center mt-3">
+					<h5>Progression de votre Inscription</h5>
+					<div class="progress">
+						<div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+					</div>
+
+
+				</div>
+				<div class="col-sm-2"></div>
+
+			{% endif %}
+
+			<div class="col-sm-12">
+					<div id="accordion01" role="tablist">
+						{% if is_granted('ROLE_OTD') %}
+							{% for listeInter in listeInters %}
+								<div class="card">
+									<div class="card-header" role="tab" id="collapse{{loop.index}}_header">
+										<h5>
+											<a data-toggle="collapse" href="#collapse{{loop.index}}" aria-expanded="false" aria-controls="collapse{{loop.index}}" class="collapsed">
+												{{listeInter.nom|upper}}
+											</a>
+										</h5>
+									</div>
+
+									<div id="collapse{{loop.index}}" class="collapse" role="tabpanel" aria-labelledby="collapse{{loop.index}}_header" data-parent="#accordion{{loop.index}}">
+										<div class="card-body">
+											<div class="row">
+
+												{% for liste in listeInter.listeInterTypeInters %}
+
+
+													<div class="col-sm-3">
+														<div class="form-groupe checkbox">
+
+															<label>{{liste.typeInter.nom}}
+																<label for=""></label>
+															</label>
+														</div>
+													</div>
+													<div class="col-sm-3">
+														<input type="checkbox" name="liste{{loop.index}}" id="liste{{loop.index}}" data-type="otd" value="{{liste.id}}" data-salarie="{{salarie.id}}" data-nom="{{liste.listeInter.nom}}" class="listeInter">
+
+													</div>
+
+												{% endfor %}
+
+											</div>
+											<br>
+
+										</div>
+									</div>
+
+								</div>
+							{% endfor %}
+						{% endif %}
+						{% if is_granted('ROLE_ODI') %}
+							{% for famille in familles %}
+								<div class="card">
+									<div class="card-header" role="tab" id="collapse{{loop.index}}_header">
+										<h5>
+											<a data-toggle="collapse" href="#collapse{{loop.index}}" aria-expanded="false" aria-controls="collapse{{loop.index}}" class="collapsed">
+												{{famille.nom|upper}}
+											</a>
+										</h5>
+									</div>
+
+									<div id="collapse{{loop.index}}" class="collapse" role="tabpanel" aria-labelledby="collapse{{loop.index}}_header" data-parent="#accordion{{loop.index}}">
+										<div class="card-body">
+											<div class="row">
+												{% for diag in famille.typeDiag %}
+													<div class="col-12 tableAccueil pt-4 pb-4 mb-4 text-dark">{{diag.nom}}
+														<div class="row mt-5">
+													{% for mission in diag.mission %}
+																<div class="col-sm-6 col-12 text-dark">
+																	<div class="row">
+																		<div class="col">
+																			<label for="">{{mission.nom|lower|capitalize}}</label>
+																		</div>
+																		<div class="col">
+																			<input type="checkbox" name="" id="" class="interOdi" data-type="odi" data-salarie="{{salarie.id}}" value="{{mission.id}}" >
+																		</div>
+																	</div>
+
+
+																</div>
+													{% endfor %}
+														</div>
+													</div>
+												{% endfor %}
+											</div>
+										</div>
+									</div>
+								</div>
+							{% endfor %}
+						{% endif %}
+						<br>
+						<div class="text-center">
+							<h4>Périmètre
+								<span class="color_blue">d'interventions</span>
+							</h4>
+
+						</div>
+
+						<div class="card">
+							<div class="card-header" role="tab" id="collapse99_header">
+								<h5>
+									<a data-toggle="collapse" href="#collapse99" aria-expanded="false" aria-controls="collapse99" class="collapsed">
+										PÉRIMÈTRE D'INTERVENTION
+									</a>
+								</h5>
+							</div>
+
+							<div id="collapse99" class="collapse" role="tabpanel" aria-labelledby="collapse99_header" data-parent="#accordion99">
+								<div class="card-body">
+									<div class="row">
+
+
+										<div class="col-sm-12 text-center">
+											<label>Déterminer votre secteur d'intervention</label>
+										</div>
+										<div class="col-sm-12 text-center">
+											<label>Le centre de votre zone d'intervention est l'adresse indiquée précédemment. Ces informations peuvent-être modifiées à tout moment depuis votre espace personnel</label>
+
+											<div class="input-group mt-3">
+												<input type="number" class="form-control" id="periInter" placeholder="Distance d'intervention (km)" value="{{ salarie.periInter }}" data-salarie="{{salarie.id}}" >
+												<div class="input-group-append">
+													<span class="input-group-text" id="basic-addon2">km</span>
+												</div>
+											</div>
+
+										</div>
+
+
+									</div>
+
+
+								</div>
+							</div>
+
+						</div>
+
+
+					</div>
+
+
+				{% if is_granted('ROLE_ODI') %}
+					<div class="row">
+						<div class="col-12 mt-5 mb-5">
+							<div class="row">
+								<div class="col-1 text-right">
+
+									{% if app.user.salarie.isHonneur ==true %}
+										<input type="checkbox" name="" id="honneur"  checked="checked">
+										{% else %}
+											<input type="checkbox" name="" id="honneur" data-salarie="{{app.user.salarie.id}}">
+									{% endif %}
+
+								</div>
+								<div class="col-11 text-left">
+									<label for="">En cochant cette case je déclare avoir les habilitations nécéssaires pour réaliser <strong>Toutes</strong> les interventions souscrites .</label>
+
+								</div>
+							</div>
+
+
+						</div>
+					</div>
+				{% endif %}
+
+				{% if entreprise.cgv == true %}
+					<br><br>
+
+					<div class="row">
+						<div class="col-sm-12 text-center">
+
+
+								<button class="btn btn-maincolor btn-prs">Valider</button>
+
+
+						</div>
+
+					</div>
+
+				{% else %}
+					<div class="col-sm-12 text-center">
+
+
+						<button class="btn btn-maincolor btn-prs">Continuer</button>
+
+					</div>
+					<div class="col-12 mt-4">
+						<p class="h5">Vous souhaitez une assistance pour vous inscrire, prenons rendez-vous par <span class="h4 "><a class="color_blue" href="mailto:assistance@diag-drone.com">E-mail</a></span> ou par <span class="h4 color_blue"><a class="color_blue"	href="tel:0665628541">téléphone</a></span>.</p>
+					</div>
+
+				{% endif %}
+
+			</div>
+		</div>
+	</div>
+
+	<div class="modal" tabindex="-1">
+
+		<div class="modal-dialog">
+			<div class="modal-content">
+
+				<div class="modal-body">
+					<p>Vous pouvez, ici, déterminer le type d'intervention que vous êtes en mesure de proposer</p>
+					<p>Lors de la phase suivante, vous indiquerez vos tarifs pour chaque type d'intervention sélectionné.</p>
+					<p>Ces informations peuvent-être modifiées à tout moment depuis votre espace personnel</p>
+
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

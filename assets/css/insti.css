@@ -1,0 +1,21 @@
+/*#zoneInsti{
+   background-image: url('/css/css_site/img/institution.jpg');
+  
+}
+#zoneGC{
+background-image: url("/css/css_site/images/GC.jpg");
+}
+.titreInsti{
+    opacity: 0.25;
+    letter-spacing: 2em;
+    text-transform: capitalize;
+    color: rgb(224, 224, 224);
+}
+#zoneInsti::before{
+background-color:#626D71;
+opacity: 0.8;
+}
+#headMenuInsti{
+    background: #adada8;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}*/

@@ -1,0 +1,54 @@
+{% extends 'entreprise/baseAE.html.twig' %}
+{% block title %}
+    Météo pour mes interventions
+{% endblock %}
+{% block contenu %}
+    {% if interventions is empty %}
+       <div class="row">
+           <div class="col-12 text-center">
+               <p class="h5">En l'absence d'intervention en cours, ces informations ne sont pas disponibles .</p>
+           </div>
+       </div>
+    {% else %}
+    {% for intervention in interventions %}
+        <div id="accordion01" role="tablist">
+
+            <div class="card">
+                <div class="card-header" role="tab" id="collapse{{ loop.index }}_header">
+                    <h5>
+                        <a class="collapsed" data-toggle="collapse" href="#collapse{{ loop.index }}" aria-expanded="false" aria-controls="collapse{{ loop.index }}">
+                            Méteo pour l'intervention du {{ intervention.rdvAT|format_datetime('short','none',locale='fr') }} à {{ intervention.adresse.ville }}
+                        </a>
+                    </h5>
+                </div>
+                <div id="collapse{{ loop.index }}" class="collapse" role="tabpanel" aria-labelledby="collapse{{ loop.index }}_header" data-parent="#accordion01">
+                    <div class="card-body">
+                        <input type="hidden" name="" value="{{ intervention.id }}">
+                    </div>
+                    <div class="table-responsive bg-white pl-5 pr-5">
+                        <table class="">
+                            <thead>
+                            <tr>
+                                <th width="33%" class="text-center">Temps</th>
+                                <th width="33%" class="text-center">Température</th>
+                                <th width="33%" class="text-center">Vent</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td class="temp text-center"></td>
+                                <td class="tempe text-center"></td>
+                                <td class="wind text-center"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    {% endif %}
+{% endblock %}
+
+
+

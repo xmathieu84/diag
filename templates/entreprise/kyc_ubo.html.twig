@@ -1,0 +1,121 @@
+{% extends 'entreprise/baseAE.html.twig' %}
+{% block title %}Creation compte MangoPay
+{% endblock %}
+
+{% block nomSection %}Compte MangoPay
+{% endblock %}
+{% block lienSection %}
+	<a href="{{path('entreprise')}}">Accueil</a>
+
+{% endblock %}
+{% block nomPage %}Compte MangoPay
+
+{% endblock %}
+
+{% block contenu %}
+	<section class="ls ms s-py-xl-150 s-py-lg-130 s-py-md-90 s-py-60">
+		{# <div class="row">
+			<div class="col-sm-2"></div>
+			<div class="col-sm-8 text-center mt-5">
+				<h5>Progression de votre Inscription</h5>
+				<div class="progress">
+					<div class="progress-bar" role="progressbar" style="width: 70%;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">70%</div>
+				</div>
+
+
+			</div>
+			<div class="col-sm-2"></div>
+
+		</div>#}
+
+
+		<div class="containe" style="margin-top: -1.5em">
+			<div class="row">
+
+				<div class="col-sm-12 ">
+					<p class="h3">Dans le cadre de la réglementation européenne de lutte contre le blanchiment d'argent, vous devez nous fournir les documents suivants afin que nous les transmettions à notre prestataire de paiement MangoPay.</p>
+
+				</div>
+				<div class="col-12 mt-4">
+					<p class="h5">Vous souhaitez une assistance pour vous inscrire, prenons rendez-vous par <span class="h4 "><a class="color_blue" href="mailto:assistance@diag-drone.com">E-mail</a></span> ou par <span class="h4 color_blue"><a class="color_blue"	href="tel:0665628541">téléphone</a></span>.</p>
+				</div>
+				<div class="col-sm-12 mt-5 mb-5  text-center">
+
+					<div class="row">
+						<div class="col-sm-4 ">
+
+							<label for="identite">Justificatif d'identité du représentant légal (permis de conduire ou CNI ou passeport) (7Mo maximum)</label>
+							<button class="boutonRemplace" id="boutonIdentite">Justificatif d'identité</button>
+							<input type="file" name="" id="identite" accept=".pdf,.jpeg,.jpg,.gif,.png">
+
+						</div>
+						<div class="col-sm-4">
+							{% if entreprise.formJuridique !="auto-entrepreneur" %}
+								<label for="kbis">Extrait kbis de moins de 3 mois (7Mo maximum)</label>
+								{% set doc = "kbis" %}
+								{% else %}
+									<label for="kbis">Extrait siren de moins de 3 mois (7Mo maximum)</label>
+									{% set doc = "Extrait siren" %}
+							{% endif %}
+
+
+							<button class="boutonRemplace alignement" id="boutonKbis">{{ doc }}</button>
+
+							<input type="file" name="" id="kbis" accept=".pdf,.jpeg,.jpg,.gif,.png">
+
+						</div>
+						{% if entreprise.formJuridique !='auto-entrepreneur' %}
+							<div class="col-sm-4 ">
+								<label for="statut">Statut de votre societé à jour et signé  (7Mo maximum)</label>
+
+								<button class="boutonRemplace" id="boutonStatut">Statut</button>
+
+								<input type="file" name="" id="statut" accept=".pdf,.jpeg,.jpg,.gif,.png">
+							</div>
+						{% endif %}
+
+						<div class="col-sm-6 mt-5 ">
+							<label for="dateNaissance">Date de naissance (format JJ/MM/AAAA)</label>
+							<input type="date" name="" id="dateNaissance" class="form-control form-control-sm">
+
+						</div>
+						<div class="col-sm-6 mt-5 ">
+							<label for="lieuNaissance">Lieu de naissance</label>
+							<input type="text" name="" id="lieuNaissance" class="form-control form-control-sm">
+
+						</div>
+						<div class="col-sm-12 mt-5 mb-5 text-center">
+							<button class="btn btn-maincolor">Valider les documents</button>
+							<p class="h7">L'envoie des documents à MangoPay peut prendre jusqu'à 15 secondes.Vous serez redirigés automatiquement vers la phase suivante.</p>
+						</div>
+						<div class="col-sm-12 text-center mb-5">
+							<p class="h3 message"></p>
+						</div>
+
+
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<button type="button" class="btn btn-primary d-none" data-toggle="modal" data-target="#modaleAttente">
+
+		</button>
+		<div class="modal fade" id="modaleAttente" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+
+					<div class="modal-body text-center">
+						<img src='/css/css_site/img/attente.gif' alt="">
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary d-none" data-dismiss="modal">Close</button>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+{% endblock %}

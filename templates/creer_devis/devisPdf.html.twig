@@ -1,0 +1,130 @@
+{% if entreprise.logo %}
+<div class="logo">
+
+		<img src="../public/uploads/logo/{{entreprise.logo}}" alt="" width="100px" heigth="100px">
+
+
+
+
+</div>
+	{% elseif entreprise.logo ==null and contenu.title  %}
+	<div class="logo"></div>
+{% endif %}
+{% if contenu.title %}
+	<div class="titre">
+		{{contenu.title}}
+	</div>
+{% elseif contenu.title  ==null and entreprise.logo  %}
+	<div class="titre"></div>
+{% endif %}
+
+<div class="entreprise">
+
+	<div>
+		{% if entreprise.formJuridique == 'auto-entrepreneur' %}
+			{{entreprise.denomination}}
+		{% else %}
+			{{entreprise.formJuridique}}
+			{{entreprise.dirigeant.prenom}}
+			{{entreprise.dirigeant.nom}}
+
+		{% endif %}
+	</div>
+	<div>{{entreprise.adresse.numero}}
+		{{entreprise.adresse.nomVoie}}
+		{{entreprise.adresse.codePostal}}
+		{{entreprise.adresse.ville}}</div>
+	<div>Téléphone :
+		{{entreprise.telephone.numero}}</div>
+
+
+	<div>Numéro de SIRET:{{entreprise.siretTva.siret}}</div>
+
+	<div>
+		{% if entreprise.siretTva.tva %}
+
+			{{entreprise.siretTva.tva}}
+
+		{% endif %}
+	</div>
+	<div>{{dirigeant.user.email}}</div>
+</div>
+
+<div class="client">
+	<div>{{contenu.corpsClient.nom}}
+
+		{{contenu.corpsClient.prenom}}</div>
+
+
+	<div>Entreprise :
+		{{contenu.corpsClient.entreprise}}</div>
+	<div>SIRET : {{ contenu.corpsClient.siret }}</div>
+	<div>Adresse :
+		{{contenu.corpsClient.adresse}}</div>
+
+	<div>Téléphone :
+		{{contenu.corpsClient.telephone}}</div>
+
+	<div>Email :
+		{{contenu.corpsClient.email}}</div>
+
+</div>
+<div class="date">
+	<p>Le
+		{{date|format_datetime('full', 'none', locale='fr')}}</p>
+
+</div>
+<table class="devis">
+	<tr>
+		<th class="refDevis">Référence</th>
+		<th class="designDevis">Désignation</th>
+		<th class="quantiteDevis">Quantité</th>
+		<th class="prixdevis">PU vente</th>
+		<th class="tvaDevis">TVA</th>
+		<th class="montantDevis">Montant HT</th>
+	</tr>
+	{% for ligne in contenu.corpsTableau %}
+		<tr>
+			<td>{{ligne.reference}}</td>
+			<td>{{ligne.designation}}</td>
+			<td>{{ligne.quantite}}</td>
+			<td>{{ligne.prixUnitaire}}
+				€</td>
+			<td>{{ligne.tva}}
+				%</td>
+			<td>{{ligne.montantHt}}
+				€</td>
+
+
+		</tr>
+	{% endfor %}
+
+</table>
+<div class="footer">
+	<div class="gfooter">
+		<span>Conditions de paiement :</span>
+		<ul>
+			{% if contenu.condition[0].condP =="acompte" %}
+				<li>acompte : {{ contenu.condition[0].acompte }} €</li>
+				<li>Comptant : {{ contenu.condition[0].comptant }} €</li>
+				{% else %}
+					<li>100% soit :<span class="prix">{{contenu.TTC}}</span><span class="type"> Paiement {{ contenu.condition[0].condP }}</span></li>
+			{% endif %}
+
+		</ul>
+	</div>
+
+	<div class="footerPrix">
+		<div class="totalHT">Total HT : {{contenu.ht}} €</div>
+		<div class="totalTva">TVA : {{contenu.TVA}} €</div>
+		<div class="totalTtc">Total TTC : {{contenu.TTC}} €</div>
+
+	</div>
+	<div class="condotionL">
+		<p>CLAUSE DE RÉSERVE DE PROPRIÉTÉ : Conformément à la loi 80.335 du 12 mai 1980, nous réservons la propriété des produits et marchandises, objets des présents débits, jusqu'au paiement de l'intégralité du prix et de ses accessoires. En cas de non paiement total ou partiel du prix de l'échéance pour quelque cause que ce soit, de convention expresse, nous nous réservons la faculté, sans formalités, de reprendre matériellement possession de ces produits ou marchandises à vos frais, risques et périls.
+			Pénalité de retard : 3 fois le taux d'intérêt légal après date échéance. Escompte pour règlement anticipé : 0% (sauf condition particulière définie dans les conditions de règlement)
+			Le montant de l'indemnité forfaitaire pour frais de recouvrement prévue en douzième alinéa de l'article L441-6 est fixé à 40 Euros en matière commerciale.</p>
+	</div>
+</div>
+
+

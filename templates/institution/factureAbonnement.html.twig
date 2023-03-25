@@ -1,0 +1,22 @@
+{% extends 'institution/baseInsti.html.twig' %}
+{% block title %}Vos factures{% endblock %}
+
+{% block pageAccueil %} <h4>Factures de votre abonnement</h4>{% endblock %}
+{% block contenu %}
+    <div class="row text-center">
+        <div class="col-sm-3">
+            <button class="btn btn-maincolor preview">&lt &lt</button>
+        </div>
+        <div class="col-sm-6">
+            <p class="h2 mois"></p>
+        </div>
+        <div class="col-sm-3">
+            <button class="btn btn-maincolor next">&gt &gt</button>
+        </div>
+        <div class="col-sm-12 mt-5 bg-white">
+            <div class="row zoneFacture">
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

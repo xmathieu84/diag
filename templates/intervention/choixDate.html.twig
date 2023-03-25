@@ -1,0 +1,150 @@
+{% extends template %}
+
+{% block title %}
+Choix Date
+{% endblock %}
+
+{% block contenu %}
+    <div class="row align-items-start bg-white pt-5 pb-5">
+        <div class="col-sm-12 col-12 mb-5">
+            <p class="h4"><span class="color_blue">Diag-drone</span> a détecté  <span class="color_blue">{{ nombre }}</span> <span class="color_blue">O</span>pérateurs <span class="color_blue">T</span>élépilotes de <span class="color_blue">D</span>rone qui correspondent à votre demande pouvant intervenir.</p>
+
+            <p class="h4 mt-4">Indiquez maintenant le créneau souhaité pour l'intervention</p>
+        </div>
+        <div class="col-sm-4 col-12">
+            <div class="row">
+                <div class="col-1">
+                    <input type="radio" name="typeDate" id="" checked="checked" value="dateSeule">
+                </div>
+                <div class="col-10">
+                    <label for="">Je souhaite choisir une date</label>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-sm-4 col-12">
+            <div class="row">
+                <div class="col-1">
+                    <input type="radio" name="typeDate" id="" value="plageDate">
+                </div>
+                <div class="col-10">
+                    <label for="">Je souhaite choisir une plage de date</label>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="col-sm-4 col-12">
+            <div class="row">
+                <div class="col-1">
+                    <input type="radio" name="typeDate" id="" value="sansDate">
+                </div>
+                <div class="col-10">
+                    <label for="">Je n'ai pas de date précise de rendez vous</label>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="col-sm-6 col-12 dateSimple">
+            <div class="row">
+                <div class=" mb-4 col-12">
+                    <label for="dateInter">Date souhaitée de l'intervention</label>
+                    <input type="date" id="dateInter" class="form-control border-gray">
+                </div>
+            </div>
+        </div>
+        <div class="col-12 plageDate">
+            <div class="row">
+                <div class="col-sm-6 col-12">
+                    <label for="dateMin">Date minimum d'intervention</label>
+                    <input type="date" id="dateMin" class="form-control border-gray">
+                </div>
+                <div class="col-sm-6 col-12">
+                    <label for="dateMax">Date maximum d'intervention</label>
+                    <input type="date" id="dateMax" class="form-control border-gray">
+                </div>
+            </div>
+        </div>
+        <div class="col-12 mt-4">
+            <div class="row">
+                <div class="col-sm-6 col-12">
+                    <a href="{{path('etape4',{id:intervention.id,code:code})}}" class="btn btn-outline-darkgrey" data-inter="{{intervention.id}}">Page précédente</a>
+
+                </div>
+                <div class="col-sm-6 col-12 text-right  bouton ">
+                    <button class="btn btn-maincolor" data-inter="{{ intervention.id }}">Publier ma demande d'intervention</button>
+                </div>
+            </div>
+        </div>
+
+    
+    </div>
+
+    {% if intervention.renoncementDelaiRetract ==false %}
+        <input type="hidden" name="" id="delai" value="14">
+    {% endif %}
+
+    <div class="modal fade" id="modalReponse" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Disponiblité</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary closeF" data-dismiss="modal">Choisir une autre date</button>
+                    <button class="btn btn-maincolor2" data-inter="{{ intervention.id }}">Valider mon rendez-vous</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button type="button" class="btn btn-primary d-none btnModale" data-toggle="modal" data-target="#modaleAttente">
+
+    </button>
+    <div class="modal fade" id="modaleAttente" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+
+            </div>
+            <div class="modal-body text-center">
+                <picture>
+                    <img src="/css/css_site/img/preloader.gif" alt="">
+                </picture>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary d-none closeSpinner" data-dismiss="modal"></button>
+
+            </div>
+        </div>
+    </div>
+</div>
+    <button type="button" class="btn btn-primary d-none btnModaleF" data-toggle="modal" data-target="#madaleFinale">
+
+    </button>
+    <div class="modal fade" id="madaleFinale" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+
+                </div>
+                <div class="modal-body text-center">
+                    <p class="h4">Votre demande d'intervention par drone a bien été enregistrée sur la <span class="color_blue">plateforme</span></p>
+                    <p class="h4">Vous serez informés par mail et par SMS dès qu'un ou plusieurs opérateurs vous auront adressé <span class="color_blue">une proposition tarifaire définitive</span>.</p>
+                    <p class="h4">Vous pourrez alors procéder à une <span class="color_blue">réservation définitive</span> pour votre intervention.</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="{{ path('demandeur_encours',{code:code}) }}">
+                        <button type="button" class="btn btn-secondary">Terminer</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

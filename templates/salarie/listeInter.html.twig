@@ -1,0 +1,65 @@
+{% extends 'entreprise/baseAE.html.twig' %}
+
+
+
+{% block title %}Assistance au vol{% endblock %}
+{% block pageAccueil %}
+    <h4>Assistance au vol</h4>
+{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
+
+
+{% endblock %}
+{% block js %}
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
+{% endblock %}
+{% block contenu %}
+    {% if interventions is empty %}
+        <div class="row">
+            <div class="col-12 text-center">
+                <p class="h5">En l'absence d'intervention en cours, ces informations ne sont pas disponibles .</p>
+            </div>
+        </div>
+    {% else %}
+    {% for intervention in interventions  %}
+        <div id="accordion{{ loop.index }}" role="tablist">
+            <div class="card" data-inter="{{ intervention.id }}">
+                <div class="card-header" role="tab" id="collapse{{ loop.index }}_header">
+                    <h5>
+                        <a data-toggle="collapse" href="#collapse{{ loop.index }}" aria-expanded="false" aria-controls="collapse{{ loop.index }}" class="collapsed">
+                            Intervention du {{ intervention.rdvAt|format_datetime('short','short',locale='fr') }}
+                        </a>
+                    </h5>
+                </div>
+
+                <div id="collapse{{ loop.index }}" class="collapse" role="tabpanel" aria-labelledby="collapse{{ loop.index }}_header" data-parent="#accordion{{ loop.index }}">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-6">
+
+                            </div>
+                            <div class="col-sm-12 text-center mb-2">
+                                <p class="h5">Zone de vol à vu</p>
+                                <p class="h7">Ces éléments sont donnés à titre indicatif</p>
+                            </div>
+
+                            <div class="col-sm-12 exclusion text-center"></div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    {% endfor %}
+    {% endif %}
+{% endblock %}
+
+{% block javascripts2 %}
+    <script type="text/javascript">
+        $('.collapse').on('shown.bs.collapse', (event) =>{
+            window.dispatchEvent(new Event('resize'));
+        });
+    </script>
+{% endblock %}

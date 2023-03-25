@@ -1,0 +1,48 @@
+ {% extends 'institution/baseInsti.html.twig' %}
+ {% block title %}Création d'un dossier{% endblock %}
+{% block titreSection %}Création d'un dossier{% endblock %}
+{% block titrePage %}Création d'un dossier{% endblock %}
+{% block pageAccueil %}
+
+{% endblock %}
+
+ {% block contenu %}
+  {{ form_start(form,{'attr':{'class':'bg-white ml--100'}}) }}
+  <div class="row ml-3 mr-3">
+       <div class="col-6">
+           {{ form_row(form.type,{'label':'Choisissez le type de dossier'}) }}
+       </div>
+      <div class="col-6">
+          {{ form_row(form.reference,{'label':'Référence interne'}) }}
+      </div>
+      <div class="col-6">
+          {{ form_row(form.nom,{'label':'Nom du dossier'}) }}
+      </div>
+
+      <div class="col-sm-12 text-center">
+          <legend>Adresse</legend>
+      </div>
+      <div class="col-3">
+          {{ form_row(form.adresse.numero,{'label':'Numéro de la voie'}) }}
+      </div>
+      <div class="col-9">
+          {{ form_row(form.adresse.nomVoie,{'label':'Nom de la voie'}) }}
+      </div>
+      <div class="col-6">
+          {{ form_row(form.adresse.codePostal,{'label':'Code postal'}) }}
+      </div>
+      <div class="col-6">
+          {{ form_row(form.adresse.ville,{'label':'Ville','attr':{'list':'city'}}) }}
+          <datalist id="city"></datalist>
+      </div>
+      <div class="col-12">
+          {{ form_row(form.dossierGen,{'label':' '}) }}
+      </div>
+      <div class="col-sm-12 text-center mt-5 mb-5">
+          <button class="btn btn-maincolor" type="submit">Valider</button>
+      </div>
+  </div>
+  {{ form_end(form) }}
+
+
+ {% endblock %}

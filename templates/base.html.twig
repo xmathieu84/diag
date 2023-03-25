@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+	<!--<![endif]-->
+
+	<head>
+		<meta
+				charset="utf-8">
+		<!--[if IE]>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<![endif]-->
+
+		<meta name="robots" content="index,follow" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="format-detection" content="telephone=no">
+
+		<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+		<link rel="stylesheet" href="/css/css_site/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/css/css_site/css/animations.css">
+		<link rel="stylesheet" href="/css/css_site/css/font-awesome5.css">
+		<link rel="stylesheet" href="/css/css_site/css/icomoon.css">
+		<link rel="stylesheet" href="/css/css_site/css/main.css" class="color-switcher-link">
+		<link rel="stylesheet" href="/css/css_site/css/shop.css" class="color-switcher-link">
+		<link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+		<link rel="apple-touch-icon" href="/css/css_site/img/free.jpg">
+		<meta name="apple-mobile-web-app-status-bar" content="black">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<meta name="theme-color" content="black">
+
+		{{ encore_entry_link_tags('app') }}
+
+
+		{% block stylesheets %}{% endblock %}
+		{% block js %}{% endblock %}
+
+		{% block referencement %}
+
+		{% endblock %}
+		<title>{% block title %}
+
+			{% endblock %}
+			
+		</title>
+
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-D93JE46GVJ"></script>
+
+	</head>
+
+	<body>
+		{% block header %}{% endblock %}
+
+		<div id="canvas">
+			<div id="box_wrapper">
+				{% if app.request.attributes.get('_route') in ["home", "quiSomme", "typeintervention", "lesProfils", "interfaceDeddies", "nosParts", "mentionsLegales"] %}
+					<section class="page_topline ds c-gutter-0 s-py-15 s-borderbottom d-xl-none">
+						<div class="container-fluid">
+							<div class="row align-items-center">
+								<div class="col-12 text-center">
+									<ul class="top-includes">
+										<li>
+											{% if app.user is null %}
+												<a class="" href="{% block mobileConnect %}{% endblock %}">
+													<small>Se connecter</small>
+													<i class="fas fa-user"></i>
+												</a>
+											{% elseif app.user.role('ROLE_DEMANDEUR') %}
+													<a href="{{ path('demandeur') }}">
+														<small>Mon espace</small>
+														<i class="fas fa-user"></i>
+													</a>
+											{% elseif app.user.role('ROLE_ENTREPRISE') %}
+												<a href="{{ path('entreprise') }}">
+													<small>Mon espace</small>
+													<i class="fas fa-user"></i>
+												</a>
+											{% elseif app.user.role('ROLE_INSTITUTION') or is_granted('ROLE_GRANDCOMPTE') %}
+												<a href="{{ path('homeInsti', {code: null}) }}">
+													<small>Mon espace</small>
+													<i class="fas fa-user"></i>
+												</a>
+											{% elseif app.user.role('ROLE_ADMIN') %}
+												<a href="{{ path('administrateur') }}">
+													<small>Mon espace</small>
+													<i class="fas fa-user"></i>
+												</a>
+											{% endif %}
+										</li>
+										<li><a href=""><small>Test</small><i class="fas fa-user"></i></a></li>
+									</ul>
+								</div>
+
+							</div>
+						</div>
+					</section>
+				{% endif %}
+				<div class="header_absolute ">
+					<!-- header with two Bootstrap columns - left for logo and right for navigation -->
+					<header class="page_header ds ms bg-transparent justify-nav-center s-overlay s-py-10 ">
+
+						<div class="container-fluid">
+
+							<div class="row align-items-center">
+								<div class="col-xl-2 col-lg-3 col-md-7 col-8">
+
+								</div>
+								<div class="col-xl-10 col-lg-9 col-md-5 col-4">
+									<div class="nav-wrap">
+										<!-- main nav start -->
+
+										<!-- eof main nav -->
+
+										{% block connexion %}
+
+											<ul class="top-includes  text-right">
+												<li>
+													<a href="">
+														{#  <small>Boutique</small>#}
+													</a>
+												</li>
+
+												<li class="login__li ">
+													{% if app.user is null %}
+														<a  href="{{ path('app_login') }}">
+															<small>Se connecter</small>
+															<i class="fas fa-user"></i>
+														</a>
+													{% elseif app.user.role('ROLE_DEMANDEUR') %}
+														<a href="{{ path('demandeur') }}">
+															<small>Mon espace</small>
+															<i class="fas fa-user"></i>
+														</a>
+													{% elseif app.user.role('ROLE_ENTREPRISE') %}
+														<a href="{{ path('entreprise') }}">
+															<small>Mon espace</small>
+															<i class="fas fa-user"></i>
+														</a>
+													{% elseif app.user.role('ROLE_INSTITUTION') or app.user.role('ROLE_GRANDCOMPTE') %}
+														<a href="{{ path('homeInsti', {code: null}) }}">
+															<small>Mon espace</small>
+															<i class="fas fa-user"></i>
+														</a>
+													{% elseif app.user.role('ROLE_ADMIN') %}
+														<a href="{{ path('administrateur') }}">
+															<small>Mon espace</small>
+															<i class="fas fa-user"></i>
+														</a>
+													{% endif %}
+
+												</li>
+											</ul>
+
+										{% endblock %}
+
+									</div>
+								</div>
+							</div>
+
+						</div>
+						<!-- header toggler -->
+						<span class="toggle_menu">
+							<span></span>
+						</span>
+					</header>
+				</div>
+
+				{% block body %}{% endblock %}
+				
+
+
+				</div>
+
+
+
+				<footer class="page_footer ls ms s-parallax s-bordertop s-py-10">
+
+				</footer>
+
+
+
+			</div>
+		</div>
+		{{ encore_entry_script_tags('app') }}
+
+		<script src="/js/js_site/vendor/modernizr-2.6.2.min.js"></script>
+		<script src="/js/js_site/compressed.js"></script>
+		<script src="/js/js_site/main.js"></script>
+		<script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/cookie-bar/cookiebar-latest.min.js?forceLang=fr&theme=flying&customize=1&tracking=1&thirdparty=1&always=1&noGeoIp=1&remember=60&privacyPage=https%3A%2F%2Fdiag-drone.com%2FmentionLegales"></script>
+
+		{% block javascripts %}{% endblock %}
+
+		<script>
+			{#  if (document.title !=='home2'){
+				document.location.href= "/";
+			}#}
+		</script>
+	</body>
+
+</html>

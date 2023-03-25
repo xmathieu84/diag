@@ -1,0 +1,147 @@
+{% extends "accueil/baseaccueil.html.twig" %}
+{% block title %}Nos abonnements en details
+{% endblock %}
+{% block titrePage %}
+	<h1>Nos Abonnements
+	</h1>
+
+{% endblock %}
+{% block nomPage %}Nos Abonnements
+
+{% endblock %}
+
+
+{% block bodyAccueil %}
+
+	<section class="ls ms s-pt-xl-150 s-pt-lg-130 s-pt-md-90 s-pt-60 s-pb-xl-140 s-pb-lg-120 s-pb-md-80 s-pb-50 c-mb-10 c-gutter-60">
+		<div class="container type" data-abonnement={{type}}>
+
+			<div class="row">
+				<div class="col-md-12 col-xs-12">
+					<h3 class="special-heading text-center">
+						<span class="mb-2 ">
+							Nos abonnements
+							<span class="color_blue">en details</span>
+						</span>
+					</h3>
+				</div>
+
+
+				<div class="fw-divider-space divider-20 divider-lg-55"></div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<div id="accordion01" role="tablist">
+						{% for abonnement in abonnements %}
+							<div class="card">
+								<div class="card-header" role="tab" id="collapse{{loop.index}}_header">
+									<h5>
+										<a data-toggle="collapse" href="#collapse{{loop.index}}" aria-expanded="false" aria-controls="collapse{{loop.index}}">
+											{{abonnement.nom}}
+										</a>
+									</h5>
+								</div>
+
+								<div id="collapse{{loop.index}}" class="collapse" role="tabpanel" aria-labelledby="collapse01_header" data-parent="#accordion01">
+									<div class="card-body">
+										<div class="row">
+											<div class="col-sm-6">
+												<ol class="list2">
+													{% for particularite in abonnement.particularites %}
+														<li class="text-black">{{particularite}}</li>
+
+													{% endfor %}
+
+
+												</ol>
+
+											</div>
+											<div class="col-sm-6 text-center">
+												<div class="item-content">
+
+													<div class="price-wrap color-darkgrey">
+														<span class="plan-sign">€</span>
+														<span class="plan-price">{{abonnement.prix}}</span>
+														<span class="plan-decimals">.00</span>
+														<span class="plan-month">/mois</span>
+													</div>
+
+												</div>
+
+
+											</div>
+
+											<div class="col-sm-12">
+												{% if abonnement.nom == 'So free' %}
+
+													<p class="text-black">Bénéficiez gratuitement de notre service de gestion d’activité.</p>
+													<p class="text-black">
+
+														Agenda dynamique, création de devis et factures, accès à notre forum et à nos offres partenaires et génération d’un rapport type pour chacune de vos missions. Chacun de ses rapports peut être transmis à la personne de votre choix (client, expert…).
+													</p>
+
+
+													<p class="text-black">Sans engagement et sans obligation d’achat, l’abonnement SO FREE, c’est votre compagnon pour bien démarrer avec DIAG DRONE.</p>
+
+												{% endif %}
+
+												{% if abonnement.nom == 'Access' %}
+													<p class="text-black">Associées aux outils de base, les fonctionnalités de cette formule vous permettent déjà de vous concentrer sur vos missions mais aussi de simplifier et de sécuriser les règlements de tous vos clients. A partir de votre portefeuille électronique et privatif, vous êtes en mesure d’accepter tout règlement par CB.
+													</p>
+													<p class="text-black">De plus vous bénéficiez d’un service d’assistance au vol grâce à notre outil de cartographie dynamique avec alerte NOTAM, SUPO AIP et AZBA.</p>
+													<p class="text-black">Cette offre intègre une déclaration de vol gratuite par mois.</p>
+													<p class="text-black">Complète et pratique, l’abonnement ACCES, c’est le meilleur moyen pour découvrir DIAG DRONE</p>
+
+
+												{% endif %}
+												{% if abonnement.nom == 'Premium' %}
+													<p class="text-black">Vous voici devant le cœur de DIAG DRONE !</p>
+													<p class="text-black">Cette formule va décupler votre activité grâce à l’option de mise en relation.</p>
+													<p class="text-black">En effet, votre activité d’Opérateur Télé Pilote de Drone est référencée par DIAG DRONE qui alors en mesure de proposer vos services en adéquation avec les besoins d’un particulier comme d’un professionnel, et ce en temps réel !
+													</p>
+													<p class="text-black">Des notifications vous sont adressées par SMS et par mail dès qu’une mission est en attente. Vous êtes libres d’affiner vos tarifs en relation directe avec le demandeur puis de confirmer le rendez-vous.</p>
+													<p class="text-black">
+														Avec cette formule, bénéficiez en plus de 10 déclarations de vol gratuites par mois.</p>
+
+
+													<p class="text-black">Performant et accessible, l’abonnement PREMIUM, c’est l’outil parfait de DIAG DRONE pour booster votre activité !</p>
+
+
+												{% endif %}
+												{% if abonnement.nom =='Infinite' %}
+													<p class="text-black">Avec INIFINITE, vous bénéficiez non seulement de tous les outils de gestion, de préparation de vol, de mise en relation avec un demandeur mais aussi de deux offres complémentaires conçues pour répondre aux structures d’envergure.</p>
+													<ul class="accueil">
+														<li>
+															<p class="text-black">-	L’accès à notre service de veille d’appels d’offre et d’appels à projet. Ainsi, vous êtes informés en temps réel de la publication d’un appel d’offre ou d’un appel à projet lié à l’activité Drone qu’il soit publié en France comme partout en Europe. Votre société reste concentrée sur son cœur de métier tout en conservant une forme de radar en mesure de repérer les projets porteurs.</p>
+														</li>
+														<li>
+															<p class="text-black">-	La mise en place d’un site internet vitrine dont vous restez le propriétaire. Associé à un système de gestion de contenu (WORDPRESS) simple et performant, votre entreprise sera visible sur le net à partir d’un site professionnel spécialement développé par les experts de DIAG DRONE. Les frais de réservation de votre nom de domaine et de votre hébergement sont à la charge de DIAG DRONE mais vous restez propriétaire de votre nom de domaine ! C’est une exclusivité DIAG DRONE. Votre site comportera au minimum 5 pages (Accueil, A propos, Contact + 2 pages de votre choix) le tout présenté selon un thème (Template) sous licence professionnelle, c’est une autre exclusivité DIAG DRONE.</p>
+														</li>
+
+
+													</ul>
+
+
+													<p class="text-black">Complet et puissant, l’abonnement INFINITE, c’est l’outil intégral de DIAG DRONE.</p>
+													<p class="text-black">Attention, cet abonnement doit être souscrit pour au moins 6 mois.</p>
+
+
+												{% endif %}
+
+											</div>
+
+										</div>
+									</div>
+								</div>
+							</div>
+
+
+						{% endfor %}
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+{% endblock %}

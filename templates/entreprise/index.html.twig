@@ -1,0 +1,307 @@
+{% extends template %}
+
+
+{% block title %}
+	Accueil entreprise
+{% endblock %}
+{% block TitreEntreprise %}
+
+{% endblock  %}
+
+{% block lienSection %}
+	<a href="{{path('entreprise')}}">Accueil</a>
+{% endblock %}
+
+
+{% block pageAccueil %}
+
+
+	<div class="row">
+		<div class="col-12 mb-4">
+			<h3 class="mb-0">Tableau de bord
+				<span class="color_blue majuscule">{{entreprise.denomination}}
+			</span>
+
+			</h3>
+		</div>
+
+		{% if app.user.salarie.isHonneur == false and is_granted('ROLE_ODI')==true %}
+			<div class="col-12 mt-3">
+				<p>Vous n'avez pas attesté que vous pouviez realiser vos missions <b><a href="{{ path('modifierInter') }}" class="color_blue">Cliquez ici </a></b>pour le faire</p>
+			</div>
+		{% endif %}
+		{% if app.user.salarie.periInter ==null and app.user.salarie.detailPrixes.toArray is empty and is_granted('ROLE_ODI')  %}
+			<div class="col-12 mt-3">
+				<p>Vous n'avez pas renseigné vos missions <b><a href="{{ path('modifierInter') }}" class="color_blue">Cliquez ici </a></b>pour les choisir</p>
+			</div>
+		{% endif %}
+		{% if is_granted('ROLE_ODI') and salarie.timeNull == false and app.user.salarie.detailPrixes.toArray is not empty %}
+			<div class="col-12 mt-3">
+				<p>Toute vos durées de missions ne sont pas complétées. <b><a href="{{ path('tempsMission') }}" class="color_blue">cliquez ici </a></b>pour les compléter</p>
+			</div>
+		{% endif %}
+		{% if app.user.salarie.detailPrixes.toArray is not empty and prixs is empty  %}
+			<div class="col-12 mt-3">
+				<p>Vous n'avez pas indiqué vos tarifs pour vos missions  <b><a href="{{ path('tarifOdi') }}" class="color_blue">Cliquez ici </a></b>pour les définir</p>
+			</div>
+		{% endif %}
+		{% if is_granted('ROLE_ENTREPRISE') and entreprise.entAss is null %}
+			<div class="col-12 mt-3">
+				<p>Vous n'avez pas renseigné de document d'assurance. <b><a href="{{ path('finalisation') }}" class="color_blue">Cliquez ici </a></b>pour la renseigner</p>
+			</div>
+		{% endif %}
+		{% if app.user.role('ROLE_AE')== false and app.user.role('ROLE_SALARIE')==false %}
+			{% if entreprise.uboDeclaration ==null and entreprise.kycDeclarations is empty %}
+				<div class="col-12 mt-3">
+					<p>Vous n'avez pas renseigné les documents pour notre partenaire de paiement CB MangoPay. <b><a href="{{ path('kyc_ubo') }}" class="color_blue">Cliquez ici </a></b>pour les renseigner</p>
+				</div>
+			{% endif %}
+			{% elseif app.user.role('ROLE_ENTREPRISE') %}
+				{% if entreprise.kycDeclarations is empty %}
+					<div class="col-12 mt-3">
+						<p>Vous n'avez pas renseigné les documents pour notre partenaire de paiement CB MangoPay. <b><a href="{{ path('kyc_ubo') }}" class="color_blue">Cliquez ici </a></b>pour les renseigner</p>
+					</div>
+				{% endif %}
+		{% endif %}
+		{% if is_granted('ROLE_OTD') and liti is empty %}
+			<div class="col-12 mt-3">
+				<p>Vous n'avez pas indiqué les interventions que vous pouviez réaliser. <b><a href="{{ path('modifierInter') }}" class="color_blue">Cliquez ici </a></b>pour le faire</p>
+			</div>
+		{% endif %}
+		{% if is_granted('ROLE_OTD') and app.user.salarie.licenceDgac ==null %}
+			<div class="col-12 mt-3">
+				<p>Vous n'avez pas renseigné votre licence DGAC . <b><a href="{{ path('licence') }}" class="color_blue">Cliquez ici </a></b>pour le faire</p>
+			</div>
+		{% endif %}
+		{% if is_granted('ROLE_OTD') and app.user.salarie.alphaTango ==null %}
+			<div class="col-12 mt-3">
+				<p>Vous n'avez pas renseigné vos justificatif Alpha Tango . <b><a href="{{ path('licence') }}" class="color_blue">Cliquez ici </a></b>pour le faire</p>
+			</div>
+		{% endif %}
+		{% if app.user.salarie.marketPlace ==null and is_granted('ROLE_ODI') %}
+			<div class="col-12 mt-3">
+				<p>Vous n'avez pas renseigné votre participation à notre Marketplace. <b><a href="{{ path('remise') }}" class="color_blue">Cliquez ici </a></b>pour la renseigner</p>
+			</div>
+		{% endif %}
+		{% if app.user.salarie.remiseTemps ==null and is_granted('ROLE_ODI') %}
+			<div class="col-12 mt-3">
+				<p>Vous n'avez pas renseigné vos remises.<b><a href="{{ path('remise') }}" class="color_blue">Cliquez ici </a></b>pour les renseigner</p>
+			</div>
+		{% endif %}
+		{% if liti is not empty and app.user.salarie.tauxHoraires is empty %}
+			<div class="col-12 mt-3">
+				<p>Vous n'avez pas renseigné vos tarifs d'intervention.<b><a href="{{ path('tarifA') }}" class="color_blue">Cliquez ici </a></b>pour les renseigner</p>
+			</div>
+		{% endif %}
+
+	</div>
+
+{#  	{% if entreprise.entAss is null %}
+
+	<div class="marquee-rtl">
+
+		<div></div>
+	</div>
+
+	{% endif %}
+	{% if salarie.alphaTango == null and is_granted('ROLE_OTD') %}
+		<div class="marquee-rtl">
+
+			<div>Votre attestation alpha tango n'est pas renseignée .</div>
+		</div>
+	{% endif %}
+	{% if salarie.licenceDgac == null and is_granted('ROLE_OTD') %}
+		<div class="marquee-rtl">
+
+			<div>Votre licence DGAC n'est pas renseignée .</div>
+		</div>
+	{% endif %}
+	{% if entreprise.formJuridique !="auto-entrepreneur"%}
+		{% if entreprise.uboDeclaration.resultat =="demandée"  %}
+			<div class="marquee-rtl">
+
+				<div>MangoPay vérifie les documents fournis. Le délai maximum est de 48 heures ouvrées avant validation.</div>
+			</div>
+		{% endif %}
+		{% if entreprise.uboDeclaration.resultat =="refusée" and entreprise.formJuridique !="auto-entepreneur" %}
+			<div class="marquee-rtl">
+
+				<div>Notre partenaire MangoPay a refusé vos documents pour l'ouverture de votre wallet. Votre compte Diag Drone est actif mais aucune solution de paiement n'est possible.
+					Merci de prendre contact avec notre assistance
+				</div>
+			</div>
+		{% endif %}
+	{% endif %} #}
+{% endblock %}
+
+{% block contenu %}
+
+	{% if entreprise.cgv == true  %}
+
+
+
+			<div class="col-12" >
+				<div class="row">
+					{% if is_granted('ROLE_OTD') %}
+					<div class="col-sm-6 col-12">
+						<div class="row">
+
+								<div class="col-12 bg-primary text-white text-center pt-4 pb-4 font-weight-bold  tableAccueil">Nombre de drones enregistrés</div>
+								<div class="col-12  text-dark text-center  pt-3 pb-3 font-weight-light  tableAccueil bg-white">{{ drones|length }}
+									<br>{% if is_granted('ROLE_ENTREPRISE') %}
+									<a href="{{ path('listedrone') }}" class="color-main">Ajouter un drone</a>
+									{% endif %}
+								</div>
+
+
+						</div>
+					</div>
+						{%else%}
+							<div class="col-sm-3 col-12"></div>
+					{% endif %}
+					<div class="col-sm-6 col-12">
+						<div class="row">
+							<div class="col-12 bg-primary text-white text-center pt-4 pb-4 font-weight-bold  tableAccueil">{% if is_granted('ROLE_OTD') %}
+									Nombre d'OTD inscrit
+									{%else%}
+										Nombre d'ODI inscrit
+								{% endif %}
+							</div>
+
+							<div class="col-12  text-dark text-center pt-3 pb-3 font-weight-light tableAccueil bg-white">{{ entreprise.salaries|length }}
+								<br> <br></div>
+						</div>
+					</div>
+					<div class="col-sm-4 col-12 text-dark">
+						<div class="row">
+							<div class="col-12 bg-success text-white pt-4 pb-4 mt-4 text-center font-weight-bold tableAccueil">Nombre de missions <br> en cours</div>
+							<div class="col-12 tableAccueil text-center pb-3 pt-3 h5 tableAccueil bg-white">
+								{{ encours|length }}
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-4 col-12 ">
+						<div class="row">
+							<div class="col-12 bg-success text-white pt-4 pb-4 mt-4 text-center font-weight-bold tableAccueil">Nombre de missions <br> réalisées</div>
+							<div class="col-12 h5  tableAccueil bg-white text-center pb-3 pt-3 h5">{{ termine|length }}</div>
+						</div>
+					</div>
+					<div class="col-sm-4 col-12">
+						<div class="row">
+							<div class="col-12 bg-success text-white pt-4 pb-4 mt-4 text-center font-weight-bold tableAccueil">Nombre de missions <br>réalisées via DIAG-DRONE</div>
+							<div class="col-12 h5  tableAccueil bg-white text-center pb-3 pt-3 h5">{{ missionDD|length }}</div>
+						</div>
+					</div>
+
+
+
+
+
+					{% if is_granted('ROLE_INFINITE') %}
+						<div class="col-sm-6 col-12 ">
+							<div class="row">
+								<div class="col-12 bg-info pt-4 pb-4 text-center font-weight-bold tableAccueil">Nombre d'appel d'offre/concurrence obtenu</div>
+								<div class="col-12 h5  tableAccueil bg-white text-center pb-3 pt-3 h5">{{ appelO|length }}</div>
+							</div>
+						</div>
+						<div class="col-sm-6 col-12 ">
+							<div class="row">
+								<div class="col-12 bg-info pt-4 pb-4 text-center font-weight-bold tableAccueil">Nombre d'appel d'offre/concurrence</div>
+								<div class="col-12 h5  tableAccueil bg-white text-center pb-3 pt-3 h5">{{ reponse|length }}</div>
+							</div>
+						</div>
+
+
+					{% endif %}
+					{% if is_granted('ROLE_PREMIUM') %}
+						<div class="col-12 bg-warning font-weight-bold tableAccueil text-center text-white pt-4 pb-4">Demandes d'intervention non pourvues en recherche d'OTD</div>
+						<div class="col-12 h5  tableAccueil bg-white text-center pb-3 pt-3 h5">
+							{{ inter|length }}<br>
+							<a href="{{ path('inter_sans_prop') }}" class="color-main">Voir les interventions</a>
+						</div>
+
+					{% endif %}
+					{#  <div class="col-12">
+						{% include 'publicite/bandeau_pub.html.twig' %}
+					</div>#}
+	{% else %}
+
+		<div class="col-12">
+			<p class="h4">Bonjour,</p>
+			<p class="h5">Afin de finaliser votre inscription sur DiagDrone certaines pièces justificatives sont nécessaires :</p>
+			<p class="h5">Si vous êtes un Auto-entrepreneur, une Entreprise individuelle à responsabilité limitée (EIRL), une Collectivité locale/territoriale ou une Entreprise individuelle déclarée auprès de la chambre d'agriculture, vous devrez fournir les documents qui suivent :</p>
+			<ul>
+				<li class="h5">Une copie recto verso sur une seule page de votre pièce d'identité OU de votre permis de conduire OU de votre passeport. Ces documents doivent être encours de validité</li>
+				<li class="h5">Un avis de situation URSAFF de moins de 3 mois OU un avis de situation SIRENE de moins de 3 mois. Vous trouverez ce document ici :
+					<a href="https://avis-situation-sirene.insee.fr">https://avis-situation-sirene.insee.fr</a></li>
+				<li class="h5">Votre RIB</li>
+				<li class="h5">Une copie de votre assurance professionnelle (RCP)</li>
+				<li class="h5">Une copie du certificat d’aptitude théorique de télépilote (C.A.T.T).</li>
+				<li class="h5">Votre numéro d’exploitant DGAC.</li>
+			</ul>
+			<p class="h5">Si vous êtes une Société Anonyme (SA), une Société à Responsabilité Limitée (SARL), une Entreprise Unipersonnelle à Responsabilité Limitée (EURL), une Société par Actions Simplifiée (SAS), une Société par Actions Simplifiée Unipersonnelle (SASU), une Exploitation Agricole à Responsabilité Limitée (EARL),une Société en Nom Collectif (SNC), un Groupement d'Intérêt Économique (GIE) ou un Groupement Agricole d'Exploitation en Commun (GAEC), vous devrez fournir les documents qui suivent :</p>
+			<ul>
+				<li class="h5">Une copie recto verso sur une seule page de votre pièce d'identité OU de votre permis de conduire OU de votre passeport. Ces documents doivent être encours de validité.</li>
+				<li class="h5">Un extrait Kbis de moins de 3 mois. Vous le trouverez à cette adresse <a href="https://www.infogreffe.fr/recherche-siret-entreprise/chercher-siret-entreprise.html">https://www.infogreffe.fr/recherche-siret-entreprise/chercher-siret-entreprise.html</a> .</li>
+				<li class="h5">Les statuts de votre structure à jour et signés.</li>
+				<li class="h5">Votre RIB</li>
+				<li class="h5">Une copie de votre assurance professionnelle (RCP)</li>
+				<li class="h5">Une copie du certificat d’aptitude théorique de télépilote (C.A.T.T).</li>
+				<li class="h5">Votre numéro d’exploitant DGAC.</li>
+			</ul>
+		</div>
+		<div class="col-12 mt-4">
+			<p class="h5">Vous souhaitez une assistance pour vous inscrire, prenons rendez-vous par <span class="h4 "><a class="color_blue" href="mailto:assistance@diag-drone.com">E-mail</a></span> ou par <span class="h4 color_blue"><a class="color_blue"	href="tel:0665628541">téléphone</a></span>.</p>
+		</div>
+		<div class="col-sm-12 pt-5 text-center">
+			{% if entreprise.getEtatAbonnements is empty %}
+				<a href="{{path('abonnement')}}">
+
+					<button class="btn btn-maincolor btn-prs">Poursuivre votre inscription</button>
+				</a>
+				{% elseif salarie.periInter == null %}
+					<a href="{{path('phase2')}}">
+
+						<button class="btn btn-maincolor btn-prs">Poursuivre votre inscription</button>
+					</a>
+				{% elseif salarie.alphaTango ==null and salarie.licenceDgac ==null %}
+					<a href="{{path('licence',{id:salarie.id})}}">
+
+						<button class="btn btn-maincolor btn-prs">Poursuivre votre inscription</button>
+					</a>
+				{% elseif salarie.tauxHoraires is empty%}
+					<a href="{{path('tarifA')}}">
+
+						<button class="btn btn-maincolor btn-prs">Poursuivre votre inscription</button>
+					</a>
+				{% elseif salarie.entreprise.entAss ==null%}
+					<a href="{{path('finalisation')}}">
+
+						<button class="btn btn-maincolor btn-prs">Poursuivre votre inscription</button>
+					</a>
+				{% elseif salarie.entreprise.uboDeclaration ==null%}
+					<a href="{{path('kyc_ubo')}}">
+
+						<button class="btn btn-maincolor btn-prs">Poursuivre votre inscription</button>
+					</a>
+				{% elseif salarie.entreprise.banques is empty%}
+					<a href="{{path('terminerInscription')}}">
+
+						<button class="btn btn-maincolor btn-prs">Poursuivre votre inscription</button>
+					</a>
+					{% elseif salarie.entreprise.cgv ==false %}
+						<a href="{{path('sepa')}}">
+
+							<button class="btn btn-maincolor btn-prs">Poursuivre votre inscription</button>
+						</a>
+			{% endif %}
+
+		</div>
+
+
+	{% endif %}
+
+{% endblock %}
+{% block contact %}
+	<a href="{{path('desinscription')}}">Désincritption</a>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'administrateur/baseA.html.twig' %}
+
+{% block body %}
+<div class="row">
+    <div class="col-12">
+        <p class="h3">Création de pack d'utlisateur supplémentaire pour {{ profil }} {{ type }}</p>
+        <p class="h5">Les changements sur les packs existant se font en temps réel sur l'application</p>
+    </div>
+    <input type="hidden" name="" id="type" value="{{ type }}">
+    <input type="hidden" name="" id="profil" value="{{ profil }}">
+    <div class="col-12 table-responsive">
+        <table class="table-bordered table">
+            <tr>
+                <th>Nom</th>
+                <th>Prix</th>
+                <th>Utilisateurs</th>
+
+            </tr>
+            {% for pack in packs %}
+                <tr class="idPack" data-id="{{ pack.id }}">
+                    <td><input type="text" class="form-control form-control-sm nomPack" value="{{ pack.nom }}"></td>
+                    <td><input type="text" class="form-control form-control-sm prixPack" value="{{ pack.prix }}"></td>
+                    <td><input type="text" class="form-control form-control-sm userPack" value="{{ pack.employe }}"></td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div class="col-12">
+        <p class="h5">Appuie sur "valider" pour créer un nouveau pack</p>
+    </div>
+    <div class="col-12 table-responsive">
+        <table class="table-bordered table">
+            <tr>
+                <th>Nom</th>
+                <th>Prix</th>
+                <th>Utilisateurs</th>
+
+            </tr>
+
+                <tr>
+                    <td><input type="text" class="form-control form-control-sm newNom" ></td>
+                    <td><input type="number" class="newPrix form-control form-control-sm"></td>
+                    <td><input type="text" class="newUser form-control form-control-sm"></td>
+                </tr>
+
+        </table>
+        <div class="text-center mt-5">
+            <button class="btn btn-outline-success">Valider</button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block title %}
+Pack supplémentaire grand compte
+{% endblock %}
+

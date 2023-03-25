@@ -1,0 +1,30 @@
+{% extends 'militaire/baseMilitaire.html.twig' %}
+{% block user %}
+    Espace de {{ user.miltaire.nomBase|capitalize }}
+{% endblock %}
+{% block title %}Changer mot de passe{% endblock %}
+{% block body %}
+    <div class="row">
+        <div class="col-sm-12">
+
+            <p>Ceci est l'espace pour changer le mot de passe fourni par DIAG-DRONE!</p>
+        </div>
+        {{ form_start(form) }}
+        <div class="row">
+            <div class="col-sm-6">
+                <p>Mot de passe (8 caractères minimum)</p>
+                {{ form_row(form.password,{'label':' ','attr':{'class':'form-control form-control-sm'}}) }}
+            </div>
+            <div class="col-sm-6">
+                <p>Vérifification du mot de passe</p>
+                {{ form_row(form.confirm_password,{'label':' ','attr':{'class':'form-control form-control-sm'}}) }}
+                <br><br>
+            </div>
+            <div class="col-sm-12 text-center">
+                <button class="btn btn-outline-success" type="submit">Enregistrer</button>
+            </div>
+        </div>
+        {{ form_end(form) }}
+    </div>
+
+{% endblock %}

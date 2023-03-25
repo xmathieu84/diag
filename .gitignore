@@ -1,0 +1,42 @@
+###> symfony/framework-bundle ###
+/.env
+/.env.local
+/.env.local.php
+/.env.*.local
+/config/secrets/prod/prod.decrypt.private.php
+/public/bundles/
+/public/blog-drone/config/connect.php
+/public/uploads/
+public/blog-drone/
+public/.htaccess
+src/Command
+cron
+/var/
+/vendor/
+/.idea
+/src/Command/
+###< symfony/framework-bundle ###
+
+###> symfony/phpunit-bridge ###
+.phpunit
+.phpunit.result.cache
+/phpunit.xml
+###< symfony/phpunit-bridge ###
+
+###> symfony/webpack-encore-bundle ###
+/node_modules/
+
+npm-debug.log
+yarn-error.log
+###< symfony/webpack-encore-bundle ###
+/nbproject/private/
+
+###> lexik/jwt-authentication-bundle ###
+/config/jwt/*.pem
+###< lexik/jwt-authentication-bundle ###
+
+###> phpunit/phpunit ###
+/phpunit.xml
+.phpunit.result.cache
+
+###< phpunit/phpunit ###

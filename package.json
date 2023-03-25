@@ -1,0 +1,47 @@
+{
+    "devDependencies": {
+        "@interactjs/types": "^1.10.11",
+        "@symfony/webpack-encore": "^0.33.0",
+        "core-js": "^3.0.0",
+        "regenerator-runtime": "^0.13.2",
+        "webpack-notifier": "^1.6.0"
+    },
+    "license": "UNLICENSED",
+    "private": true,
+    "scripts": {
+        "dev-server": "encore dev-server",
+        "dev": "encore dev",
+        "watch": "encore dev --watch",
+        "build": "encore production --progress"
+    },
+    "dependencies": {
+        "@fullcalendar/core": "^5.5.1",
+        "@fullcalendar/daygrid": "^5.5.0",
+        "@fullcalendar/interaction": "^5.5.0",
+        "@fullcalendar/list": "^5.5.0",
+        "@fullcalendar/timegrid": "^5.5.1",
+        "axios": "^0.21.1",
+        "bs-custom-file-input": "^1.3.4",
+        "dragula": "^3.7.3",
+        "dropzone": "^5.9.3",
+        "fullcalendar": "^5.5.1",
+        "interactjs": "^1.10.11",
+        "jquery": "^3.6.0",
+        "jquery-timepicker": "^1.3.3",
+        "jquery-ui": "jquery/jquery-ui#1.12.1",
+        "leaflet": "^1.6.0",
+        "mapbox-gl": "^1.11.1",
+        "moment": "^2.29.4",
+        "owl.carousel": "^2.3.4",
+        "pickadate": "^5.0.0-alpha.3",
+        "sass": "^1.43.4",
+        "sass-loader": "^10.0.0",
+        "siema": "^1.5.1",
+        "sortablejs": "^1.14.0",
+        "superagent": "^8.0.0",
+        "swagger-ui": "^4.10.0",
+        "timepicker-ui": "^2.1.1",
+        "vanilla-tags-input": "^1.0.0",
+        "yarn": "^1.22.5"
+    }
+}

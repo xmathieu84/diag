@@ -1,0 +1,56 @@
+.typeCarte > label::before
+ {
+	content: none;
+}
+
+
+
+input#amex,input#visa,input#mastercard,input#virement,input#maestro,input#wallet,.montantWallet,#paiementCerfaForm{
+    display: none;
+}
+
+label#labelAmex,label#labelMaestro,label#labelMastercard,label#labelVisa,label#labelVisa,label#labelVirement,label#labelWallet{
+    width: 5em;
+    height: 5em;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    
+}
+
+
+label#labelMaestro{
+    background-image: url('/css/css_site/images/paiement/maestro.png');
+}
+label#labelMastercard{
+    background-image: url('/css/css_site/images/paiement/masterCard.png');
+}
+label#labelVisa{
+    background-image: url('/css/css_site/images/paiement/visa.png');
+   
+}
+label#labelVirement{
+    background-image: url(/css/css_site/images/paiement/virement.png);
+}
+label#labelWallet{
+    background-image: url(/css/css_site/images/paiement/wallet.png);
+}
+ input#visa:checked + label#labelVisa,
+ input#wallet:checked + label#labelWallet,
+ input#mastercard:checked + label#labelMastercard,
+ input#maestro:checked + label#labelMaestro,
+ input#virement:checked + label#labelVirement
+  {
+    background-color: inherit;
+    border: 3px solid greenyellow;
+}
+
+
+.compte>p>span{
+    color: red;
+    
+}
+.virement,.infoPaiement{
+    display: none;
+}
+

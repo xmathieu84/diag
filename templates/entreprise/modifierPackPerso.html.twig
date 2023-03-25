@@ -1,0 +1,120 @@
+{% extends 'entreprise/baseAE.html.twig' %}
+
+{% block title %}
+Modifier mes packs
+{% endblock %}
+
+{% block contenu %}
+
+    <div id="accordion01" role="tablist">
+        <div class="row">
+        {% for pack in packs %}
+            <div class="col-sm-4 col-12 mb-3">
+                    <div class="card">
+                        <div class="card-header" role="tab" id="collapse{{ loop.index }}_header">
+                            <h5>
+                                <a data-toggle="collapse" href="#collapse{{ loop.index }}" aria-expanded="false" aria-controls="collapse{{ loop.index }}" class="collapsed">
+                                    {{pack.nom}}
+                                </a>
+                            </h5>
+                        </div>
+
+                        <div id="collapse{{ loop.index }}" class="collapse" role="tabpanel" aria-labelledby="collapse{{ loop.index }}_header" data-parent="#accordion01">
+                            <div class="card-body">
+                                <p class="h3">Missions contenues</p>
+                                <ul >
+                                    {% for mission in pack.missions %}
+                                        <li class="missionPack">{{ mission.nom }} </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            <div class="card-footer">
+                                <button class=" btn btn-maincolor" data-toggle="modal" data-target="#modalModifPack{{ loop.index }}">Modifier</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+        {% endfor %}
+        </div>
+</div>
+    {% for pack in packs %}
+        <div class="modal fade" id="modalModifPack{{ loop.index }}" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">{{ pack.nom }}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <span class="h3">Missions contenues</span>
+                                <ul class="listeMissionPack" data-pack="{{ pack.id }}">
+                                    {% for mission in pack.missions %}
+
+                                        <li class="missionModifie" data-type="{{ mission.typeDiag.nom }}" data-value="{{ mission.id }}">{{ mission.nom }}
+                                            <button class="deleteMission" data-toggle="tooltip" data-placement="top" title="Supprimer">X</button>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+
+                            <div class="col-12 mt-5">
+                                <span class="h3">Missions disponibles</span>
+                                <div class="row">
+                                    {% for famille in familles %}
+                                        <div class="col-12 text-center mt-4">
+                                            <span class="h4">
+                                                {{ famille.nom }}
+                                            </span>
+                                            <div class="row text-left">
+                                                {% for type in famille.typeDiag %}
+
+
+                                                        <div class="col-12 mt-4">
+                                                            <span class="h5">{{ type.nom }}</span>
+                                                            <div class="row typeFamille" data-type="{{ type.nom }}">
+                                                                {% for mission in type.mission %}
+                                                                    {% if mission not in pack.missions %}
+                                                                        <div class="col-md-4 col-sm-6 col-12 mt-4 typeMission">
+                                                                            <div class="row">
+
+                                                                                <div class="col-1">
+                                                                                    <input type="checkbox" name="" id="" value="{{ mission.id }}" class="inputMission" data-pack="{{ pack.id }}">
+                                                                                </div>
+                                                                                <div class="col-11">
+                                                                                    <label for="">{{ mission.nom }}</label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    {% endif %}
+
+
+
+                                                                {% endfor %}
+                                                            </div>
+                                                        </div>
+
+
+
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Understood</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
+

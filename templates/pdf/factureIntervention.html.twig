@@ -1,0 +1,295 @@
+<style>
+    .imgPdf {
+        width: 40%;
+        height: 16%;
+    }
+    .image {
+        text-align: center;
+    }
+    .logoEntreprise{
+        width: 6.5em;
+    }
+
+    .entreprise {
+        float: left;
+        width: 40%;
+        font-size: 1.1em;
+    }
+
+    .demandeur {
+        width: 45%;
+        float: right;
+        text-align: right;
+        font-size: 1em;
+
+    }
+    .intitule {
+        text-decoration: underline;
+    }
+    .intitule-entreprise {
+        margin-bottom: 0;
+        margin-top: 0.5em;
+    }
+    .date {
+        text-align: center;
+        font-size: 1.5em;
+    }
+
+    th.colonne1,
+    th.colonne2 {
+        height: 8em;
+        font-size: 1.2em;
+    }
+    th.facture2,
+    th.facture1 {
+        height: 6em;
+        font-size: 1.2em;
+        text-align: center;
+    }
+    .colonne1,
+    .facture1 {
+        width: 70%;
+        text-align: center;
+    }
+
+    .colonne2,
+    .facture2 {
+        width: 30%;
+        text-align: center;
+    }
+
+    td.colonne1,
+    td.colonne2 {
+        height: 4.4em;
+        font-size: 1.1em;
+    }
+    td.colonne1-facture,
+    td.facture2 {
+        height: 3.8em;
+        font-size: 1.1em;
+    }
+    .prixInter {
+
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .facture2,
+    .facture1 {
+        border: 1px solid black;
+    }
+
+    #piedDepage2 {
+        position: absolute;
+        bottom: 0;
+        height: 50px;
+    }
+    .versement {
+        margin: 0;
+    }
+    th.premiere{
+        border: none;
+    }
+
+    .adresse {
+        margin-top: 3em;
+        width: 100%;
+    }
+    .sousTotal{
+        float: right;
+        width: 30%;
+        text-align: center;
+
+    }
+    .ht,.tva,.ttc,.vide{
+        float: left;
+        width: 40%;
+        padding-top: 0.5em;
+
+    }
+    .montantHt,.montantTva,.montantTtc,.trait{
+        float: left;
+        width: 58%;
+        padding-top: 0.5em;
+    }
+    .trait{
+        border-top: 1px solid black;
+    }
+    .vide{
+        border-top: 1px solid white;
+    }
+
+
+</style>
+<div class="image">
+    <img src="../public/css/css_site/images/logo-diagdrone.png" alt="" class="imgPdf">
+
+    {% if entreprise.logo %}
+        <img src="../public/uploads/logo/{{ entreprise.logo }}" alt="logo entreprise" class="logoEntreprise">
+    {% endif %}
+    <h1>Facture n° {{ numero }}</h1>
+
+</div>
+
+
+<div>
+    <div class="entreprise fact">
+        {% if entreprise.formJuridique =='auto-entrepreneur' %}
+            <span class="denominEnseigne">{{entreprise.enseigne}}
+                {{entreprise.denomination}}</span><br>
+        {% else %}
+            <span class="formeJuridique">{{entreprise.formJuridique}}</span><br>
+            <span class="denominEnseigne">{{entreprise.enseigne}}
+                {{entreprise.denomination}}</span><br>
+        {% endif %}
+
+        <p class="intitule intitule-entreprise">Adresse:</p>
+        <span>{{entreprise.adresse.numero}}
+            {{entreprise.adresse.nomVoie}}</span><br>
+        <span>{{entreprise.adresse.codePostal}}
+            {{entreprise.adresse.ville}}</span>
+        <p class="intitule intitule-entreprise">Email:</p>
+        <span>{{dirigeant.user.email}}</span>
+
+        <p class="intitule intitule-entreprise">Téléphone:</p>
+        <span>{{entreprise.telephone.numero}}</span>
+
+
+    </div>
+
+    <div class="demandeur">
+        <p class="intitule">Adresse de facturation:</p>
+        {% if intervention.intDem.profil =='Particulier propriétaire' %}
+            <span>{{intervention.intDem.civilite.type}}
+                {{intervention.intDem.civilite.nom}}
+                {{intervention.intDem.civilite.prenom}}</span>
+        {% else %}
+            <span>{{intervention.intDem.nom|capitalize}}</span>
+        {% endif %}
+        <br><span>{{intervention.intDem.adresse.numero}}
+            {{intervention.intDem.adresse.nomVoie}}</span><br>
+        <span>{{intervention.intDem.adresse.codePostal}}
+            {{intervention.intDem.adresse.ville}}</span>
+        {% if intervention.intDem.siretTva %}
+            <br><span>SIRET : {{ intervention.intDem.siretTva.siret }}</span><br>
+            <span>TVA : {{ intervention.intDem.siretTva.tva }}</span>
+        {% endif %}
+        <p class="intitule">Adresse du diagnostic:</p>
+        <span class="adresse">{{intervention.adresse.numero}}
+            {{intervention.adresse.nomVoie}}</span><br>
+        <span class="adresse">{{intervention.adresse.codepostal}}
+            {{intervention.adresse.ville}}</span>
+
+    </div>
+
+</div>
+<div class="date">
+    <p>Intervention le
+        {{intervention.rdvAt|format_datetime('full', 'none', locale='fr')}}</p>
+</div>
+
+
+<table class="prixInter">
+    <tr>
+        <th class="premiere"></th>
+        {% if entreprise.siretTva.assujeti == true %}
+            <th class="facture">Prix HT</th>
+        {% else %}
+            <th class="facture">Prix NET</th>
+        {% endif %}
+
+    </tr>
+    <tr>
+        <td class="facture1">{{intervention.listeInter.nom}}
+            {{intervention.typeInter.nom}}</td>
+        <td class="facture2">
+            {% if entreprise.siretTva.assujeti == false %}
+                {{(intervention.prix)|number_format(2)}}
+                €
+            {% else %}
+                {{(intervention.prix /taux)|number_format(2)}} € HT
+
+            {% endif %}
+        </td>
+
+    </tr>
+    {% if entreprise.siretTva.assujeti == true %}
+        <tr>
+            <td class="facture1">Montant tva {{ tva }} %</td>
+            <td class="facture2">
+                {{ (intervention.prix - intervention.prix/taux)|number_format(2) }} € HT
+            </td>
+        </tr>
+    {% endif %}
+    <tr>
+        <td class="facture1">
+            {% if entreprise.siretTva.assujeti == true %}
+                Total TTC
+                {% else %}
+                TOTAL NET
+            {% endif %}
+        </td>
+        <td class="facture2">
+            {{ intervention.prix|number_format(2) }} €
+        </td>
+    </tr>
+</table>
+
+{% if type  %}
+
+    <br>
+    <table class="prixInter">
+        <tr>
+            <td class="facture1">Acompte pour intervention</td>
+            <td class="facture2">{{ (intervention.acommpte/taux)|number_format(2) }} € HT</td>
+        </tr>
+    </table>
+{% endif %}
+
+<div class="sousTotal">
+    {% if entreprise.siretTva.assujeti ==true %}
+        <div class="ht">
+            <span>Total HT : </span>
+        </div>
+        <div class="montantHt">
+            <span>{{ ((intervention.prix-intervention.acommpte)/taux)|number_format(2) }} € </span>
+        </div>
+        <div class="tva">
+            <span>TVA {{ tva }} %</span>
+        </div>
+        <div class="montantTva">
+            <span>{{ ((intervention.prix-intervention.acommpte)-(intervention.prix-intervention.acommpte)/taux)| number_format(2)}} € </span>
+
+        </div>
+        <div class="vide"></div>
+        <div class="trait">
+
+        </div>
+    {% endif %}
+
+    <div class="ttc">
+        {% if entreprise.siretTva.assujeti == true %}
+            <span>Total TTC : </span>
+        {% else %}
+            <span>Total NET : </span>
+        {% endif %}
+
+    </div>
+    <div class="montantTtc">
+        <span> {{ (intervention.prix-intervention.acommpte) |number_format(2) }} €</span>
+
+    </div>
+
+</div>
+
+
+<footer id="piedDepage2">
+    {% if entreprise.siretTva.assujeti == false %}
+        <p class="versement">TVA non applicable selon l’article 293 B du Code Général des Impôts</p>
+    {% endif %}
+
+
+    <p class="versement">Pensez à télécharger ou imprimer votre facture.</p>
+</footer>
+
+

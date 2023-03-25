@@ -1,0 +1,25 @@
+.marquee-rtl {
+
+    margin: 1em auto;
+    height: 5em;
+    overflow: hidden;
+
+}
+.marquee-rtl > :first-child {
+    display: inline-block;
+    padding-top: 2em;/* modèle de boîte en ligne */
+    padding-right: 2em;                   /* un peu d'espace pour la transition */
+    padding-left: 100%;                   /* placement à droite du conteneur */
+    white-space: nowrap;
+    font-size: 1.3em;/* pas de passage à la ligne */
+    color: black;
+    animation: defilement-rtl 25s infinite linear;
+}
+@keyframes defilement-rtl {
+    0% {
+        transform: translate3d(0,0,0);      /* position initiale à droite */
+    }
+    100% {
+        transform: translate3d(-100%,0,0);  /* position finale à gauche */
+    }
+}

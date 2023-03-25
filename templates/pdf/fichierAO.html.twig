@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Fiche appel d'offre</title>
+    <style>
+        .titre{
+            width: 100%;
+            height: 4em;
+            text-align: center;
+        }
+        .souligne{
+            text-decoration: underline;
+            margin-right: 10px;
+        }
+        .corp{
+            margin-bottom: 1em;
+        }
+    </style>
+</head>
+<body>
+    <div class="titre">
+        <h2>Fiche appel d'offre n°{{ appel.id }}</h2>
+        <h6>Créé le {{ appel.date|format_datetime('short','none',locale='fr') }}</h6>
+    </div>
+    <div class="corp">
+        <p><span class="souligne">Dénomination :</span> {{ appel.agents.demandeur.nom }}</p>
+        <p><span class="souligne">Type :</span> {{ appel.agents.demandeur.profil }}</p>
+        <p><span class="souligne">Adresse :</span> {{ appel.agents.demandeur.adresse.numero }} {{ appel.agents.demandeur.adresse.nomVoie }} {{ appel.agents.demandeur.adresse.codePostal }} {{ appel.agents.demandeur.adresse.ville }}</p>
+        <p><span class="souligne">Numéro de SIREN : </span>{{ appel.agents.demandeur.siretTva.siret }}</p>
+        <p><span class="souligne">Numéro de TVA : </span>{{ appel.agents.demandeur.siretTva.tva }}</p>
+        <p><span class="souligne">Nom + prénom de contact : </span>{{ appel.agents.civilite.nom }} {{ appel.agents.civilite.prenom }}</p>
+        <p><span class="souligne">Numéro de téléphone : </span>{{ appel.agents.demandeur.telephon.numero }}</p>
+        <p><span class="souligne">Email de contact : </span>{{ appel.agents.user.email }}</p>
+    </div>
+<div class="ao">
+    <div class="titre">
+        <h5><b>FICHE d’information concernant L’APPEL A CONCURENCES ou l’APPEL D’OFFRES</b></h5>
+    </div>
+    {% if appel.ordre %}
+        <p><span class="souligne">Numéro d'ordre : </span>{{ appel.ordre }}</p>
+    {% endif %}
+    {% if appel.reference %}
+        <p><span class="souligne">Numéro de réference : </span>{{ appel.reference }}</p>
+    {% endif %}
+    {% if appel.denomination %}
+        <p><span class="souligne">Dénomination de l’APPEL A CONCURENCES ou de L’APPEL D’OFFRES : </span>{{ appel.denomination }}</p>
+    {% endif %}
+    <p><span class="souligne">Il s'agit :</span>{{ appel.type }}</p>
+    {% if appel.type == "appel d'offre" %}
+        {% if appel.categorie %}
+            <p><span class="souligne">Catégorie de l’APPEL D’OFFRES : </span>{{ appel.categorie }}</p>
+        {% endif %}
+        {% if appel.restreint %}
+            <p><span class="souligne">L'appel d'offre est : </span>RESTREINT</p>
+            <p><span class="souligne">Délai de dépôt des candidatures : </span>{{ appel.restreint.delaiDepotCandidature|date('%d') }} jours à compter de la publication de l’appel d’offres</p>
+            <p><span class="souligne">Délai de réponse à la candidature  : </span>{{ appel.restreint.delaiReponseCandidature|date('%d') }} jours à compter de date de fin des candidatures</p>
+            {% else %}
+                <p><span class="souligne">L'appel d'offre est : </span>OUVERT</p>
+        {% endif %}
+    {% endif %}
+    <p><span class="souligne">Date maximum de remise de la proposition : </span>{{ appel.dateRemiseProp|format_datetime('short','none',locale='fr') }}</p>
+    <p><span class="souligne">Date maximum de prise de décision  : </span>{{ appel.datePriseDecision|format_datetime('short','none',locale='fr') }}</p>
+    {% if appel.datePassationCommande %}
+        <p><span class="souligne">Date de passation de la commande   : </span>{{ appel.datePassationCommande|format_datetime('short','none',locale='fr') }}</p>
+    {% endif %}
+    {% if appel.dateMaxLivraison %}
+        <p><span class="souligne">Date maximum de livraison    : </span>{{ appel.dateMaxLivraison|format_datetime('short','none',locale='fr') }}</p>
+    {% endif %}
+    {% if appel.critereSelection %}
+        <p><span class="souligne">Critères principaux de sélection des offres : </span>{{ appel.critereSelection }}</p>
+    {% endif %}
+    <p><span class="souligne">Préambule – présentation – contexte général : </span> {{ appel.presentation }}</p>
+    {% if appel.budget %}
+        <p><span class="souligne">Budget envisagé : </span>Oui</p>
+
+        {% if appel.budget.prevu %}
+            <p><span class="souligne">Budget prévu : </span>{{ appel.budget.prevu }} €</p>
+        {% else %}
+
+            <p><span class="souligne">Budget prévu : compris entre </span>{{ appel.budget.minimum }} €<span class="souligne"> et </span> {{ appel.budget.maximum }} €</p>
+        {% endif %}
+
+        {% else %}
+            <p><span class="souligne">Budget envisagé : </span>Non</p>
+    {% endif %}
+    {% if appel.infoComplementaires is not empty %}
+        {% for info in  appel.infoComplementaires %}
+            <h3>{{ info.type }}</h3>
+            <p>{{ info.texte }}</p>
+            <p><span class="souligne">Nombre de fichier : </span>{{ info.fichierInfoComplementaires|length }} fichier(s)</p>
+        {% endfor %}
+    {% endif %}
+
+
+</div>
+<div class="final">
+    <p>Fiche établie le {{appel.date|format_datetime('short','none',locale='fr')}} par {{ appel.agents.civilite.prenom|capitalize}} {{ appel.agents.civilite.nom|capitalize}} pour le compte de {{ appel.agents.demandeur.nom }}
+        A 	 {{ appel.agents.demandeur.adresse.ville }}
+    </p>
+</div>
+</body>
+</html>

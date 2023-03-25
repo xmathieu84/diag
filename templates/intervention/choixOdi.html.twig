@@ -1,0 +1,248 @@
+{% extends template %}
+
+{% block title %}
+Choix de l'ODI
+{% endblock %}
+
+{% block bodyAccueil %}
+    <input type="hidden" name="" value="{{ inter.id }}">
+<section class="ls service-single s-py-xl-150 s-py-lg-130 s-py-md-90 s-py-60 bg-white">
+    <div class="container pb-5" style="padding-top: 8em">
+        <div class="jumbotron animate jumbotron-fluid" data-animation="fadeIn" data-delay="150">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h1 class="display-4">Votre demande de diagnostic</h1>
+                </div>
+                <div class="col-12 mt-5">
+                    <span class="h4">{{ inter.typeDiag|capitalize }} {{ inter.tailleBien.typeBien.nom }}</span><br>
+                    <span class="h4">{{ inter.tailleBien.taille }}</span>
+                </div>
+                <div class="col-sm-6 col-12 mt-3">
+                    <span class="souligne h5">Installation éléctrique </span><span class="h5">: {{ inter.ageElec }}</span>
+                </div>
+                <div class="col-sm-6 col-12 mt-3">
+                    <span class="souligne h5">Installation gaz </span><span class="h5">: {{ inter.ageGaz }}</span>
+                </div>
+                <div class=" col-12 mt-3">
+                    <span class="h5 souligne">Adresse : </span><span class="h5">{{ inter.adresse.adresseComplete }}</span>
+                </div>
+                <div class="col-12 mt-5">
+                    <span class="h4">Vos diagnotics</span><br>
+                    <ul class="listeTravaux">
+                        {% for diag in inter.missions %}
+                            <li>{{ diag.nom }}</li>
+                        {% endfor %}
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+
+
+
+            <div class="col-12">
+                <div id="calendrier"></div>
+            </div>
+        </div>
+
+</section>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalOdi" hidden>
+
+    </button>
+
+    <div class="modal fade" id="modalOdi" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Votre choix</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <input type="hidden" name="" class="salarie">
+                            <input type="hidden" name="" class="date">
+                            <div class="col-12 mb-5">
+                                <p class="h3">Intervention le <span class="dateDiag"></span></p>
+                                <p class="h5">Durée prévue : <span class="dureeDiag"></span></p>
+                            </div>
+                            <div class="col-lg-12">
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link rdv" id="tab01" data-toggle="tab" href="#tab01_pane" role="tab" aria-controls="tab01_pane" aria-expanded="true" data-moment="journee">Journée</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link rdv" id="tab02" data-toggle="tab" href="#tab02_pane" role="tab" aria-controls="tab02_pane" data-moment="demi">Demi journée</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link rdv" id="tab03" data-toggle="tab" href="#tab03_pane" role="tab" aria-controls="tab03_pane" data-moment="precis">Heure précise</a>
+                                    </li>
+
+                                </ul>
+                                <div class="tab-content">
+
+                                    <div class="tab-pane fade show active in" id="tab01_pane" role="tabpanel" aria-labelledby="tab01">
+                                            <div class="row">
+                                                <div class="col-12" id="journee">
+
+                                                </div>
+                                                <div class="col-12 text-center mt-5" id="prixJournee">
+
+                                                </div>
+                                                <div class="col-12 text-right">
+                                                    <button class="btn btn-maincolor journee mt-5">Valider le rendez vous</button>
+                                                </div>
+                                            </div>
+                                    </div>
+
+                                    <div class="tab-pane fade demi" id="tab02_pane" role="tabpanel" aria-labelledby="tab02">
+                                        <div class="row">
+                                            <div class="col-12" id="demi">
+
+                                            </div>
+                                            <div class="col-sm-6 col-12 mt-5">
+                                                <div class="form-check">
+                                                    <input class="form-check-input demijournee" type="radio" name="demi" id="exampleRadios1" value="Avant 14 heures">
+                                                    <label class="form-check-label" for="exampleRadios1" style="background: none">
+                                                        Avant 14 heures
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-12 mt-5">
+                                                <div class="form-check">
+                                                    <input class="form-check-input demijournee" type="radio" name="demi" id="exampleRadios1" value="Après 14 heures">
+                                                    <label class="form-check-label" for="exampleRadios1" style="background: none">
+                                                        Après 14 heures
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 mt-5">
+                                                <p class="h5 resultat color_blue"></p>
+                                            </div>
+                                            <div class="col-12 text-center mt-5" id="prixDemi"></div>
+                                            <div class="col-12 text-right mt-5">
+                                                <button class="btn btn-maincolor demiJ">Valider le rendez vous</button>
+                                            </div>
+                                        </div>
+
+                                        </div>
+
+
+                                    <div class="tab-pane fade precis" id="tab03_pane" role="tabpanel" aria-labelledby="tab03">
+
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <label for="heure">Choisissez une heure de rendez vous</label>
+                                                <select name="" id="heure">
+                                                    <option value="" disabled selected>Choisissez une heure de rendez vous</option>
+                                                    {% for i in 8..20 %}
+                                                        <option value="{{ i }}:00">A partir de {{ i }} h</option>
+                                                    {% endfor %}
+                                                </select>
+
+                                            </div>
+                                            <div class="col-12 prixHeurePreci mt-5">
+
+                                            </div>
+                                            <div class="col-12 mt-5">
+                                                <p class="h5 reponseHeure color_blue"></p>
+                                            </div>
+                                            <div class="col-12 text-right mt-5">
+                                                <button class="btn btn-maincolor heure" hidden>Valider le rendez vous</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!-- tabs end-->
+                            </div>
+                        </div>
+                    </div>
+
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary closeModal" data-dismiss="modal">Modifier mes choix</button>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+    <button type="button" class="inscription" data-toggle="modal" data-target="#modalInscrit" hidden>
+
+    </button>
+    <button type="button" class="connectz" data-toggle="modal" data-target="#modalConnecte" hidden>
+
+    </button>
+    <div class="modal fade" id="modalInscrit" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel"></h5>
+
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <p class="h4">Votre demande de diagnostic a bien été enregistrées.</p>
+                                <p class="h4">Afin de procéder au paiement, veuillez vous inscrire ou vous connecter sur notre plateforme</p>
+                            </div>
+                            <div class="col-sm-6 col-12 mt-5">
+
+                                <a href="" id="connect"><button class="btn btn-maincolor btn-block text-center">Se connecter</button></a>
+                                </button>
+                            </div>
+                            <div class="col-sm-6 col-12 mt-5">
+                                <a href="" id="inscrit" ><button class="btn btn-maincolor btn-block text-center">S'inscrire</button></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modalConnecte" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel"></h5>
+
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <p class="h4">Votre demande de diagnostic a bien été enregistrées.</p>
+                                {% if app.user %}
+                                    {% if app.user.role('ROLE_DEMANDEUR') %}
+                                        <p class="h4">Vous pouvez maintenant procéder au paiement en cliquant sur le lien ci-dessous .</p>
+                                        {% else %}
+                                            <p class="h4">Vous pouvez accéder au récapitulatif de votre demande de diagnostic en cliquant sur le lien ci-dessous.</p>
+                                    {% endif %}
+                                {% endif %}
+
+                            </div>
+                            <div class="col-sm-6 col-12 mt-5">
+                                {% if app.user %}
+                                    {% if app.user.role('ROLE_DEMANDEUR') %}
+                                        <a href="{{ path('paiementDiag',{type:"acompte",uuid:inter.identifiat}) }}" id=""><button class="btn btn-maincolor btn-block text-center">Accéder au paiement</button></a>
+                                    {% else %}
+                                        <a href="{{ path('demandeur_diag') }}" id=""><button class="btn btn-maincolor btn-block text-center">Récapitulatif</button></a>
+                                    {% endif %}
+                                {% endif %}
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

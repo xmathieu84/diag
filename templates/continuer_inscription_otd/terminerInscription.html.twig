@@ -1,0 +1,242 @@
+{% extends 'entreprise/terminerInscription.html.twig' %}
+{% block title %}Condition générales
+{% endblock %}
+
+{% block nomSection %}Conditions Générales de Vente
+{% endblock %}
+
+{% block nomPage %}Conditions Générales de Vente
+{% endblock %}
+
+
+{% block contenu %}
+
+
+	<section class="ls ms s-pt-xl-150 s-pt-lg-130 s-pt-md-90 s-pt-60 s-pb-xl-140 s-pb-lg-120 s-pb-md-80 s-pb-50 c-mb-10 c-gutter-60">
+		<div class="row">
+			<div class="col-sm-2"></div>
+			<div class="col-sm-8 text-center mt-5">
+				<h5>Progression de votre Inscription</h5>
+				<div class="progress">
+					<div class="progress-bar" role="progressbar" style="width: 85%;" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">85%</div>
+				</div>
+
+
+			</div>
+			<div class="col-sm-2"></div>
+
+		</div>
+
+		{% if is_granted('ROLE_ENTREPRISE') or is_granted('ROLE_GRANDCOMPTE') or is_granted('ROLE_BTP')%}
+
+
+				{{ form_start(form) }}
+			<div class="row pr-3 pl-3">
+				<div class="col-sm-6">
+					{{ form_row(form.adresse,{'label':'Adresse complète de votre banque'}) }}
+				</div>
+				<div class="col-sm-6">
+					{{ form_row(form.nom,{'label':'Nom de votre banque'}) }}
+				</div>
+				<div class="col-sm-6 col-12">
+					{{ form_row(form.iban,{'label':'Code IBAN (sans espace, 27 caractères)','attr':{'minlength':27,'maxlength':27,'autocomplete':'off'}}) }}
+				</div>
+				<div class="col-sm-6 col-12">
+					{{ form_row(form.bic,{'label':'Code BIC','autocomplete':'off'}) }}
+				</div>
+			</div>
+
+
+
+
+		{% endif %}
+				<div class="col-sm-12 text-center">
+					<p class="h6">Veuillez lire et accepter nos condition générales de vente (CGV) ainsi que nos condition générales d'utilisation (CGU) afin de terminer votre inscription</p>
+					<button type="button" class="btn btn-maincolor" data-toggle="modal" data-target="#modale">Voir et accepter les Conditions Générales de Vente</button>
+
+
+				</div>
+
+
+		<div class="modal" id="modale" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+
+			<div class="modal-dialog modal-dialog-scrollable" id="modaleCgv">
+
+
+				<div class="modal-content">
+					<div class="modal-header">
+
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						{% if is_granted("ROLE_ENTREPRISE") %}
+							{% if is_granted('ROLE_OTD') %}
+								<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam amet et,
+									exercitationem ipsa laboriosam maxime nobis odio quidem similique tempora. At
+									excepturi facilis iste nam pariatur ullam veritatis. Eaque, voluptatum?
+								</div>
+								<div>Eligendi esse fugiat harum incidunt ipsum modi omnis temporibus. Accusamus beatae
+									debitis dolorem eligendi ipsam necessitatibus quos rerum veniam. Animi, delectus
+									illo iusto libero nesciunt odio optio quisquam ratione suscipit.
+								</div>
+								<div>Ab hic labore laudantium quod quos. Delectus, possimus, sint? Ab beatae blanditiis,
+									consequuntur dicta dolore eaque expedita illo inventore perspiciatis quis ratione
+									tenetur unde? Assumenda ipsum molestias quos similique voluptatem?
+								</div>
+								<div>Amet beatae, consequatur doloremque est harum obcaecati praesentium! Alias
+									consequuntur corporis eius explicabo facilis libero maiores minus nobis officiis.
+									Debitis dolor enim iste nesciunt obcaecati officiis sint suscipit tempora unde.
+								</div>
+								<div>Alias aliquid atque cupiditate debitis eius, explicabo hic id incidunt iste neque
+									nisi placeat quaerat quis recusandae rerum sapiente sequi similique ullam velit
+									veritatis vitae voluptates voluptatum. Dolore ipsam, nobis?
+								</div>
+								<div>Accusamus hic nesciunt praesentium. Doloremque enim eum facilis harum id iure
+									necessitatibus non officia velit voluptate! Blanditiis, dicta quidem recusandae
+									reprehenderit veritatis voluptas. Aperiam aut deleniti, magnam non recusandae
+									repellendus.
+								</div>
+								<div>Aliquid architecto dignissimos doloribus ea eligendi excepturi hic laborum nihil
+									nisi, odit quas repudiandae temporibus vel velit voluptatem! At eveniet ex
+									exercitationem modi nam non quo recusandae reprehenderit, suscipit ullam!
+								</div>
+								<div>Atque beatae culpa debitis dicta dolorem doloribus eius exercitationem id maxime
+									odio pariatur praesentium quasi quisquam, quod, ratione repellendus sapiente sequi
+									sit sunt velit? Aperiam cumque eius in necessitatibus recusandae.
+								</div>
+								<div>A accusamus ad, aperiam cum dolore ea, earum enim eveniet fuga id praesentium quae
+									quia quibusdam quidem quo ratione similique soluta tenetur ullam voluptatem? Dolorem
+									quia quidem sapiente tempore voluptatum.
+								</div>
+								<div>Accusamus, accusantium, eum. Accusamus ad aperiam beatae cupiditate deleniti dicta
+									dolorem dolores earum est eveniet harum id impedit itaque natus numquam perferendis,
+									perspiciatis placeat quae repudiandae veniam veritatis voluptates voluptatibus?
+								</div>
+								{%endif%}
+
+						{% endif %}
+						{% if is_granted('ROLE_DEMANDEUR') or is_granted('ROLE_CONSULTANT')%}
+
+
+							<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci architecto
+								aspernatur aut corporis excepturi ipsam, iure nesciunt nulla obcaecati vero. Architecto
+								enim perspiciatis porro quisquam, quos rem sit soluta veniam.
+							</div>
+							<div>Accusamus alias, aliquid blanditiis consectetur consequuntur culpa cumque doloremque
+								est in iure, labore natus obcaecati officiis porro quasi qui sint tempora tenetur ullam
+								voluptates. Dolorum iste nam nostrum omnis pariatur?
+							</div>
+							<div>Aperiam aut, debitis dignissimos dolorem ea, eligendi, et expedita facere in incidunt
+								minima nostrum nulla officia porro quasi quibusdam saepe sunt? Commodi exercitationem
+								modi nulla obcaecati pariatur provident vitae voluptate?
+							</div>
+							<div>Debitis dolore eum in, libero magnam numquam optio quam quibusdam quisquam, quo
+								recusandae sit sunt ullam? Aspernatur debitis ea, eaque modi nemo nobis, placeat
+								reprehenderit sapiente sint tempora velit veniam?
+							</div>
+							<div>At beatae corporis debitis doloribus ducimus eaque est facere hic in, incidunt, iure
+								labore necessitatibus non odit optio perferendis perspiciatis quam quod recusandae
+								repellat soluta vel vero voluptate. Fuga, voluptates?
+							</div>
+							<div>Blanditiis dolore, doloremque incidunt maiores molestias omnis unde. A blanditiis
+								delectus error nesciunt odit repellat voluptatem voluptatum! At, cumque dicta, nulla
+								officia, optio perspiciatis qui reiciendis ullam velit vero voluptas.
+							</div>
+							<div>Cum, quibusdam, recusandae! Architecto ipsa libero maiores, reprehenderit sint tenetur
+								veniam. Alias aliquam commodi consequuntur deserunt dignissimos illo inventore
+								laboriosam maxime nobis numquam, quibusdam repudiandae. Asperiores facere fuga labore
+								reprehenderit.
+							</div>
+							<div>Blanditiis dignissimos in laudantium nihil odit provident voluptatum. Amet aperiam,
+								architecto culpa deserunt iure nulla sint sunt. Accusantium amet blanditiis, debitis,
+								dolorem doloremque labore laborum molestiae, nostrum quae temporibus vel.
+							</div>
+							<div>Consectetur ea iste, perspiciatis praesentium provident quae quam quisquam repellendus
+								sunt vero. Alias animi, consequatur distinctio eaque enim et eum iure laudantium maxime
+								nihil nulla odio, officia suscipit veniam vero?
+							</div>
+							<div>Aliquid amet deserunt earum excepturi facilis, iusto pariatur placeat quo reiciendis
+								repellat tempore unde. Eos eum, reiciendis? Exercitationem in laudantium similique
+								tempore vitae! Dolore maxime minima mollitia nulla perspiciatis, sed!
+							</div>
+						{% endif %}
+						{% if is_granted('ROLE_INSTITUTION') or is_granted('ROLE_GRANDCOMPTE') or is_granted('ROLE_BTP') %}
+							<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti iure libero,
+								mollitia nemo nisi optio quasi ullam vel. Accusantium corporis culpa dolores est
+								laboriosam molestiae odit quo sed sit. Dolores!
+							</div>
+							<div>A aliquid atque autem culpa cum cumque deserunt dolorem eaque error ex exercitationem
+								expedita hic incidunt ipsa itaque minus perspiciatis possimus quaerat, reiciendis
+								temporibus velit voluptas voluptatum? Cumque, quisquam, similique.
+							</div>
+							<div>Alias architecto consequatur, cum deleniti dolorem ducimus error harum, id inventore
+								iusto minus odit quas saepe ut vitae voluptatem voluptates? Ad beatae delectus facere
+								iste nesciunt nisi placeat, quibusdam reprehenderit?
+							</div>
+							<div>Ad commodi doloremque esse exercitationem fuga ipsa iusto magnam minima nisi possimus
+								quibusdam recusandae, voluptates. Deserunt dicta distinctio dolorem, dolores enim, ex
+								excepturi harum incidunt perspiciatis praesentium, quos vel voluptatibus!
+							</div>
+							<div>Aut consequuntur deserunt modi possimus reprehenderit. Atque ipsa nobis reiciendis rem
+								similique. Adipisci, architecto deleniti illum in inventore libero maiores mollitia
+								perferendis quae ratione similique soluta ut voluptate. Fugit, ratione.
+							</div>
+							<div>Alias aspernatur at autem ducimus est excepturi expedita fugiat id illum inventore
+								iusto labore magnam nobis, nulla numquam omnis quidem recusandae sed sint velit! Cumque
+								facilis hic libero modi sequi.
+							</div>
+							<div>Autem eius rerum soluta? Aliquid assumenda enim, et explicabo fugit inventore ipsam
+								ipsum itaque laborum maxime mollitia necessitatibus nihil odio optio quidem reiciendis
+								repellat repellendus, sed sequi similique totam voluptates.
+							</div>
+							<div>Ab accusamus adipisci atque beatae blanditiis doloremque doloribus, ducimus expedita,
+								explicabo in minus nesciunt officia reiciendis sit tempore vero voluptatem. A cumque
+								dolores ipsum maiores, necessitatibus nostrum quis tempore vitae?
+							</div>
+							<div>Aperiam atque autem dolor dolorum, eos illum ipsa molestiae odit pariatur provident
+								quaerat quasi quis repellat reprehenderit rerum. Cumque cupiditate eaque quia ratione
+								voluptates. Enim harum libero molestias perspiciatis quod!
+							</div>
+							<div>Ab animi atque dolorum ducimus, exercitationem ipsa ipsam laudantium magnam nulla
+								perferendis provident qui reprehenderit sit temporibus, voluptate. Accusamus adipisci,
+								commodi eos minima necessitatibus nostrum numquam pariatur quis suscipit voluptatem!
+							</div>
+						{% endif %}
+
+
+
+				</div>
+
+				<div class="modal-footer">
+					{#<div class="col-sm-6">
+											<a href="{{path ('retract')}}" target="_blank">
+
+												<button class="btn btn-warning">Formulaire de rétractation</button>
+											</a>
+
+									</div>#}
+
+					<div class="col-sm-6">
+						{% if is_granted('ROLE_ENTREPRISE') or is_granted('ROLE_GRANDCOMPTE') or is_granted('ROLE_BTP') %}
+							<button class="btn btn-maincolor" type="submit">J'accepte</button>
+						{% else %}
+							<a href="{{path ('accordCgv')}}">
+								<button class="btn btn-maincolor">J'accepte</button>
+							</a>
+						{% endif %}
+
+					</div>
+					<div class="col-sm-6">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+		{% if is_granted('ROLE_ENTREPRISE') or is_granted('ROLE_GRANDCOMPTE') or is_granted('ROLE_BTP') %}
+		{{ form_end(form) }}
+		{% endif %}
+	</section>
+{% endblock %}

@@ -1,0 +1,136 @@
+.logoDossier{
+    width: 25%;
+    float: left;
+    text-align: center;
+    padding-right: 0.5em;
+    padding-top: 1.5em;
+}
+.sepaDossier{
+    float: left;
+    width: 2%;
+    height:300px;
+    background: #F68446;
+}
+.createurDossier{
+    text-transform: uppercase;
+}
+.cadre1Dossier{
+    height: 300px;
+}
+.cadre2Dossier{
+    height:300px;
+}
+.cadre1Dossier,.cadre2Dossier{
+    float: left;
+    width: 30%;
+    background: #CBCDCA;
+    margin-left: 0.5em;
+    padding-left: 0.5em;
+    padding-top: 0.5em;
+    font-size: 0.9em;
+}
+.bleuDossier{
+    height: 1em;
+    width: 100%;
+    background: #3680CB ;
+    margin-top: -1em;
+}
+.cadreTitreDossier{
+    width: 100%;
+    height: 110px;
+    background: #CBCDCA;
+    text-align: center;
+    padding-top: 25px;
+    font-size: 27px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.titre1{
+    text-transform: uppercase;
+}
+.cadre3Dossier{
+    background: #CBCDCA;
+    margin-left: 70px;
+}
+.cadre4Dossier{
+    background: #CBCDCA;
+    margin-right: 40px;
+    margin-left: 50px;
+}
+
+.cadre5Dossier{
+
+    background: #CBCDCA;
+    height: 100px;
+    margin-left: 70px;
+    font-size: 30px;
+
+}
+.cadre6Dossier{
+
+
+    background: #CBCDCA;
+    height: 100px;
+    font-size: 30px;
+    margin-right: 40px;
+    margin-left: 50px;
+}
+
+.cadreAlerte{
+    width: 100%;
+    min-height: 500px;
+
+}
+.rDossier{
+
+    border-bottom: 1px dotted black;
+    font-size: 0.9em;
+
+}
+
+.cadrePage2{
+    padding-top: 2em;
+    background:#CBCDCA ;
+    padding-bottom: 2em;
+    font-size: 1.2em;
+    margin-left: 180px;
+
+}
+.bg-dossier{
+    background:#CBCDCA ;
+}
+.content{
+
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 10em;
+
+}
+.cadre1Page2{
+    margin-left: 100px;
+    margin-top: 1em;
+    padding-bottom: 1em;
+    padding-top: 1em;
+
+}
+.notes {
+    margin-top: 40px;
+    border-collapse: collapse;
+}
+.texte{
+    margin-bottom: 20px;
+    width: 100%;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.footer{
+    height: 60px;
+}
+.cadre1Page3,.cadre2Page3{
+    float: left;
+    width: 50%;
+    height: 40px;
+    background:#CBCDCA ;
+    text-align: center;
+
+}

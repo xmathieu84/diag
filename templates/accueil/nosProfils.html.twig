@@ -1,0 +1,690 @@
+{% extends 'accueil/baseaccueil.html.twig' %}
+
+{% block nomPage %}{{ type|capitalize }}
+{% endblock %}
+{% block title %}Nos profils
+{% endblock %}
+
+
+{% block bodyAccueil %}
+	<section class="ls ms s-pt-xl-150 s-pt-lg-130 s-pt-md-90 s-pt-60 s-pb-xl-140 s-pb-lg-120 s-pb-md-80 s-pb-50 c-mb-10 c-gutter-60">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 col-xs-12">
+					<h3 class="special-heading text-center">
+						<span class="mb-2 ">
+						Interface
+							<span class="color_blue">{{ type }}</span>
+						</span>
+					</h3>
+				</div>
+
+
+				<div class="fw-divider-space divider-20 divider-lg-55"></div>
+			</div>
+			{% if type =='Opérateurs Télé-pilotes de Drone' %}
+				<div class="row type" data-type="otd">
+					<div class="col-lg-12">
+						<div id="accordion01" role="tablist">
+							<div class="card">
+								<div class="card-header" role="tab" id="otd_header">
+									<h5>
+										<a class="collapsed" data-toggle="collapse" href="#otd" aria-expanded="false" aria-controls="otd">
+											Votre interface dédiée
+										</a>
+									</h5>
+								</div>
+								<div id="otd" class="collapse" role="tabpanel" aria-labelledby="otd_header" data-parent="#accordion01" style="">
+									<div class="card-body">
+										<p>L'interface spécifique développée par DIAG DRONE permet, pour chaque OTD, de disposer d'un outil global de gestion de son activité. </p>
+										<p>Ainsi, un CRM de création de devis et de factures est des plus utiles pour une gestion simple et précise. De même, un calendrier dynamique permet d'optimiser l'activité et surtout, en fonction de l'abonnement choisi, d'être mis en relation avec un demandeur, et ce, en temps réel puisque l'algorithme développé par DIAG DRONE s’appuie sur des données calendaires et géographiques (géolocalisation dynamique). De plus, une application spécifique de tarification des interventions, renseignée par l'OTD, permet à chaque demandeur de connaître précisément le coût, c'est sûr et sans surprise ! </p>
+										<p>L'interface OTD est aussi au service de l'OTD pour gérer son parc matériel et ses MAP. Pour chaque intervention, seul le temps de vol est à préciser pour compléter le MAP, les autres données étant automatisées. </p>
+										<p>L’interface OTD permet à chacun de retrouver ses interventions déjà réalisées et suivre celles en cours. Des outils d’assistance au vol type NOTAM ou zone d’exclusion apportent les informations nécessaires à des interventions en toute quiétude.  </p>
+										<p>Une fois l’intervention réalisée, l’opérateur utilise le générateur de rapport formaté qui présente de façon synthétique toutes les données captées parle drone (images, vidéos, données télémétriques, thermographiques...). Ce rapport est alors transmis au demandeur ou à tout consultant extérieur. Afin de sécuriser les paiements, DIAG DRONE a choisi un partenaire de renom MANGO PAY. Chaque OTD possède son propre compte (sa wallet) lui permettant de récupérer ses fonds sous 48 h. Pour encore accompagner les OTD dans le développement de leur activité, DIAG DRONE a développé une application leur permettant de connaître les demandes d’intervention non pourvues d’OTD pour ainsi se positionner y compris hors de leur zone d’intervention initiale. </p>
+
+										<p>Enfin, un outil de publication et de réponse aux appels d’offre ou appels à concurrence ouvre de nouveaux horizons et de nouveaux marchés aux opérateurs. </p>
+									</div>
+								</div>
+							</div>
+							<div class="card">
+								<div class="card-header" role="tab" id="demandeur_header">
+									<h5>
+										<a data-toggle="collapse" href="#abonnementOtd" aria-expanded="false" aria-controls="abonnementOtd" class="collapsed">
+											Nos offres et abonnements
+										</a>
+									</h5>
+								</div>
+
+								<div id="abonnementOtd"  class="collapse bg-white" role="tabpanel" aria-labelledby="abonnementOtdr_header" data-parent="#accordion01" style="">
+
+									<div class="card-body mr-5 bg-white  text-black">
+
+										<div class="table-responsive-xl">
+											<table class="color-dark">
+												<tr>
+													<th ></th>
+													<th class="text-center">So Free</th>
+													<th class="text-center">Classic Access</th>
+													<th class="text-center">Premium Network</th>
+													<th class="text-center">Infinite Network</th>
+												</tr>
+												<tr>
+													<td class="text-center">Abonnement mensuel</td>
+													<td class="text-center">9.99 € HT</td>
+													<td class="text-center">39.99 € HT</td>
+													<td class="text-center">79.99 € HT</td>
+													<td class="text-center">129.99 € HT</td>
+												</tr>
+												<tr>
+													<td class="text-center">Nombre d'OTD compris dans l'abonnement</td>
+													<td class="text-center">1</td>
+													<td class="text-center">2</td>
+													<td class="text-center">2</td>
+													<td class="text-center">2</td>
+												</tr>
+												<tr>
+													<td class="text-center">Abonnement OTD supplémentaire</td>
+													<td class="text-center">9.99 € HT</td>
+													<td class="text-center">35 € HT</td>
+													<td class="text-center">60 € HT</td>
+													<td class="text-center">90 € HT</td>
+												</tr>
+												<tr>
+													<td>Commission HT sur intervention <br>
+														(base de calcul : montant HT facturé par l'OTD)
+													</td>
+													<td class="text-center">NC</td>
+													<td class="text-center">NC</td>
+													<td class="text-center">12%</td>
+													<td class="text-center">10%</td>
+												</tr>
+												<tr>
+													<td>Accès CRM (Customer Relationship Manager)<br>éditez vos devis et factures, suivez vos prospects !</td>
+													<td class="text-center"><img src="/css/css_site/img/validation.png" alt="" width="20px" height="20px"></td>
+													<td class="text-center"><img src="/css/css_site/img/validation.png" alt="" width="20px" height="20px"></td>
+													<td class="text-center"><img src="/css/css_site/img/validation.png" alt="" width="20px" height="20px"></td>
+													<td class="text-center"><img src="/css/css_site/img/validation.png" alt="" width="20px" height="20px"></td>
+												</tr>
+												<tr>
+													<td>Agenda dynamique :<br>
+														gérer tous vos rendez-vous en temps réel</td>
+													<td class="text-center"><img src="/css/css_site/img/validation.png" alt="" width="20px" height="20px"></td>
+													<td class="text-center"><img src="/css/css_site/img/validation.png" alt="" width="20px" height="20px"></td>
+													<td class="text-center"><img src="/css/css_site/img/validation.png" alt="" width="20px" height="20px"></td>
+													<td class="text-center"><img src="/css/css_site/img/validation.png" alt="" width="20px" height="20px"></td>
+												</tr>
+												<tr>
+													<td>Accès au générateur de rapport type <br> automatisez vos rapports d'intervention !</td>
+													<td class="text-center"><img src="/css/css_site/img/validation.png" alt="" width="20px" height="20px"></td>
+													<td class="text-center"><img src="/css/css_site/img/validation.png" alt="" width="20px" height="20px"></td>
+													<td class="text-center"><img src="/css/css_site/img/validation.png" alt="" width="20px" height="20px"></td>
+													<td class="text-center"><img src="/css/css_site/img/validation.png" alt="" width="20px" height="20px"></td>
+												</tr>
+												<tr>
+													<td>Accès au forum <br> profitez de notre communauté pour échanger sur vos pratiques !</td>
+													<td class="text-center"><img src="/css/css_site/img/validation.png" alt="" width="20px" height="20px"></td>
+													<td class="text-center"><img src="/css/css_site/img/validation.png" alt="" width="20px" height="20px"></td>
+													<td class="text-center"><img src="/css/css_site/img/validation.png" alt="" width="20px" height="20px"></td>
+													<td class="text-center"><img src="/css/css_site/img/validation.png" alt="" width="20px" height="20px"></td>
+												</tr>
+												<tr>
+													<td>Accès aux offres partenaires <br> bénéficiez des offres réservées aux adhérents de DIAG DRONE</td>
+													<td class="text-center"><img src="/css/css_site/img/validation.png" alt="" width="20px" height="20px"></td>
+													<td class="text-center"><img src="/css/css_site/img/validation.png" alt="" width="20px" height="20px"></td>
+													<td class="text-center"><img src="/css/css_site/img/validation.png" alt="" width="20px" height="20px"></td>
+													<td class="text-center"><img src="/css/css_site/img/validation.png" alt="" width="20px" height="20px"></td>
+												</tr>
+												<tr>
+													<td>Accès à notre solution de paiement sécurisé</td>
+													<td></td>
+													<td class="text-center"><img src="/css/css_site/img/validation.png" alt="" width="20px" height="20px"></td>
+													<td class="text-center"><img src="/css/css_site/img/validation.png" alt="" width="20px" height="20px"></td>
+													<td class="text-center"><img src="/css/css_site/img/validation.png" alt="" width="20px" height="20px"></td>
+												</tr><tr>
+													<td>Accès aux outils d'assistance au vol</td>
+													<td></td>
+													<td class="text-center"><img src="/css/css_site/img/validation.png" alt="" width="20px" height="20px"></td>
+													<td class="text-center"><img src="/css/css_site/img/validation.png" alt="" width="20px" height="20px"></td>
+													<td class="text-center"><img src="/css/css_site/img/validation.png" alt="" width="20px" height="20px"></td>
+												</tr><tr>
+													<td>Accès au service de mise en relation <br> avec des demandeurs en temps réel</td>
+													<td></td>
+													<td></td>
+													<td class="text-center"><img src="/css/css_site/img/validation.png" alt="" width="20px" height="20px"></td>
+													<td class="text-center"><img src="/css/css_site/img/validation.png" alt="" width="20px" height="20px"></td>
+												</tr><tr>
+													<td>Accès à notre outil de veille <br> d'appel d 'offre et d'appel à projet</td>
+													<td></td>
+													<td></td>
+													<td></td>
+													<td class="text-center"><img src="/css/css_site/img/validation.png" alt="" width="20px" height="20px"></td>
+												</tr><tr>
+													<td>Création de votre site internet vitrine</td>
+													<td></td>
+													<td></td>
+													<td></td>
+													<td class="text-center"><img src="/css/css_site/img/validation.png" alt="" width="20px" height="20px"></td>
+												</tr><tr>
+													<td>Déclarations de vol comprises dans l'abonnement <br>
+													Déclaration supplémentaire : 8€ HT /unité</td>
+													<td class="text-center">0</td>
+													<td class="text-center">1</td>
+													<td class="text-center">10</td>
+													<td class="text-center">Illimitées</td>
+												</tr>
+											</table>
+										</div>
+
+									</div>
+								</div>
+							</div>
+
+
+						</div>
+					</div>
+					<div class="col-12 mt-5 text-center">
+						<a rel="nofollow" href="{{path('inscritent',{type:"otd"})}}" class="button profil_choice">S'inscrire</a>
+					</div>
+				</div>
+			{% endif %}
+			{% if type =='Demandeurs' %}
+				<div class="row">
+					<article class="flexx_row bg-white mb-2">
+						<div class="item-media flexx" style="background: url(/css/css_site/images/blog/demandeur.jpg);"></div>
+
+						<div class="item-content flexx bg-white">
+							<h4>Profil
+								<span class="color_blue">PROFIL DEMANDEUR – DONNEUR D’ORDRE</span>.
+
+							</h4>
+
+							<p class="text-black">
+								<b>Que vous soyez particulier ou professionnel, la plateforme DIAG DRONE est à votre service pour enfin simplifier vos demandes de diagnostics immobiliers et vos demandes d’intervention par drone. Quel que soit votre besoin, DIAG DRONE est en mesure de vous mettre en relation avec un diagnostiqueur ou un Opérateur Télépilote de Drone qualifié, disponible et à proximité du site d’intervention.</b>
+							</p>
+
+
+							<p class="text-black">La prise de rendez-vous se fait en temps réel et sans surprise tarifaire. DIAG DRONE vous garantit la qualification du technicien qui interviendra.</p>
+							<p class="text-black">Une fois l’intervention réalisée, le diagnostiqueur ou l’OTD utilise la plateforme pour générer diagnostics, rapports, constats, dossiers… nécessaires pour tout expert, agent immobilier, notaire, assureur et autres consultants consultant.</p>
+							<p class="text-black">Depuis votre espace personnel, vous aurez toute liberté pour permettre à qui vous le voulez de consulter le rapport généré.</p>
+
+							<p class="text-black">Le service est gratuit pour tous les demandeurs, seul le coût de la mission est à régler via notre service de règlement sécurisé (MangoPay).</p>
+
+
+						</div>
+					</article>
+					<div class="col-6 text-center">
+						<a rel="nofollow" href=""
+						   class="button profil_choice">Voir le guide de l'utilisateur</a>
+					</div>
+					<div class="col-6 text-center">
+						<button class="button profil_choice" data-toggle="modal" data-target="#modaleInter">Faire une demande d'intervention</button>
+					</div>
+				</div>
+				<div class="modal fade" id="modaleInter" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header" style="border: none">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<div class="container">
+									<div class="row text-center">
+										<div class="col-sm-6 col-12">
+											<a rel="nofollow" href="{{path('rechercheDrone')}}">
+												<button class="btn btn-primary pt-5 pb-5">Demande d’intervention par drone</button>
+											</a>
+										</div>
+										<div class="col-sm-6 col-12">
+											<a rel="nofollow" href="{{path('createDiag')}}">
+												<button class="btn btn-primary pt-5 pb-5">Demande de diagnostics immobilier</button>
+											</a>
+
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer" style="border: none">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			{% endif %}
+			{% if type == 'Consultants' %}
+				<div class="row type" data-type="otd">
+					<div class="col-lg-12">
+						<div id="accordion01" role="tablist">
+							<div class="card">
+								<div class="card-header" role="tab" id="otd_header">
+									<h5>
+										<a class="collapsed" data-toggle="collapse" href="#otd" aria-expanded="false" aria-controls="otd">
+											Votre interface dédiée
+										</a>
+									</h5>
+								</div>
+								<div id="otd" class="collapse" role="tabpanel" aria-labelledby="otd_header" data-parent="#accordion01" style="">
+									<div class="card-body">
+										<p>Vous êtes expert, géomètre, architecte, artisan…DIAG DRONE vous permet d’être consultant des rapports générés par notre plateforme. À partir de votre espace personnel, vous retrouvez tous les rapports qui vous ont été assignés par un demandeur-donneur d’ordre. Fiable et sécurisée, la plateforme DIAG DRONE est l’alliée de votre activité.</p>
+										<p>De plus, vous pouvez à tout moment devenir Demandeur et ainsi bénéficier des services de mise en relation avec les Opérateurs Télépilotes de Drone (OTD) qualifiés, disponibles et à proximité. Le basculement du profil Consultant au profil Demandeur se fait en quelques clics depuis votre espace personnel. Le service est simple et rapide donc particulièrement adapté à vos métiers. L’utilisation des services de DIAG DRONE en tant que Consultant est entièrement gratuite !</p>
+									</div>
+								</div>
+							</div>
+							<div class="card">
+								<div class="card-header" role="tab" id="demandeur_header">
+									<h5>
+										<a data-toggle="collapse" href="#abonnementOtd" aria-expanded="false" aria-controls="abonnementOtd" class="collapsed">
+											Cette interface est gratuite !
+										</a>
+									</h5>
+								</div>
+
+								<div id="abonnementOtd" class="collapse" role="tabpanel" aria-labelledby="abonnementOtdr_header" data-parent="#accordion01" style="">
+
+									<div class="card-body">
+
+										<p class="h3"></p>
+
+									</div>
+								</div>
+							</div>
+
+
+						</div>
+					</div>
+					<div class="col-12 mt-5 text-center">
+						<a rel="nofollow" href="{{path('inscriptionDem',{type:'consultant'})}}"
+						   class="button profil_choice">S'inscrire</a>
+					</div>
+				</div>
+
+
+
+
+			{% endif %}
+			{% if type =='Grands Comptes' %}
+				<div class="row type" data-type="otd">
+					<div class="col-lg-12">
+						<div id="accordion01" role="tablist">
+							<div class="card">
+								<div class="card-header" role="tab" id="otd_header">
+									<h5>
+										<a class="collapsed" data-toggle="collapse" href="#otd" aria-expanded="false" aria-controls="otd">
+											Votre interface dédiée
+										</a>
+									</h5>
+								</div>
+								<div id="otd" class="collapse" role="tabpanel" aria-labelledby="otd_header" data-parent="#accordion01" style="">
+									<div class="card-body">
+										<p>L’interface Grands comptes a été spécialement développée pour répondre à toutes les problématiques rencontrées par tous les institutionnels et concernant la gestion des diagnostics de leurs biens immobiliers et la gestion des éventuels sinistres. </p>
+										<p>Accessibles selon plusieurs profils (super admin, admin, agent...), ces interfaces intègrent un calendrier dynamique permettant l’organisation optimale d’une équipe de collaborateurs concernés de près ou de loin par la gestion des diagnostics d’un bien. </p>
+										<p>Ces interfaces permettent donc de gérer, à partir d’un tableau de bord simple d’utilisation, l’intégralité des différents diagnostics liés au patrimoine dont ils ont la gestion, et ce, en temps réel et en itinérance. </p>
+										<p>De ce fait, le suivi des diagnostics d’un site de production, de bureux ou de tout autre bien s’en trouve simplifié puisque l’interface réunie tous les documents légaux et techniques liés à un bien le tout couplé à une gestion calendaire y compris du personnel. </p>
+										<p>Un système d’alerte par notification sur l’espace personnel, par mail et/ou par SMS permet de gérer, en toute sécurité, la mise à jour ou le renouvellement de tel ou tel diagnostic afin que le bien concerné soit, en temps réel, à jour concernant toutes les normes imposées. </p>
+										<p>Depuis cette même interface, les utilisateurs pourront procéder à la réservation d’une intervention par drone quel que soit le type de mission connexe à la gestion d’un patrimoine (constat visuel suite à un sinistre, bilan thermique, photogrammétrie pour l’aménagement du territoire...).</p>
+
+									</div>
+								</div>
+							</div>
+
+							<div class="card mb-5">
+								<div class="card-header" role="tab" id="demandeur_header">
+									<h5>
+										<a data-toggle="collapse" href="#abonnementOtd" aria-expanded="false" aria-controls="abonnementOtd" class="collapsed">
+											Nos offres et abonnements
+										</a>
+									</h5>
+								</div>
+
+								<div id="abonnementOtd" class="collapse" role="tabpanel" aria-labelledby="abonnementOtdr_header" data-parent="#accordion01" style="">
+
+									<div class="card-body">
+										<div class="row">
+											<div class="col-12 text-center">
+												<p class="h4">Nos abonnements</p>
+											</div>
+
+											<div class="table-responsive pr-5">
+												<table>
+													<tr>
+														<th class="text-center" width="42%">Prix mensuel HT</th>
+														<th class="text-center"width="42%">Utilisateurs</th>
+													</tr>
+													<tr>
+														<td class="text-center">15 € HT</td>
+														<td class="text-center">1</td>
+													</tr>
+													<tr>
+														<td class="text-center">25 € HT</td>
+														<td class="text-center">2</td>
+													</tr>
+												</table>
+											</div>
+											<div class="col-12 text-center">
+												<p class="h4">Nos packs additionnels</p>
+											</div>
+											<div class="table-responsive pr-5">
+												<table>
+													<tr>
+														<th class="text-center" width="42%">Prix mensuel HT</th>
+														<th class="text-center"width="42%">Utilisateurs supplémentaires</th>
+													</tr>
+													<tr>
+														<td class="text-center">10 € HT</td>
+														<td class="text-center">1</td>
+													</tr>
+													<tr>
+														<td class="text-center">40 € HT</td>
+														<td class="text-center">5</td>
+													</tr>
+													<tr>
+														<td class="text-center">65 € HT</td>
+														<td class="text-center">10</td>
+													</tr>
+												</table>
+											</div>
+										</div>
+
+									</div>
+								</div>
+							</div>
+
+							<div class="col-12 text-center mt-5">
+								<a rel="nofollow" href="{{ path('inscriptionDem',{type:'Grand compte',id:app.request.get('id')}) }}"
+								   class="button profil_choice btn-lg">Choisir ce profil</a>
+							</div>
+							<div class="col-md-12 col-xs-12 mt-5">
+								<h3 class="special-heading text-center">
+						<span class="mb-2 ">
+							Interface
+							<span class="color_blue">Copropriétés</span>
+						</span>
+								</h3>
+							</div>
+							<div class="card mt-5">
+								<div class="card-header" role="tab" id="otd_header">
+									<h5>
+										<a class="collapsed" data-toggle="collapse" href="#copro" aria-expanded="false" aria-controls="otd">
+											Votre interface dédiée
+										</a>
+									</h5>
+								</div>
+								<div id="copro" class="collapse" role="tabpanel" aria-labelledby="otd_header" data-parent="#accordion01" style="">
+									<div class="card-body">
+										<p>Cette interface « Copropriétés » a été conçue pour permettre à une copropriété via son syndic éventuellement de gérer l’ensemble des diagnostics immobiliers obligatoires dans le temps.</p>
+										<p>Une fois l’ensemble des documents numérisé, des alertes vous sont envoyées vous indiquant les fins de validités.</p>
+										<p>Tous vos documents, diagnostics, études, devis… Ils sont stockés de façon sécurisée et suivent votre copropriété même en cas de changement de syndic par exemple.</p>
+									</div>
+								</div>
+							</div>
+							<div class="card">
+								<div class="card-header" role="tab" id="demandeur_header">
+									<h5>
+										<a data-toggle="collapse" href="#abonnementCopro" aria-expanded="false" aria-controls="abonnementOtd" class="collapsed">
+											Nos offres et abonnements
+										</a>
+									</h5>
+								</div>
+
+								<div id="abonnementCopro" class="collapse" role="tabpanel" aria-labelledby="abonnementOtdr_header" data-parent="#accordion01" style="">
+
+									<div class="card-body">
+										<div class="row">
+											<div class="col-12 text-center">
+												<p class="h4">Nos abonnements</p>
+											</div>
+
+											<div class="table-responsive pr-5">
+												<table>
+													<tr>
+														<th class="text-center" width="42%">Prix mensuel HT</th>
+														<th class="text-center"width="42%">Utilisateurs</th>
+													</tr>
+
+													<tr>
+														<td class="text-center">2 € HT (2.40€ TTC)</td>
+														<td class="text-center">2</td>
+													</tr>
+												</table>
+											</div>
+											<div class="col-12 text-center">
+												<p class="h4">Notre pack additionnel</p>
+											</div>
+											<div class="table-responsive pr-5">
+												<table>
+													<tr>
+														<th class="text-center" width="42%">Prix mensuel HT</th>
+														<th class="text-center"width="42%">Utilisateurs supplémentaires</th>
+													</tr>
+													<tr>
+														<td class="text-center">1 € HT (1.20 € HT)</td>
+														<td class="text-center">1</td>
+													</tr>
+
+												</table>
+											</div>
+										</div>
+
+									</div>
+								</div>
+							</div>
+
+
+						</div>
+					</div>
+					<div class="col-12 text-center mt-5">
+						<a rel="nofollow" href="{{ path('syndicatCorpoprietes') }}"
+						   class="button profil_choice btn-lg">Choisir ce profil</a>
+					</div>
+				</div>
+			{% endif %}
+			{% if type =='Institutionnels' %}
+				<div class="row type" data-type="otd">
+					<div class="col-lg-12">
+						<div id="accordion01" role="tablist">
+							<div class="card">
+								<div class="card-header" role="tab" id="otd_header">
+									<h5>
+										<a class="collapsed" data-toggle="collapse" href="#otd" aria-expanded="false" aria-controls="otd">
+											Votre interface dédiée
+										</a>
+									</h5>
+								</div>
+								<div id="otd" class="collapse" role="tabpanel" aria-labelledby="otd_header" data-parent="#accordion01" style="">
+									<div class="card-body">
+										<p>L’interface Institutionnel a été spécialement développée pour répondre à toutes les problématiques rencontrées par tous les institutionnels et concernant la gestion des diagnostics de leurs biens immobiliers et la gestion des éventuels sinistres. </p>
+										<p>Accessibles selon plusieurs profils (super admin, admin, agent...), ces interfaces intègrent un calendrier dynamique permettant l’organisation optimale d’une équipe de collaborateurs concernés de près ou de loin par la gestion des diagnostics d’un bien. </p>
+										<p>Ces interfaces permettent donc de gérer, à partir d’un tableau de bord simple d’utilisation, l’intégralité des différents diagnostics liés au patrimoine dont ils ont la gestion, et ce, en temps réel et en itinérance.</p>
+										<p>De ce fait, le suivi des diagnostics d’une copropriété, d’un immeuble, d’une salle polyvalente, d’un stade, d’une école, d’un lycée et de tout autre bâtiment public s’en trouve simplifié puisque l’interface réunie tous les documents légaux et techniques liés à un bien le tout couplé à une gestion calendaire y compris du personnel.</p>
+										<p>Un système d’alerte par notification sur l’espace personnel, par mail et/ou par SMS permet de gérer, en toute sécurité, la mise à jour ou le renouvellement de tel ou tel diagnostic afin que le bien concerné soit, en temps réel, à jour concernant toutes les normes imposées. </p>
+										<p>Depuis cette même interface, les utilisateurs pourront procéder à la réservation d’une intervention par drone quel que soit le type de mission connexe à la gestion d’un patrimoine (constat visuel suite à un sinistre, bilan thermique, photogrammétrie pour l’aménagement du territoire...).</p>
+
+									</div>
+								</div>
+							</div>
+							<div class="card">
+								<div class="card-header" role="tab" id="demandeur_header">
+									<h5>
+										<a data-toggle="collapse" href="#abonnementOtd" aria-expanded="false" aria-controls="abonnementOtd" class="collapsed">
+											Nos offres et abonnements
+										</a>
+									</h5>
+								</div>
+
+								<div id="abonnementOtd" class="collapse" role="tabpanel" aria-labelledby="abonnementOtdr_header" data-parent="#accordion01" style="">
+
+									<div class="card-body">
+
+											<div class="row">
+												<div class="col-12 text-center">
+													<p class="h4">Villes,Communautés de communes, Départements, Région</p>
+												</div>
+												<div class="table-responsive pr-5">
+													<table>
+														<thead>
+															<tr>
+																<th class="text-center" width="25%"></th>
+																<th class="text-center" width="25%">Nombre utilisateurs</th>
+																<th class="text-center" width="25%">Prix mensuel HT</th>
+															</tr>
+														</thead>
+														<tbody>
+														<tr>
+															<td class="text-center">Entre 1 et 300 habitants</td>
+															<td class="text-center">1</td>
+															<td class="text-center">9 €</td>
+														</tr>
+														<tr>
+															<td class="text-center">Entre 301 et 500 habitants</td>
+															<td class="text-center">1</td>
+															<td class="text-center">15 €</td>
+														</tr>
+														<tr>
+															<td class="text-center">Entre 501 et 1000 habitants</td>
+															<td class="text-center">2</td>
+															<td class="text-center">20 €</td>
+														</tr>
+														<tr>
+															<td class="text-center">Entre 1001 et 5000 habitants</td>
+															<td class="text-center">3</td>
+															<td class="text-center">30 €</td>
+														</tr>
+														<tr>
+															<td class="text-center">Entre 5001 et 10000 habitants</td>
+															<td class="text-center">3</td>
+															<td class="text-center">35 €</td>
+														</tr>
+														<tr>
+															<td class="text-center">Entre 10001 et 50000 habitants</td>
+															<td class="text-center">5</td>
+															<td class="text-center">60 €</td>
+														</tr>
+														<tr>
+															<td class="text-center">Entre 50001 et 100000 habitants</td>
+															<td class="text-center">8</td>
+															<td class="text-center">120 €</td>
+														</tr>
+														<tr>
+															<td class="text-center">Entre 100001 et 500000 habitants</td>
+															<td class="text-center">15</td>
+															<td class="text-center">200 €</td>
+														</tr>
+														<tr>
+															<td class="text-center">Plus de 500000 habitants</td>
+															<td class="text-center">30</td>
+															<td class="text-center">350 €</td>
+														</tr>
+														</tbody>
+													</table>
+												</div>
+												<div class="col-12 text-center">
+													<p class="h4">Communautés religieuses, Établissement public (musée, parc naturel...), Sociétés d'Économie Mixte (SEM), Sociétés Coopérative d'Intérêt Collectif (SCIC)</p>
+												</div>
+												<div class="table-responsive pr-5">
+													<table>
+														<tr>
+
+															<th class="text-center" width="40%">Nombre utilisateurs</th>
+															<th class="text-center" width="40%">Prix mensuel HT</th>
+														</tr>
+														<tr>
+
+															<td class="text-center">5</td>
+															<td class="text-center">80 €</td>
+														</tr>
+														<tr>
+
+															<td class="text-center">5</td>
+															<td class="text-center">80 €</td>
+														</tr>
+													</table>
+												</div>
+
+												<div class="col-12 text-center">
+													<p class="h4">Packs utilisateurs supplémentaires </p>
+												</div>
+												<div class="table-responsive pr-5">
+													<table>
+														<tr>
+
+															<th class="text-center" width="40%">Nombre utilisateurs</th>
+															<th class="text-center" width="40%">Prix mensuel TTC</th>
+														</tr>
+														<tr>
+
+															<td class="text-center">1</td>
+															<td class="text-center">5 €</td>
+														</tr>
+														<tr>
+
+															<td class="text-center">5</td>
+															<td class="text-center">20 €</td>
+														</tr>
+														<tr>
+
+															<td class="text-center">10</td>
+															<td class="text-center">35 €</td>
+														</tr>
+													</table>
+												</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+
+						</div>
+					</div>
+					<div class="col-12 text-center">
+						<a rel="nofollow" href="{{ path('inscriptionDem',{type:'institutionnel',id:app.request.get('id')}) }}"
+						   class="button profil_choice">S'inscrire</a>
+					</div>
+				</div>
+			{% endif %}
+			{% if type =='Diagnostiqueurs' %}
+				<div class="row type" data-type="otd">
+					<div class="col-lg-12">
+						<div id="accordion01" role="tablist">
+							<div class="card">
+								<div class="card-header" role="tab" id="otd_header">
+									<h5>
+										<a class="collapsed" data-toggle="collapse" href="#otd" aria-expanded="false" aria-controls="otd">
+											Votre interface dédiée
+										</a>
+									</h5>
+								</div>
+								<div id="otd" class="collapse" role="tabpanel" aria-labelledby="otd_header" data-parent="#accordion01" style="">
+									<div class="card-body">
+										<p>Bientôt intégré à notre plateforme, une interface dédiée aux diagnostiqueurs permettra :</p>
+										<ul>
+											<li>La mise en relation avec tous les demandeurs sur le territoire</li>
+											<li>La gestion au quotidien de l’activité de l’entreprise via notre CRM dédié</li>
+											<li>Des paiements sécurisés via notre plateforme</li>
+											<li>Répondre à des appels d’offres ou à concurrence locaux ou nationaux.</li>
+										</ul>
+
+									</div>
+								</div>
+							</div>
+
+
+						</div>
+					</div>
+					<div class="col-12 mt-5 text-center">
+						<a rel="nofollow" href="{{path('inscritent',{type:"odi"})}}" class="button profil_choice">S'inscrire</a>
+					</div>
+				</div>
+			{% endif %}
+		</div>
+	</section>
+
+
+
+
+				
+
+
+			
+{% endblock %}

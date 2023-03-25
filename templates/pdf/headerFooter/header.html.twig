@@ -1,0 +1,23 @@
+<div class="logo">
+
+    <img src="uploads/logo/{{ insitution.logo }}" alt="" width="200">
+
+</div>
+<div class="sepa" width="30";
+></div>
+<div class="cadre1">
+    <p>Créateur du dossier : </p>
+    <p class="createur"><b>{{ dossier.createur }}</b></p>
+    <p>Propriétaire du dossier : </p>
+    <p class="createur"><b>{{ dossier.proprietaire }}</b></p>
+    <p>Date de création : </p>
+    <p><b>{{ dossier.date|format_datetime('short','none',locale='fr') }}</b></p>
+</div>
+<div class="cadre2">
+    <p>Date de la dernière intervention sur le dossier : </p>
+    <p><b>{{ dossier.dateModif|format_datetime('short','none',locale='fr') }}</b></p>
+    <p>Effectuée par : </p>
+    <p><b>{{ dossier.nomModifiant }}</b></p>
+    <p>Type de modification effectuée : </p>
+    <p>{{ dossier.typeModif }}</p>
+</div>

@@ -1,0 +1,144 @@
+{% extends "base.html.twig" %}
+
+
+{% block connexion %}
+
+	<ul class="top-includes  text-right">
+
+		<li>
+			<a class="login-form-btn" href="{{path('app_logout')}}">
+				<small>Se déconnecter</small>
+				<i class="fas fa-user"></i>
+			</a>
+		</li>
+	</ul>
+{% endblock %}
+{% block body %}
+	<section class="page_title ds s-overlay s-pt-140 s-pt-md-170 s-pb-60 s-pb-md-90 s-pb-lg-100">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 text-center">
+					<h1>
+						{% block titreSection %}{% endblock %}
+					</h1>
+					<div class="breadcrumb-wrap">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item">
+								<a href="{{path('demandeur')}}">Accueil</a>
+
+							</li>
+							<li class="breadcrumb-item active">
+								{% block titrePage %}{% endblock %}
+							</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class=" bg-grey-light py-5">
+		<div class="container">
+			<div class="row">
+				<div class="col-12 mb-5">
+
+					{% block pageAccueil %}{% endblock %}
+
+				</div>
+
+				<main class="col-lg-8 col-sm-8 col-xs-12">
+
+					{% block contenu %}{% endblock %}
+
+				</main>
+
+				<aside class="col-lg-4 col-sm-4 col-xs-12">
+
+
+					<nav class=" nav bg-white">
+						<h5 class="title_side_dashboard">Navigation
+						</h5>
+						<nav class=" bg-white">
+							<ul class="nav menu-click dashbord">
+								<li class="active">
+									<a href="{{ path('salarie')}}">Accueil</a>
+
+								</li>
+
+
+								<li>
+									<a>Calendrier</a>
+									<ul>
+                                        <li><a href=" {{ path('absence') }} ">Absences</a></li>
+                                        <li><a href=" {{ path('calendrier') }} ">Calendrier</a></li>
+
+
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a>Demandes en cours</a>
+                                    <ul>
+                                        <li><a href=" {{ path('interPerso') }} ">Ajouter une intervention</a></li>
+                                        {% if is_granted('ROLE_PREMIUM') %}
+                                            <li><a href=" {{ path('demcours') }} ">Propositions</a></li>
+                                        {% endif %}
+                                        {% if is_granted('ROLE_CLASSIC') %}
+                                            <li><a href="{{ path('salListeInter') }}">Assistance au vol</a></li>
+                                            <li><a href="{{ path('notam') }}">NOTAMS</a></li>
+                                        {% endif %}
+
+                                        <li><a href=" {{ path('mesinter') }} ">Mes Interventions/Mes Factures</a></li>
+                                    </ul>
+                                </li>
+                                {% if is_granted('ROLE_PREMIUM') %}
+                                    <li>
+                                        <a class="" href="{{ path('inter_sans_prop') }}">Interventions sans OTD</a>
+
+                                    </li>
+                                {% endif %}
+
+
+                                <li>
+                                    <a class="" href="{{ path('creer_facture') }}">Faire une facture</a>
+                                </li>
+                                {% if is_granted('ROLE_CLASSIC') %}
+                                    <li>
+                                        <a class="" href="{{ path('recevoirPaiement') }}">Recevoir un paiement</a>
+                                    </li>
+                                {% endif %}
+
+
+                                <li>
+                                    <a href="{{ path('forum') }}" target="_blank">Accéder au forum DIAG-DRONE</a>
+
+                                </li>
+                                {% if is_granted('ROLE_CLASSIC') %}
+                                    <li>
+
+                                        <a>Gestion des MAP</a>
+                                        <ul>
+                                            <li><a class="" href="{{ path('map') }}">Mes MAP</a></li>
+
+                                            <li><a class="" href="{{ path('remplirMap') }}">Compléter mes MAP</a></li>
+
+
+                                        </ul>
+                                    </li>
+                                {% endif %}
+
+
+                            </ul>
+						</nav>
+					</nav>
+				</aside>
+			</div>
+
+		</div>
+	</section>
+
+
+{% endblock %}
+{% block javascripts %}
+	{{ encore_entry_script_tags('app') }}
+	{% block js_intervention %}{% endblock %}
+{% endblock  %}
+{% block contact %}{% endblock  %}

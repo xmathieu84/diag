@@ -1,0 +1,57 @@
+{% extends 'administrateur/baseA.html.twig' %}
+{% block titre %}
+    Lire messsage
+{% endblock  %}
+{% block body %}
+  <section class="wrapper">
+    <div class="row mt">
+      <div class="col-sm-2"></div>
+      <div class="col-sm-8">
+        <section class="panel">
+          <div class="panel-body">
+            <div class="mail-header row">
+              <div class="col-md-8">
+                <h4 class="pull-left">
+                  {{ message.sujet }}
+                </h4>
+              </div>
+              <div class="col-md-4">
+                <div class="compose-btn pull-right">
+                    <a href="{{path('messageLu',{id:message.id})}}" id="chemin"><button class="btn btn-danger" style="margin-right: 1em;">Marquer comme lu</button></a>
+                        <button class="btn btn-info" id="repondre">Répondre</button>
+                        
+                </div>
+              </div>
+            </div>
+            <div class="mail-sender">
+                <div class="row">
+                    <div class="col-md-8">
+                        <span>{{message.expediteur}}</span>
+                    </div>
+                    <div class="col-md-4">
+                        <p class="date">{{message.date|format_datetime('short', 'short', locale = 'fr')}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="view-mail">
+                <p>{{message.contenu}}</p>
+            </div>
+        </section>
+      </div>
+      <div class="col-sm-2"></div>
+    </div>
+  </section>
+  
+<dialog id="reponse">
+    <div class="row"><div class="col-sm-2"></div>
+    <div class="col-sm-8">
+        {{form_start(form)}}
+        {{form_label(form.reponse,'Répondre au message',{'label_attr':{'class':'control-label'}})}}
+        {{form_row(form.reponse,{'label':' ', 'attr':{'class':'form-control','rows':'15','cols':'60'}})}}
+        <button type="submit" class="btn btn-sm btn-success">Envoyer</button>
+        {{form_end(form)}}
+    </div>
+    <div class="col-sm-2"></div></div>
+
+</dialog>
+{% endblock %}

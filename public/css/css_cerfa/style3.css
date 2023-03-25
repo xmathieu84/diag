@@ -1,0 +1,567 @@
+body{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.imgDrapeau{
+    float: left;
+    width: 15%;
+    
+    
+}
+.imgCerfa{
+    margin-top: -4em;
+    float: right;
+    width: 15%;
+    
+    
+}
+
+.titre{
+    font-size: 20px; 
+}
+
+.sousTitre{
+    font-size: 16px;
+}
+.titre1{
+    text-align: center;    
+    font-weight: bold;
+    width: 70%;
+}
+.sousCerfa{
+    font-size: 10px;
+}
+.sousDrapeau{
+font-size: 9px;
+padding-left: 5px;
+
+}
+.accroche{
+    margin-top: 1em;
+    width: 100%;
+    font-size: 9px;
+    text-align: center;
+}
+.table1,.table2,.table3,.table4{
+    width: 100%;
+    border: 1px solid black;
+    border-collapse: collapse;
+    margin-top: 6px;
+}
+.fond1,.fond2,.fond3,.fond4,.fond5,.fond6{
+    background-color: #C6D9F1;
+    border: 1px solid black;
+    text-align: left;
+    font-weight: bold;
+    padding-left: 10px;
+}
+.table1case1{
+    
+    width: 49.41%;
+    float: left;
+    border:1px solid black;
+    
+}
+.table1case2{
+    width: 50%;
+    float: right;
+    border:1px solid black;
+    
+}
+.boldcase1,.blodcase2{
+    font-size: 11px;
+    font-weight: bold;
+    margin-top: 5px;
+    width: 100%;
+    margin-left: 5px;
+    
+}
+.checkbox{
+    float: left;
+    font-size: 21px;
+    width: 5%;
+
+}
+.madamecase1{
+    float: left;
+    margin-top: 1px;
+    width: 35%;
+    margin-bottom: 1px;
+    font-size: 11px;
+     margin-left: 4px;
+     margin-bottom: 3px;
+    
+}
+.monsieurcase1{
+    float: left;
+    width: 40%;
+    text-align: left;
+    font-size: 11px;
+     margin-left: 4px;
+     margin-bottom: 3px;
+}
+.prenomcase1,.nomcase1{
+    float: left;
+    width: 40%;
+    margin-bottom: 9px; 
+    font-size: 11px;   
+}
+.demsoc,.nomcom{
+    font-size: 11px;
+    margin-left: 5px;
+    margin-top: 4px;
+}
+.nomcom{
+   margin-bottom: 10px; 
+}
+.table1case3{
+    width: 100%;
+    border: 1px solid black;
+}
+.boldcase3{
+    font-size: 11px;
+    font-weight: bold;
+    margin-top: 5px;
+    width: 100%;
+    margin-left: 5px;
+    float: left;
+    margin-bottom: 3px;
+}
+.madamecase3,.monsieurcase3,.madamecase4,.monsieurcase4{
+    float: left;
+    width: 13%;
+    font-size: 11px;
+    margin-bottom: 4px;
+    margin-left: 2px;
+    
+}
+.nomcase3,.prenomcase3,.fonctioncase3,.nomcase4,.prenomcase4{
+    padding-top: 3px;
+    float: left;
+    width: 23%;
+    font-size: 11px;
+    margin-bottom: 4px;
+    height:  20px;
+}
+.telportcase3,.mailcase3,.telportcase4,.mailcase4{
+    float: left;
+    width: 49%;
+    font-size: 11px;
+    margin-bottom: 6px;
+}
+.telportcase3,.telportcase4{
+    margin-left: 5px;
+}
+.table1case4{
+    width: 100%;
+    border: 1px solid black;
+}
+.boldcase4{
+    float: left;
+    width: 40%;
+    font-size: 11px;
+    font-weight: bold;
+    margin-left: 5px;
+    margin-top: 5px;
+    padding-top: 3px;
+    
+    height: 20px;
+}
+.choixcase4{
+    float: left;
+    width: 50%;
+    font-size: 12px;
+}  
+
+.table2{
+    margin-top: 20px;
+}
+.table2choix1,.table2choix2{
+    font-size: 11px;
+    margin-left: 3px;
+}
+.table2choix1{
+    margin-top: 5px;
+}
+.annotationdebut{
+    float: left;
+    width: 21%;
+}
+.annotation{
+    float: left;
+    font-style: italic;
+    width: 64%;
+    padding-top: 3px;
+}
+.finannotation{
+    float: left;
+    font-style: italic;
+    padding-top: 3px;
+    width: 4%;
+}
+.indice{
+    float: left;
+    font-size: 8px;
+    width: 3%;
+    padding-right: -15px;   
+}
+.explicationtable2{
+    font-style: italic;
+    font-size: 10px;
+    width: 100%;
+    margin-left: 5px;
+}
+.annotation2{
+    font-style: italic;
+}
+.table2choix2{
+    margin-bottom: 5px;
+}
+.table3{
+    margin-top: 20px;
+    border: 1px solid black;
+}
+.table3explication{
+    font-size: 11px;
+    font-style: italic;
+    float: left;
+    width: 29.41%;
+    
+    
+    text-align: center;
+    padding-top: 45px;
+    
+}
+.bold{
+    font-weight: bold;
+}
+.derniertable3{
+    font-size: 11px;
+    padding-left: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    
+    border: 1px solid black;
+    width: 100%;
+}
+.table3Hdebut,.table3Hfin{
+    font-size: 12px;
+    float: left;
+    width: 68%;
+    border: 1px solid black;
+    padding-left: 5px;  
+
+}
+.table3Hdebut{
+    height: 48px;
+    
+}
+.table3Hfin{
+    height: 52;
+    margin-top: -28px;
+    
+}
+.debut{
+    float: left;
+    width: 50%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.datestr,.heureformat{
+    font-size: 10px;
+    font-style: italic;
+}
+.duree{
+    width: 100%;
+    font-size: 11px;
+    border: 1px solid black;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    padding-top: 5px;
+}
+.jours{
+    font-weight: bold;
+}
+.italic{
+    font-style: italic;
+}
+.table4{
+    margin-top: 20px;
+}
+.table4case1{
+    width: 95.41%;
+    border: 1px solid black;
+    font-size: 12px;
+}
+.numerodrone{
+    float: left;
+    width: 4%;
+    border: 1px solid black;
+    height: 40px;
+    text-align: center;
+    padding-top: 10px;
+    font-size: 12px;
+}
+.constructeur{
+    margin-left: 5px;
+    float: left;
+    width: 35.5%;
+    margin-top: 5px;
+    
+    }
+    .modele{
+    float: left;
+    width: 60.91%;
+    
+}
+.infoDrone{
+    width: 95.41%;
+    margin-top: -26px;
+    margin-bottom: 5px;
+}
+.classe{
+    float: left;
+    width: 20%;
+    padding-top: 2px;
+    margin-left: 5px;
+}
+.captif{
+    float: left;
+    width: 34%;
+     
+}
+.poids{
+    float: left;
+    width: 40%;
+    padding-top: 2px;
+     
+}
+.unitepoids{
+    float: right;
+    width: 4%;
+    padding-top: 2px;
+}
+.page{
+    text-align: center;
+    margin-top: 24px;
+    color: #A2A2A2;
+    font-size: 11px;
+}
+.table5{
+    border: 1px solid black;
+}
+.titretable5{
+    float: left;
+    width: 100%;
+    font-size: 11px;
+    font-weight: bold;
+    padding-left: 5px;
+}
+.agglo{
+    float: left;
+    width: 35%;
+    font-size: 11px;
+    padding-left: 5px;
+}
+.personne{
+    float: left;
+    width: 60%;
+    font-size: 11px;
+}
+.localisation
+{
+    width: 100%;
+    padding-left: 5px;
+    margin-bottom: 5px;
+    
+}
+table{
+    width: 95%;
+    border: 1px solid black;
+    border-collapse: collapse;
+    margin-top: 5px;
+}
+.codePostalTable,.villeTable,.adresseTable{
+    font-size: 11px;
+    border: 1px solid black;
+}
+.codePostalTable{
+    width: 25%;
+}
+.villeTable{
+    width: 30%;
+}
+.adresseTable{
+    width: 48%;
+}
+.villetd,.codepostaltd,.adressetd{
+    height: 15px;
+    border: 1px solid black;
+    font-size: 11px;
+    text-align: center;
+}
+.espacepublic{
+    font-size: 11px;
+    margin-top: 5px;
+    padding-left: 5px;
+}
+.decriretable5{
+    font-size: 9px;
+}
+.decriptionsite{
+    float: left;
+    width: 90%;
+    height: 45px;
+    margin-top: 5px;
+    padding-left: 5px;
+}
+.sitetable5{
+    font-size: 11px;
+    font-weight: bold;    
+}
+.aeronef{
+    float: left;
+    width: 35%;
+    font-size: 11px;
+    font-weight: bold;
+    margin-left: 5px;
+    padding-top: 4px;
+}
+.toutaeronef{
+    float: left;
+    width: 25%;
+    font-size: 11px;
+    margin-bottom: 5px;
+}
+.choixaeronef{
+    float: left;
+    width: 39%;
+    font-size: 11px;
+}
+.datetable5{
+    float: left;
+    width: 25%;
+    font-size: 11px;
+    margin-left: 5px;
+    margin-bottom: 5px;
+}
+.datebold{
+    font-weight: bold;
+}
+.autretable5{
+    float: left;
+    width: 65%;
+    font-size: 11px;
+}
+.conditionvol{
+    float: left;
+    width: 100%;
+    font-size: 11px;
+    font-weight: bold;
+    margin-bottom: 3px;
+    padding-left: 5px;
+}
+.volvue,.volautre{
+    font-size: 11px;
+    float: left;
+    width: 100%;
+    margin-left: 5px;
+       margin-bottom: 3px;
+}
+.suitreautrecas{
+    font-size: 9px;
+}
+.hauteurVol{
+    float: left;
+    font-size: 11px;
+    width: 30%;
+     margin-left: 8px;
+    margin-bottom: 4px;
+}
+.unitevol{
+    float: left;
+    font-size: 11px;
+    width: 60%;
+    margin-bottom: 4px;
+}
+.objetmission{
+    float: left;
+    font-size: 11px;
+    width: 100%;
+    margin-bottom: 4px;
+    font-weight: bold;
+    margin-left: 8px;
+}
+.site1,.site2{
+    border: 1px solid black;
+}
+.exterieurtable{
+    font-size: 11px;
+    margin-left: 10px;
+    margin-top: 2px;
+    margin-bottom: 10px;
+}
+.table6,.table6case2,.table6case3{
+    border: 1px solid black;
+}
+.textetable6{
+    font-size: 11px;
+    padding-left: 5px;
+    padding-bottom: 3px;
+}
+.liste{
+    margin-top: -11px;
+}
+.table6case2{
+    font-size: 11px;
+    float: left;
+    width: 30%;
+    padding-left: 5px;
+    height: 46px;
+}
+.lieu,.datetable6{
+    float: left;
+    width: 50%;
+}
+
+.table6case3{
+    font-size: 11px;
+    float: left;
+    width: 40%;
+    padding-left: 5px;
+    border-right: none;
+}
+.table6case4{
+    float: left;
+    width: 27.91%;
+    border :1px solid black;
+    border-left: none;
+    height: 46px;
+}
+.personnemorale{
+    font-size: 9px;
+    font-style: italic;
+}
+.table7{
+    margin-top: 10px;
+    padding-left: 5px;
+    padding-top: 3px;
+    padding-bottom: 2px;
+    border: 1px solid black;
+    background-color: #F2F2F2;
+    font-size: 10px;
+    font-style: italic;
+}
+.table7bold{
+    font-weight: bold;
+}
+.table7site{
+    color: #1870F7;
+    text-decoration: underline #1870F7;
+}
+.fin{
+    text-align: center;
+    margin-top: 3px;
+    color: #A2A2A2;
+    font-size: 11px;
+}
+

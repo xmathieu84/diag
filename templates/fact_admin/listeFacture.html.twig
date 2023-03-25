@@ -1,0 +1,47 @@
+{% extends "administrateur/baseA.html.twig" %}
+{% block title %}Liste des factures
+{% endblock %}
+
+{% block body %}
+
+
+	<div class="row text-center">
+		<div class="col-sm-2"></div>
+		<div class="col-sm-8 choixDate">
+			<span>
+				<button class="precedent">&#60 &#60</button>
+
+				<span class="date"></span>
+
+				<button class="suivant">&#62&#62</button>
+			</span>
+		</div>
+		<div class="col-sm-2"></div>
+		<br><br>
+		<div class="col-sm-12 listeFactures">
+			<div class="row mt liste"></div>
+		</div>
+	</div>
+
+
+	<div class="row text-center mt-5">
+		<div class="col-sm-2"></div>
+		<div class="col-sm-8 choisDateDevis choixDate">
+
+			<span>
+				<button class="precedent moisAvant">&#60&#60</button>
+
+				<span class="dateDevis date"></span>
+
+				<button class="suivant moisApres">&#62&#62</button>
+			</span>
+		</div>
+		<div class="col-sm-2"></div>
+		<br><br>
+		<div class="col-sm-12 listeDevis">
+			<div class="row mt devis"></div>
+		</div>
+	</div>
+
+
+{% endblock %}

@@ -1,0 +1,13 @@
+.titre{
+    text-align: center;
+}
+table{
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+td{
+    border: 1px solid black;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+}

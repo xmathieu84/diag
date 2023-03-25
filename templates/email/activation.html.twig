@@ -1,0 +1,50 @@
+{% extends 'accueil/baseaccueil.html.twig' %}
+
+{% block title %}Diag-drone
+{% endblock %}
+{% block titrePage %}
+	<h1>Validation de votre compte</h1>
+{% endblock %}
+{% block nomSection %}
+	<a href="{{path('home')}}">Accueil</a>
+{% endblock %}
+{% block nomPage %}
+
+	Validation
+{% endblock %}
+
+{% block bodyAccueil %}
+	<section class="ls ms s-pt-xl-150 s-pt-lg-130 s-pt-md-90 s-pt-60 s-pb-xl-140 s-pb-lg-120 s-pb-md-80 s-pb-50 c-mb-10 c-gutter-60">
+		<div class="container">
+			<div class="row mt-108">
+				<div class="col-12 my-50">
+					<h4>Merci, votre compte est désormais en
+						<span class="color_blue">attente de validation.</span>
+					</h4>
+				</div>
+				<div class="col-12 my-50">
+					<p>Merci de votre inscription sur notre plateforme
+						,Un email vous a été envoyé, merci de
+						<span class="color_blue">consulter votre messagerie</span>
+						pour
+						<span class="color_blue">activer votre compte</span>
+						et poursuivre votre inscription.</p>
+					<p>N'oubliez pas de consulter votre courrier indésirable</p>
+
+
+				</div>
+
+				<div class="col-12">
+					<div class="row">
+						<div class="col-md-12 col-xs-12 text-center">
+							<a href="{{path('home')}}" class="btn btn-outline-maincolor">Revenir à l'accueil
+							</a>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</section>
+{% endblock %}

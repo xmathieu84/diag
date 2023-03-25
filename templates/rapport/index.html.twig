@@ -1,0 +1,191 @@
+{% extends 'entreprise/baseAE.html.twig' %}
+
+{% block title %}Rapport
+{% endblock %}
+{% block titreSection %}Rapport
+{% endblock %}
+{% block titrePage %}Rapport
+{% endblock %}
+
+{% block contenu %}
+    {% if intervention.intDem.user %}
+        {% set id = intervention.intDem.id %}
+    {% else %}
+        {% set id = 0 %}
+
+    {% endif %}
+
+
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group" id="rapport">
+                <p class="h6">Ajouter une vidéo(Taille maximum : 2 Go)</p>
+
+
+				<button class="btn btn-maincolor" for="fichierVideo" data-rapport="{{form.vars["value"].id}}" id="boutonAjouter">Ajouter une vidéo</button>
+				<input type="file" name="" id="fichierVideo" required="false" multiple="true"><span id="transfertVideo" class="h6" style="color: black"></span>
+				<input type="hidden" id="verif" value={{id}}>
+
+			</div>
+		</div>
+
+
+		<div class="col-sm-6">
+			{{ form_start(form) }}
+
+			<p class="h6">Télécharger des photos</p>
+			<button type="button" class="btn btn-maincolor photo">Ajouter des photos</button>
+			<span class="info h6"></span>
+
+			{{form_row(form.photos,{'label':' ' })}}
+
+
+
+		</div>
+		<div class="col-12 mb-5">
+			<p class="h6">Photos déjà enregistrées</p>
+			{% for photo in photos %}
+				<a href="{{ asset('uploads/photoRapport/' ~ photo.nom) }}" target="_blank">
+					photo
+					n°{{loop.index}}
+				</a>
+			{% endfor %}
+		</div>
+
+		{% if intervention.typeInter.nom != "Captation audiovisuelle" %}
+			
+
+		<div class="col-sm-4">
+			<br>
+			<div class="form-group rapport" id="rapport">
+				<p class="h6">Ajouter un fichier</p>
+				<button type="button" class="btn btn-maincolor" id="file">Ajouter un fichier</button>
+				{{ form_row (form.rap_fichier,{'label':' ' ,'attr':{'class':'form-control-file'}})}}
+			</div>
+		</div>
+		<div class="col-sm-4">
+			<br>
+			<div class="form-group" id="rapport">
+				<p class="h6">Données télémetriques</p>
+				<button type="button" class="btn btn-maincolor" id="dTele">Données télémetrique</button>
+				{{ form_row (form.donnees_telemetrique,{'label':' ' ,'attr':{'class':'form-control-file'}})}}
+			</div>
+		</div>
+
+
+		{% if intervention.listeInter.nom == 'interventions aériennes' %}
+			<div class="col-sm-4">
+				<br>
+				<div class="form-group" id="rapport">
+					<p class="h6">CERFA de l'intervention</p>
+					<button type="button" class="btn btn-maincolor" id="cerfa">Cerfa de l'intervention</button>
+					{{ form_row (form.cerfa_inter,{'label':' ' ,'attr':{'class':'form-control-file'}})}}
+				</div>
+			</div>
+		{% endif %}
+
+
+		<div class="col-sm-6 text-center" id="rapport">
+			<div class="form-group has-placeholder">
+				{{ form_row (form.rap_resume,{'label':' ' ,'attr':{'class':'form-control',"placeholder":"Ecrivez le resumé ici","rows":"10"}})}}
+			</div>
+            <button type="button" class="btn btn-maincolor btn-resume" data-toggle="modal" data-target="#modalresume">
+                Ajouter un résumé au rapport
+            </button>
+
+        </div>
+
+        <div class="col-sm-6" id="rapport">
+            <div class="form-group has-placeholder">
+                {{ form_row (form.rap_messhid,{'label':' ' ,'attr':{'class':'form-control',"placeholder":"Indication(Cela ne figurera pas dans le rapport)","rows":"10"}}) }}
+            </div>
+        </div>
+		{% endif %}
+        {% if intervention.datePaiement == null and intervention.intDem.user %}
+            <div class="col-sm-6 col-12" id="rapport">
+                <div class="form-group">
+                    <p class="h6">Avez vous reçu le paiement?(chèque ou espèces)</p>
+
+                    {{ form_row(form.paiement,{'label':' ','novalidate':'novalidate'}) }}
+                </div>
+            </div>
+        {% endif %}
+        <div class="col-sm-6 col-12" id="rapport">
+            <div class="form-group">
+				<p class="h6">Avez vous terminé d'écrire le rapport?</p>
+
+				{{form_row(form.confirmation,{'label':' ','novalidate':'novalidate'})}}
+			</div>
+		</div>
+		{% if intervention.datePaiement == null and intervention.intDem.user.roles[0] =='ROLE_DEMANDEUR' %}
+			<div class="col-sm-4" id="paiement">
+				<div class="form-group has-placeholder">
+					<p class="h6">Date du paiement</p>
+					{{form_row(form.date,{'label':' ','attr':{'class':'form-control','novalidate':'novalidate'}})}}
+				</div>
+			</div>
+		{% endif %}
+		{% if intervention.incident == null %}
+
+			<div class="col-sm-12 text-center">
+				<p class="h6">L'intervention a-t-elle connue un incident (matériel ou corporel)?</p>
+				{{ form_row(form.degatInter,{'label':' '}) }}
+			</div>
+			<div class="col-sm-6 text-center materiel">
+				<p class="h6">Liste des dégats matériels</p>
+				{{ form_row(form.degat.degatMateriel,{'label':' ','attr':{'class':'bg-white'}}) }}
+			</div>
+			<div class="col-sm-6 text-center corporel">
+				<p class="h6">Liste des dégats corporels</p>
+				{{ form_row(form.degat.degatCorporel,{'label':' ','attr':{'class':'bg-white'}}) }}
+			</div>
+
+		{% endif %}
+		<div class="col-sm-12 text-center mt-5">
+			<button type="submit" class="btn-maincolor btn">Envoyer</button>
+		</div>
+
+	</div>
+
+	{{ form_widget(form._token) }}
+	{{ form_end(form ,{'render_rest': false}) }}
+	<div class="modal fade" id="modalresume" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="staticBackdropLabel">Resumé de l'intervention</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="zone-text">
+						{% if rapport.rapResume != null %}
+							{% for resume in rapport.rapResume %}
+								<textarea id="" cols="15" rows="5" class="text-resume" value="{{resume}}"></textarea>
+
+							{% endfor %}
+						{% else %}
+							<textarea id="" cols="15" rows="5" class="text-resume"></textarea>
+
+						{% endif %}
+
+
+					</div>
+					<div>
+						<button type="button" class="btn btn-primary btn-ajoutText">Ajouter un paragraphe</button>
+					</div>
+
+				</div>
+				<div class="modal-footer">
+
+					<button type="button" class="btn btn-primary btnResume" data-dismiss="modal">Valider</button>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+{% endblock %}

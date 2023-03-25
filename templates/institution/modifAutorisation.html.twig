@@ -1,0 +1,72 @@
+{% extends template %}
+
+{% block title %}
+    Liste autorisations
+{% endblock %}
+
+{% block contenu %}
+
+    {% if is_granted('ROLE_MANITOUGC') %}
+{% set type ='gc' %}
+        {% else %}
+            {% set type ='insti' %}
+    {% endif %}
+    <div class="table-responsive">
+        <table>
+            {% for agent in agents %}
+                <tr class="text-dark">
+                    <th class="text-center">{{ agent.civilite.prenom }} {{ agent.civilite.nom }}</th>
+                    <td class="text-center authorisation">{% for role in agent.user.roles %}
+                            {% if role =='ROLE_MANITOU' or role == 'ROLE_MANITOUGC' %}
+                                Administrateur du compte
+                            {% endif %}
+                            {% if role =='ROLE_RESPONSABLE' or role == 'ROLE_RESPONSABLEGC' %}
+                                Administrateur adjoint
+                            {% endif %}
+                            {% if role =='ROLE_NIVEAU1' or role == 'ROLE_NIVEAU1GC' %}
+                                Niveau 1
+                            {% endif %}
+                            {% if role =='ROLE_NIVEAU2' or role == 'ROLE_NIVEAU2GC' %}
+                                Niveau 2
+                            {% endif %}
+                            {% if role =='ROLE_NIVEAU3' or role == 'ROLE_NIVEAU3GC' %}
+                                Niveau 3
+                            {% endif %}
+                        {% endfor %}</td>
+                    <td class="text-center"><button class="btn btn-maincolor" data-toggle="modal" data-target="#roleModale{{ loop.index }}">Modifier</button></td>
+                </tr>
+                <div class="modal fade" id="roleModale{{ loop.index }}" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">Modifier les autorisations de {{ agent.civilite.prenom }} {{ agent.civilite.nom }}</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+
+
+                                        <select class="form-control form-control-lg">
+                                            <option value="MANITOU">Administrateur du compte</option>
+                                            <option value="RESPONSABLE">Administrateur adjoint</option>
+                                            <option value="NIVEAU1">Niveau 1</option>
+                                            <option value="NIVEAU2">Niveau 2</option>
+                                            <option value="NIVEAU3">Niveau 3</option>
+                                        </select>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Quitter</button>
+                                <button type="button" class="btn btn-primary" data-type="{{ type }}" data-user="{{ agent.id }}">Valider</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+        </table>
+
+    </div>
+{% endblock %}
+

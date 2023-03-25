@@ -1,0 +1,62 @@
+{% extends 'administrateur/baseA.html.twig' %}
+
+{% block body %}
+<div class="row">
+    <div class="col-12 h3 text-center">
+       Modification de : {{ pack.nom }}
+    </div>
+    <div class="col-12 mt-5">
+        <p class="h4">Mission du pack : </p>
+        <ul class="list-group list-group-horizontal">
+            {% for mission in pack.missions %}
+                <li class="list-group-item">{{ mission.nom }} <br> <a class="deleteMission" href="{{ path('supprimerMission',{idPack : pack.id,idMission:mission.id}) }}">X</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="col-12 mt-5">
+        <p class="h4">Missions disponibles</p>
+        <div class="accordion" id="accordionExample">
+            {% for famille in familles %}
+                <div class="card mt-2">
+                    <div class="card-header" id="heading{{ loop.index }}">
+                        <h2 class="mb-0 ">
+                            <button class="btn btn-link btn-block text-left collapsed text-dark" type="button" data-toggle="collapse" data-target="#collapse{{ loop.index }}" aria-expanded="false" aria-controls="collapse{{ loop.index }}">
+                                {{famille.nom}}
+                            </button>
+                        </h2>
+                    </div>
+                    <div id="collapse{{ loop.index }}" class="collapse" aria-labelledby="heading{{ loop.index }}" data-parent="#accordionExample">
+                        <div class="card-body">
+                            <div class="row">
+                                {% for type in famille.typeDiag %}
+                                    <div class="col-12 border border-dark pt-4 pb-4 text-center">
+                                        <p class="h4">{{ type.nom }}</p>
+                                        <div class="row">
+                                            {% for mission in type.mission %}
+                                                {% if mission not in pack.missions %}
+                                                    <div class="col-4">
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input missionAdmin" type="checkbox"  value="{{ mission.id }}" data-nom="{{ mission.nom }}" data-pack="{{ pack.id }}">
+                                                            <label class="form-check-label" for="inlineCheckbox1">{{ mission.nom }}</label>
+                                                        </div>
+                                                    </div>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block title %}
+Modifier pack
+{% endblock %}
+

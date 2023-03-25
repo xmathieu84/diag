@@ -1,0 +1,244 @@
+{% extends 'institution/baseInsti.html.twig' %}
+
+{% block title %}
+    Ajouter des pièces
+{% endblock %}
+{% block titreSection %}Ajouter des pièces{% endblock %}
+{% block titrePage %}Ajouter des pièces{% endblock %}
+{% block pageAccueil %}
+
+        <a href="{{ path('listeDossier',{code:code}) }}">ListeDossier</a><span class="color-dark">-></span><a href="{{ path('indossier',{nom:sousDossier.dossier.type,code:code}) }}">{{ sousDossier.dossier.type }}</a><span class="color-dark">-></span>
+        <a href="{{ path('FinaliserDossier',{id:sousDossier.dossier.id,nom:sousDossier.dossier.type,code:code}) }}">{{ sousDossier.type }}</a><span class="color-dark">->Ajouter des pièces</span>
+
+
+{% endblock %}
+{% block contenu %}
+    <div class="row mb-5">
+        {% if is_granted('ROLE_NIVEAU1') %}
+            <div class="col-6 text-center">
+                <button class="btn btn-info" data-toggle="modal" data-target="#ajoutPiece">Ajouter une pièce</button>
+            </div>
+            <div class="col-6 text-center">
+                <button class="btn btn-maincolor2" data-toggle="modal" data-target="#ajoutNote">Ajouter une note</button>
+            </div>
+        {% endif %}
+
+    </div>
+    <div class="row" id="zoneDoc">
+        {% for fichier in sousDossier.docSousDossiers %}
+           <div class="col-3 mb-5 text-center lineSupprimer">
+               <div class="row">
+                   <div class="col-6"><figure >
+                           <img src="/css/css_site/img/filepetit.png" alt="">
+                           <figcaption class="text-dark">{{ fichier.libelle }}</figcaption>
+
+                       </figure>
+                   </div>
+                   <div class="col-6 text-left">
+                       <div class="btn-group " role="group" >
+                           <button id="btnGroupDrop1" type="button" class="btnMenu dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">+</button>
+                           <div class="dropdown-menu" aria-labelledby="btnGroupDrop1"style="z-index: 1000000;">
+                               <a class="dropdown-item"  data-toggle="modal" data-target="#voirNote{{ loop.index }}">Voir les notes</a>
+                               <a class="dropdown-item" href="/uploads/dossier/{{ fichier.fichier }}" target="_blank">Ouvrir dans un nouvel onglet</a>
+
+                               {% if is_granted('ROLE_NIVEAU1') %}
+                                   <a href="#" class="dropdown-item"data-toggle="modal" data-target="#ajoutPiece">Ajouter une pièce</a>
+                               {% endif %}
+                                   <a href="#"class="dropdown-item" data-toggle="modal" data-target="#ajoutNote">Ajouter une note</a>
+
+                               <a href="{{ path('FinaliserDossier',{id:sousDossier.dossier.id,nom:sousDossier.dossier.type,code:code}) }}" class="dropdown-item">Page précédente</a>
+                               {% if is_granted('ROLE_NIVEAU1') %}
+                                   <a href="#" class="dropdown-item delete">Supprimer la piéce</a>
+                               {% endif %}
+
+                           </div>
+                       </div>
+                   </div>
+               </div>
+
+
+           </div>
+
+
+
+
+
+
+
+            <div class="modal fade" id="voirNote{{ loop.index }}" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable modalNote">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Consulter les notes du fichier {{ fichier.libelle }}</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row zoneDelete">
+                                {% for note in fichier.annotations %}
+                                    <div class="col-sm-12 mb-5 elementDelete">
+                                        <div class="row">
+                                            <div class="col-10"> <p>Ajoutée par <b>{{ note.auteur }}</b> le {{ note.date|format_datetime('short','none',locale='fr') }}</p></div>
+                                            <div class="col-2 text-center">
+                                                <figure>
+                                                    <img src="/css/css_site/img/poubelle.png" alt="" class="delete" data-id="{{ note.id }}">
+                                                    <figcaption class="h7">Supprimer</figcaption>
+                                                </figure>
+                                            </div>
+                                            <div class="col-12">
+                                                <p>{{ note.texte }}</p>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+                                {% endfor %}
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+    </div>
+
+    <div class="modal fade" id="ajoutPiece" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modalAjoutPièce modal-dialog-scrollable modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Ajouter une pièce</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <p class="h5">Les champs marqués * sont obligatoires</p>
+                        </div>
+                        <div class="col-6 mt-3">
+                            <label for="">Libéllé *</label>
+                            <input type="text" name="" id="libéllé">
+                        </div>
+                        <div class="col-sm-6 mt-3">
+                            <label for="fichier">Ajoutez un fichier *</label>
+                            <input type="file" name="" id="fichier" accept="{{ accept }}">
+                            <button type="button" class="btn-fichier">Choisir un fichier</button>
+                        </div>
+                        <div class="col-6 mt-3">
+                            <label for="validite">Date de validité</label>
+                            <input type="date" name="" id="validite" class="form-control form-control-sm">
+                        </div>
+                        <div class="col-6 mt-3">
+                            <label for="">Délai de l'alerte</label>
+                            <select name="" id="alerte"  class="form-control form-control-lg">
+                                <option value=""disabled selected>Sélectionnez une durée</option>
+                                <option value="P3M">3 mois</option>
+                                <option value="P1M">1 mois avant</option>
+                                <option value="P15D">15 jours avant</option>
+                                <option value="P8D">8 jouts avant</option>
+                                <option value="P0D">Le jours J</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-12 mt-5 text-center">
+                            <button class="btn btn-outline-maincolor">Ajouter un contact pour l'alerte</button>
+                        </div>
+                        <div class="col-sm-12 text-center">
+                            <legend>Contact</legend>
+                        </div>
+                        <div class="row zoneContact pl-2 pr-2">
+
+                        </div>
+                        <div class="col-sm-12 text-center">
+                            <legend>Note</legend>
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="note">Titre</label>
+                            <input type="text" name="" id="titreNote">
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="texteNote">Contenu</label>
+                            <textarea name="" id="texteNote" cols="30" rows="10"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                    <button type="button" class="btn btn-primary" data-id = "{{ sousDossier.id }}">Valider</button>
+                </div>
+                <div class="modal" tabindex="-1" id="transfert">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Suivi du téléchargement de votre fichier</h5>
+
+                            </div>
+                            <div class="modal-body">
+                                <div class="progress">
+                                    <div class="progress-bar barUpload" role="progressbar" aria-valuenow="0" aria-valuemin="0"  aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="ajoutNote" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modalNote">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Ajoutez une note</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-2"></div>
+                        <div class="col-8">
+                            <label for="choixFichier">Choisissez un document</label>
+                            <select name="" id="choixFichier">
+                                <option value=""disabled selected>Choisissez un document</option>
+                                {% for fichier in sousDossier.docSousDossiers %}
+                                    <option value="{{ fichier.id }}">{{ fichier.libelle }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="col-2"></div>
+                        <div class="col-12">
+                            <label for="titre">Titre</label>
+                            <input type="text" name="" id="titre" pattern="[A-Za-z0-9]">
+                        </div>
+                        <div class="col-12">
+                            <label for="newNote">Nouvelle note</label>
+                            <textarea name="" id="newNote" cols="30" rows="10"></textarea>
+                            =
+                        </div>
+                        <div class="row ancienNote pl-2">
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                    <button type="button" class="btn btn-primary envoyer">Valider</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

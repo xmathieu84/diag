@@ -1,0 +1,53 @@
+{% extends 'accueil/baseaccueil.html.twig' %}
+{% block title %}
+	Nous contacter
+{% endblock  %}
+{% block body %}
+	<section class="page_title ds s-overlay s-pt-140 s-pt-md-170 s-pb-60 s-pb-md-90 s-pb-lg-100">
+		<div class="container pb-3">
+			<div class="row">
+				<div class="col-md-12 text-center">
+					<h1>Nous contacter</h1>
+					<div class="text-white">04 13 95 01 55</div>
+					<div class="text-white">contact@diag-drone.com</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="ls ms s-py-xl-150 s-py-lg-130 s-py-md-90 s-py-60">
+		<div class="container pt-3 pb-5">
+			<div class="row">
+				<div class="col-12 mb-4">
+					{#  <p class="h5">Pour tout renseignement et assistance : 04/13/95/01/55</p>#}
+				</div>
+				<div class="col-12 contact-us animate" data-animation="scaleAppear">
+
+					{{form_start(form)}}
+					<div class="row">
+						<div class="col-sm-6">
+							<div class="form-group has-placeholder">
+								{{form_row(form.sujet,{'label':' ','attr':{'class':'form-control',"placeholder":"Sujet"}})}}
+							</div>
+						</div>
+
+						<div class="col-sm-6">
+							<div class="form-group has-placeholder">
+								{{form_row(form.expediteur,{'label':' ','attr':{'class':'form-control',"placeholder":"Adresse mail"}})}}
+							</div>
+						</div>
+						<div class="col-sm-12">
+							<div class="form-group has-placeholder">
+
+								{{form_row(form.contenu,{'label':' ','attr':{'class':'form-control','rows':'10',"cols":"40","placeholder":"votre message"}})}}
+							</div>
+						</div>
+						<div class="col-sm-12">
+							<button type="submit" class="btn btn-maincolor">Envoyer</button>
+						</div>
+
+						{{form_end(form)}}
+					</div>
+					<div class="col-sm-3"></div>
+				</div>
+			</section>
+		{% endblock %}

@@ -1,0 +1,129 @@
+{% extends "base.html.twig" %}
+{% block lienAccueil %}{{path('app_logout')}}{% endblock %}
+{% block mobileConnect %}{{path('app_logout')}}{% endblock %}
+
+{% block connexion %}
+
+	<nav class="top-nav justify-nav-end ">
+		{% block menu %}
+		<div class="d-xl-none right">
+			<a class="login-form-btn" href="{{path('app_logout')}}">
+                <small>Se déconnecter</small>
+                <i class="fas fa-user"></i>
+            </a>
+		</div>	
+		{% endblock %}
+
+		<ul class="nav sf-menu">
+			<li>
+				<a href="{{ path('demandeur') }}">Espace Personnel</a>
+			</li>
+			<li>
+				<a href="{{ path('modifInfo') }}">Mes infos</a>
+			</li>
+			<li>
+				<a href="/DIAG DRONE - Guide de l'utilisateur - Comment trouver et réserver un drone.pdf" target="_blank">Guide d'utilisation</a>
+			</li>
+			<li>
+				<a href="{{ path('nosParts') }}" >Nos partenaires</a>
+			</li>
+
+			<li class="mr-3 onMobile text-center">
+
+				<div class="row d-inline-flex align-items-center">
+                    <span class="left logoMenu">
+
+                    </span>
+					<span class="right">
+                        <a class="login-form-btn" href="{{path('app_logout')}}">
+                            <small>Se déconnecter</small>
+                            <i class="fas fa-user"></i>
+                        </a>
+                    </span>
+				</div>
+			</li>
+		</ul>
+	</nav>
+
+
+
+{% endblock %}
+{% block body %}
+
+	<section class=" bg-grey-light py-5 dem">
+		<div class="container-fluid">
+			<div class="d-lg-none">
+                <header class="page_header_side header_side_sticked ls mt-108">
+                    <span class="toggle_menu toggle_menu_side header-slide"><span></span></span>
+                    <div class="scrollbar-macosx">
+                        <div class="side_header_inner pt-0">
+                            <div class="header-side-menu">
+                                <!-- main side nav start -->
+                                <nav class="mainmenu_side_wrapper bg-white">
+                                	{% include 'demandeur/navMenu.html.twig' %}
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+            </div>
+
+			<div class="row  mt-5 ml-1 mr-1 pt-3">
+				<div class="col-lg-3 col-xl-3 pl-0 d-none d-lg-block">
+					<nav class="bg-white">
+						<h5 class="title_side_dashboard">Navigation
+						</h5>
+						<nav class="bg-white">
+							{% include "demandeur/navMenu.html.twig" %}
+						</nav>
+					</nav>
+				</div>
+
+				<main class="col-lg-9 col-md-12">
+					<div class="breadcrumb-wrap justify-content-start mb-1">
+						<ol class="breadcrumb">
+                            {% if app.request.attributes.get('_route') != "demandeur" %}
+                            <li class="breadcrumb-item">
+                                <a href="{{path('demandeur')}}">Accueil</a>
+                            </li>
+                            {% endif %}
+                            <li class="breadcrumb-item active">
+                                {% block title %}{% endblock %}
+                            </li>
+                        </ol>
+                    </div>
+					<div class="text-center mb-4 mt-4">
+						{% block pageAccueil %}{% endblock %}
+					</div>
+					{% block bodyAccueil %}{% endblock %}
+					{% block contenu %}{% endblock %}
+
+				</main>
+			</div>
+			{% block publicite %}{% endblock %}
+		</div>
+
+	</section>
+
+{% endblock %}
+
+{% block cg %}
+	<li class="mt-3"><a href="{{ path('consultCg') }}">CGU</a></li>
+	<li  class="mt-3">|</li>
+	<li  class="mt-3"><a href="https://www.mangopay.com/terms/PSP/PSP_MANGOPAY_FR.pdf" target="_blank">Condition générales MANGO PAY</a></li>
+	<li  class="mt-3">|</li>
+	<li  class="mt-3"><a href="/FORMULAIRE%20DE%20RETRACTATION%20DIAG%20DRONE.docx" target="_blank">Formulaire de rétractation</a></li>
+	<li  class="mt-3">|</li>
+	<li  class="mt-3"><a href="{{path('cguOtdDemandeur')}}" target="_blank">CGV</a></li>
+{% endblock %}
+{% block javascripts %}
+	<script src="/js/js_site/nombreInter.js"></script>
+	<script type="text/javascript">
+		$('.page_header ').find('.toggle_menu').hide();
+	</script>
+	<script src="/js/js_site/pubCible.js"></script>
+	{% block js_intervention %}
+	{% endblock %}
+{% endblock  %}
+
+{% block contact %}{% endblock  %}

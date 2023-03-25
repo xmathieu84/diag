@@ -1,0 +1,111 @@
+{% extends 'administrateur/baseA.html.twig' %}
+
+{% block body %}
+<div class="row">
+    <div class="col-12 text-center mb-5">
+        <p class="h2">Création de pack ODI</p>
+        <p class="h5">Les packs qui ont des missions en rouge ont des missions qui ne sont pas proposées aux demandeurs.</p>
+    </div>
+    <div class="col-12  mb-5">
+        <button class="btn btn-primary btn-block btn-lg" data-toggle="modal" data-target="#staticBackdrop">Créer un pack</button>
+    </div>
+
+    {% for pack in packs %}
+        <div class="card mr-5 mt-2 border border-dark" style="width: 15rem;">
+            <div class="card-body">
+                <h5 class="card-title">{{ pack.nom }} {{ pack.id }}</h5>
+            </div>
+            <ul class="list-group list-group-flush">
+                {% for mission in pack.missions %}
+                    {% if mission.actif %}
+                        <li class="list-group-item h7">{{ mission.nom }}</li>
+                        {% else %}
+                            <li class="list-group-item h7" style="color: red">{{ mission.nom }}</li>
+                    {% endif %}
+
+                {% endfor %}
+            </ul>
+            <div class="card-body">
+                <a href="{{ path('modiferPackAdmin',{id:pack.id}) }}" class="card-link btn btn-success">Modifier</a>
+            </div>
+        </div>
+    {% endfor %}
+    <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Création pack</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12">
+                                <span class="h4">A quel type de bien s'adresse le pack?</span><br>
+                                {% for type in types %}
+                                    <div class="form-check form-check-inline mt-3 mr-4">
+                                        <input class="form-check-input typeBien" type="checkbox" id="inlineCheckbox{{ loop.index }}" value="{{ type.id }}">
+                                        <label class="form-check-label" for="inlineCheckbox{{ loop.index }}">{{ type.nom }}</label>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <div class="col-6 mt-3">
+                                <label for="nomPack">Nom du pack</label>
+                                <input type="text" name="" id="nomPack" class="form-control">
+                            </div>
+                            <div class="col-12 mt-5">
+                                <div class="accordion" id="accordionExample">
+                                    {% for famille in familles %}
+                                        <div class="card mt-2">
+                                            <div class="card-header" id="heading{{ loop.index }}">
+                                                <h2 class="mb-0 ">
+                                                    <button class="btn btn-link btn-block text-left collapsed text-dark" type="button" data-toggle="collapse" data-target="#collapse{{ loop.index }}" aria-expanded="false" aria-controls="collapse{{ loop.index }}">
+                                                        {{famille.nom}}
+                                                    </button>
+                                                </h2>
+                                            </div>
+                                            <div id="collapse{{ loop.index }}" class="collapse" aria-labelledby="heading{{ loop.index }}" data-parent="#accordionExample">
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        {% for type in famille.typeDiag %}
+                                                            <div class="col-12 border border-dark pt-4 pb-4 text-center">
+                                                                <p class="h4">{{ type.nom }}</p>
+                                                                <div class="row">
+                                                                    {% for mission in type.mission %}
+                                                                        {% if mission.actif %}
+                                                                            <div class="col-4">
+                                                                                <div class="form-check form-check-inline">
+                                                                                    <input class="form-check-input missionAdmin" type="checkbox"  value="{{ mission.id }}">
+                                                                                    <label class="form-check-label" for="inlineCheckbox1">{{ mission.nom }}</label>
+                                                                                </div>
+                                                                            </div>
+                                                                        {% endif %}
+                                                                    {% endfor %}
+                                                                </div>
+                                                            </div>
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                    <button type="button" class="btn btn-primary validerPack">Valider</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+{% block title %}
+Create Pack ODI
+{% endblock %}
+

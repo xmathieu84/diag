@@ -1,0 +1,70 @@
+{% extends 'administrateur/baseA.html.twig' %}
+
+{% block body %}
+<div class="row">
+    <div class="col-6 border border-dark">Agents assurances</div>
+    <div class="col-6 border border-dark ">
+        <a href="{{ path('export',{type:"agentAssu"}) }}" class="btn btn-lg btn-primary">Exporter la liste en csv</a>
+    </div>
+    <div class="col-6 border border-dark ">Administrateur de bien et syndic</div>
+    <div class="col-6 border border-dark ">
+        <a href="{{ path('export',{type:"abien"}) }}" class="btn btn-lg btn-primary">Exporter la liste en csv</a>
+    </div>
+    <div class="col-6 border border-dark ">Agent immobilier</div>
+    <div class="col-6 border border-dark ">
+        <a href="{{ path('export',{type:"agentImmo"}) }}" class="btn btn-lg btn-primary">Exporter la liste en csv</a>
+    </div>
+    <div class="col-6 border border-dark">Bureau d'étude</div>
+    <div class="col-6 border border-dark ">
+        <a href="{{ path('export',{type:"bureauEtude"}) }}" class="btn  btn-primary">Exporter la liste en csv</a>
+    </div>
+    <div class="col-6 border border-dark ">BTP</div>
+    <div class="col-6 border border-dark ">
+        <a href="{{ path('export',{type:"btp"}) }}" class="btn btn-lg btn-primary">Exporter la liste en csv</a>
+    </div>
+    <div class="col-6 border border-dark">Controlleurs du bâtiments</div>
+    <div class="col-6 border border-dark ">
+        <a href="{{ path('export',{type:"controlBtp"}) }}" class="btn btn-lg btn-primary">Exporter la liste en csv</a>
+    </div>
+    <div class="col-6 border border-dark ">Géomètres</div>
+    <div class="col-6 border border-dark ">
+        <a href="{{ path('export',{type:"geometre"}) }}" class="btn btn-lg btn-primary">Exporter la liste en csv</a>
+    </div>
+    <div class="col-6 border border-dark ">Maitre d'oeuvre</div>
+    <div class="col-6 border border-dark ">
+        <a href="{{ path('export',{type:"maitre"}) }}" class="btn btn-lg btn-primary">Exporter la liste en csv</a>
+    </div>
+    <div class="col-6 border border-dark ">Office de gestion HLM</div>
+    <div class="col-6 border border-dark ">
+        <a href="{{ path('export',{type:"hlm"}) }}" class="btn btn-lg btn-primary">Exporter la liste en csv</a>
+    </div>
+    <div class="col-6 border border-dark ">Promoteurs et constructeurs</div>
+    <div class="col-6 border border-dark ">
+        <a href="{{ path('export',{type:"promoteur"}) }}" class="btn btn-lg btn-primary">Exporter la liste en csv</a>
+    </div>
+    <div class="col-6 border border-dark ">Urbanistes</div>
+    <div class="col-6 border border-dark ">
+        <a href="{{ path('export',{type:"urbaniste"}) }}" class="btn btn-lg btn-primary">Exporter la liste en csv</a>
+    </div>
+    <div class="col-6 border border-dark ">Lotisseurs</div>
+    <div class="col-6 border border-dark ">
+        <a href="{{ path('export',{type:"lotisseur"}) }}" class="btn btn-lg btn-primary">Exporter la liste en csv</a>
+    </div>
+    <div class="col-6 border border-dark ">Experts en assurances</div>
+    <div class="col-6 border border-dark ">
+        <a href="{{ path('export',{type:"expertAssu"}) }}" class="btn btn-lg btn-primary">Exporter la liste en csv</a>
+    </div>
+    <div class="col-6 border border-dark ">Mairies</div>
+    <div class="col-6 border border-dark ">
+        <a href="{{ path('export',{type:"mairie"}) }}" class="btn btn-lg btn-primary">Exporter la liste en csv</a>
+    </div>
+
+
+
+</div>
+{% endblock %}
+
+{% block title %}
+
+{% endblock %}
+

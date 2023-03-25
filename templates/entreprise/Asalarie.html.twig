@@ -1,0 +1,190 @@
+{% extends "entreprise/baseAE.html.twig" %}
+{% block title %}Inscription salarie
+{% endblock %}
+{% block TitreEntreprise %}
+	<h1>Ajouter un télé-opérateur</h1>
+{% endblock  %}
+{% block titreSection %}Ajout d'un OTD
+{% endblock %}
+{% block titrePage %}Ajout d'un OTD
+
+{% endblock %}
+
+
+{% block pageAccueil %}
+	<h4 class="mb-5">Espace d'ajout
+		{% if app.user.role('ROLE_OTD') %}
+			<span class="color_blue">d'Opérateur Télépilote de Drone</span>
+		{% endif %}
+		{% if app.user.role('ROLE_ODI') %}
+			<span class="color_blue">d'Opérateur Diagnostiqueur Immobilier</span>
+		{% endif %}
+
+	</h4>
+	<div class="mt-5 mb-3 text-center">
+		{% if app.user.role('ROLE_OTD') %}
+			{% if etat %}
+				{% if etat.abonnement.otdMax > entreprise.salaries|length %}
+					<p class="h4">Votre OTD est inclus dans votre abonnement</p>
+				{% else %}
+					<p class="h4">Cet OTD vous sera facturé
+						{{etat.abonnement.otdSup}}
+						€/mois</p>
+				{% endif %}
+
+
+			{% endif %}
+		{% endif %}
+
+	</div>
+
+{% endblock %}
+
+{% block contenu %}
+
+	<div class="row">
+
+				<div class="col-12 contact-us animate text-center formSalarie" data-animation="scaleAppear">
+					<p class="h6">Les champs marqués * sont obligatoires
+					</p>
+
+
+					{{form_start(form)}}
+
+					<div class="row text-center">
+
+						<div class="col-sm-12">
+							<p class="h6">Civilité</p>
+							{{form_row(form.civilite.type,{'label':' '})}}
+						</div>
+
+						<div class="col-sm-6">
+							<div class="form-group has-placeholder">
+								<p class="h6">Prénom de l'OTD*</p>
+								{{form_row(form.civilite.prenom,{'label':' ' ,'attr':{'class':'form-control border-dark',"placeholder":"Prénom"}})}}
+							</div>
+						</div>
+
+						<div class="col-sm-6 ">
+							<div class="form-group has-placeholder">
+								<p class="h6">Nom de l'OTD*</p>
+								{{form_row(form.civilite.nom,{'label':' ' ,'attr':{'class':'form-control border-dark',"placeholder":"Nom"}})}}
+							</div>
+						</div>
+
+						<div class="col-sm-6 ">
+							<div class="form-group has-placeholder">
+								<p class="h6">Numéro de télephone *
+								</p>
+								{{form_row(form.telephone.numero,{'label':' ' ,'attr':{'class':'form-control border-dark',"placeholder":"Numéro de téléphone"}})}}
+
+							</div>
+						</div>
+						<div class="col-sm-6 ">
+							<div class="form-group has-placeholder">
+								<p class="h6">Adresse mail de contact *
+								</p>
+								{{form_row(form.user.email,{'label':' ' ,'attr':{'class':'form-control border-dark',"placeholder":"Email"}})}}
+							</div>
+						</div>
+						<div class="col-sm-6 ">
+							<div class="form-group has-placeholder">
+								<p class="h6">Mot de passe *
+								</p>
+								{{form_row(form.user.password,{'label':' ' ,'attr':{'class':'form-control border-dark',"placeholder":"Mot de passe"}})}}
+							</div>
+						</div>
+						<div class="col-sm-6 ">
+							<div class="form-group has-placeholder">
+								<p class="h6">Confirmez le mot de passe *</p>
+								{{form_row(form.user.confirm_password,{'label':' ' ,'attr':{'class':'form-control border-dark',"placeholder":"Confimez le mot de passe"}})}}
+							</div>
+						</div>
+						<div class="col-sm-6 ">
+							<div class="form-group has-placeholder">
+								<p class="h6">Numéro de la voie
+								</p>
+								{{form_row(form.adresse.numero,{'label':' ' ,'attr':{'class':'form-control border-dark',"placeholder":"Numéro de la voie"}})}}
+							</div>
+						</div>
+						<div class="col-sm-6 ">
+
+							<div class="form-group has-placeholder">
+								<p class="h6">Nom de la voie *</p>
+								{{form_row(form.adresse.nomVoie,{'label':' ' ,'attr':{'class':'form-control border-dark',"placeholder":"Nom de la voie"}})}}
+							</div>
+						</div>
+						<div class="col-sm-6 ">
+							<div class="form-group has-placeholder">
+								<p class="h6">Code postal*</p>
+								{{form_row(form.adresse.codePostal,{'label':' ' ,'attr':{'class':'form-control border-dark',"placeholder":"Code Postal"}})}}
+							</div>
+						</div>
+
+						<div class="col-sm-6 ">
+							<div class="form-group has-placeholder">
+								<p class="h6">Ville*(indiquez d'abord votre code postal)</p>
+								{{form_row(form.adresse.ville,{'label':' ' ,'attr':{'class':'form-control border-dark',"placeholder":"Indiquez d'abord le code postal","list":"city"}})}}
+								<datalist id="city"></datalist>
+							</div>
+						</div>
+						<div class="col-sm-6 col-12 ">
+							<div class="form-group has-placeholder">
+								<p class="h6 mt-2">Souhaitez vous copier les tarifs, packs et missions d'un ODI existant ?</p>
+								{{form_row(form.copier,{'label':' '})}}
+
+							</div>
+						</div>
+						<div class="col-sm-6 col-12 odi">
+							<div class="form-group has-placeholder">
+								<p class="h6 mt-2">Choisissez votre ODI</p>
+								{{form_row(form.salarie,{'label':' '})}}
+							</div>
+						</div>
+						<div class="col-12 mission mt-4">
+							<div class="row">
+								<div class="col-12">
+									<p class="h5">Que souhaitez vous copier ?</p>
+								</div>
+								<div class="col-sm-4 col-12">
+									{{form_widget(form.mission)}}
+									{{form_label(form.mission)}}
+								</div>
+								<div class="col-sm-4 col-12">
+									{{form_widget(form.pack)}}
+									{{form_label(form.pack)}}
+								</div>
+								<div class="col-sm-4 col-12">
+									{{form_widget(form.tarif)}}
+									{{form_label(form.tarif)}}
+								</div>
+
+							</div>
+						</div>
+
+
+
+
+					</div>
+					<div class="col-sm-12"><br><br><button type="submit" class="btn btn-primary">Valider</button>
+					</div>
+				</div>
+				{% for message in app.flashes %}
+					<p class="h6">{{message}}</p>
+				{% endfor %}
+				{{form_end(form)}}
+
+
+
+
+</div>
+{% endblock %}
+{% block javascripts %}
+	<script>
+		function noBack(){window.history.forward()}
+		noBack();
+		window.onload=noBack;
+		window.onpageshow=function(evt){if(evt.persisted)noBack()}
+		window.onunload=function(){void(0)}
+	</script>
+{% endblock  %}

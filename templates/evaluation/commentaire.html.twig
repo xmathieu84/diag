@@ -1,0 +1,31 @@
+{% extends template %}
+
+
+{% block demandeur %}
+	<table class="table table-bordered">
+
+		<thead>
+			<tr>
+				<th>Date
+				</th>
+				<th>Note</th>
+				<th>Commentaire</th>
+			</tr>
+
+		</thead>
+		<tbody>
+			{% for note in notes %}
+				<tr>
+					<td>{{note.date|format_datetime('full', 'none', locale='fr')}}</td>
+					<td>{{note.note}}</td>
+					<td>{{note.commentaire}}</td>
+
+				</tr>
+			{% endfor %}
+
+		</tbody>
+
+	</table>
+
+
+{% endblock %}

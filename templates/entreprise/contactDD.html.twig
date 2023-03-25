@@ -1,0 +1,32 @@
+{% extends 'entreprise/baseAE.html.twig' %}
+{% block TitreEntreprise %}
+	<h1>Contactez Diagdrone</h1>
+{% endblock  %}
+{% block titreSection %}Contactez DIAG-DRONE
+{% endblock %}
+
+{% block titrePage %}Contactez DIAG-DRONE
+{% endblock %}
+
+{% block contenu %}
+
+	<div class="row align-items-center">
+		<div class="col-lg-12 animate" data-animation="scaleAppear">
+			<div class="form-wrapper px-lg-70 py-lg-100 px-20 py-60 cs ">
+				<div class="form-group has-placeholder">
+					{{form_start(form)}}
+					<p class="h6">Sujet du message</p>
+					{{form_row(form.sujet,{'label':' ','attr':{'class':'form-control',"placeholder":"Objet de votre message"}})}}
+
+					<br><br>
+
+					{{form_row(form.contenu,{'label':' ','attr':{'class':'form-control','rows':'15','cols':'20',"placeholder":"Tapez ici votre message"}})}}
+					<br><button type="submit" class="btn btn-darkgrey">Envoyer</button>
+					{{form_end(form)}}
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock  %}

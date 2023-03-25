@@ -1,0 +1,39 @@
+{% extends template %}
+
+{% block title %}
+  Désinscription
+{% endblock %}
+
+{% block body %}
+<section class="ls ms s-py-xl-150 s-py-lg-130 s-py-md-90 s-py-60">
+	<div class="col-12 text-center"><p class="inscriTitre"></p></div>
+	<div class="container">
+		<div class="row">
+			
+			<div class="col-12">
+            {{form_start(form)}}
+            <div class="row text-center">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-8">
+                    <p class="h6">Autorisez-vous SAS diag-drone à conservez vos informations(mail) pour vous contacter?</p>
+            
+                        {{form_row(form.question)}}
+
+                </div>
+                <div class="col-sm-2"></div>
+                <div class="col-sm-2"></div>
+                <div class="col-sm-8">
+                    <p class="h6">Pour quelle raison souhaitez vous vous désinscrire?</p>
+                    {{form_label(form.raison,'', {'label_attr': {'class': 'control-label'}})}}
+                    {{form_row( form.raison,{'label':' ', 'attr':{'class':'form-control','rows':'10','cols':'10'}})}}
+            </div>
+            <div class="col-sm-12 text-center">
+            <button type="submit" class="btn btn-danger">Se désinscrire</button>
+            </div>
+            {{form_end(form)}}
+        </div>
+        
+    </div>
+    </div>
+</section>
+{% endblock %}

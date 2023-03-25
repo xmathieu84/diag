@@ -1,0 +1,74 @@
+{% extends 'administrateur/baseA.html.twig' %}
+{% block title %}Catégories{% endblock %}
+{% block body %}
+    <section class="wrapper">
+        <div class="row">
+            <div class="col-2 bg-success pr-2 pl-2 pt-2 pb-2 mb-1"></div>
+            <div class="col-10">
+                <p>=>Demande validée</p>
+            </div>
+            <div class="col-2 bg-warning pr-2 pl-2 pt-2 pb-2 mb-1"></div>
+            <div class="col-10">
+                <p>=>Demande en attente</p>
+            </div>
+            <div class="col-2 bg-danger pr-2 pl-2 pt-2 pb-2"></div>
+            <div class="col-10">
+                <p>=>Demande refusée</p>
+            </div>
+            <div class="col-12 mb-5 mt-5">
+                <div class="btn-group btn-block" role="group">
+                    <button id="btnGroupDrop1" type="button" class="btn btn-primary   dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Filtrer
+                    </button>
+                    <div class="dropdown-menu" style="width: 100%" aria-labelledby="btnGroupDrop1">
+                        <a class="dropdown-item" href="{{ path('editeCategorie',{id:theme.id}) }}">Tout voir</a>
+                        <a class="dropdown-item" href="{{ path('editeCategorie',{id:theme.id,type:"refusé"}) }}">Refusé</a>
+                        <a class="dropdown-item" href="{{ path('editeCategorie',{id:theme.id,type:"publié"}) }}">Accepté</a>
+                        <a class="dropdown-item" href="{{ path('editeCategorie',{id:theme.id,type:"en attente"}) }}">En attente</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="accordion" id="accordionExample">
+                {% for categorie in categories %}
+                    {% if categorie.statut =='publié' %}
+                      {% set classe ="bg-success"%}
+                        {% elseif categorie.statut =="en attente" %}
+                            {% set classe ="bg-warning"%}
+                        {% elseif categorie.statut =="publié" %}
+                            {% set classe ="bg-success"%}
+                    {% endif %}
+                    <div class="card mb-4">
+                        <div class="card-header {{ classe }}" id="headingTwo{{ loop.index }}">
+                            <h2 class="mb-0">
+                                <button class="btn btn-block text-left collapsed " type="button"  data-toggle="collapse" data-target="#collapseTwo{{ loop.index }}" aria-expanded="false" aria-controls="collapseTwo">
+                                    {{categorie.nom}} le {{ categorie.date|format_datetime('short','none',locale="fr") }}
+                                </button>
+                            </h2>
+                        </div>
+                        <div id="collapseTwo{{ loop.index }}" class="collapse" aria-labelledby="headingTwo{{ loop.index }}" data-parent="#accordionExample">
+                            <div class="card-body">
+                               <p class="h6">{{ categorie.contenu }}</p>
+                                <p class="h6">Auteur : {{ categorie.auteur }}</p>
+                                {% if categorie.cible =="otd" %}
+                                    <p class="h6">Cible : OTD</p>
+                                    {% else %}
+                                        <p class="h6">Cible : Grand compte ou institutionnel</p>
+                                {% endif %}
+                                <div class="text-right mt-5">
+                                    {% if categorie.statut =='en attente' or categorie.statut =='refuse' %}
+                                        <a href="{{ path('validerRep',{id:categorie.id,reponse:'publié'}) }}" class="btn btn-sm btn-success">Publier</a>
+                                    {% else %}
+                                        <a href="{{ path('validerRep',{id:categorie.id,reponse:'refusé'}) }}" class="btn btn-sm btn-danger">Refuser</a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+
+    </section>
+{% endblock %}

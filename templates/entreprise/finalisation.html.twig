@@ -1,0 +1,88 @@
+{% extends template %}
+{% block title %}
+	{% if entreprise.cgv == true %}
+		Ajouter vos informations assurantielles
+	{% else %}
+		Phase 6 de votre inscription
+	{% endif %}
+{% endblock %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="/css/css_site/css/inscription.css">
+
+
+{% endblock %}
+
+
+
+
+
+{% block contenu %}
+
+
+<section class="ls bg-white">
+	<div class="container">
+		<div class="row mt-5">
+			{% if entreprise.cgv == false %}
+				<div class="col-sm-2"></div>
+				<div class="col-sm-8 text-center">
+					<h5>Progression de votre Inscription</h5>
+					<div class="progress">
+						<div class="progress-bar" role="progressbar" style="width: 60%;" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">60%</div>
+					</div>
+
+
+				</div>
+				<div class="col-sm-2"></div>
+
+			{% endif %}
+
+			<div class="col-12 text-center">
+
+					<h4 class="d-inline">Informations assurantielles</h4>
+
+			</div>
+
+		</div>
+		{{form_start(form)}}
+		<div class="row mt-5">
+			{% for message in app.flashes('notice') %}
+				<div class="flash-notice">
+					{{ message }}
+				</div>
+			{% endfor %}
+			<div class="col-12">
+				<div class="row">
+					<div class="col-6 mb-5">
+						{{form_row(form.nom_compagnie,{'label':"Nom de votre compagnie d'assurance* ",'attr':{'class':'form-control','placeholder':'Nom de votre compagnie d\' assurance *'}})}}
+					</div>
+					<div class="col-6">
+						{{form_row(form.ass_pro,{'label':"Numéro de contrat d'assurance* ",'attr':{'class':'form-control','placeholder':'Numéro de contrat d\'assurance professionnelle *'}})}}
+					</div>
+					<div class="col-6">
+						{{form_row(form.ass_pro_fichier,{'label':" Télécharger votre Rc Pro",'attr':{'accept':"application/pdf"}})}}
+						<button class="boutonAssu" type="button" id="assu">Télécharger votre Rc Pro *</button>
+					</div>
+				</div>
+				<div class="col-12 text-right">
+					<button type="submit" class="btn btn-maincolor">Valider</button>
+				</div>
+			</div>
+
+
+			{{ form_widget(form._token) }}
+
+			{{ form_end(form ,{'render_rest': false}) }}
+
+
+		</div>
+	</div>			
+</section>
+
+
+
+				
+
+
+
+{% endblock  %}

@@ -1,0 +1,159 @@
+{% extends "demandeur/basedemandeur.html.twig" %}
+{% block title %}
+	paiement
+{% endblock %}
+{% block titreSection %}Paiement
+	{{type}}
+{% endblock %}
+{% block titrePage %}Paiement
+	{{type}}
+{% endblock %}
+
+{% block contenu %}
+
+<div class="col-sm-12 mb-5 ">
+	<img src="/css/css_site/images/paiement/mangopay.png" alt="" height="80%">
+</div>
+
+<div class="form-group bg-white pl-2 pr-2 pt-2">
+
+	<div class="text-center">
+		<p class="h6"><span class="rondCarte"> 1 </span>Selectionnez votre type de carte</p>
+	</div>
+	<div class="row">
+
+
+		<div class="col-sm-3 typeCarte  mt-3 text-center">
+
+
+			<input type="radio" name="typeCard" id="visa" value="CB_VISA_MASTERCARD">
+			<label for="visa" id="labelVisa"></label>
+
+			<p class="h6">Visa</p>
+
+		</div>
+
+		<div class="col-sm-3 typeCarte mt-3 text-center">
+
+
+			<input type="radio" name="typeCard" id="mastercard" value="CB_VISA_MASTERCARD">
+			<label for="mastercard" id="labelMastercard"></label>
+
+			<p class="h6">Mastercard</p>
+
+		</div>
+		<div class="col-sm-3 typeCarte  mt-3 text-center">
+
+
+			<input type="radio" name="typeCard" id="maestro" value="MAESTRO">
+			<label for="maestro" id="labelMaestro"></label>
+
+			<p class="h6">Maestro</p>
+
+		</div>
+		<div class="col-sm-3 typeCarte text-center  mt-3">
+
+
+			<input type="radio" name="typeCard" id="virement" value="virement" data-inter="{{intervention.id}}" data-type="{{type}}" data-typeInter="diag">
+			<label for="virement" id="labelVirement"></label>
+
+			<p class="h6">Virement Bancaire</p>
+		</div>
+	</div>
+
+
+</div>
+<div class="col-sm-12 text-center bg-white mb-3 pt-5 pb-5">
+	<p class="h5 souligne">Montant du Paiement :
+		{{montant|number_format(2)}}
+		€</p>
+
+</div>
+
+{{form_start(form,{'attr':{'class':'bg-white pr-5 pl-5','id':'formulaire'}})}}
+{% set lien = url %}
+
+<div class="row text-center">
+	{{form_row(form.returnURL,{'value':lien})}}
+
+	<div class="col-sm-4">
+		<div class="form-group has-placeholder">
+			{{form_row(form.accessKeyRef,{'label': ' ','attr':{'class':'form-control form-control-lg '}})}}
+
+		</div>
+	</div>
+	<div class="col-sm-4">
+		<div class="form-group has-placeholder">
+			{{form_row(form.data,{'label': ' ','attr':{'class':'form-control form-control-lg ','placeholder':'cryptogramme'}})}}
+
+		</div>
+	</div>
+
+	<br><br>
+
+	<div class="col-sm-12">
+		<div class="form-group has-placeholder">
+			<p class="h6"><span class="rondCarte"> 2 </span> Numéro de la carte</p>
+			{{form_row(form.cardNumber,{'label': ' ','attr':{'class':'form-control form-control-lg ','placeholder':'Numéro de la carte','minlength':'16','maxlength':'16'}})}}
+
+
+		</div>
+	</div>
+	<div class="col-sm-6">
+		<div class="form-group has-placeholder">
+			<p class="h6">Date d'expiration (format MMYY)</p>
+			{{form_row(form.cardExpirationDate,{'label': ' ','attr':{'class':'form-control form-control-lg ','placeholder':'Date d\'expiration','minlength':'4','maxlength':'4'}})}}
+
+			</div>
+		</div>
+
+		<div class="col-sm-6">
+			<div class="form-group has-placeholder">
+				<p class="h6">Cryptogramme de securité</p>
+				{{form_row(form.cardCvx,{'label': ' ','attr':{'class':'form-control form-control-lg '}})}}
+
+			</div>
+		</div>
+
+		<div class="col-sm-12 bouton-submit"></div>
+
+
+	
+	{{form_end(form)}}
+
+</div>
+
+
+	
+<div class="col-sm-12 bg-white mt-2 pb-5 virement">
+
+	<div class="col-sm-12">
+
+		<p class="h2">Voici les coordonnées bancaire pour effectuer le virement.</p>
+		<p class="h6">Renseigner <b>exactement</b> la référence indiquée. Il sera utilisé pour identifier le bénéficiaire de la transaction
+auprès de notre prestataire MANGOPAY.</p>
+	</div>
+	<div class="col-sm-12 mt-5 compte">
+
+		<p class="h5">Titulaire du compte : <span class="titulaire"></span></p>
+		<p class="h5 mt-3">Numéro de compte (IBAN): <span class="numero"></span></p>
+		<p class="h5 mt-3">Numéro de compte (BIC) : <span class="bic"></span></p>
+		<p class="h5 mt-3">Adresse du compte: <span class="adresse"></span></p>
+		<p class="h5 mt-3">Référence du virement a rappeler : <span class="refVirement"></span></p>
+	</div>
+	<div class="col-sm-12 mt-3 text-center">
+	<a href="{{path("validerModePaiement",{type:type,id:intervention.id})}}" class="btn btn-maincolor">Valider ce mode de paiement</a>
+	</div>
+</div>
+<div class="col-sm-12 text-center bg-white">
+
+
+	<input type="checkbox" name="" id="accord" data-inter="{{intervention.id}}">
+	<label for="accord">J'ai lu et j'accepte les conditions générales de vente disponible <a href="{{path('cguOtdDemandeur')}}" target="_blank" class="h4"><b>ici</b></a></label>
+
+
+</div>
+
+	
+
+{% endblock %}

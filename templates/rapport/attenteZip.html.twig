@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Création zip</title>
+</head>
+
+<body>
+<style type="text/css">
+    .image{
+       
+        margin-top : 15em;
+        text-align : center;
+        
+    }
+    p{
+        font-size :1.5em;
+        animation-duration: 4s;
+        animation-name: clignoter;
+        animation-iteration-count: infinite;
+        transition: none;
+    }
+    @keyframes clignoter {
+        0%   { opacity:1; }
+        40%   {opacity:0; }
+        100% { opacity:1; }
+}
+</style>
+            <div class="image">
+                <img src="/css/css_site/img/40603.gif" alt="" width="20% "height="20%" data-rapport={{id}}>
+                <p>La finalisation du rapport est en cours. Veuillez patienter...</p>
+            </div>
+            {{ encore_entry_script_tags('app') }}
+</body>
+</html>

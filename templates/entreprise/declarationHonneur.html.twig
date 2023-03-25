@@ -1,0 +1,21 @@
+{% extends template %}
+
+{% block title %}
+Déclaration sur l'honneur
+{% endblock %}
+
+{% block contenu %}
+<div class="row mt--70">
+      <div class="col-12 mt-5">
+        <p class="h6">Je soussigné(e) {{ odi.civilite.type }} {{odi.civilite.nom}} {{odi.civilite.prenom}}, demeurant au {{odi.adresse.adresseComplete}}, atteste sur l'honneur que :</p>
+        <ul>
+            <li class="h6">Je suis en capacité de réaliser les interventions auxquelles j'ai souscrites,</li>
+            <li class="h6">Je possède tout les brevets ainsi que les habilitations nécessaires à la réalisation de ces interventions</li>
+        </ul>
+        <p class="h6">J'ai pris connaissance des sanctions pénales encourues par l'auteur d'une fausse attestation.</p>
+
+    </div>
+
+</div>
+{% endblock %}
+

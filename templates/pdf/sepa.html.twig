@@ -1,0 +1,247 @@
+<div class="pdfSepa">
+
+	<div class="DDlogo">
+		<img src="../public/css/css_site/images/logo-diagdrone.png" alt="" class="imgSepa">
+
+
+	</div>
+	<div class="titre">
+
+		<h3>Mandat de Prélèvement SEPA </h3>
+
+	</div>
+
+	<br>
+	<table class="T1">
+		<tr>
+			<td class="sepa">Référence Unique de Mandat (RUM)</td>
+
+
+			<td class="sepa">{{nom}}{{date|format_datetime('short', 'none', locale='fr')}}Diag-Drone</td>
+
+
+		</tr>
+		<tr>
+			<td class="sepa">Type de paiement</td>
+
+
+			<td class="sepa">
+
+				<span>Récurent
+					<input type="checkbox" name="" id="recurent" checked="checked">
+					<label for="recurent"></label>
+				</span>
+
+
+				<span class="ponctuel">Ponctuel
+					<input type="checkbox" name="" id="ponctuel">
+					<label for="ponctuel"></label>
+				</span>
+			</td>
+
+		</tr>
+
+	</table>
+
+	<div class="intro">
+		<span>En signant ce formulaire de mandat, vous autorisez (A] SAS DIAG-DRONE à envoyer des instructions à votre banque pour débiter votre compte, et (B) votre banque à débiter votre compte conformément aux instructions de SAS DIAG-DRONE.</span>
+		<br><span>Vous bénéficiez du droit d’être remboursé par votre banque selon les conditions décrites dans la convention que vous avez passée avec elle. Toute demande de remboursement doit être présentée dans les 8 semaines suivant la date de débit de votre compte pour un prélèvement autorisé.</span>
+	</div>
+
+	<table class="T2">
+		<tr>
+			<td class="gras sepa">Nom du CREANCIER</td>
+
+			<td class="sepa">SAS DIAG-DRONE</td>
+
+
+		</tr>
+		<tr>
+			<td class="vide sepa"></td>
+			<td class="sepa"></td>
+
+		</tr>
+		<tr>
+			<td class="sepa">N° d’Identifiant Créancier SEPA (ICS)</td>
+
+
+			<td class="sepa">FR 80 ZZZ 872CAB</td>
+
+
+		</tr>
+		<tr>
+			<td class="sepa">Adresse du créancier</td>
+
+
+			<td class="sepa">200 rue Michel de Montaigne</td>
+
+
+		</tr>
+		<tr>
+			<td class="sepa">Code Postal</td>
+
+
+			<td class="sepa">84140</td>
+
+
+		</tr>
+		<tr>
+			<td class="sepa">Ville</td>
+
+
+			<td class="sepa">Avignon</td>
+
+
+		</tr>
+		<tr>
+			<td class="sepa">Pays</td>
+
+
+			<td class="sepa">FRANCE</td>
+
+
+		</tr>
+
+	</table>
+
+	<table class="T3">
+		<tr>
+			<td class="gras">DEBITEUR</td>
+
+			<td class="formJuridique">
+				{% if formJuridique=='auto-entrepreneur' %}
+					{{entreprise.dirigeant.nom}}
+					{{entreprise.dirigeant.prenom}}
+				{% elseif formJuridique=='gc' %}
+					{{nom }}
+				{% else %}
+					{{entreprise.formJuridique}}
+					{{entreprise.enseigne}}
+					{{entreprise.denomination}}
+
+
+				{% endif %}
+			</td>
+
+		</tr>
+		<tr>
+			<td class="vide"></td>
+			<td class="sepa"></td>
+
+		</tr>
+		<tr>
+			<td class="sepa">Adresse du débiteur</td>
+
+
+			<td class="sepa">{{entreprise.adresse.numero}}</td>
+			{{entreprise.adresse.nomVoie}}
+		</tr>
+
+
+		<tr>
+			<td class="sepa">Code Postal</td>
+
+
+			<td class="sepa">{{entreprise.adresse.codePostal}}</td>
+
+
+		</tr>
+		<tr>
+			<td class="sepa">Ville</td>
+
+
+			<td class="sepa">{{entreprise.adresse.ville}}</td>
+
+
+		</tr>
+		<tr>
+			<td class="sepa">Pays</td>
+
+
+			<td class="sepa">FRANCE</td>
+
+		</tr>
+		<tr>
+			<td class="vide"></td>
+			<td class="sepa"></td>
+
+		</tr>
+		<tr>
+			<td class="sepa">Nom et prénom du titulaire du compte / Débiteur</td>
+
+
+			<td class="sepa">
+
+				{% if formJuridique=='auto-entrepreneur' %}
+					{{entreprise.dirigeant.nom}}
+					{{entreprise.dirigeant.prenom}}
+				{% elseif formJuridique=='gc' %}
+					{{nom }}
+				{% else %}
+					{{entreprise.formJuridique}}
+					{{entreprise.enseigne}}
+					{{entreprise.denomination}}
+
+
+				{% endif %}
+			</td>
+
+		</tr>
+		<tr>
+			<td class="sepa">Banque</td>
+
+
+			<td class="sepa">{{banque.nom}}</td>
+
+
+		</tr>
+		<tr>
+			<td class="sepa">Adresse de la banque</td>
+
+			<td class="sepa">{{banque.adresse}}</td>
+
+		</tr>
+		<tr>
+			<td class="sepa">Code BIC de la banque</td>
+
+
+			<td class="sepa">{{banque.bic}}</td>
+
+
+		</tr>
+		<tr>
+			<td class="sepa">IBAN du débiteur</td>
+
+
+			<td class="sepa">{{banque.iban}}</td>
+
+
+		</tr>
+	</table>
+	<table class="T4">
+		<tr>
+			<td class="gras">Lieu</td>
+
+			<td class="gras">Date</td>
+
+
+			<td class="gras">Signature du débiteur</td>
+
+
+		</tr>
+		<tr>
+			<td class="fin2L">
+				<p class="lieu">{{lieu}}</p>
+			</td>
+
+
+			<td class="fin2L">
+				<p class="dateJour">{{date|format_datetime('short', 'none', locale='fr')}}</p>
+			</td>
+
+
+			<td class="fin2L"></td>
+
+		</tr>
+	</table>
+</div>

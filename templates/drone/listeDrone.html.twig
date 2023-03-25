@@ -1,0 +1,166 @@
+{% extends 'entreprise/baseAE.html.twig' %}
+{% block title %}Liste des drones
+{% endblock %}
+
+{% block pageAccueil %}
+	<h4>Votre parc materiel</h4>
+
+{% endblock %}
+
+{% block contenu %}
+
+	<div class="container">
+		<div class="row">
+
+			<div class="col-12 ">
+				<div class="table-responsive">
+					<table class="table table-hover">
+						<thead>
+							<tr class="table-primary">
+								<th class="text-center fabricant">Fabricant</th>
+
+								<th class="text-center type">Modèle</th>
+								<th class="numero">Numéro de série</th>
+								<th class="text-center numéro">Numéro Alpha Tango</th>
+
+								<th class="text-center poids">Poids</th>
+
+								<th class="text-center captif">Captif</th>
+
+								<th class="text-center classe">Classe</th>
+								<th class="text-center marque">Marque CE</th>
+
+								<th class="text-center classe">ID trame de balise (beacon)</th>
+								<th class="text-center">Vitesse (m/s)</th>
+									<th class="text-center"></th>
+
+
+							</tr>
+						</thead>
+						<tbody>
+							{% for drone in drones %}
+								<tr>
+									<td class="text-center" style="color:black">{{drone.nomFabriquant}}</td>
+									<td class="text-center" style="color:black">{{drone.typeDrone}}</td>
+									<td class="text-center text-black">{{ drone.serial }}</td>
+									<td class="text-center" style="color:black">{{drone.numeroDGAC}}</td>
+									<td class="text-center" style="color:black">{{drone.PoidDrone|number_format(3)}}
+										kg</td>
+
+									<td class="text-center" style="color:black">
+										{% if drone.captif == 1 %}oui
+										{% else %}
+											non
+										{% endif %}
+									</td>
+									<td class="text-center" style="color:black">{{drone.classe}}</td>
+									<td class="text-center text-black">{{ drone.marqueCEE }}</td>
+									<td class="text-center" style="color:black">{{drone.trame}}</td>
+									<td class="text-center">{{ drone.vitesse }}</td>
+									 <td>
+										<a href="{{path('supprimerDrone',{id:drone.id})}}" class="deleteDrone">
+											<button class="supprimer"></button>
+
+										</a>
+									</td>
+
+								</tr>
+
+							{% endfor %}
+
+						</tbody>
+					</table>
+					<div class="col-sm-9"></div>
+					<div class="col-3">
+						<button class="btn btn-maincolor" data-toggle="modal" data-target="#exampleModal">Ajouter</button>
+
+					</div>
+
+				</div>
+
+
+			</div>
+
+		</div>
+	</div>
+	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" style="max-width: 80%">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Ajouter un drone</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-12">
+							<p class="h5">Les champs marqués d'une * sont obligatoires</p>
+						</div>
+						<div class="col-sm-6 col-12 mt-3">
+							<label for="fabricant">Fabricant *</label>
+							<input type="text" class="" id="fabricant">
+						</div>
+						<div class="col-sm-6 col-12 mt-3">
+							<label for="Type">Modèle *</label>
+							<input type="text" class="" id="Type">
+						</div>
+						<div class="col-sm-6 col-12 mt-3">
+							<label for="numero">Numéro DGAC *</label>
+							<input type="text" class="numero">
+						</div>
+						<div class="col-sm-6 col-12 mt-3">
+							<label for="poids">Poids (en kg) *</label>
+							<input type="number" class="" id="poids">
+						</div>
+						<div class="col-sm-6 col-12 mt-3">
+							<label for="beacon">ID trame de balise (beacon)</label>
+
+							<input type="text" id="beacon">
+						</div>
+						<div class="col-sm-6 col-12 mt-3">
+							<label for="ce">Marque CE </label>
+							<input type="text" name="" id="ce">
+						</div>
+						<div class="col-sm-6 col-12 mt-3 text-center">
+							<p class="h6 mb-3">Votre drone est il captif ? *</p>
+							<label for="oui">Oui</label><input type="radio" name="captif" id="oui" class="" value="1">
+							<label for="non">Non</label><input type="radio" name="captif" id="non" class="" value="0">
+						</div>
+						<div class="col-sm-6 col-12 mt-3">
+							<label for="" class="serial">Numéro de série *</label>
+							<input type="text" name="" id="serial">
+						</div>
+						<div class="col-sm-6 col-12 mt-3">
+							<label for="classe">Classe de votre drone *</label>
+							<select name="" id="classe">
+								<option value="Multirotors">Multirotors</option>
+
+								<option value="Dirigeable">Dirigeable</option>
+
+								<option value="Ballon">Ballon</option>
+
+								<option value="Hélicoptère">Hélicoptère</option>
+
+								<option value="Voilure fixe">Voilure fixe</option>
+
+							</select>
+						</div>
+						<div class="col-sm-6 col-12 mt-3">
+							<label for="vitesse">Vitesse (m/s) *</label>
+							<input type="number" id="vitesse">
+						</div>
+					</div>
+					
+					
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+					<button type="button" class="btn btn-primary">Enregistrer</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

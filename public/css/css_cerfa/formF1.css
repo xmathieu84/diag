@@ -1,0 +1,296 @@
+@font-face{
+    font-family: 'Century Gothic';
+    src: url('/css/css_site/fonts/Century-Gothic_9791.ttf') format('truetype'),
+    url('/css/css_site/fonts/CenturyGothic.woff') format('woff');
+
+}
+
+.drapeau{
+   
+   float: left;
+   width: 15%;
+   height: 3em;
+   opacity: 0.9;
+}
+.videEntete{
+    float: left;
+    width: 68%;
+    height: 4.6em;
+     
+    
+}
+.numeroForm{
+    float: right;
+    padding-top: 2em;
+    width: 16%;
+    font-size: 0.75em;
+    height: 4.15em;
+     color: #808080; 
+      font-family: 'Calibri';
+}
+.titredrapeau{
+    float: left;
+    font-size: 0.66em;
+    text-align: center;
+    width: 15%;
+    padding-left: 0.6em;
+    color: #808080; 
+    
+}
+.titre{
+    float: left;
+    font-size: 1.6em;
+    width: 70%;
+    text-align: center;
+    font-family: 'Century Gothic';
+    font-weight:  bold;
+    color: #808080;
+    
+}
+.videTitre{
+    float: right;
+    width: 13%;
+    
+    height: 3.4em;
+}
+.videExplication{
+    float: left;
+    width: 15%;
+    
+    height: 3.4em;
+
+}
+.explication{
+    float: left;
+    width: 65%;
+    text-align: center;
+    opacity: 0.9;
+    height: 3.4em;
+    font-family: 'Century Gothic';
+    padding-left: 1em;
+    padding-right: 1em;
+    font-size: 0.9em;
+    color: #808080;
+}
+.finexplication{
+    float: right;
+    width: 15%;
+     
+    height:4.1em;
+}
+.videIntro{
+    float: left;
+    width: 5%;
+    
+    height: 7em;
+}
+.intro{
+    float: right;
+    
+    font-size: 0.86em;
+    
+}
+.case1,.case3,.case5,.case7,.case9,.case11{
+    float: left;
+    width: 100%;
+    background: #8DB3E2;
+    margin-top: 1.2em;
+    font-size: 1.1em;
+    padding: 0.2em 0 0.2em 0.3em;
+    
+}
+.case2,.case4,.case6,.case8,.case10,.case12{
+    width: 100%;
+    float: left;
+    background: #DBE5F1;
+    font-size: 0.85em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    padding-left: 1em;
+    padding-right: 0.8em;
+    margin-top: 0.5em;
+}
+.nom,.enrigistrement,.contructeur,.modele,.immat{
+    padding-top: 0.2em;
+    float: left;
+    width: 33%;
+}
+.divInputNom,.divInputEnregistrement,.divInputConstructeur,divInputModele,divInputImmat{
+    float: left;
+    width: 67%;
+}
+.inputNom,.inputEnregistrement,.inputConstructeur,.inputModele,.inputImmat,#date{
+   
+    width: 100%;
+}
+.config{
+    float: left;
+    width: 20%;
+    
+}
+.chkbx{
+    float: right;
+    width: 75%;
+    background-color: white;
+    padding: 0.2em, 0em 0.2em 1em ;
+    
+}
+.multirotor,
+.avion,
+.helico,
+.autre{
+    float: left;    
+}
+.multirotor{
+    width: 17%;
+}
+.avion{
+    text-align: center;
+    width: 15%;
+}
+.helico{
+    width: 35%;
+}
+.autre{
+    width: 25%;
+}
+.conops{
+    padding-top: 2em;
+    float: left;
+    width: 25%;
+}
+.conopsTextArea{
+    width: 68%;
+    float: right;
+    height: 5em;
+    border: 1px solid black;
+    background-color: white;
+}
+.manuel{
+    float: left;
+    width: 45%;
+    margin-top: 0.5em;
+}
+.risque{
+    float: left;
+    width: 55%;
+     
+}
+.spanManuel{
+    float: left;
+    width: 63%;
+    padding-top: 0.2em;
+}
+.chkbxManuel{
+    float: right;
+    width: 35%;
+    background-color: white;
+    padding-top: 0.2em;
+}
+.spanRisque{
+    float: left;
+    width: 64%;
+    padding-top: 0.3em;
+}
+.inputRisque{
+ float: right;
+    width: 34%;
+    background: white;
+    border: 1px solid black;
+    height: 2em;
+}
+.suite1,.textSuite1,.suite2,.textSuite2{
+    float: left;
+    width: 100%;
+    margin-top: 0.5em;
+}
+.textSuite1,.textSuite2{
+    background-color: white;
+    border: 1px solid black;
+    height: 6.5em;
+    
+}
+.assurance{
+    float: left;
+    width: 60%;
+   padding-top: 0.5em;
+}
+.chkbxAssu{
+    float: left;
+    width: 30%;
+    background-color: white;
+    margin-top: 0.5em;
+
+}
+.assuOui{
+    float: left;
+    width: 40%;
+    padding-left: 1.5em;
+}
+.assuNon{
+    float: right;
+    width: 48%;
+}
+.declaCase10{
+    background: white;
+    float: left;
+    width: 100%;
+    padding-left: 0.5em;
+}
+.spanLieu{
+    float: left;
+    width: 7.5%;
+    padding-top: 0.9em;
+}
+.lieu{
+    margin-top: 0.5em;
+    float: left;
+    width: 52.5%;
+    border: 1px solid black;
+    height: 2.5em;
+    background: white;
+    
+    
+}
+.spanDate{
+    float: left;
+    width: 5%;
+    padding-left: 0.5em;
+    padding-top: 0.4em;
+}
+.caseDate{
+    float: left;
+    width: 33.3%;
+    background-color: white;
+    height: 2.5em;
+    border: 1px solid black;
+}
+.spanSignature{
+    float: left;
+    width: 23%;
+    padding-top: 2.2em;
+}
+.signature{
+    margin-top: 0.5em;
+    float: left;
+    width: 76.5%;
+    border: 1px solid black;
+    height: 4.5em;
+    background-color: white;
+}
+.protection{
+    margin-top: 25em;
+    width: 100%;
+    border: 1px solid black;
+    font-size: 0.74em;
+}
+.instruction{
+    width: 100%;
+    background: white;
+    color:#A279A2 ;
+    padding-left: 0.2em;
+    font-size: 0.95em;
+}
+
+
+

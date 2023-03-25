@@ -1,0 +1,53 @@
+{% extends 'entreprise/baseAE.html.twig' %}
+
+{% block title %}Liste des appels d'offres{% endblock %}
+{% block pageAccueil %}
+    <h4>Liste des appels d'offre/appels à concurrence</h4>
+{% endblock %}
+{% block contenu %}
+<div class="row">
+    <div class="col-12 mt-5">
+        <div id="accordion01" role="tablist">
+            {% for appel in appels %}
+                <div class="card">
+                    <div class="card-header" role="tab" id="demandeur_header">
+                        <h5>
+                            <a data-toggle="collapse" href="#inter{{ loop.index }}" aria-expanded="false" aria-controls="demandeur" class="text-capitalize">
+                                {{appel.denomination}}
+                            </a>
+                        </h5>
+                    </div>
+
+                    <div id="inter{{ loop.index }}" class="collapse bg-white" role="tabpanel" aria-labelledby="demandeur_header" data-parent="#accordion01">
+                        <div class="row text-center">
+
+                        </div>
+                        <div class="card-body">
+                            <div class="row  text-center">
+                                <div class="col-6 tableAccueil text-dark">Date de création</div>
+                                <div class="col-6 tableAccueil text-dark">{{ appel.date|format_datetime('short','none',locale='fr') }}</div>
+                                <div class="col-6 tableAccueil text-dark">Date remise de la proposition</div>
+                                <div class="col-6 tableAccueil text-dark">{{ appel.dateRemiseProp|format_datetime('short','none',locale='fr') }}</div>
+                                <div class="col-6 tableAccueil text-dark">Fiche</div>
+                                <div class="col-6 tableAccueil text-dark">
+                                    <a href="{{ path('ficheAO',{id:appel.id}) }}" class="btn btn-info btn-block text-white" target="_blank">Fiche</a>
+                                </div>
+                                <div class="col-6 tableAccueil text-dark">Dossier</div>
+                                <div class="col-6 tableAccueil text-dark">
+                                    <a href="{{ path('telechargerDossierAo',{id:appel.id}) }}"target="_blank">
+                                        <img src="/css/css_site/img/zipcouleur.png" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-12 mt-5">
+                                    <a href="{{ path('reponseAo',{id:appel.id}) }}" class="btn btn-maincolor btn-block text-white">Répondre</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+</div>
+{% endblock %}

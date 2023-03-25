@@ -1,0 +1,26 @@
+{% extends template %}
+
+{% block contenu %}
+
+	<div class="row">
+		<div class="col-sm-12 mb-5">
+			<p class="h6">Vous avez dépassé le nombre d'OTD maximum que votre abonnement permet</p>
+			<br><p class="h6">Le montant de votre abonnement est maintenant de
+				{{montant}}
+				€</p>
+			<br><p class="h6">Si vous avez fini d'ajouter les OTD faisant partis de votre société cliquez sur "Valider mon abonnement".</p>
+			<br><p class="h6">
+				Sinon vous pouvez continuer à ajouter des OTD en cliquer sur "Ajouter des OTD"</p>
+		</div>
+		<div class="col-sm-6 mt-5 text-center">
+			<a href="{{path('validerAbonnement',{id:etat.id})}}" class="btn btn-prs3 btn-outline-maincolor">Valider mon abonnement</a>
+
+		</div>
+		<div class="col-sm-6 mt-5 text-center">
+			<a href="{{path('Asalarie')}}" class="btn btn-prs3 btn-outline-maincolor">Ajouter des OTD</a>
+
+
+		</div>
+	</div>
+
+{% endblock %}

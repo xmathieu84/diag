@@ -1,0 +1,39 @@
+{% extends template %}
+{% block title %}Envoyer un rapport{% endblock %}
+{% block titreSection %}Envoyer un rapport{% endblock %}
+{% block titrePage %}Envoyer un rapport{% endblock %}
+
+{% block pageAccueil %}
+<p class="h5">Entrez dans les champs les différentes adresses mail des personnes qui pourront consulter le rapport.</p>
+    <p class="h5">Un lien <b>UNIQUE</b> et valable <b>UNE SEULE FOIS</b> leurs seront envoyés</p>
+{% endblock %}
+
+{% block contenu %}
+
+<div class="row text-center bg-white pt-5 pb-5">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8">
+        <p class="h6">Selectionnez un rapport</p>
+        <select name="" id="idRapport" >
+            <option value="">Vos rapports</option>
+            {% for rapport in rapports %}
+                {% if (rapport) %}
+                <option value="{{ rapport.id }}">{{ rapport.archive }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+    </div>
+    <div class="col-sm-2"></div>
+    <div class="col-sm-12 ">
+
+        <p class="h6">Adresse mail : </p>
+        <input type="text" id="tag-input1" class="form-control form-control-sm">
+
+
+
+    </div>
+    <div class="col-sm-12 mt-3">
+        <button class="btn btn-outline-maincolor">Valider</button>
+    </div>
+</div>
+{% endblock %}

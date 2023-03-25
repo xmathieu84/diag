@@ -1,0 +1,65 @@
+{% extends 'administrateur/baseA.html.twig' %}
+{% block titre %}
+	Liste des demandeurs
+{% endblock %}
+
+{% block body %}
+	<section class="wrapper">
+		<h3>
+			Liste des personnes inscrites</h3>
+		<div class="row mt">
+			<div class="col-lg-12">
+				<div class="content-panel">
+
+					<table class="table table-bordered table-striped table-condensed">
+						<thead>
+							<tr>
+
+								<th scope="col">Demandeur</th>
+								<th scope="col">Type</th>
+								<th scope="col">Adresse</th>
+								<th>Téléphone</th>
+
+							</tr>
+						</thead>
+						<tbody>
+							{% for demandeur in demandeurs %}
+								<tr>
+									<td scope="row">{% if demandeur.profil ==="Particulier propriétaire" %}
+											{{demandeur.civilite.prenom}}
+											{{demandeur.civilite.nom}}
+											{% elseif demandeur.user %}
+												{{demandeur.civilite.prenom}}
+												{{demandeur.civilite.nom}} <br>
+												{{ demandeur.profil }} {{ demandeur.nom }}
+											{% else %}
+												{{ demandeur.profil }} {{ demandeur.nom }}
+										{% endif %}</td>
+									<td>{{demandeur.profil}}</td>
+									<td>{{demandeur.adresse.numero}}
+										{{demandeur.adresse.nomVoie}}
+										{{demandeur.adresse.codePostal}}
+										{{demandeur.adresse.ville}}</td>
+
+
+									<td>
+										{% if demandeur.telephon %}
+											{{ demandeur.telephon.numero }}
+										{% endif %}
+									</td>
+									<td>
+										<a href="{{path('interventionDemandeur',{id:demandeur.id})}}">
+											<button class="btn btn-primary btn-round">Voir les demandes d'interventions</button>
+										</a>
+									</td>
+								</tr>
+							{% endfor %}
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</section>
+
+{% endblock %}

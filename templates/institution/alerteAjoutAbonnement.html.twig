@@ -1,0 +1,24 @@
+{% extends 'institution/baseInsti.html.twig' %}
+
+{% block title %}
+Alerte ajout d'un abonnement
+{% endblock %}
+
+{% block contenu %}
+<div class="row">
+    <div class="col-12">
+        <p class="h4 mb-5">Vous avez choisi l'abonnement suivant pour profiter de toutes les fonctionnalités de DiagDrone : </p>
+        <ul class="listeAbo">
+            <li class="h4">Nom : {{ abonnement.nom }}</li>
+            <li class="h4">Utlisateur(s) : {{ abonnement.utlisateur }}</li>
+            <li class="h4">Prix : {{ abonnement.prix }} € HT ({{ abonnement.prix*1.2 }} € TTC)</li>
+            <li class="h4">Durée : {{ abonnement.duree|date("%y")  }} an</li>
+        </ul>
+    </div>
+    
+    <div class="col-12 text-right mt-5">
+        <a href="{{ path('validerAjout',{id:idAbo}) }}"><button class="btn btn-maincolor">Souscrire à cet abonnement</button></a>
+    </div>
+</div>
+{% endblock %}
+

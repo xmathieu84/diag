@@ -1,0 +1,189 @@
+{% extends 'institution/baseInsti.html.twig' %}
+{% block title %}Mon abonnement{% endblock %}
+{% block titreSection %}Mon abonnement{% endblock %}
+{% block titrePage %}Mon abonnement{% endblock %}
+
+{% block contenu %}
+    {% if is_granted('ROLE_INSTITUTION') %}
+        {% set nom = 'Agents' %}
+        {% else %}
+            {% set nom = 'Collaborateurs' %}
+    {% endif %}
+    <div class="row bg-white">
+        <div class="col-sm-12 text-center">
+            <p class="h3">Type d'abonnement : </p>
+        </div>
+        <div class="col-sm-12 mt-4 mb-3">
+            {% for aboTotal in aboTotals %}
+                <p class="h6">{{ aboTotal.abonnement.nom}} du {{ aboTotal.debut|format_datetime('short', 'none', locale='fr') }} au {{ aboTotal.fin|format_datetime('short', 'none', locale='fr') }}</p>
+            {% endfor %}
+
+        </div>
+    {% if is_granted('ROLE_GRANDCOMPTE') and is_granted('ROLE_BTP')==false and agent.demandeur.profil =="Entreprise BTP et autres" %}
+       <div class="col-12 text-center mb-5">
+           <a href="{{ path('ajouterAbonnement',{type : 'Pro-Btp'}) }}" class="btn btn-maincolor">Souscrire un abonnement publicitaire géolocalisé</a>
+       </div>
+    {% endif %}
+        {% if is_granted('ROLE_BTP') and is_granted('ROLE_GRANDCOMPTE') ==false %}
+            <div class="col-12 text-center">
+                <a href="{{ path('ajouterAbonnement',{type : "Entreprise BTP et autres"}) }}" class="btn btn-maincolor">Souscrire un abonnement grand compte</a>
+            </div>
+        {% else %}
+            <div class="col-sm-12 mt-3 mb-3 text-center">
+                <p class="h3 ">Mes packs supplémentaires</p>
+            </div>
+            <div class="col-sm-12">
+                {% for aboTotal in aboTotals %}
+                    {% if aboTotal.PackSupAboInstis is not empty %}
+
+                        <div class="row">
+                            {% for packInsti in aboTotal.PackSupAboInstis %}
+                                <div class="col-sm-3">
+                                    <ul class="listPack">
+                                        <li class="color-dark">{{ packInsti.packSup.nom }}</li>
+                                    </ul>
+                                </div>
+                            {% endfor %}
+                        </div>
+
+
+                    {% else %}
+                        <p class="h6">Vous n'avez souscrit aucun pack.</p>
+                    {% endif %}
+                {% endfor %}
+            </div>
+
+
+
+    </div>
+    <div class="row mt-4 bg-white">
+            {% if aboTotalSouscrit.abonnement.utlisateur > 1 %}
+                <div class="col-sm-12 text-center mb-5 pt-5 pb-5">
+                    <p class="h3">Les packs disponibles</p>
+                </div>
+
+                {% for pack in packs %}
+
+                    <div class="col-md-6 mb-2">
+                        <div class="card">
+                            <div class="card-block">
+
+                                <div class="good-review-score mb-2">
+                                    <span class="h2">{{ pack.nom }}</span>
+                                </div>
+
+                                <div class="texte ml-1">
+
+                                    <p class="card-text h4"> Prix : {{ pack.prix }} € HT ({{ pack.prix*1.2 }} € TTC) / Mois </p>
+                                </div>
+
+                            </div>
+                            <div class="card-footer bg-grey-light">
+                                <label >Nombre de pack souhaité</label>
+                                <input type="number" name=""  class="bg-white nbrePack" data-id ="{{ pack.id }}" data-nom="{{ pack.nom }}" data-prix="{{ pack.prix }}">
+
+                                <div class="text-center">
+                                    <button class="btn btn-maincolor mt-5 ajoutPack" data-toggle="modal" data-target="#recapPack">Ajouter</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                {% else %}
+                <p class="h5">Afin d'ajouter des utilisateurs, nous vous proposons de souscrire à l'abonnement suivant : </p>
+                    <p class="h4 mt-5">{{ abonnementAPrendre.nom }} avec {{ abonnementAPrendre.utlisateur }} utilisateurs pour une durée de {{ abonnementAPrendre.duree|date('%y')}} an(s) </p>
+                    <p class="h4">au prix de {{ abonnementAPrendre.prix }} € HT/mois ({{ (abonnementAPrendre.prix*1.2)|number_format(2) }} € TTC/mois)</p>
+            {% endif %}
+        {% endif %}
+    </div>
+    <div class="modal fade" id="recapPack" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog" id="modalePack">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Récapitulatif</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                   <div class="table-responsive">
+                       <table class="table-pack">
+                           <thead>
+                           <tr>
+                               <th class="intitulePack">Intitulé</th>
+                               <th>Nombre</th>
+                               <th>Prix TTC</th>
+                               <th>Prix HT</th>
+
+
+                           </tr>
+                           </thead>
+                           <tbody class="color-dark">
+
+                           </tbody>
+                       </table>
+                       <div class="total color-dark text-center">
+                           <div class="ttc pt-1"></div>
+                           <div class="ht pt-1"></div>
+                       </div>
+                   </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary fermer" data-dismiss="modal">Fermer</button>
+                    <button type="button" class="btn btn-primary commander">Commander</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button type="button" class="btn btn-primary btnreponse" data-toggle="modal" data-target="#modalReponse">
+
+    </button>
+    <button type="button" class="btn btn-primary btnreponse2 d-none" data-toggle="modal" data-target="#modalReponse2">
+
+    </button>
+    <div class="modal fade" id="modalReponse" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Packs ajoutés</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p class="h6">Vos packs supplémentaires ont été ajoutés à votre abonnement</p>
+                    <p class="h6">Vous pouvez retrouver votre facture dans votre espace</p>
+                    <p class="h6">DIAG-DRONE vous remercie</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                    <a href="{{ path('factureAbonnement') }}" class="btn btn-primary">Mes factures</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modalReponse2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Packs ajoutés</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p class="h6">Vos packs supplémentaires ont été ajoutés à votre abonnement</p>
+                    <p class="h6">Vous retrouverez votre facture dans votre espace lors de la mise à disposition de votre facture d'abonnement.</p>
+                    <p class="h6">DIAG-DRONE vous remercie</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                    <a href="{{ path('factureAbonnement') }}" class="btn btn-primary">Mes factures</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

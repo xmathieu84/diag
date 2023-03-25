@@ -1,0 +1,107 @@
+{% extends 'accueil/baseaccueil.html.twig' %}
+{% block stylesheets %}
+
+
+{% endblock %}
+{% block title %}Diag-drone
+{% endblock %}
+
+{% block body %}
+
+
+	<section class="page_slider">
+		<div class="scroll_down">
+
+		</div>
+	<!-- eof flexslider -->
+
+	</section>
+
+
+
+<!-- Start Section About -->
+
+<!-- End Section About -->
+
+
+
+
+
+<section class=" ls mt-5  s-pb-xl-150 s-pb-lg-130 s-pb-md-90 s-pb-60 pt-50 forfait_carousel bg-grey-light">
+	<div class="container">
+		<div class="row">
+
+			{% for profil in profils %}
+				<div class="col-md-4 col-sm-12">
+					<div class="product profile_choice">
+						<a class="woocommerce-LoopProduct-link" href="{{ path('lesProfils',{type:profil.type}) }}">
+
+							<div class="img-wrap">
+								<img src="/css/css_site/images/{{ profil.image }}" alt="">
+							</div>
+							<h2 class="profil">{{ profil.interface }}</h2>
+							<h2 class="profil">{{ profil.profil }}</h2>
+							<h2 class="profil">{{ profil.autre }}</h2>
+							<p class="h7 text-center" >{{ profil.sousTitre }}</p>
+						</a>
+						<a rel="nofollow " href="{{ path('lesProfils',{type:profil.type}) }}" class="button profil_choice mt-3">Voir ce
+							profil</a>
+					</div>
+
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+</section>
+
+	<section class=" ls  s-pb-xl-150 s-pb-lg-130 s-pb-md-90 s-pb-60 pt-50 forfait_carousel bg-grey-light">
+
+		<div class="container">
+
+			<div class="row">
+
+
+			</div>
+		</div>
+	</section>
+	<div class="modal fade" id="modalVIdeo" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<video id="diagDroneEnVideo" controls width="100%">
+					    <source src="/css/css_site/video/Diag-drone.mp4?rel=0"
+					            type="video/mp4">
+					    Désolé, votre navigateur ne supporte pas les vidéos embarquées.
+					</video>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+{% endblock %}
+
+{% block javascripts %}
+	<script type="text/javascript">
+		$(document).ready(function(){
+			const video = document.querySelector("#diagDroneEnVideo");
+			$('#modalVIdeo').on('shown.bs.modal', function () {
+			  	video.play();
+			}).on('hide.bs.modal', function () {
+				video.pause();
+				video.currentTime = 0;
+			});
+		});
+	</script>
+{% endblock %}

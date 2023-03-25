@@ -1,0 +1,80 @@
+{% extends 'entreprise/terminerInscription.html.twig' %}
+
+{% block contenu %}
+    <div class="col-12">
+        <p class="h4">Bonjour,</p>
+        <p class="h5">Afin de finaliser votre inscription sur DiagDrone certaines pièces justificatives sont nécessaires :</p>
+        <p class="h5">Si vous êtes un Auto-entrepreneur, une Entreprise individuelle à responsabilité limitée (EIRL), une Collectivité locale/territoriale ou une Entreprise individuelle déclarée auprès de la chambre d'agriculture, vous devrez fournir les documents qui suivent :</p>
+        <ul>
+            <li class="h5">Une copie recto verso sur une seule page de votre pièce d'identité OU de votre permis de conduire OU de votre passeport. Ces documents doivent être encours de validité</li>
+            <li class="h5">Un avis de situation URSAFF de moins de 3 mois OU un avis de situation SIRENE de moins de 3 mois. Vous trouverez ce document ici :
+                <a href="https://avis-situation-sirene.insee.fr">https://avis-situation-sirene.insee.fr</a></li>
+            <li class="h5">Votre RIB</li>
+            <li class="h5">Une copie de votre assurance professionnelle (RCP)</li>
+            <li class="h5">Une copie du certificat d’aptitude théorique de télépilote (C.A.T.T).</li>
+            <li class="h5">Votre numéro d’exploitant DGAC.</li>
+        </ul>
+        <p class="h5">Si vous êtes une Société Anonyme (SA), une Société à Responsabilité Limitée (SARL), une Entreprise Unipersonnelle à Responsabilité Limitée (EURL), une Société par Actions Simplifiée (SAS), une Société par Actions Simplifiée Unipersonnelle (SASU), une Exploitation Agricole à Responsabilité Limitée (EARL),une Société en Nom Collectif (SNC), un Groupement d'Intérêt Économique (GIE) ou un Groupement Agricole d'Exploitation en Commun (GAEC), vous devrez fournir les documents qui suivent :</p>
+        <ul>
+            <li class="h5">Une copie recto verso sur une seule page de votre pièce d'identité OU de votre permis de conduire OU de votre passeport. Ces documents doivent être encours de validité.</li>
+            <li class="h5">Un extrait Kbis de moins de 3 mois. Vous le trouverez à cette adresse <a href="https://www.infogreffe.fr/recherche-siret-entreprise/chercher-siret-entreprise.html">https://www.infogreffe.fr/recherche-siret-entreprise/chercher-siret-entreprise.html</a> .</li>
+            <li class="h5">Les statuts de votre structure à jour et signés.</li>
+            <li class="h5">Votre RIB</li>
+            <li class="h5">Une copie de votre assurance professionnelle (RCP)</li>
+            <li class="h5">Une copie du certificat d’aptitude théorique de télépilote (C.A.T.T).</li>
+            <li class="h5">Votre numéro d’exploitant DGAC.</li>
+        </ul>
+    </div>
+    <div class="col-12 mt-4">
+        <p class="h5">Vous souhaitez une assistance pour vous inscrire, prenons rendez-vous par <span class="h4 "><a class="color_blue" href="mailto:assistance@diag-drone.com">E-mail</a></span> ou par <span class="h4 color_blue"><a class="color_blue"	href="tel:0665628541">téléphone</a></span>.</p>
+    </div>
+    <div class="col-sm-12 pt-5 text-center">
+        {% if entreprise.getEtatAbonnements is empty %}
+            <a href="{{path('abonnement')}}">
+
+                <button class="btn btn-maincolor btn-prs">Poursuivre votre inscription</button>
+            </a>
+        {% elseif salarie.periInter == null %}
+            <a href="{{path('phase2')}}">
+
+                <button class="btn btn-maincolor btn-prs">Poursuivre votre inscription</button>
+            </a>
+        {% elseif salarie.alphaTango ==null and salarie.licenceDgac ==null %}
+            <a href="{{path('licence',{id:salarie.id})}}">
+
+                <button class="btn btn-maincolor btn-prs">Poursuivre votre inscription</button>
+            </a>
+        {% elseif salarie.tauxHoraires is empty%}
+            <a href="{{path('tarifA')}}">
+
+                <button class="btn btn-maincolor btn-prs">Poursuivre votre inscription</button>
+            </a>
+        {% elseif salarie.entreprise.entAss ==null%}
+            <a href="{{path('finalisation')}}">
+
+                <button class="btn btn-maincolor btn-prs">Poursuivre votre inscription</button>
+            </a>
+        {% elseif salarie.entreprise.uboDeclaration ==null%}
+            <a href="{{path('kyc_ubo')}}">
+
+                <button class="btn btn-maincolor btn-prs">Poursuivre votre inscription</button>
+            </a>
+        {% elseif salarie.entreprise.banques is empty%}
+            <a href="{{path('terminerInscription')}}">
+
+                <button class="btn btn-maincolor btn-prs">Poursuivre votre inscription</button>
+            </a>
+        {% elseif salarie.entreprise.cgv ==false %}
+            <a href="{{path('sepa')}}">
+
+                <button class="btn btn-maincolor btn-prs">Poursuivre votre inscription</button>
+            </a>
+        {% endif %}
+
+    </div>
+{% endblock %}
+
+{% block title %}
+Continuer l'inscription
+{% endblock %}
+

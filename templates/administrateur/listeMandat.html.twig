@@ -1,0 +1,139 @@
+{% extends 'administrateur/baseA.html.twig' %}
+{% block title %}
+    Liste Mandat de prélèvement
+{% endblock %}
+{% block body %}
+    <div class="accordion" id="accordionExample">
+        <div class="card">
+            <div class="card-header" id="headingOne">
+                <h2 class="mb-0">
+                    <button class="btn  btn-block text-left color-dark" id="btn-linkAdmin" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                       OTD
+                    </button>
+                </h2>
+            </div>
+
+            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-8"></div>
+                        <div class="col-4 text-right mb-5">
+                            <label for="emailAdminGc">Recherche par email</label>
+                            <input type="text" name="" id="emailAdminOtd" class="form-control form-control-sm" >
+                        </div>
+                        <div class="col-12 table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Nom</th>
+                                    <th>Banque</th>
+                                    <th>Mandat</th>
+                                </tr>
+                                </thead>
+                                <tbody class="otd">
+                                {% for entrepise in entreprises %}
+                                    <tr>
+                                        <td>{{ entrepise.denomination }} {{ entrepise.formJuridique }}</td>
+                                        <td>
+
+                                                {% for banque in entrepise.banques %}
+                                                    <div class="col-12">
+                                                        {{ banque.nom }}
+                                                    </div>
+                                                    <hr class="banqueAdmin">
+                                                {% endfor %}
+
+                                        </td>
+                                        <td>
+                                            <div class="row">
+                                            {% for banque in entrepise.banques %}
+                                                {% if banque.sepaSigne %}
+                                                <div class="col-12 text-center">
+                                                    <a href="/uploads/sepa/{{ banque.sepaSigne }}" target="_blank">
+                                                        <figure>
+                                                            <img src="{{ asset('css/css_site/images/pdfPetit.png') }}" alt="">
+                                                            <figcaption>Mandat {{ banque.sepaSigne }}</figcaption>
+                                                        </figure>
+                                                    </a>
+                                                </div>
+                                                <hr class="banqueAdmin">
+                                                {% endif %}
+                                            {% endfor %}
+                                            </div>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingTwo">
+                <h2 class="mb-0">
+                    <button class="btn btn-link btn-block text-left collapsed" type="button" id="btn-linkAdmin" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        Grand compte
+                    </button>
+                </h2>
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                <div class="card-body">
+                   <div class="row">
+                       <div class="col-8"></div>
+                       <div class="col-4 text-right mt-5">
+                           <label for="emailAdminGc">Recherche par email</label>
+                           <input type="email" name="" id="emailAdminGc" class="form-control form-control-sm" >
+                       </div>
+                       <div class="col-12 table-responsive">
+                           <table class="table table-bordered">
+                               <thead>
+                               <tr>
+                                   <th>Nom</th>
+                                   <th>Banque</th>
+                                   <th>Mandat</th>
+                               </tr>
+                               </thead>
+                               <tbody class="gc">
+                               {% for grandcompte in grandcomptes %}
+                                   <tr>
+                                       <td>{{ grandcompte.profil }} {{ grandcompte.nom }}</td>
+                                       <td>
+                                           <div class="row">
+                                               {% for banque in grandcompte.banques %}
+                                                   <div class="col-12">
+                                                       {{ banque.nom }}
+                                                   </div>
+                                                   <hr class="banqueAdmin">
+                                               {% endfor %}
+                                           </div>
+                                       </td>
+                                       <td>
+                                           {% for banque in grandcompte.banques %}
+                                               <div class="col-12">
+                                                   <a href="">
+                                                       <figure>
+                                                           <img src="{{ asset('css/css_site/images/pdfPetit.png') }}" alt="">
+                                                           <figcaption>Mandat {{ grandcompte.nom }}</figcaption>
+                                                       </figure>
+                                                   </a>
+                                               </div>
+                                               <hr class="banqueAdmin">
+                                           {% endfor %}
+                                       </td>
+                                   </tr>
+                               {% endfor %}
+                               </tbody>
+                           </table>
+                       </div>
+                   </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+
+
+

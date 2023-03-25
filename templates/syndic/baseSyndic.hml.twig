@@ -1,0 +1,98 @@
+{% extends "base.html.twig" %}
+{% block mobileConnect %}{{path('app_logout')}}{% endblock %}
+{% block lienAccueil %}{{path('app_logout')}}{% endblock %}
+{% block connexion %}
+
+    <nav class="top-nav justify-nav-end ">
+        <ul class="nav sf-menu">
+            <li>
+                <a href="#">Espace Personnel</a>
+
+            </li>
+            <li>
+                <a href="#">Mes infos</a>
+            </li>
+
+
+            <li class="mr-3 onMobile text-center">
+
+                <div class="row d-inline-flex align-items-center">
+                    <span class="left logoMenu">
+
+                    </span>
+                    <span class="right">
+                        <a class="login-form-btn" href="{{path('app_logout')}}">
+                            <small>Se déconnecter</small>
+                            <i class="fas fa-user"></i>
+                        </a>
+                    </span>
+                </div>
+
+            </li>
+
+        </ul>
+
+        <ul class="list-unstyled d-flex align-items-center">
+
+        </ul>
+
+    </nav>
+{% endblock %}
+
+{% block body %}
+
+    <section class="ls bg-grey-light py-5">
+        <div class="container">
+            <div class="row mt-108">
+                <div class="col-12 mb-5 mt-5">
+
+                    {% block pageAccueil %}{% endblock %}
+
+                </div>
+
+                <main class="col-lg-9 col-sm-3 col-xs-12">
+
+                    {% block contenu %}{% endblock %}
+                    {% block bodyAccueil %}{% endblock %}
+                </main>
+
+                <aside class="col-lg-3 col-sm-3 col-xs-12">
+                        <nav class=" nav bg-white">
+                            <h5 class="title_side_dashboard">Menu Syndic de co-propriété
+                            </h5>
+                            <nav class=" bg-white">
+                                <ul class="nav menu-click dashbord">
+
+                                    <li>
+                                        <a href="{{ path('demandeAccès') }}">Rechercher un syndicat de co-propriété</a>
+
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('mesDemandesAcces') }}">Mes demandes</a>
+
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('homeSyndic') }}">Mes syndic de co-propriétés</a>
+
+                                    </li>
+
+
+                                </ul>
+
+
+                            </nav>
+                        </nav>
+
+
+
+
+                </aside>
+
+
+            </div>
+
+        </div>
+    </section>
+
+
+{% endblock %}

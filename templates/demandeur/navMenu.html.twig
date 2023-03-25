@@ -1,0 +1,60 @@
+<ul class="menu-click dashbord menuPrincipal">
+	<li class="d-xl-none">
+		<a href="/DIAG DRONE - Guide de l'utilisateur - Comment trouver et réserver un drone.pdf" target="_blank">Guide d'utilisation</a>
+	</li>
+	<li>
+		<a href="{{ path('demandeur') }}">Accueil</a>
+	</li>
+
+	<li>
+		<a href="{{ path('modifInfo') }}">MODIFIEZ MES INFORMATIONS</a>
+	</li>
+	{% if is_granted('ROLE_DEMANDEUR') %}
+	<li>
+		<a href="{{ path('createDiag') }}">RÉSERVEZ UN DIAGNOSTIC</a>
+	</li>
+		<li>
+			<a href="{{ path('listeInterNonTerminée') }}">POURSUIVRE UNE DEMANDE D'INTERVENTION</a>
+		</li>
+	<li>
+		<a href="{{ path('demandeur_encours') }}">INTERVENTIONS EN ATTENTE DE PROPOSITION(S)
+			<span class="notif cours"></span>
+		</a>
+	</li>
+    <li>
+		<a href="{{ path('enAttenteDePaiement') }}">INTERVENTIONS EN ATTENTE DE PAIEMENT
+			<span class="notif Apaiement"></span>
+		</a>
+	</li>
+    <li>
+		<a href="{{ path('demandeur_diag') }}">INTERVENTIONS EN COURS / TERMINÉES
+			<span class="notif terminees"></span>
+		</a>
+
+	</li>
+	<li>
+		<a href="{{ path('listeRapportDem') }}">PARTAGEZ UN RAPPORT
+
+		</a>
+	</li>
+	{% endif %}
+
+	{% if is_granted("ROLE_CONSULTANT") %}
+		<li>
+			<a href="{{path('rapportConsultant')}}">RECHERCHEZ / CONSULTEZ UN RAPPORT</a>
+		</li>
+	{% endif %}
+	
+	{% if is_granted("ROLE_INSTITUTION") %}
+		<li>
+			<a href="{{path('instituListeInter')}}">LES INTERVENTIONS PROCHES</a>
+		</li>
+		<li class="subMenu">
+			<a>Appel d'offres</a>
+			<ul class="hero-light-bg">
+				<li><a class="" href="">Publier un appel d'offres</a></li>
+				<li><a class="" href="">Mes appels d'offres</a></li>
+			</ul>
+		</li>
+	{% endif %}
+</ul>

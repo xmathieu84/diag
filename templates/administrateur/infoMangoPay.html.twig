@@ -1,0 +1,63 @@
+{% extends 'administrateur/baseA.html.twig' %}
+
+{% block body %}
+<section class="wrapper">
+
+    <div class="row mt">
+        <div class="col-12 mb-5">
+            <div class="row">
+                <div class="col-6 text-center pt-4">
+                    <a href="{{ path('infoMangoPay') }}" class="btn btn-success">Tout voir</a>
+                </div>
+                <div class="col-6 text-center ">
+                    <label for="mail">Adresse Mail recherchée</label>
+                    <input type="text" name="" id="mail" class="form-control form-control-lg">
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Dirigeant Entreprise</th>
+                    <th>id User MangoPay</th>
+                    <th>N° wallet MangoPay</th>
+                    <th>N° Banque MangoPay</th>
+                    <th>N° déclaration UBO</th>
+                    <th>Resultat UBO</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for dirigeant in dirigeants %}
+                    <tr>
+                        <td>
+                            {{ dirigeant.civilite.nom }} {{ dirigeant.civilite.prenom }}<br>
+                            {{ dirigeant.entreprise.denomination }} <br>
+                            {{ dirigeant.user.email }}
+                        </td>
+                        <td>
+                            {{ dirigeant.user.mangoPayId }}
+                        </td>
+                        <td>
+                            {{ dirigeant.user.walletMangoId }}
+                        </td>
+                        <td>{{ dirigeant.user.bankMangoPay }}</td>
+                        <td>{% if dirigeant.entreprise.UboDeclaration %}
+                                {{ dirigeant.entreprise.UboDeclaration.idUbo }}
+                            {% endif %}</td>
+                        <td>{% if dirigeant.entreprise.UboDeclaration %}
+                                {{ dirigeant.entreprise.UboDeclaration.resultat }}
+                            {% endif %}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block title %}
+Info MangoPay
+{% endblock %}
+

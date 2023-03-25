@@ -1,0 +1,57 @@
+{% extends 'entreprise/baseAE.html.twig' %}
+{% block titrePage %}Réponse à l' {{appel.type}}{% endblock %}
+{% block titreSection %}Réponse à l' {{appel.type}}{% endblock %}
+{% block title %}Reponse appel{% endblock %}
+{% block pageAccueil %}<h4>Votre réponse à {{ appel.denomination }} {% if appel.restreint %}restreint
+
+{% endif %} pour {{ appel.agents.demandeur.nom }}</h4>{% endblock %}
+{% block contenu %}
+
+
+            {{ form_start(form) }}
+            <div class="row bg-white">
+                <div class="col-sm-12 mt-5">
+                    <p class="h6">Les champs marqués d'une * sont obligatoires</p>
+                </div>
+                <div class="col-sm-12 mt -5 mb-4 text-center">
+                    <legend>Contact</legend>
+
+                </div>
+                <div class="col-sm-12">
+
+                    <div class="contacts row" data-prototype="{{ form_widget(form.contacts.vars.prototype)|e('html_attr') }}"></div>
+                </div>
+                <div class="col-sm-12 mt-3 mb-3 text-center">
+                    <button type="button" class="add_item_link btn btn-maincolor btn-dossierAo" data-collection-holder-class="contacts">Ajouter un contact (Si différent de l’opérateur soumissionnaire)</button>
+                </div>
+                <div class="col-sm-12 mb-2">
+                    {{ form_row(form.presentation,{'label':'Présentation succincte de l’opérateur soumissionnaire *','attr':{'cols':30,'rows':10}}) }}
+
+                </div>
+                <div class="col-sm-12 mb-3">
+                    {{ form_row(form.qualification,{'label':'Qualifications de l’entreprise à répondre *','attr':{'cols':30,'rows':10}}) }}
+                </div>
+                <div class="col-sm-12 mb-3">
+                    {{ form_row(form.contexte,{'label':'Contexte général de la réponse ','attr':{'cols':30,'rows':10}}) }}
+                </div>
+                <div class="col-sm-2"></div>
+                <div class="col-sm-8 mb-3">
+                    {{ form_row(form.prix,{'label':"Montant financier global de l'offre *"}) }}
+                </div>
+                <div class="col-sm-2"></div>
+                <div class="col-sm-12 mb-3">
+                    {{ form_row(form.details,{'label':'Détails et/ou précisions financières au besoin ','attr':{'cols':30,'rows':10}}) }}
+                </div>
+                <div class="col-sm-12 text-center mb-3">
+                    {{ form_row(form.precision,{"label":"Souhaitez-vous apporter des renseignements et/ou précisions complémentaires d’ordre technique *"}) }}
+                </div>
+                <div class="col-sm-12 mb-3 zonePrecision">
+                    {{ form_row(form.precisionCom,{'label':'Précisions','attr':{'cols':30,'rows':10}}) }}
+                </div>
+                <div class="col-sm-12 text-center">
+                    <button class="btn btn-maincolor">Passer à l'étape suivante</button>
+                </div>
+                {{ form_end(form) }}
+            </div>
+
+{% endblock %}

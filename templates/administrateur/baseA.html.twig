@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<link href="/css/css_admin/css/img/logo/logo.png" rel="icon">
+		<title>
+			{% block title %}
+				{% block titre %}{% endblock %}
+			{% endblock %}
+		</title>
+		{{ encore_entry_link_tags('app') }}
+
+		<link href="/js/js_admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+		<link href="/js/js_admin/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+
+		<link href="/css/css_admin/css/ruang-admin.min.css" rel="stylesheet">
+	</head>
+
+
+	<body id="page-top">
+		<div
+			id="wrapper">
+			<!-- Sidebar -->
+			<ul class="navbar-nav sidebar sidebar-light accordion text-center" id="accordionSidebar">
+				<a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{path('administrateur')}}">
+					<div class="sidebar-brand-icon"></div>
+					<div class="sidebar-brand-text mx-3">Espace administrateur DIAG-DRONE</div>
+				</a>
+
+				<hr class="sidebar-divider">
+
+				<li class="nav-item">
+					<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTableaudeBord" aria-expanded="true" aria-controls="collapseBootstrap">
+						<i class="far fa-fw fa-window-maximize"></i>
+						<span>Tableau de bord</span>
+					</a>
+					<div id="collapseTableaudeBord" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
+						<div class="bg-white py-2 collapse-inner rounded mr-1">
+
+
+							<a class="collapse-item" href="{{ path('taux') }}">Définir Taux</a>
+							<a class="collapse-item" href="{{ path('signature_admin') }}">Signature</a>
+
+
+
+							<a class="collapse-item" href="{{ path('factureAdmin') }}">Créer une facture / un devis</a>
+
+							<a class="collapse-item" href="{{path('listeFacture')}}">Liste des factures / Devis</a>
+
+							<a class="collapse-item" href="{{path('contrainteInter')}}">Contraintes de vols</a>
+						</div>
+					</div>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#comptabilite" aria-expanded="true" aria-controls="collapseBootstrap">
+						<i class="far fa-fw fa-window-maximize"></i>
+						<span>Comptabilité ( Didier) </span>
+					</a>
+					<div id="comptabilite" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
+						<div class="bg-white py-2 collapse-inner rounded mr-1">
+
+
+							<a class="collapse-item" href="{{ path('listeMandatPrelevement') }}">Liste des Mandats</a>
+							<a class="collapse-item" href="{{ path('facturePresta') }}">Factures</a>
+							<a class="collapse-item" href="{{ path('fichierBanque') }}">Fichiers de prélèvement</a>
+
+
+						</div>
+					</div>
+				</li>
+
+
+				<li class="nav-item">
+					<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEntreprise" aria-expanded="true" aria-controls="collapseForm">
+						<i class="fab fa-fw fa-wpforms"></i>
+						<span>Entreprise</span>
+					</a>
+					<div id="collapseEntreprise" class="collapse" aria-labelledby="headingForm" data-parent="#accordionSidebar">
+						<div class="bg-white py-2 collapse-inner rounded">
+
+							<a class="collapse-item" href="{{ path('listeEntreprise') }}">Liste entreprises</a>
+
+
+							<a class="collapse-item" href="{{path('listeOTD')}}">Carte OTD</a>
+
+
+							<a class="collapse-item" href="{{path('infoMangoPay')}}">MangoPay</a>
+
+
+							<a class="collapse-item" href="{{path('listeAbo')}}">Valider abonnements</a>
+						</div>
+					</div>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInterA" aria-expanded="true" aria-controls="collapseForm">
+						<i class="fab fa-fw fa-wpforms"></i>
+						<span>Paiement</span>
+					</a>
+					<div id="collapseInterA" class="collapse" aria-labelledby="headingForm" data-parent="#accordionSidebar">
+						<div class="bg-white py-2 collapse-inner rounded">
+							<a class="collapse-item" href="{{path('interEnAttente')}}">Interventions en attente</a>
+
+
+						</div>
+					</div>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="{{ path('admindemandeur') }}">
+
+						<i class="fas fa-fw fa-user-tie"></i>
+
+						<span>Demandeurs</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInstitution"
+					   aria-expanded="true" aria-controls="collapseTable">
+						<i class="fas fa-fw fa-table"></i>
+						<span>Grand compte</span>
+					</a>
+					<div id="collapseInstitution" class="collapse" aria-labelledby="headingTable"
+						 data-parent="#accordionSidebar">
+						<div class="bg-white py-2 collapse-inner rounded">
+
+							<a class="collapse-item" href="{{ path('listeGrandCompte') }}">Valider abonnement</a>
+
+							<a href="{{ path('listeFactureInsti') }}" class="collapse-item">Liste des factures</a>
+
+
+						</div>
+					</div>
+				</li>
+
+				<li class="nav-item">
+					<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInter"
+					   aria-expanded="true" aria-controls="collapseTable">
+						<i class="fas fa-fw fa-table"></i>
+						<span>Intervention</span>
+					</a>
+					<div id="collapseInter" class="collapse" aria-labelledby="headingTable"
+						 data-parent="#accordionSidebar">
+						<div class="bg-white py-2 collapse-inner rounded">
+
+							<a class="collapse-item" href="{{path('adminIntervention')}}">Liste intervention</a>
+
+
+							{# <a class="collapse-item" href="{{path('typeInter')}}">Type d'intervention</a>#}
+
+
+							<a class="collapse-item" href="{{path('cerfa_admin')}}">Envoyer les CERFAs</a>
+
+							<a class="collapse-item" href="">Intervention dépassées</a>
+
+							<a href="{{ path('moyennePrixInter') }}" class="collapse-item">Prix moyen</a>
+							<a href="{{ path('createPack') }}" class="collapse-item">Packs ODI</a>
+							<a href="{{ path('voirMission') }}">Missions ODI</a>
+						</div>
+					</div>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAbonnement"
+					   aria-expanded="true" aria-controls="collapseTable">
+						<i class="fas fa-fw fa-table"></i>
+						<span>Abonnement</span>
+					</a>
+					<div id="collapseAbonnement" class="collapse" aria-labelledby="headingTable"
+						 data-parent="#accordionSidebar">
+						<div class="bg-white py-2 collapse-inner rounded">
+
+							<a class="collapse-item" href="{{ path('admin_abonnement') }}">OTD</a>
+							<a class="collapse-item" href="{{ path('abonnementGc') }}">Grand compte</a>
+							<a class="collapse-item" href="{{ path('abonnementInstitution') }}">Institution</a>
+
+
+
+						</div>
+					</div>
+				</li>
+
+				<li class="nav-item">
+					<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseForum"
+					   aria-expanded="true" aria-controls="collapseForm">
+						<i class="fab fa-fw fa-wpforms"></i>
+						<span>Forum</span>
+					</a>
+					<div id="collapseForum" class="collapse" aria-labelledby="headingForm"
+						 data-parent="#accordionSidebar">
+						<div class="bg-white py-2 collapse-inner rounded">
+
+							<a class="collapse-item" href="{{ path('theme') }}">Liste et création thème</a>
+
+
+							<a class="collapse-item" href="{{ path('consulterMessages') }}">Création categorie</a>
+
+
+							<a class="collapse-item" href="{{path('archive')}}">Modérer réponses</a>
+
+
+						</div>
+					</div>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseMessage" aria-expanded="true" aria-controls="collapseForm">
+						<i class="fab fa-fw fa-wpforms"></i>
+						<span>Messages</span>
+					</a>
+					<div id="collapseMessage" class="collapse" aria-labelledby="headingForm" data-parent="#accordionSidebar">
+						<div class="bg-white py-2 collapse-inner rounded">
+
+							<a class="collapse-item" href="{{ path('adminMessage') }}">Envoyer e-mails</a>
+
+
+							<a class="collapse-item" href="{{ path('consulterMessages') }}">nouveaux messages</a>
+
+
+							<a class="collapse-item" href="{{path('archive')}}">Messages archivés</a>
+
+							<a class="collapse-item" href="{{path('tableForStat')}}">Export table pour stats</a>
+						</div>
+					</div>
+				</li>
+
+				<li class="nav-item">
+					<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePromo" aria-expanded="true" aria-controls="collapseForm">
+						<i class="fab fa-fw fa-wpforms"></i>
+						<span>Codes promotionnels</span>
+					</a>
+					<div id="collapsePromo" class="collapse" aria-labelledby="headingForm" data-parent="#accordionSidebar">
+						<div class="bg-white py-2 collapse-inner rounded">
+
+							<a class="collapse-item" href="{{path('admin_code_promo')}}">Créer un code promotionnel</a>
+
+
+							<a class="collapse-item" href="{{ path('ambassadeur') }}">Ambassadeurs</a>
+							<a class="collapse-item" href="{{ path('mailAmbassadeurUnique') }}">Envoie un mail ambassadeur</a>
+
+
+						</div>
+					</div>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseMail" aria-expanded="true" aria-controls="collapseForm">
+						<i class="fab fa-fw fa-wpforms"></i>
+						<span>Envoie de mail promo</span>
+					</a>
+					<div id="collapseMail" class="collapse" aria-labelledby="headingForm" data-parent="#accordionSidebar">
+						<div class="bg-white py-2 collapse-inner rounded">
+
+							<a class="collapse-item" href="{{path('envoieOtd')}}">Mails OTD</a>
+							<a class="collapse-item" href="{{path('autreEnvoie')}}">Mails Autres</a>
+							<a class="collapse-item" href="{{path('journaliste')}}">Journaliste</a>
+
+							<a href="{{ path('listeMailPromo') }}" class="collapse-item">Anciennes campagnes</a>
+
+
+
+						</div>
+					</div>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseArmee" aria-expanded="true" aria-controls="collapseArmee">
+						<i class="fab fa-fw fa-wpforms"></i>
+						<span>Espace armée</span>
+					</a>
+					<div id="collapseArmee" class="collapse" aria-labelledby="headingForm" data-parent="#accordionSidebar">
+						<div class="bg-white py-2 collapse-inner rounded">
+
+							<a class="collapse-item" href="{{path('ajouterArmee')}}">Ajouter une base militaire</a>
+
+
+							<a class="collapse-item" href="{{ path('listeArmee') }}">Liste des bases inscrites</a>
+
+
+						</div>
+					</div>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCOmmune" aria-expanded="true" aria-controls="collapseCOmmune">
+						<i class="fab fa-fw fa-wpforms"></i>
+						<span>Liste Mairie/communaute de commune</span>
+					</a>
+					<div id="collapseCOmmune" class="collapse" aria-labelledby="headingForm" data-parent="#accordionSidebar">
+						<div class="bg-white py-2 collapse-inner rounded">
+
+							<a class="collapse-item" href="{{path('listeVille')}}">Mairie</a>
+
+
+							<a class="collapse-item" href="">Communauté de commune</a>
+
+
+						</div>
+					</div>
+				</li>
+
+				<hr class="sidebar-divider">
+				<li>
+					<a href="{{path('app_logout')}}" class="btn btn-danger btn-sm">Déconnexion</a>
+				</li>
+			</ul>
+			<!-- Sidebar -->
+			<div id="content-wrapper" class="d-flex flex-column">
+				<div
+					id="content">
+					<!-- TopBar -->
+					<nav class="navbar navbar-expand navbar-light bg-navbar topbar mb-4 static-top">
+						<button id="sidebarToggleTop" class="btn btn-link rounded-circle mr-3">
+							<i class="fa fa-bars"></i>
+						</button>
+
+					</nav>
+					<!-- Topbar -->
+
+					<!-- Container Fluid-->
+					<div class="container-fluid" id="container-wrapper"> {% block body %}{% endblock %}
+						</div>
+						<!---Container Fluid-->
+					</div>
+					<!-- Footer -->
+					<footer class="sticky-footer bg-white"></footer>
+					<!-- Footer -->
+				</div>
+			</div>
+
+			<!-- Scroll to top -->
+			<a class="scroll-to-top rounded" href="#page-top">
+				<i class="fas fa-angle-up"></i>
+			</a>
+			{{ encore_entry_script_tags('app') }}
+
+			<script src="/js/js_admin/vendor/jquery/jquery.min.js"></script>
+			<script src="/js/js_admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+			<script src="/js/js_admin/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+			<script src="/js/js_admin/js/ruang-admin.js"></script>
+
+
+		</body>
+
+	</html>

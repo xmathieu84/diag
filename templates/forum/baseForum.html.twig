@@ -1,0 +1,80 @@
+{% extends "base.html.twig" %}
+{% block connexion %}
+
+	<ul class="top-includes  text-right">
+
+		<li>
+			<a class="login-form-btn" href="{{path('security_logout')}}">
+				<small>Se déconnecter</small>
+				<i class="fas fa-user"></i>
+			</a>
+		</li>
+	</ul>
+{% endblock %}
+{% block body %}
+	<section class="page_title ds s-overlay s-pt-140 s-pt-md-170 s-pb-60 s-pb-md-90 s-pb-lg-100">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 text-center">
+					<h1>
+						{% block titreSection %}{% endblock %}
+					</h1>
+					<div class="breadcrumb-wrap">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item">
+								<a href="{{path('forum')}}">Accueil</a>
+
+
+							</li>
+							<li class="breadcrumb-item active">
+								{% block titrePage %}{% endblock %}
+							</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class=" bg-grey-light py-5">
+		<div class="container">
+			<div class="row">
+				<div class="col-12 mb-5">
+					{% block pageAccueil %}{% endblock %}
+
+				</div>
+
+				<main class="col-lg-12 col-sm-12 col-xs-12">
+					{% block contenu %}{% endblock %}
+
+				</main>
+
+				{#<aside class="col-lg-4 col-sm-4 col-xs-12">
+												
+												
+																	<nav class=" nav bg-white">
+																		<h5 class="title_side_dashboard">Navigation
+																		</h5>
+																		<nav class=" bg-white">
+																			<ul class="nav menu-click dashbord"></ul>
+												
+												
+																		</nav>
+												
+												
+																	</nav>
+												
+												
+																</aside>#}
+
+
+			</div>
+
+		</div>
+	</section>
+
+
+{% endblock %}
+{% block javascripts %}
+	{{ encore_entry_script_tags('app') }}
+{% endblock  %}
+{% block contact %}{% endblock  %}

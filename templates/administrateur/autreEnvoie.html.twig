@@ -1,0 +1,114 @@
+{% extends 'administrateur/baseA.html.twig' %}
+
+{% block body %}
+<div class="row">
+    <div class="col-12 mb-3">
+        <label for="">Description de la campagne</label>
+        <input type="text" class="form-control description">
+    </div>
+    <div class="col-sm-6 col-12 mb-5">
+        <label for="">Départements visés (pour la Corse mettre 20. Pour tout les departements il faut laisser vide)</label>
+        <input type="text" class="form-control departement">
+    </div>
+    <div class="col-sm-6 col-12">
+        <label for="">Choisir une ancienne campagne (Non obligatoire, permet de retrouver d'anciennnes campagne de mail)</label>
+        <select name="" id="ancienne" class="form-control">
+            <option value="" disabled selected>Anciennes campagnes </option>
+            {% for campagne in campagnes %}
+                <option value="{{ campagne.id }}">{{ campagne.description }} {{ campagne.cible }} {{ campagne.date|format_datetime('short','none',locale='fr') }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="col-4">
+        <label for="cible">Cible</label>
+        <select name="" id="cible" class="form-control">
+            <option value=""disabled selected>Cible</option>
+            <option value="equipe">The best team (Pour les tests uniquement)</option>
+            <option value="abien">Administrateurs de biens</option>
+            <option value="agentAssu">Agents assurance</option>
+            <option value="agentImmo">Agent immobillier</option>
+            <option value="bureauEtude">Bureaux d'études</option>
+            <option value="btp">BTP</option>
+            <option value="controlBtp">Controle BTP</option>
+            <option value="tp">Entreprise TP</option>
+            <option value="expertAssu">Experts en assurances</option>
+            <option value="geometre">Géometres experts</option>
+            <option value="maitre">Maître d'oeuvres en bâtiments</option>
+            <option value="hlm">Office et gestion d'HLM</option>
+            <option value="promoteur">Promoteurs constructeurs</option>
+            <option value="urbaniste">Urbanistes</option>
+            <option value="lotisseur">Lotisseurs</option>
+            <option value="mairie">Mairie</option>
+
+        </select>
+    </div>
+    <div class="col-4">
+        <label for="titre">Titre du mail</label>
+        <input type="text" id="titre" class="form-control">
+    </div>
+    <div class="col-4">
+        <label for="c">Code promotionnel (non obligatoire)</label>
+        <input type="text" id="codePromo" class="form-control">
+    </div>
+    <div class="col-6">
+        <label for="">Paragraphe 1</label>
+        <textarea name="" id="" cols="30" rows="10" class="form-control paragraphe"></textarea>
+    </div>
+    <div class="col-6">
+        <label for="">Paragraphe 2</label>
+        <textarea name="" id="" cols="30" rows="10" class="form-control paragraphe"></textarea>
+    </div>
+    <div class="col-6">
+        <label for="">Paragraphe 3</label>
+        <textarea name="" id="" cols="30" rows="10" class="form-control paragraphe"></textarea>
+    </div>
+    <div class="col-6">
+        <label for="">Paragraphe 4</label>
+        <textarea name="" id="" cols="30" rows="10" class="form-control paragraphe"></textarea>
+    </div>
+    <div class="col-6">
+        <label for="">Paragraphe 5</label>
+        <textarea name="" id="" cols="30" rows="10" class="form-control paragraphe"></textarea>
+    </div>
+    <div class="col-6">
+        <label for="">Paragraphe 6</label>
+        <textarea name="" id="" cols="30" rows="10" class="form-control paragraphe"></textarea>
+    </div><div class="col-6">
+        <label for="">Paragraphe 7</label>
+        <textarea name="" id="" cols="30" rows="10" class="form-control paragraphe"></textarea>
+    </div>
+    <div class="col-6">
+        <label for="">Paragraphe 8</label>
+        <textarea name="" id="" cols="30" rows="10" class="form-control paragraphe"></textarea>
+    </div>
+    <div class="col-6">
+        <label for="">Paragraphe 9</label>
+        <textarea name="" id="" cols="30" rows="10" class="form-control paragraphe"></textarea>
+    </div>
+    <div class="col-6">
+        <label for="">Paragraphe 10</label>
+        <textarea name="" id="" cols="30" rows="10" class="form-control paragraphe"></textarea>
+    </div>
+    <div class="col-6">
+        <label for="">Paragraphe 11</label>
+        <textarea name="" id="" cols="30" rows="10" class="form-control paragraphe"></textarea>
+    </div>
+    <div class="col-6">
+        <label for="">Paragraphe 12</label>
+        <textarea name="" id="" cols="30" rows="10" class="form-control paragraphe"></textarea>
+    </div>
+    <div class="col-12 text-center mt-5">
+        <button class="btn btn-success">Valider</button>
+    </div>
+</div>
+    <dialog class="dialogAttente text-center">
+        <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </dialog>
+{% endblock %}
+
+{% block title %}
+Autre envoie
+{% endblock %}
+

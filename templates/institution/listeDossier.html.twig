@@ -1,0 +1,67 @@
+{% extends 'institution/baseInsti.html.twig' %}
+
+{% block title %}
+Liste dossier
+{% endblock %}
+{% block titreSection %}Liste dossier{% endblock %}
+{% block titrePage %}Liste dossier{% endblock %}
+{% block pageAccueil %}
+<span class="color-dark">Typologie dossier</span>
+{% endblock %}
+{% block contenu %}
+<div class="row text-center">
+
+
+        <div class="col-4">
+            <a href="{{ path('indossier',{nom:'Patrimoine immobilier',code:code}) }}">
+                <figure>
+                    <img src="/css/css_site/img/dossierbleu.png" alt="">
+                    <figcaption>Patrimoine immobilier <span class="badge badge-success">{{ patrimoine }}</span></figcaption>
+                </figure>
+            </a>
+        </div>
+        <div class="col-4">
+            <a href="{{ path('indossier',{nom:'Voirie , Espace vert , Parking',code:code}) }}">
+                <figure>
+                    <img src="/css/css_site/img/dossierbleu.png" alt="">
+                    <figcaption>Voirie , Espace vert , Parking <span class="badge badge-success">{{ espace }}</span></figcaption>
+                </figure>
+            </a>
+        </div>
+        <div class="col-4">
+            <a href="{{ path('indossier',{nom:'Réseaux',code:code}) }}">
+                <figure>
+                    <img src="/css/css_site/img/dossierbleu.png" alt="">
+                    <figcaption>Réseaux <span class="badge badge-success">{{ reseau }}</span></figcaption>
+                </figure>
+            </a>
+        </div>
+        <div class="col-4">
+            <a href="{{ path('indossier',{nom:'Ouvrage d’art',code:code}) }}">
+                <figure>
+                    <img src="/css/css_site/img/dossierbleu.png" alt="">
+                    <figcaption>Ouvrage d’art <span class="badge badge-success">{{ ouvrage }}</span></figcaption>
+                </figure>
+            </a>
+        </div>
+        <div class="col-4">
+            <a href="{{ path('indossier',{nom:'Evènement sportif ou culturel',code:code}) }}">
+                <figure>
+                    <img src="/css/css_site/img/dossierbleu.png" alt="">
+                    <figcaption>Evènement sportif ou culturel <span class="badge badge-success">{{ sport }}</span></figcaption>
+                </figure>
+            </a>
+        </div>
+        <div class="col-4">
+            <a href="{{ path('indossier',{nom:'Intervention diverse',code:code}) }}">
+                <figure>
+                    <img src="/css/css_site/img/dossierbleu.png" alt="">
+                    <figcaption>Intervention diverse <span class="badge badge-success">{{ inter }}</span></figcaption>
+                </figure>
+            </a>
+        </div>
+
+
+</div>
+{% endblock %}
+

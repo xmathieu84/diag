@@ -1,0 +1,35 @@
+#sousDossier{
+    max-width: 75%;
+}
+.interDrone,.diagTechnique,#fichier,#transfert{
+    display: none;
+}
+.modalAjoutPièce{
+    max-width: 75%;
+}
+.modalNote{
+    max-width: 60%;
+}
+.modaleNoteGen,.modalAjoutNote,.modalPieceGenerale{
+    max-width: 70%;
+}
+.btn-fichier {
+    width: 100%;
+    background: rgba(26, 134, 178, 0.34);
+    border: none;
+    height: 3.2em;
+}
+.barUpload{
+    height: 1.5em;
+}
+#transfert{
+    opacity: 0.8;
+
+}
+.btn-modalFichier{
+    padding: .25rem .5rem;
+    font-Size: .875rem;
+    line-height: 1.5;
+    border-radius: .2rem;
+    min-width: 2em;
+}

@@ -1,0 +1,48 @@
+{% extends 'entreprise/baseAE.html.twig' %}
+
+    {% block pageAccueil %}
+   <div class="row">
+       {% if nom =='axa' %}
+       <div class="col-12 text-center">
+           <h6 class="mb-3">Bienvenue sur l'offre de notre partenaire .</h6>
+       </div>
+       <div class="col-12 text-center">
+           <figure>
+               <img src="{{ asset('css/css_site/img/axa.png') }}" alt="" width="100px"height="100px">
+           </figure>
+       </div>
+
+       {% endif %}
+   </div>
+    {% endblock %}
+    {% block contenu %}
+        <div class="row">
+        {% if nom =='axa' %}
+            <div class="col-sm-4 mt-4 text-center">
+                <a href="/PLAQUETE COMMERCIALE ATOUT DRONE.pdf" target="_blank">
+                    <figure>
+                        <img src="{{ asset('css/css_admin/img/pdf.png') }}" alt="">
+                        <figcaption>PLAQUETE COMMERCIALE ATOUT DRONE.pdf</figcaption>
+                    </figure>
+                </a>
+            </div>
+            <div class="col-sm-4 mt-4 text-center">
+                <a href="/FORMULAIRE DE DECLARATION ATOUT DRONE.pdf" target="_blank">
+                    <figure>
+                        <img src="{{ asset('css/css_admin/img/pdf.png') }}" alt="">
+                        <figcaption>FORMULAIRE DE DECLARATION ATOUT DRONE.pdf</figcaption>
+                    </figure>
+                </a>
+            </div>
+            <div class="col-sm-4 mt-4 text-center">
+                <a href="/ANNEXE PE ATOUTS DRONE.pdf" target="_blank">
+                    <figure>
+                        <img src="{{ asset('css/css_admin/img/pdf.png') }}" alt="">
+                        <figcaption>ANNEXE PE ATOUTS DRONE.pdf</figcaption>
+                    </figure>
+                </a>
+            </div>
+        {% endif %}
+        </div>
+    {% endblock %}
+

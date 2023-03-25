@@ -1,0 +1,275 @@
+{% extends 'entreprise/baseAE.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
+
+
+{% endblock %}
+{% block js %}
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
+
+{% endblock %}
+{% block title %}
+Détails de l'intervention
+{% endblock %}
+
+{% block contenu %}
+
+<div class="row bg-white">
+
+
+    <div class="col-sm-12 pt-3 pb-3 mb-3">
+        <p class="h4">Indiquez votre proposition tarifaire pour cette intervention.</p>
+        <p class="h4">Vos frais de déplacement seront ajoutés à votre proposition.</p>
+        <p class="h4">Votre proposition sera immédiatement transmise au demandeur qui pourra réserver l'intervention.</p>
+
+
+
+    </div>
+    {% if proposition.inter.budgetInter %}
+        {% set budget = proposition.inter.budgetInter.montant %}
+    {% else %}
+        {% set budget = 50000000 %}
+    {% endif %}
+    <input type="hidden" class="budgetMax" value="{{budget }}">
+    <div class="col-sm-12">
+        <div class="row">
+            <div class="col-sm-5">
+                <div class="mb-2"><span class="h6 color_blue mb-5">Ville : </span><span class="h6">{{proposition.inter.adresse.ville}} ({{ proposition.inter.adresse.departement.numeroDepartement }})</span></div>
+
+                <div class="mb-2">
+                    {% if proposition.inter.dateWitch %}
+                        <span class="h6 color_blue">Date souhaitée : </span>
+                        <span class="h6">{{proposition.inter.dateWitch |format_datetime("short","none",locale='fr')}} </span>
+                        {% elseif proposition.inter.dateDebut %}
+                            <span class="h6 color_blue">Date souhaitée : </span>
+                            <span class="h6">Entre le {{proposition.inter.dateDebut |format_datetime("short","none",locale='fr')}} et {{proposition.inter.dateFin |format_datetime("short","none",locale='fr')}}  </span>
+                            {% else %}
+                                <span class="h6 color_blue">Date souhaitée : </span> <span class="h6">Pas de date choisie</span>
+                    {% endif %}
+
+                </div>
+                <div class="mb-2"><span class="h6 color_blue">Intervention dûe à une intempérie :{% if proposition.inter.intemperie %}
+																<span class="h6">oui</span>
+																{% else %}
+																<span class="h6">non</span>
+                    {% endif %}</div>
+                <div class="mb-2">
+                    <span class="h6 color_blue">Précisions : </span><span class="h6">{% if proposition.inter.interPrecision %}
+                            {{proposition.inter.interPrecision}}
+                        {% else %}
+                            Non
+                        {% endif %}
+															</span>
+                </div>
+                <div class="mb-2">
+                    <span class="h6 color_blue">Prestation : </span><span class="h6">{{proposition.inter.typeInter.nom}}</span>
+                </div>
+                {% if proposition.inter.typeInter.nom =="Captation audiovisuelle" %}
+                    {% if proposition.inter.nbreVideo %}
+                        <div class="mb-2">
+                            <span class="h6 color_blue">Nombre de vidéos maximums souhaitées : </span><span class="h6">{{ proposition.inter.nbreVideo }}</span>
+                        </div>
+                    {% endif %}
+                        {% if proposition.inter.nbrePhoto != null %}
+                            <div class="mb-2">
+                                <span class="h6 color_blue">Nombre de photos souhaitées : </span><span class="h6">{{ proposition.inter.nbrePhoto }}</span>
+                            </div>
+                        {% endif %}
+
+                {% endif %}
+                <div class="mb-3">
+                    <span class="h6 color_blue">Élément(s) à contrôler : </span>
+                    <ul>
+                        {% for demande in proposition.inter.typeDemande %}
+                            <li><span class="h6">{{ demande }}</span></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% if proposition.inter.budgetInter %}
+                    <div class="mb-3">
+                        <span class="h6 color_blue">Budget maximum : </span><span class="h6">{{ proposition.inter.budgetInter.montant }} €</span>
+                    </div>
+                {% endif %}
+
+                <input type="hidden" value="{{proposition.inter.id}}" class="inter">
+
+            </div>
+            <div class="col-sm-5 col-12 carte"></div>
+
+
+
+            <div class="col-sm-8 col-12 mt-4 mb-4">
+
+                <div class="row ml-2">
+                    <div class="col-12 mb-4 text-center">
+                        <p class="h4">Contraintes de vol</p>
+                    </div>
+                    <div class="col-4 text-center border pt-3 pb-3 border-gray ">
+                        <span class="h6">Type</span>
+                    </div>
+                    <div class="col-4 text-center border pt-3 pb-3 border-gray">
+                        <span class="h6">Altitude</span>
+                    </div>
+                    <div class="col-4 text-center border pt-3 pb-3 border-gray">
+                        <span class="h6">Spécificités</span>
+                    </div>
+                    {% if proposition.inter.contrainteInters is empty %}
+                        <div class="col-12 mt-5">
+                            <p class="h6">Les contraintes de vol sont en cours de réalisation .</p>
+                        </div>
+                    {% endif %}
+                    {% for contraite in proposition.inter.contrainteInters %}
+
+                            <div class="col-4 border border-gray color-dark pt-3 pb-3">{{ contraite.type }}</div>
+                            <div class="col-4 border border-gray color-dark pt-3 pb-3">{{ contraite.distance }}</div>
+                            <div class="col-4 border border-gray color-dark pt-3 pb-3">{{ contraite.specificite }}</div>
+
+                    {% endfor %}
+                </div>
+                {% if proposition.inter.dateDebut %}
+                    {% set mini = (proposition.inter.dateDebut|date("Y-m-d"))~"T00:00" %}
+                    {% set maxi = (proposition.inter.dateFin|date("Y-m-d"))~"T23:59" %}
+                    {% elseif proposition.inter.dateWitch %}
+                        {% set mini = (proposition.inter.dateWitch|date("Y-m-d"))~"T00:00" %}
+                        {% set maxi = (proposition.inter.dateWitch|date("Y-m-d"))~"T23:59" %}
+                    {% else %}
+                        {% set mini = null %}
+                        {% set maxi = null %}
+                {% endif %}
+                {% if proposition.datePropose is not null %}
+                    {% set valeur = proposition.datePropose|date('Y-m-d') ~"T"~ proposition.datePropose|date('H:i')  %}
+                    {% elseif proposition.datePropose ==null%}
+                        {% set valeur = mini %}
+                {% endif %}
+
+            </div>
+            <div class="col-sm-4 col-12 mt-4 mb-4">
+                <p class="h4">Photos du site</p>
+                <ul>
+                {% for photo in proposition.inter.photoInter %}
+                    <li class="liste" style="columns: 2">
+                        <a href="/uploads/photoInter/{{photo.nom}}" target="blank">Photo n°{{loop.index}}</a>
+                    </li>
+                {% endfor %}
+                </ul>
+            </div>
+
+            <div class="col-sm-6 col-12">
+                <label class="h6 color_blue">Tarif proposé : </label>
+                <input type="number" name="" id="" class="form-control form-control-sm prix" data-prop="{{proposition.id}}" value="{{proposition.prix}}">
+            </div>
+            <div class="col-sm-6 col-12">
+                <label for="" class="h6 color_blue">Rendez vous proposé</label>
+                <input type="datetime-local" name="" step="13500" id="dateInter" class="form-control form-control-sm " min="{{ mini }}" max="{{ maxi }}" value="{{ valeur }}">
+            </div>
+
+
+
+
+
+        </div>
+    </div>
+
+    <div class="col-sm-12">
+        <div class="row">
+            <div class="col-sm-3">
+                <br>
+                <button class="btn btn-sm btn-maincolor valid">Valider et transmettre</button>
+
+            </div>
+            <div class="col-sm-4"></div>
+            <div class="col-sm-2">
+                <br>
+                <a href="{{path ('refuser',{idProp:proposition.id})}}">
+
+                    <button class="btn btn-sm btn-danger ">Refuser l'intervention</button>
+                </a>
+            </div>
+
+        </div>
+    </div>
+    <button type="button"class="btn btn-primary openModal" data-toggle="modal" data-target="#modaleResult" style="display: none">
+
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modaleResult" tabindex="-1" aria-labelledby="resultModale" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="resultModale">Réponse</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p class="h6 message"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                    <a href="{{ path('entreprise') }}" class="btn btn-primary">Retourner à l'accueil</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+      {#   <div class="col-12">
+            <div id="accordion02" role="tablist">
+
+                {% for proposition in propositions %}
+
+
+                {% if proposition.inter.propositionChoisie == null or proposition.dateFin < date %}
+                <div>
+                    {% if proposition.prix %}
+                        <div role="tab" id="collapse{{loop.index}}_header" class="mb-5 priceDone">
+                            <h6>
+                                <a data-toggle="collapse" href="#collapse{{loop.index}}" aria-expanded="true" aria-controls="collapse01">
+                                    Intervention le {{ proposition.inter.rdvAT|format_datetime('short','none',locale="fr")}} à {{ proposition.inter.adresse.ville|capitalize}} en attente (Votre proposition : {{ proposition.prix }} € hors déplacement)
+                                </a>
+                            </h6>
+                        </div>
+                    {% else %}
+                        <div role="tab" id="collapse{{loop.index}}_header" class="mb-5 priceNone">
+                            <h6>
+                                <a data-toggle="collapse" href="#collapse{{loop.index}}" aria-expanded="true" aria-controls="collapse01">
+                                    Intervention le {{ proposition.inter.rdvAT|format_datetime('short','none',locale="fr")}} à {{ proposition.inter.adresse.ville|capitalize}} en attente
+                                </a>
+                            </h6>
+                        </div>
+                    {% endif %}
+                    {% if loop.index == 1 %}
+                    <div id="collapse{{loop.index}}" class="collapse show" role="tabpanel" aria-labelledby="collapse{{loop.index}}_header" data-parent="#accordion02">
+                        {% else %}
+                        <div id="collapse{{loop.index}}" class="collapse" role="tabpanel" aria-labelledby="collapse{{loop.index}}_header" data-parent="#accordion02">
+                            {% endif %}
+
+                            <div class="card-body" style="padding-top:1em">
+
+
+
+
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    {% endif %}
+
+
+                    {% endfor %}
+
+
+                </div>
+
+            </div>
+
+
+
+        </div>
+   #}
+
+    {% endblock %}
+

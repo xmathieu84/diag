@@ -1,0 +1,148 @@
+{% extends 'administrateur/baseA.html.twig' %}
+{% block titre %}
+	Liste des intervention du demandeur
+{% endblock %}
+
+{% block body %}
+	<section class="wrapper">
+		<div class="row mt">
+			<div class="col-lg-12">
+				<div class="content-panel">
+
+
+					<h2>Intervention de
+						{{demandeur.civilite.nom}}
+						{{demandeur.civilite.prenom}}</h2>
+					<table class="table table-bordered table-striped table-condensed cf">
+
+						<thead>
+							<tr>
+
+								<th class="numeric">Type d'intervention</th>
+								<th class="numeric">Adresse de l'intervention</th>
+								<th class="numeric">Salarie</th>
+								<th class="numeric">Téléphone du salarié</th>
+								<th class="numeric">Statut Intervention</th>
+								<th class="numeric">Détails</th>
+							</tr>
+						</thead>
+						<tbody>
+
+
+							{% for intervention in demandeur.interventions %}
+									<tr>
+										<td scope="row">{{intervention.typeInter.nom}}
+											{{reservation.intervention.listeInter.nom}}</td>
+
+										<td>{{reservation.intervention.adresse.numero}}
+											{{reservation.intervention.adresse.nomVoie}}
+											{{reservation.intervention.adresse.codePostal}}
+											{{reservation.intervention.adresse.ville}}
+										</td>
+
+										{% if reservation.salarie != null %}
+
+											<td>{{reservation.salarie.civilite.nom}}
+												{{reservation.salarie.civilite.prenom}}</td>
+											<td>{{reservation.salarie.telephone.numero}}</td>
+										{% else %}
+											<td></td>
+											<td></td>
+
+										{% endif %}
+									<td>{{ intervention.statuInter }}</td>
+									<td><button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal{{ loop.index }}">Détails</button></td>
+									</tr>
+
+
+							{% endfor %}
+						</tbody>
+
+					</table>
+
+				</div>
+			</div>
+		</div>
+		{% for intervention  in demandeur.interventions %}
+			<div class="modal fade" id="exampleModal{{ loop.index }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Intervention</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<div class="row">
+								<div class="col-sm-6 col-6 border-bottom border-dark pt-5 pb-5">
+									<span class="h6">Date et heure Rdv : {{ intervention.rdvAt|format_datetime('short', 'short', locale='fr') }}</span>
+								</div>
+								<div class="col-sm-6 col-6 border-bottom border-dark pt-5 pb-5">
+									<span class="h6">Lieu : {{ intervention.adresse.numero }} {{  intervention.adresse.nomVoie }} {{  intervention.adresse.codePostal }} {{ intervention.adresse.ville }}</span>
+								</div>
+								<div class="col-sm-6 col-6 border-bottom border-dark pt-5 pb-5">
+									<span class="h6">Détails de l'intervention : {{ intervention.interPrecision }}</span>
+								</div>
+								<div class="col-sm-6 col-6 border-bottom border-dark pt-5 pb-5">
+									<span class="h6">Type de mission :{{ intervention.typeInter.nom }} {{ intervention.listeInter.nom }}</span>
+								</div>
+								<div class="col-sm-6 col-6 border-bottom border-dark pt-5 pb-5">
+									Photos : <ul>
+										{% if intervention.photoInter is not empty %}
+											{% for photo in intervention.photoInter %}
+												<li><a href="/uploads/photoInter{{ photo.nom }}" target="_blank">{{ photo.nom }}</a></li>
+											{% endfor %}
+										{% endif %}
+									</ul>
+								</div>
+								<div class="col-sm-6 col-6 border-bottom border-dark pt-5 pb-5">
+														<span class="h6">Prix de l'intervention : {{ intervention.prix }} € {% if intervention.propositionChoisie %}
+																({{ intervention.propositionChoisie.salarie.entreprise.commission * reservation.intervention.prix /100 }})
+															{% endif %}</span>
+								</div>
+								<div class=" col-12 border-bottom border-dark pt-5 pb-5">
+									<p class="h5">Propositions</p>
+    								<table class="table-bordered table">
+										<tr>
+											<th class="text-center">OTD</th>
+											<th class="text-center">Email</th>
+											<th class="text-center">Téléphone</th>
+											<th class="text-center">Entreprise</th>
+											<th class="text-center">Prix proposé + commission</th>
+										</tr>
+										{% for prop in intervention.propositions %}
+											{% if prop == prop.inter.propositionChoisie %}
+												<tr>
+													<td class="text-center text-primary">{{ prop.salarie.civilite.prenom }} {{ prop.salarie.civilite.nom }}</td>
+													<td class="text-center text-primary">{{ prop.salarie.user.email }}</td>
+													<td class="text-center text-primary">{{ prop.salarie.telephone.numero }}</td>
+													<td class="text-center text-primary">{{ prop.salarie.entreprise.denomination }}</td>
+													<td class="text-center text-primary">{{ prop.prix + prop.indemnite }} € ({{ (prop.prix + prop.indemnite)* prop.salarie.entreprise.commission /100 }} €)</td>
+												</tr>
+												{% else %}
+													<tr>
+														<td class="text-center">{{ prop.salarie.civilite.prenom }} {{ prop.salarie.civilite.nom }}</td>
+														<td class="text-center">{{ prop.salarie.user.email }}</td>
+														<td class="text-center">{{ prop.salarie.telephone.numero }}</td>
+														<td class="text-center">{{ prop.salarie.entreprise.denomination }}</td>
+														<td class="text-center">{{ prop.prix + prop.indemnite }} € ({{ (prop.prix + prop.indemnite)* prop.salarie.entreprise.commission /100 }} €) </td>
+													</tr>
+											{% endif %}
+										{% endfor %}
+									</table>
+
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+	</section>
+
+{% endblock %}

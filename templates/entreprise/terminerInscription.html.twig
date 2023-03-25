@@ -1,0 +1,32 @@
+{% extends "base.html.twig" %}
+
+
+{% block connexion %}
+
+
+{% endblock %}
+{% block body %}
+<section class="ls bg-grey-light py-5">
+	<div class="">
+		<div class="row mt-108">
+			<div class="col-12 mb-5 mt-5 pl-5 p-5">
+
+
+	{% block contenu %}{% endblock %}
+
+			</div>
+		</div>
+	</div>
+</section>
+{% endblock %}
+
+{% block javascripts %}
+	<script>
+		function noBack(){window.history.forward()}
+		noBack();
+		window.onload=noBack;
+		window.onpageshow=function(evt){if(evt.persisted)noBack()}
+		window.onunload=function(){void(0)}
+	</script>
+{% endblock  %}
+{% block contact %}{% endblock  %}

@@ -1,0 +1,25 @@
+{% extends "administrateur/baseA.html.twig" %}
+{% block body %}
+
+	<section class="wrapper">
+		<div class="row mt">
+			<div class="col-sm-2"></div>
+			<div class="col-sm-8">
+				<h3>Saisir les type d'interventions</h3>
+				{{form_start(form)}}
+				{{form_label(form.nom,"Type d'intervention",{'label_attr':{'class':'control-label'}})}}
+				{{form_row(form.nom,{'attr':{'class':'form-control form-control-sm'}})}}
+				{{form_label(form.description,"Description de l'intervention",{'label_attr':{'class':'control-label'}})}}
+				{{form_row(form.description,{'attr':{'class':'form-control form-control-sm'}})}}
+				{{form_label(form.listeInter,"Classe de l'intervention",{'label_attr':{'class':'control-label'}})}}
+				{{form_row(form.listeInter,{'attr':{'class':'form-check-input'}})}}
+				<br>
+				<br>
+				<br>
+				<button type="submit" class="btn btn-primary">valider</button>
+				{{form_end(form)}}
+			</div>
+			<div class="col-sm-2"></div>
+		</div>
+	</section>
+{% endblock %}

@@ -1,0 +1,116 @@
+{% extends 'entreprise/baseAE.html.twig' %}
+
+{% block title %}Modifier mes informations
+{% endblock %}
+{% block TitreEntreprise %}
+	<h1>MODIFIER VOS INFORMATIONS</h1>
+{% endblock %}
+{% block pageAccueil %}
+	<h2>Vos informations de contact</h2>
+
+{% endblock %}
+
+{% block contenu %}
+
+
+<div class="col-12 text-center mb--70">
+	<p class="inscriTitre"></p>
+</div>
+
+
+{{form_start(form)}}
+<div class="row text-center">
+	<div class="col-12 mb-5">
+		<p class="h6">Pour tout changement des statuts de votre société , veuillez contacter notre équipe afin de vous accompagner dans les démarches.</p>
+	</div>
+
+	<div class="col-sm-12">
+		<p class="h6">Civilité *</p>
+		{{form_row(form.dirigeant.type)}}
+	</div>
+	<div class="col-sm-6">
+		<div class="form-group has-placeholder">
+			<p class="h6">Nom du reponsable légal *
+			</p>
+			{{form_row(form.dirigeant.nom,{ 'label' : ' ' ,'attr':{'class':"form-control form-control-lg bg-white",'placeholder':'Nom du responsable légal *'}})}}
+
+		</div>
+	</div>
+	<div class="col-sm-6">
+		<div class="form-group has-placeholder">
+			<p class="h6">Prénom du reponsable légal *
+			</p>
+			{{form_row(form.dirigeant.prenom,{'label' : ' ' ,'attr':{'class':"form-control form-control bg-white","placeholder":"Prénom du reponsable légal *"}})}}
+
+
+		</div>
+	</div>
+	<div class="col-sm-6">
+		<div class="form-group has-placeholder">
+			<p class="h6">Numéro de téléphone mobile *
+			</p>
+			{{form_row(form.telephone.numero,{'label' : ' ' ,'attr':{'class':"form-control form-control-lg bg-white","placeholder":"Numéro de téléphone *"}})}}
+
+
+		</div>
+	</div>
+	<div class="col-sm-6">
+		<div class="form-group has-placeholder">
+			<p class="h6">Adresse mail de contact *
+			</p>
+			<p class="h6">Veuillez nous contacter</p>
+
+		</div>
+	</div>
+
+
+	<div class="col-sm-6">
+		<div class="form-group has-placeholder">
+			<p class="h6">Numéro de la voie
+			</p>
+			{{form_row(form.adresse.numero,{'label' : ' ' ,'attr':{'class':"form-control form-control-lg bg-white","placeholder":"Numéro de la voie"}})}}
+
+
+		</div>
+	</div>
+	<div class="col-sm-6">
+		<div class="form-group has-placeholder">
+			<p class="h6">Nom de la voie *
+			</p>
+			{{form_row(form.adresse.nomVoie,{'label' : ' ' ,'label' : ' ' , 'attr':{'class':"form-control  bg-white","placeholder":"Nom de la voie *"}})}}
+
+
+		</div>
+	</div>
+	<div class="col-sm-6">
+		<div class="form-group has-placeholder">
+			<p class="h6">Code postal *
+			</p>
+			{{form_row(form.adresse.codePostal,{'label' : ' ' , 'attr':{'class':"form-control form-control-lg bg-white","placeholder":"Code Postal *"}})}}
+
+		</div>
+	</div>
+	<div class="col-sm-6">
+		<div class="form-group has-placeholder">
+			<p class="h6">Ville*( indiquez d'abord votre code postal)
+			</p>
+			{{form_row(form.adresse.ville,{'label' : ' ' , 'attr':{'class':"form-control form-control-lg bg-white",'list':'city', 'placeholder' : 'Ville(Indiquez d\'abord votre code postal)*'}})}}
+							<datalist id="city"></datalist>
+		</div>
+	</div>
+	<div class="col-sm-6 text-center">
+		<button id="logo" type="button">Sélectionnez votre logo (non obligatoire)</button>
+		{{form_row(form.logo,{ 'label' : ' ','attr':{'class':"custom-file-input"}})}}
+
+
+	</div>
+	<div class="col-sm-12 text-center mt-3">
+	<button type="submit" class="btn btn-maincolor">Valider</button>
+	</div>
+</div>
+				{{form_end(form)}}
+			
+
+
+	
+{% endblock %}

@@ -1,0 +1,142 @@
+.pricing-plan {
+  text-align: center;
+  padding: 65px 60px;
+  transition: transform 0.6s ease-in-out, box-shadow 0.6s ease-in-out;
+
+  &.ls{
+	.price-wrap:not([class*='bg-']){
+	  color: $darkColor;
+	}
+  }
+
+  &:hover {
+	transform: translateY(-15px);
+	box-shadow: 0px 8px 12px 3px rgba(0, 0, 0, 0.35);
+  }
+
+  & > div {
+	margin-bottom: 95px;
+
+	&:last-child {
+	  margin-bottom: 0;
+	}
+  }
+
+  &.with-features > div {
+	margin-bottom: 53px;
+
+	&:last-child {
+	  margin-bottom: 0;
+	}
+  }
+
+  .plan-header {
+	&[class*='bg-'] {
+	  padding: 30px 0;
+	  margin-left: -60px;
+	  margin-right: -60px;
+	  margin-top: -65px;
+	}
+
+	.plan-name {
+	  margin-bottom: 0;
+
+	  &[class*='bg-'] {
+		padding-top: 30px;
+		margin-top: -40px;
+	  }
+	}
+
+	.plan-description {
+	  h6{
+		color: $darkColor;
+		  font-weight: 200;
+	  }
+	}
+  }
+
+
+  .price-wrap {
+	display: flex;
+	justify-content: center;
+	align-items: flex-end;
+	font-Size: 60px;
+	flex-wrap: wrap;
+	line-height: 0.8;
+	font-weight: 500;
+
+	&[class*='bg-'] {
+	  padding: 30px 0;
+	  margin-left: -60px;
+	  margin-right: -60px;
+	}
+
+	.plan-sign {
+	  font-Size: 40px;
+	  position: relative;
+	  top: -18px;
+	}
+
+	.plan-decimals {
+	  font-Size: 40px;
+	}
+
+	.plan-month {
+	  font-Size: 20px;
+	  font-weight: 200;
+	  width: 100%;
+	  margin-top: 20px;
+	  text-transform: capitalize;
+	}
+  }
+
+  .plan-button {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	.btn {
+	  margin-bottom: 0;
+	}
+
+	.btn + .btn {
+	  margin-top: 15px;
+	}
+  }
+
+  @media(max-width: 1199px) {
+	padding: 45px 40px;
+	& > div {
+	  margin-bottom: 65px;
+
+	  &:last-child {
+		margin-bottom: 0;
+	  }
+	}
+
+	&.with-features > div {
+	  margin-bottom: 30px;
+
+	  &:last-child {
+		margin-bottom: 0;
+	  }
+	}
+
+	.price-wrap {
+	  &[class*='bg-'] {
+		margin-left: -40px;
+		margin-right: -40px;
+	  }
+	}
+
+	.plan-header {
+	  &[class*='bg-'] {
+		margin-left: -40px;
+		margin-right: -40px;
+		margin-top: -45px;
+	  }
+	}
+  }
+}
+

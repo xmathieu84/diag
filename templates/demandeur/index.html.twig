@@ -1,0 +1,87 @@
+{% extends template %}
+
+{% block title %}Accueil
+{% endblock %}
+{% block titredemandeur %}
+	<h1>Accueil</h1>
+{% endblock  %}
+
+
+
+{% block contenu %}
+	<div class="row">
+		{% if interDiags is not empty %}
+			<div class="col-12 mb-5 text-center">
+				<p>Vous avez un diagnostic en attente de règlement. Veuillez cliquer <a
+								href="{{ path('enAttenteDePaiement') }}" class="h4 color_blue">ici</a> afin d'accéder au paiement</p>
+			</div>
+		{% endif %}
+	</div>
+	<div class="row ml-5 mr-5">
+		<div class="col-12 cs text-center pt-5 pb-5">
+						{% if demandeur.profil =="Particulier propriétaire" %}
+							<h5  style="color:white">
+								{{demandeur.civilite.type}}
+								{{ demandeur.civilite.prenom }}
+								{{ demandeur.civilite.nom }}
+							</h5>
+							{% else %}
+								<h5 style="color:white">
+									{{demandeur.profil}}
+									{{ demandeur.nom }}
+								</h5>
+						{% endif %}
+
+
+
+					{% if demandeur.profil != 'Particulier propriétaire' %}
+						<div class="row mt-4 mb-4">
+							<div class="col-12">
+								<div>
+									<p class="h4"style="color:white">SIRET :
+										{{ demandeur.siretTva.siret }}</p>
+								</div>
+							</div>
+							<div class="col-12">
+
+								<div>
+									<p class="h4"style="color:white">TVA intracommunautaire :
+										{{ demandeur.siretTva.tva }}</p>
+								</div>
+
+							</div>
+						</div>
+
+					{% endif %}
+					<span class="h4" style="color:white"><i class="fas fa-envelope"></i>
+						:</span>
+					<span class="h4"style="color:white">
+
+						{{ demandeur.user.email }}</span>
+
+
+
+				<p class="h4" style="color:white">
+					<i class="fas fa-Téléphone"></i>
+					: {{demandeur.telephon.numero}}</p>
+				<div class="plan-features">
+					<p>
+						<i class="fas fa-map-marker-alt" style="color:white"></i>
+
+					</p>
+					<p class="h6" style="color:white">{{ demandeur.adresse.numero }}
+						{{ demandeur.adresse.nomVoie }}</p>
+
+					<p class="h6" style="color:white">{{ demandeur.adresse.codePostal }}
+
+						{{ demandeur.adresse.ville }}</p>
+
+
+
+
+		</div>
+	</div>
+
+</div>
+
+{% endblock %}

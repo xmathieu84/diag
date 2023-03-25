@@ -1,0 +1,98 @@
+{% extends 'entreprise/baseAE.html.twig' %}
+{% block pageAccueil %}
+    <h4>NOTAM</h4>
+{% endblock %}
+{% block title %}Notam{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
+
+
+{% endblock %}
+{% block js %}
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
+
+{% endblock %}
+
+{% block contenu %}
+<div class="row">
+    <div class="col-sm-12 mb-5">
+        <p class="h4">NOTAM édités au  {{ date|format_datetime('short','none',locale='fr') }}</p>
+    </div>
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8 text-center">
+        <label for="rechercheAdresse">Localiser une adresse : </label>
+        <div class="input-group mb-3">
+            <input type="text" class="form-control bg-white"  aria-label="Recipient's username" aria-describedby="basic-addon2" id="rechercheAdresse">
+            <div class="input-group-append">
+                <span class="input-group-text bg-white" id="basic-addon2" style="border: none"><img src="/css/css_site/img/loupetpetit.png" alt="" id="loupe"></span>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-sm-2"></div>
+
+    <div class="col-sm-12 carte">
+
+    </div>
+
+    <div class="col-12">
+        <div id="accordion01" role="tablist">
+
+            <div class="card">
+                <div class="card-header" role="tab" id="collapse02_header">
+                    <h5>
+                        <a class="collapsed" data-toggle="collapse" href="#collapse02" aria-expanded="false" aria-controls="collapse02">
+                            Notam importants
+                        </a>
+                    </h5>
+                </div>
+                <div id="collapse02" class="collapse" role="tabpanel" aria-labelledby="collapse02_header" data-parent="#accordion01">
+                    <div class="card-body">
+                        <div class="table-responsive ml--60 mr--50">
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th class="text-center">Date de début</th>
+                                    <th class="text-center">Date de fin</th>
+                                    <th class="text-center">Localisation</th>
+                                    <th class="text-center">Altitude</th>
+                                    <th class="text-center">Contenu</th>
+                                </tr>
+                                </thead>
+                                <tbody class="important"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" role="tab" id="collapse03_header">
+                    <h5>
+                        <a class="collapsed" data-toggle="collapse" href="#collapse03" aria-expanded="false" aria-controls="collapse03">
+                            Notam non-pertinents
+                        </a>
+                    </h5>
+                </div>
+                <div id="collapse03" class="collapse" role="tabpanel" aria-labelledby="collapse03_header" data-parent="#accordion01">
+                    <div class="card-body">
+                        <div class="table-responsive ml--60 mr--50">
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th class="text-center">Date de début</th>
+                                    <th class="text-center">Date de fin</th>
+                                    <th class="text-center">Localisation</th>
+                                    <th class="text-center">Altitude</th>
+                                    <th class="text-center">Contenu</th>
+                                </tr>
+                                </thead>
+                                <tbody class="nonPer"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

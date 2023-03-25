@@ -1,0 +1,40 @@
+{% extends 'entreprise/baseAE.html.twig' %}
+{% block TitreEntreprise %}
+	<h1>Message non-lu</h1>
+{% endblock TitreEntreprise %}
+{% block contenu %}
+
+	<div class="row">
+
+
+		<div class="col-sm-12">
+
+			<table class="table table-bordered">
+				<tr>
+					<th>Date</th>
+					<th>Sujet</th>
+				</tr>
+				{% for message in messages %}
+					<tr>
+						<td>
+							{{message.date|format_datetime('short', 'short', locale = 'fr')}}
+						</td>
+						<td>{{ message.sujet }}</td>
+						<td>
+							<a href="{{ path('lire', {id: message.id})}}">
+								<button class="btn-sm btn-info ">Lire</button>
+							</a>
+						</td>
+						<td>
+							<a href="">
+								<button class="btn-sm btn-warning ">Archiver</button>
+							</a>
+						</td>
+					</tr>
+				{% endfor %}
+			</table>
+		</div>
+
+
+	</div>
+{% endblock %}

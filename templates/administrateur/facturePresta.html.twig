@@ -1,0 +1,113 @@
+{% extends 'administrateur/baseA.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-12 text-center">
+            <p class="h2">Factures OTD</p>
+        </div>
+        <div class="col-12 mt-5">
+            <div class="row">
+                <div class="col-4 text-right">
+                    <button class="btn btn-primary precedentAdmin" data-type = "otd">
+                        Précédent
+                    </button>
+                </div>
+                <div class="col-4 text-center">
+                    <span class="h4 mois">Aout</span>
+                </div>
+                <div class="col-4 text-left">
+                    <button class="btn btn-primary suivantAdmin" data-type = "otd">
+                        Suivant
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="row zoneFactureAdminPresta mt-5">
+                {% for facture in factures %}
+                    <div class="col-3 text-center">
+                        <a href="/uploads/factureDD/{{ facture.nom }}" target="_blank">
+                            <figure>
+                                <img src="{{ asset('css/css_site/images/pdfmoyen.png') }}" alt="">
+                                <figcaption>{{ facture.nom }}</figcaption>
+                            </figure>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-12 text-center mt-5">
+            <p class="h2">Factures Institutionnel</p>
+        </div>
+        <div class="col-12">
+            <div class="row">
+                <div class="col-4 text-right">
+                    <button class="btn btn-primary precedentAdmin" data-type = "insti">
+                        Précédent
+                    </button>
+                </div>
+                <div class="col-4 text-center">
+                    <span class="h4 mois">Aout</span>
+                </div>
+                <div class="col-4 text-left">
+                    <button class="btn btn-primary suivantAdmin"data-type = "insti">
+                        Suivant
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="row zoneFactureAdminPresta mt-5">
+                {% for facture in factureIs %}
+                    <div class="col-3 text-center">
+                        <a href="/uploads/factureInsti/{{ facture.nom }}" target="_blank">
+                            <figure>
+                                <img src="{{ asset('css/css_site/images/pdfmoyen.png') }}" alt="">
+                                <figcaption>{{ facture.nom }}</figcaption>
+                            </figure>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-12 text-center mt-5">
+            <p class="h2">Factures Grand Compte</p>
+        </div>
+        <div class="col-12">
+            <div class="row">
+                <div class="col-4 text-right">
+                    <button class="btn btn-primary precedentAdmin" data-type = "gc">
+                        Précédent
+                    </button>
+                </div>
+                <div class="col-4 text-center">
+                    <span class="h4 mois">Aout</span>
+                </div>
+                <div class="col-4 text-left">
+                    <button class="btn btn-primary suivantAdmin" data-type = "gc">
+                        Suivant
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="row zoneFactureAdminPresta mt-5">
+                {% for facture in factureGc %}
+                    <div class="col-3 text-center">
+                        <a href="/uploads/factureInsti/{{ facture.nom }}" target="_blank">
+                            <figure>
+                                <img src="{{ asset('css/css_site/images/pdfmoyen.png') }}" alt="">
+                                <figcaption>{{ facture.nom }}</figcaption>
+                            </figure>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block titre %}
+Facture prestation DD
+{% endblock %}
+

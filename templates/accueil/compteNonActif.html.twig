@@ -1,0 +1,28 @@
+{% extends 'accueil/baseaccueil.html.twig' %}
+
+{% block bodyAccueil %}
+    <section class="ls ms s-pt-xl-150 s-pt-lg-130 s-pt-md-90 s-pt-60 s-pb-xl-140 s-pb-lg-120 s-pb-md-80 s-pb-50 c-mb-10 c-gutter-60">
+
+        <div class="container">
+            <div class="row mt-5">
+                <div class="col-12 text-center mt-5">
+                    <p class="h5">Votre compte n'est pas activé.</p>
+                    <p class="h5">Cliquez sur le lien reçu dans la mail d'activation de votre compte</p>
+                    <p class="h5">Pensez à vérifier dans vos indésirables.</p>
+                </div>
+                <div class="col-sm-12 text-center">
+                    <p class="h7">Si vous n'avez pas reçu d'activation cliquez ci-dessous</p>
+                    <button class="btn btn-maincolor mt-5" data-user="{{ id }}">Recevoir un nouveau lien d'activation</button>
+                </div>
+                <div class="col-sm-12 text-center mt-5">
+                    <p class="h5 message"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block title %}
+Compte non activé
+{% endblock %}
+

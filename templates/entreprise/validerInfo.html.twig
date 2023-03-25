@@ -1,0 +1,24 @@
+{% extends 'entreprise/baseAE.html.twig' %}
+
+{% block title %}
+Changement validé
+{% endblock %}
+
+{% block contenu %}
+    {% if is_granted('ROLE_OTI') %}
+        {%set type = "OTD"%}
+    {% endif %}
+    {% if is_granted('ROLE_ODI') %}
+        {%set type = "ODI"%}
+    {% endif %}
+<div class="row">
+    <div class="col-12">
+        <p class="h4">Vos changements ont bien été enregistrés</p>
+    </div>
+
+    <div class="col-12 mt-2">
+        <p class="h4">Si vous avez ajouté un {{ type }}, n'oubliez pas de définir ses tarifs d'intervention dans la rubrique <span class="h3">"GESTION"</span> du menu .</p>
+    </div>
+</div>
+{% endblock %}
+

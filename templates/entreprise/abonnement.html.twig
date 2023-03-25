@@ -1,0 +1,396 @@
+{% extends template %}
+{% block title %}
+	{% if entreprise.cgv == true %}
+		Abonnement
+	{% else %}
+		Choix de l'abonnement
+	{% endif %}
+{% endblock %}
+{% block nomSection %}Bienvenue sur DIAG-DRONE
+{% endblock %}
+{% block lienSection %}
+	<a href="{{path('home')}}">Accueil</a>
+{% endblock %}
+{% block nomPage %}
+	Compte activé!
+{% endblock %}
+
+{% block contenu %}
+
+
+	<section class="ls my-50">
+		{% if entreprise.cgv == false %}
+			<div class="container-fluid">
+				<div class="row row_price">
+
+					<div class="col-sm-2"></div>
+					<div class="col-sm-8 text-center mt-3">
+						<h5>Progression de votre Inscription</h5>
+						<div class="progress">
+							<div class="progress-bar" role="progressbar" style="width: 10%;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">10%</div>
+						</div>
+
+
+					</div>
+					<div class="col-sm-2"></div>
+				</div>
+			</div>
+
+			{#  <div class="container d-flex justify-content-center padding">
+				<div class="row">
+					<div class="col-md-9 col-sm-6">
+						<div class="progress blue">
+                <span class="progress-left">
+                    <span class="progress-bar"></span>
+                </span>
+							<span class="progress-right">
+                    <span class="progress-bar"></span>
+                </span>
+							<div class="progress-value">100%</div>
+						</div>
+					</div>
+
+
+				</div>
+			</div>#}
+
+		{% endif %}
+		{% if etat %}
+
+			<div class="container-fluid">
+				<div class="row row_price">
+					<div class="form-check form-check-inline select_p">
+						<input class="form-check-input no_opacity " type="radio" id="" name="inlineRadioOptions" value="{{etat.abonnement.id}}">
+						<label class="form-check-label pricing-plan version_two box-shadow with-features ls blockSelect" for="inlineRadio">
+
+							<div class="form_inside">
+								<div class="plan-header">
+									<div class="plan-name">
+										<h5 class="abo_title">
+											Abonnement
+											<span class="color_blue">{{etat.abonnement.nom}}</span>
+										</h5>
+									</div>
+								</div>
+								<div class="price-wrap color-darkgrey">
+									<span class="plan-sign">€</span>
+									<span class="plan-price">{{etat.montant}}</span>
+
+									<span class="plan-month">HT /mois</span>
+								</div>
+								<div class="plan-features mt-5">
+									<ul class="list-unstyled text-left">
+										{% if is_granted('ROLE_OTD') %}
+											<li>
+												<i class="fa fa-check color_blue" aria-hidden="true"></i>
+												<span class="supAbo">{{etat.abonnement.otdMax}}
+												OTD inclus</span>
+											</li>
+
+
+											<li>
+												<i class="fa fa-check color_blue" aria-hidden="true"></i>
+												<span class="supAbo">{{etat.abonnement.otdSup}}€ HT /mois par OTD supplémentaire</span>
+											</li>
+										{% endif %}
+
+
+									</ul>
+
+								</div>
+
+								<div class="plan-features mt-5">
+									<ul class="list-unstyled text-left">
+
+										{% for particularite in etat.abonnement.particularites %}
+											<li>
+												<i class="fa fa-check color_blue" aria-hidden="true"></i>
+												{% if particularite == 'Commission sur intervention : 10%' or particularite =="Commission sur intervention : 12% " %}
+													<span class="particularité">{{particularite}}</span>
+													{% else %}
+														<span>{{particularite}}</span>
+												{% endif %}
+
+
+											</li>
+
+										{% endfor %}
+									</ul>
+								</div>
+
+							</div>
+						</label>
+					</div>
+
+				</div>
+				{% if etat.abonnement.nom !='Infinite network' %}
+					<div class="col-12 text-center mt-35 mb-35">
+						<a href="{{ path('changerAbonnement') }}" class="btn btn-maincolor">Changer mon abonnement</a>
+					</div>
+				{% endif %}
+
+			</div>
+
+			<div class="col-sm-12 text-center">
+				{% if entreprise.cgv == false %}
+					{% if entreprise.formJuridique == 'auto-entrepreneur'   %}
+						<a href="{{path('phase2')}}" class="btn btn-maincolor">Continuer mon inscription</a>
+					{% else %}
+						<a href="{{path('finalisation')}}" class="btn btn-maincolor">Continuer mon inscription</a>
+
+
+					{% endif %}
+
+				{% endif %}
+
+
+			</div>
+		{% else %}
+			<div class="container">
+				<div class="row">
+					<div class="col-12 pt-35">
+						<h4>Merci, pour votre confiance
+							<span class="color_blue">.</span>
+						</h4>
+					</div>
+					<div class="col-12 my-30">
+						<p>Afin d'accéder à votre
+							<span class="color_blue">espace personnel</span>
+							merci de poursuivre votre inscription en saisissant les informations demandées ci-dessous</p>
+					</div>
+					<div class="col-12 mt-4 mb-5">
+						<p class="h5">Vous souhaitez une assistance pour vous inscrire, prenons rendez-vous par <span class="h4 "><a class="color_blue" href="mailto:assistance@diag-drone.com">E-mail</a></span> ou par <span class="h4 color_blue"><a class="color_blue"	href="tel:0665628541">téléphone</a></span>.</p>
+					</div>
+					<div class="col-md-12">
+						<div class="row"></div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="container">
+				<div class="row">
+					<div class="col-12 mb-5">
+						<p class="h4">
+
+							Je possède un code promotionnel
+							<span class="color_blue">pour mon abonnement</span>
+						</p>
+						<div class="row">
+							<div class="col-md-6 col-xs-12 mt-1">
+								<input type="text" id="codePromo">
+							</div>
+							<div class="col-md-6 col-xs-12 mt-1">
+								<button class="btn btn-sm btn-primary">Vérifier</button>
+							</div>
+						</div>
+					</div>
+					<div class="col-12 my-50" id="step1">
+						<h5>
+							<span class="color_blue">
+								1)
+							</span>
+							Sélectionner
+							<span class="color_blue">votre formule</span>
+						</h5>
+					</div>
+				</div>
+			</div>
+			<div class="container-fluid">
+				<div class="row row_price">
+
+					{% for abonnement in abonnements %}
+						<div class="form-check form-check-inline select_p">
+							<input class="form-check-input no_opacity abonnement" type="radio" id="inlineRadio{{abonnement.id}}" name="inlineRadioOptions" value="{{abonnement.id}}">
+							<label class="form-check-label pricing-plan version_two box-shadow with-features ls blockSelect" data-aboid="{{abonnement.id}}" for="inlineRadio{{abonnement.id}}">
+
+								<div class="form_inside" id="abonnement{{abonnement.id}}">
+
+									<div class="plan-header">
+										<div class="plan-name">
+											<h5 class="abo_title">
+												Abonnement
+												<span class="color_blue">{{abonnement.nom|capitalize}}</span>
+
+											</h5>
+										</div>
+									</div>
+									<div class="price-wrap color-darkgrey">
+
+										<span class="plan-price" id="prixAbo{{ abonnement.id }}">{{abonnement.prix}}</span>
+										<span class="plan-sign">€</span>
+										<span class="plan-month">HT /mois</span>
+										<span class="h5 mt-3" id="htABo{{ abonnement.id }}">({{ (abonnement.prix*1.2)|number_format(2) }} TTC / mois) </span>
+									</div>
+									{% if abonnement.nom == 'Infinite network' %}
+										<div class="mt-4">
+											<span class="text-black minAbo">6 mois d'abonnement minimum</span>
+										</div>
+
+									{% endif %}
+									<div class="plan-features mt-5">
+										<ul class="list-unstyled text-left">
+											{% if is_granted('ROLE_OTD') %}
+												<li>
+													<i class="fa fa-check color_blue" aria-hidden="true"></i>
+													<span class="supAbo">{{abonnement.otdMax}}
+													OTD inclus</span>
+												</li>
+
+												{% if abonnement.nom !="So free" %}
+													<li>
+														<i class="fa fa-check color_blue" aria-hidden="true"></i>
+														<span class="supAbo">{{abonnement.otdSup}}€ HT/mois par OTD supplémentaire</span>
+													</li>
+
+												{% endif %}
+											{% endif %}
+
+
+
+										</ul>
+
+									</div>
+									<div class="plan-features mt-5">
+										<ul class="list-unstyled text-left">
+
+
+											{% for particularite in abonnement.particularites %}
+												<li>
+													<i class="fa fa-check color_blue" aria-hidden="true"></i>
+
+														<span>{{particularite}}</span>
+
+
+												</li>
+
+											{% endfor %}
+											{% if abonnement.commission %}
+												<li>
+													<i class="fa fa-check color_blue" aria-hidden="true"></i>
+
+													<span class="color_blue">Commission sur intervention : {{abonnement.commission}}%</span>
+
+
+												</li>
+											{% endif %}
+										</ul>
+									</div>
+									<div class="row">
+										<div class="col-12 align-items-center">
+											<button data-aboid="{{ abonnement.id }}" class="btn btn-maincolor plan-button_footer_price selectAbo mt-5">Sélectionner</button>
+										</div>
+									</div>
+								</div>
+							</label>
+						</div>
+
+					{% endfor %}
+				</div>
+				{% if is_granted('ROLE_OTD') %}
+					<div class="row mb-50 py-50">
+						<div class="col-12 text-center">
+							<a href="#step2" class="btn btn-outline-maincolor btnNextorPrev2 ">Choisir ma durée<i class="fas fa-arrow-down "></i>
+							</a>
+						</div>
+					</div>
+					</div>
+					<section class="ls s-py-xl-160 s-py-lg-130 s-py-md-90 s-py-60 c-gutter-60 divider-top-2 " id="step2">
+
+						<div class="container">
+							<div class="row">
+								<div class="col-sm-8 col-xs-12 mt-50">
+									<h5>
+								<span class="color_blue">
+									2)
+								</span>
+										Choisissez votre
+										<span class="color_blue">
+									durée d'engagement</span>
+									</h5>
+								</div>
+								<div class="col-sm-4 col-xs-12 text-right my-50 ">
+									<a href="#step1" class="btn btn-outline-maincolor btnNextorPrev ">Changer mon abonnement
+										<i class="fas fa-arrow-up"></i>
+									</a>
+								</div>
+								<div class="col-sm-12 mt-50">
+
+									<input type="range" value="1" min="1" max="12" list="mois" class="form-control-range timeabo" step="1" data-abonnement="3">
+
+									<div class="row">
+										{% for i in 1..12 %}
+											<div class="col-sm-1 text-center padOnMobile">{{i}}
+												mois</div>
+										{% endfor %}
+
+										<br>
+										<br>
+
+
+									</div>
+									<div class="col-sm-12 message"></div>
+								</div>
+							</div>
+						</div>
+					</section>
+				{% endif %}
+
+
+
+				<div class="col-sm-12 text-center CGU"></div>
+
+
+			</section>
+
+		{% endif %}
+
+	</section>
+
+	<button type="button" class="btnAbo" data-toggle="modal" data-target="#modalResultAbonnement" style="display: none">
+		<button type="button" id="btnAmbassadeur" data-toggle="modal" data-target="#modaleAmbassadeur" style="display: none">
+
+	</button>
+	<div class="modal fade" id="modalResultAbonnement" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="staticBackdropLabel">Votre abonnement</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-12 reponseAbo">
+
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary refuserAboCodePromo" data-dismiss="modal">Refuser l'offre</button>
+					<button type="button" class="btn btn-primary validerAboCodePromo" data-dismiss="modal">Accepter l'offre</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="modaleAmbassadeur" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="staticBackdropLabel">Votre abonnement</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body zoneReponse">
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary refusAmbassadeur" data-dismiss="modal">Refuser l'abonnement</button></button>
+					<button type="button" class="btn btn-primary validerAmbassadeur">Valider l'abonnement</button>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock  %}

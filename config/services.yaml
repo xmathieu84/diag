@@ -1,0 +1,69 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    photos_directory: '%kernel.project_dir%/public/uploads/photoInter'
+    photoRappport_directory: '%kernel.project_dir%/public/uploads/photoRapport'
+    video_directory: '%kernel.project_dir%/public/uploads/videoRapport'
+    fichier_directory: '%kernel.project_dir%/public/uploads/fichierRapport'
+    logo_directory: '%kernel.project_dir%/public/uploads/logo'
+    assurances_directory: '%kernel.project_dir%/public/uploads/assurances'
+    mandatCerfa_directory: '%kernel.project_dir%/public/uploads/mandatCerfa'
+    licence_directory: '%kernel.project_dir%/public/uploads/licence'
+    cerfa_directory: '%kernel.project_dir%/public/uploads/cerfa'
+    factureDem_directory: '%kernel.project_dir%/public/uploads/factureDem'
+    factureEnt_directory: '%kernel.project_dir%/public/uploads/factureEnt'
+    factureAdmin_directory: '%kernel.project_dir%/public/uploads/factureAdmin'
+    devisAdmin_directory: '%kernel.project_dir%/public/uploads/devisAdmin'
+    rapport_directory : '%kernel.project_dir%/public/uploads/rapport'
+    cerfaInter_directory : '%kernel.project_dir%/public/uploads/cerfaInter'
+    sepa_directory : '%kernel.project_dir%/public/uploads/sepa'
+    devis_directory : '%kernel.project_dir%/public/uploads/devis'
+    justificatif_directory: '%kernel.project_dir%/public/uploads/justifcatif'
+    diag_directory : '%kernel.project_dir%/public/uploads/diagnostic'
+    factureDD_directory : '%kernel.project_dir%/public/uploads/factureDD'
+    factureInsti_directory : '%kernel.project_dir%/public/uploads/factureInsti'
+    appelOffre_directory: '%kernel.project_dir%/public/uploads/appelOffre'
+    dossier_directory : '%kernel.project_dir%/public/uploads/dossier'
+    fichierPrix_directory : '%kernel.project_dir%/public/uploads/fichierPrix'
+    
+
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+    # makes classes in src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    App\:
+        resource: '../src/*'
+        exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
+
+    # controllers are imported separately to make sure services can be injected
+    # as action arguments even if you don't extend any base controller class
+    App\Controller\:
+        resource: '../src/Controller'
+        tags: ['controller.service_arguments']
+
+    # add more service definitions when explicit configuration is needed
+    # please note that last definitions always *replace* previous ones
+    App\Twig\AppExtension:
+        lazy: true
+
+
+
+    App\Controller\OpenApi\OpenApiFactory:
+        decorates: 'api_platform.openapi.factory'
+        arguments: [ '@App\Controller\OpenApi\OpenApiFactory.inner' ]
+        autoconfigure: false
+
+    App\EventListener\LogoutListener:
+        tags:
+            - name: 'kernel.event_listener'
+              event: 'Symfony\Component\Security\Http\Event\LogoutEvent'
+              dispatcher: security.event_dispatcher.main
+
+

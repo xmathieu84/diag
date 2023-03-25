@@ -1,0 +1,39 @@
+{% extends 'institution/baseInsti.html.twig' %}
+
+{% block title %}
+Changer mes coordonnées bancaires
+{% endblock %}
+
+{% block contenu %}
+<div class="row bg-white pt-5 pb-5">
+    <div class="col-12 mb-5 text-center">
+        <p class="h5">Changer vos coordonnées bancaires</p>
+    </div>
+    <div class="col-sm-6">
+        <label for="iban">IBAN</label>
+        <input type="text" name="" id="iban" value="{{ banque.iban }}">
+    </div>
+    <div class="col-sm-6 ">
+        <label for="bic">Code BIC</label>
+        <input type="text" name="" id="bic" value="{{ banque.bic }}">
+    </div>
+
+    <div class="col-6">
+        <label for="adresse">Adresse de votre banque</label>
+        <input type="text" name="" id="adresse" value="{{ banque.adresse }}">
+    </div>
+<div class="col-6">
+    <label for="nom">Nom de votre banque</label>
+    <input type="text" name="" id="nom" value="{{ banque.nom }}">
+</div>
+    <div class="col-12 text-center mt-5">
+        <button class="btn btn-maincolor">Valider</button>
+    </div>
+    {% if banque.sepaSigne %}
+        <div class="col-sm-12 text-center mt-5">
+            <a href="/uploads/sepa/{{ banque.sepaSigne }}">Voir mon mandat de prélèvement SEPA</a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
+

@@ -1,0 +1,134 @@
+<div class="imageFactAdmin"><img src="../public/css/css_site/images/logo-diagdrone.png" alt="" class="imgPdf"></div>
+
+<div class="diagdrone">
+	<span>SAS DIAG DRONE</span><br>
+	<span>200 rue Michel de Montaigne</span><br>
+	<span>84140 AVIGNON</span><br>
+	<span class="infoPdf">Numéro de SIREN
+	</span>
+	<span>
+		: 880431580</span><br>
+	<span class="infoPdf">Numéro de SIRET:
+	</span>
+	<span>88043158000013</span><br>
+	<span class="infoPdf">Numéro TVA intracommunautaire
+	</span>
+	<span>
+		: FR78880431580</span><br>
+	<span class="infoPdf">Code NAF / APE</span>
+	<span>
+		: 6312Z (portails Internet)</span>
+</div>
+
+<div class="client">
+	<span>{{entreprise.nom}}</span><br>
+	<span>{{entreprise.nomDirigeant}}</span><br>
+	<span>{{entreprise.adresse}}</span><br>
+	<span>{{entreprise.ville}}</span><br>
+</div>
+<div class="factPdf">
+	<h3>
+		Facture n°
+		{{numero}}
+	</h3>
+
+</div>
+<div>
+	<p>Le
+		{{date}}</p>
+</div>
+
+<div class="table">
+	<table class="facture">
+		<tr>
+			<th class="reference">Référence</th>
+			<th class="designation">Désignation</th>
+			<th class="quantite">Quantité</th>
+			<th class="unite">Unité</th>
+			<th class="unitaire">PU vente</th>
+			<th class="taxe">TVA</th>
+			<th class="horsTaxe">Montant HT</th>
+		</tr>
+		{% for ligne in lignes %}
+			<tr>
+				<td>{{ligne.ref}}</td>
+				<td class="test">
+					{{ligne.designer.designation}}
+					<br>
+					{% if ligne.designer.ligne1 %}
+
+						<span>{{ligne.designer.ligne1}}</span><br>
+					{% endif %}
+
+					{% if ligne.designer.ligne2 %}
+
+						<span>{{ligne.designer.ligne2}}</span><br>
+					{% endif %}
+					{% if ligne.designer.ligne3 %}
+
+						<span>{{ligne.designer.ligne3}}</span><br>
+					{% endif %}
+					{% if ligne.designer.ligne4 %}
+
+						<span>{{ligne.designer.ligne4}}</span><br>
+					{% endif %}
+					{% if ligne.designer.ligne5 %}
+
+						<span>{{ligne.designer.ligne5}}</span><br>
+					{% endif %}
+					{% if ligne.designer.ligne6 %}
+
+						<span>{{ligne.designer.ligne6}}</span><br>
+					{% endif %}
+				</td>
+				<td>{{ligne.nombre}}</td>
+				<td>{{ligne.unitaire}}</td>
+				<td>{{ligne.prixUnitVente}}
+					€</td>
+				<td>{{ligne.tva}}</td>
+				<td>{{ligne.montantHors}}
+					€</td>
+
+
+			</tr>
+		{% endfor %}
+	</table>
+</div>
+
+<div class="piedDePage">
+	<p>Montant HT :
+		<span>
+			{{HT|number_format(2)}}
+
+			€</span>
+
+	</p>
+
+	<p>
+		TVA(20%) :
+		<span>{{tva|number_format(2)}}
+
+			€</span>
+	</p>
+
+	<p>
+		Total :
+		<span>{{TTC|number_format(2)}}
+
+
+			€ TTC</span>
+	</p>
+
+</div>
+
+<footer>
+	<p>CLAUSE DE RÉSERVE DE PROPRIÉTÉ : Conformément à la loi 80.335 du 12 mai 1980, nous réservons la propriété des produits
+																																		    et marchandises, objets des présents débits, jusqu'au paiement de l'intégralité du prix et de ses accessoires. En cas de
+																																		    non paiement
+																																		    total ou partiel du prix del'échéance pour quelquecause quecesoit, deconvention expresse, nous nousréservonslafaculté,
+																																		    sansformalités, dereprendre matériellement possession deces produits ou marchandisesàvosfrais, risqueset périls.
+																																		    Pénalité deretard : 3 foisletaux d'intérêt légalaprès dateéchéance. Escompte pour règlement anticipé: 0% (sauf condition
+																																		    particulière définie danslesconditions derèglement) Le montant del'indemnitéforfaitaire pour frais derecouvrement
+																																		    prévueen douzièmealinéa del'articleL441-6 est fixéà 40 Eurosen matièrecommerciale.
+	</p>
+</footer>

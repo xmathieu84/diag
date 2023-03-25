@@ -1,0 +1,25 @@
+{% extends 'administrateur/baseA.html.twig' %}
+{% block title %}Moyenne prix intervention{% endblock %}
+
+{% block body %}
+    <table class="table table-striped">
+        <tr>
+            <th></th>
+            <th>Type d'intervention</th>
+            <th>Prix moyen</th>
+            <th>Nombre d'intervention</th>
+        </tr>
+        {% for liste in listes %}
+
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ liste.type.nom }} <br>{{ liste.listeInter.nom }}</td>
+                <td>{% if liste.inter != 0 %}
+                        {{ (liste.prix/liste.inter)|number_format(2) }} €
+                {% endif %}
+                </td>
+                <td>{{ liste.inter }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

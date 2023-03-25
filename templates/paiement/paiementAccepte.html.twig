@@ -1,0 +1,32 @@
+{% extends "demandeur/basedemandeur.html.twig" %}
+{% block title %}Paiement validé
+{% endblock %}
+{% block titreSection %}Paiement
+					validé
+{% endblock %}
+{% block titrePage %}Paiement
+					validé
+{% endblock %}
+
+{% block contenu %}
+	<div class="row">
+		<div class="col-sm-12">
+			<p class="h5">Votre paiement a été effectué.</p>
+
+			<p class="h5">Cliquez sur l'un des liens suivant pour quitter cette page.</p>
+
+		</div>
+		<div class="col-sm-6 text-center">
+			<a href="{{path('demandeur')}}" class="btn btn-maincolor">Retour à l'accueil</a>
+
+		</div>
+		<div class="col-sm-6 text-center">
+			<a href="{{path('app_logout')}}" class="btn">Se déconnecter</a>
+
+
+		</div>
+
+	</div>
+
+
+{% endblock %}

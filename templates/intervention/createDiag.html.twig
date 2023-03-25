@@ -1,0 +1,82 @@
+{% extends template %}
+
+{% block title %}
+    Nouvelle demande de diagnostics
+{% endblock %}
+
+{% block bodyAccueil %}
+    <style>
+        input[type="date"]::before{
+            content: attr(placeholder)" : ";
+            white-space: pre;
+        }
+        input[type="date"]:focus::before {
+
+        }
+    </style>
+
+    {% if inter  %}
+        <input type="hidden" name="" value="{{ inter.identifiat }}">
+    {% endif %}
+<section class="ls service-single s-py-xl-150 s-py-lg-130 s-py-md-90 s-py-60 bg-white">
+    <div class="container pb-3">
+        <div class="row">
+
+        <div class="col-12 mb-5">
+            <p class="h5">Vous souhaitez : </p>
+        </div>
+
+            <div class="col-12">
+                <div class="row">
+                        <div class="col-sm-3 col-6">
+                            <input type="radio" name="action" id="louer" value="location" class="typeDiag"  hidden>
+                            <label for="louer" class="border-gray pr-5 pl-5 text-center">
+                                <figure>
+                                    <img src="/css/css_site/img/iconDiag/cle.png" alt="">
+                                    <span>Louer</span>
+                                </figure>
+                            </label>
+                        </div>
+                        <div class="col-sm-3 col-6">
+                            <input type="radio" name="action" id="vendre" value="vente" class="typeDiag"  hidden>
+                            <label for="vendre" class="border-gray pr-5 pl-5 text-center">
+                            <figure>
+                                <img src="/css/css_site/img/iconDiag/euro.png" alt="">
+                                <span>Vendre</span>
+                            </figure>
+                        </div>
+                        <div class="col-sm-6 col-12 pt-4">
+                            <input type="date" name="date" id="dateInterDiag" class="form-control " placeholder="Choisir une date (falcultatif)">
+                        </div>
+                    </div>
+
+            </div>
+
+            <div class="col-12">
+                <p class="h5">Séléctionnez un type de bien :</p>
+                <div class="row">
+                    {% for type in types %}
+                        <div class="col-sm-4 col-6">
+                            <input type="radio" name="typeBien" id="typeBien{{ loop.index }}" class="inputTypeBien" hidden value="{{ type.id }}">
+                            <label for="typeBien{{ loop.index }}"class="border-gray text-center zoneTypeBien" style="background: none">
+                                <figure>
+                                    <img src="/css/css_site/img/iconDiag/{{ type.nom }}.png" alt="">
+                                    <span>{{ type.nom }}</span>
+                                </figure>
+                            </label>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="row zoneTaille"></div>
+            </div>
+            <div class="col-12 text-right">
+                <button class="btn btn-maincolor">Continuer</button>
+            </div>
+
+    </div>
+    </div>
+</section>
+{% endblock %}
+

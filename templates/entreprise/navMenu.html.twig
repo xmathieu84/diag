@@ -1,0 +1,275 @@
+<ul class="menu-click dashbord menuPrincipal">
+	<li class="d-lg-none">
+		<a href="/DIAG DRONE - Guide de l'utilisateur - Interface Opérateur Télépilote de Drone.pdf" target="_blank">Guide d'utilisation</a>
+	</li>
+	<li>
+		<a href="{{ path('entreprise') }}">Accueil</a>
+	</li>
+	{% if is_granted('ROLE_AE') == false and is_granted("ROLE_ENTREPRISE") %}
+	<li class="subMenu">
+		{% if is_granted('ROLE_OTD') %}
+			<a>MES OPÉRATEURS TELE-PILOTES DE DRONES</a>
+			{%else%}
+				<a>MES OPÉRATEURS DIAGNOSTIQUEURS IMMOBILLIERS</a>
+		{% endif %}
+
+		<ul class="hero-light-bg">
+			{% if is_granted('ROLE_FREE') ==false %}
+				
+
+			<li><a class="" href="{{ path('nsalarie') }}">Consulter la
+					liste</a></li>
+			<li><a class="" href="{{ path('Asalarie') }}">{% if is_granted('ROLE_OTD') %}
+						Ajouter un
+						OTD
+						{%else%}
+							Ajouter un
+							ODI
+					{% endif %}</a></li>
+			{% endif %}
+			<li><a class="" href="{{ path('tarifA') }}">Tarif
+					d'intervention</a></li>
+
+		</ul>
+	</li>
+	{% endif %}
+
+	<li class="subMenu">
+		<a>GESTION</a>
+		<ul class="hero-light-bg">
+			{% if is_granted('ROLE_ENTREPRISE') %}
+
+			<li><a class="" href="{{ path('factures') }}">Mes
+					factures/Mes devis</a></li>
+			<li><a href="{{ path('factureRecu') }}">Factures recues</a>
+			</li>
+			{% endif %}
+			<li><a class="" href="{{ path('creer_devis') }}">Créer un
+					devis</a></li>
+			<li><a class="" href="{{ path('creer_facture') }}">Créer
+					une facture</a></li>
+			{% if is_granted('ROLE_CLASSIC') or is_granted('ROLE_ODI') %}
+				<li><a class="" href="{{ path('recevoirPaiement') }}">Recevoir un
+						paiement</a></li>
+
+			{% endif %}
+			{% if is_granted('ROLE_ENTREPRISE') %}
+
+			<li><a class=""
+				   href="{{ path('abonnement') }}">Abonnements</a></li>
+			{% if is_granted("ROLE_CLASSIC") or is_granted('ROLE_ODI') %}
+				<li><a class="" href="{{ path('payout') }}">Consulter
+						mon solde</a>
+				</li>
+			{% endif %}
+			{% endif %}
+			<li>
+				<a href="{{ path('tarifA') }}">Tarifs d'intervention</a>
+			</li>
+			<li>
+				<a href="{{ path("tempsMission") }}">Durée d'intervention</a>
+			</li>
+			<li>
+				<a href="{{ path('remise') }}">Remises</a>
+			</li>
+
+		</ul>
+
+	</li>
+	{% if is_granted("ROLE_ODI") and is_granted('ROLE_SALARIE') %}
+		<li class="subMenu">
+			<a>PACKS DIAGNOSTIQUEURS</a>
+			<ul class="hero-light-bg">
+				<li>
+					<a class="" href="{{ path('packPT') }}">Choisir des packs</a>
+				</li>
+				<li>
+					<a href="">Créer / modifier un pack</a>
+				</li>
+			</ul>
+
+		</li>
+	{% endif %}
+
+
+
+
+		<li class="subMenu">
+			<a>MODIFIEZ</a>
+
+			<ul class="hero-light-bg">
+				{% if is_granted('ROLE_ENTREPRISE') %}
+				<li><a class="nav-link" href="{{ path('modifierEnt') }}">Informations
+						générales</a></li>
+
+				<li><a class="nav-link"
+					   href="{{ path('voirAssu') }}">Informations assurantielles</a></li>
+				<li><a href="{{ path('modifBanqueOtd') }}" class="nav-link">Informations bancaires</a></li>
+				{% endif %}
+				{% if is_granted('ROLE_OTD') %}
+					<li><a class="nav-link"
+						   href="{{ path('typeModif') }}">Type et périmètre d'intervention / CATT / ALPHA TANGO</a></li>
+				{% endif %}
+					<li>
+						<a href="{{ path('modifierInter') }}">Mes missions</a>
+					</li>
+
+			</ul>
+
+		</li>
+
+
+	<li class="subMenu">
+		<a>CALENDRIER</a>
+		<ul class="hero-light-bg">
+			{% if is_granted('ROLE_ENTREPRISE') and is_granted('ROLE_AE') == false  %}
+				<li><a href="{{ path('planningOtd') }}" class="navlink" >Planning général</a></li>
+			{% endif %}
+			<li><a class="nav-link" href="{{ path('calendrier') }}">Planning personnel</a>
+			</li>
+			<li><a class="nav-link" href=" {{ path('absence') }} ">Mes absences</a>
+			</li>
+
+
+		</ul>
+	</li>
+
+	{% if is_granted('ROLE_ENTREPRISE') and is_granted('ROLE_OTD') %}
+
+
+	<li class="subMenu">
+		<a>PARC MATERIEL</a>
+		<ul class="hero-light-bg">
+
+
+			<li>
+				<a class="nav-link" href=" {{ path('listedrone') }} ">Mes
+					appareils</a>
+			</li>
+
+
+		</ul>
+	</li>
+	{% endif %}
+	<li class="subMenu">
+		<a class="interGen">INTERVENTIONS <span class="notifGénérale"></span></a>
+		<ul class="hero-light-bg">
+
+				{% if is_granted('ROLE_PREMIUM')  %}
+					<li><a class="color-wh notifPart" href="{{ path('demcours') }}">Proposez vos tarifs <span class="notifFin"></span></a></li>
+					<li><a class="color-wh" href="{{ path('inter_sans_prop') }}"
+						>Demandes non pourvues</a></li>
+				{% endif %}
+				{% if is_granted("ROLE_CLASSIC")  %}
+					<li><a href="{{ path('interRealise') }}">Interventions réalisées</a></li>
+
+					<li><a class="nav-link" href="{{ path('mesinter') }}">Interventions en cours</a></li>
+
+
+
+					<li><a class="nav-link" href="{{ path('interPerso') }}">Ajouter
+							une intervention</a></li>
+				{% endif %}
+
+				{% if is_granted('ROLE_PREMIUM')%}
+					<li><a class="nav-link" href="{{ path('histoProp') }}">Historique
+							de mes propositions</a></li>
+				{% endif %}
+
+			{% if is_granted('ROLE_ODI') %}
+			<li>
+				<a class="nav-link" href="{{ path('mesinter') }}">Interventions en cours</a>
+			</li>
+			<li>
+				<a href="{{ path('interRealise') }}">Interventions réalisées</a>
+			</li>
+			<li>
+				<a class="nav-link" href="{{ path('interPerso') }}">Ajouter
+					une intervention</a>
+			</li>
+
+			{% endif %}
+
+
+
+		</ul>
+	</li>
+	{% if is_granted('ROLE_CLASSIC') and is_granted('ROLE_OTD') %}
+	<li class="subMenu">
+		<a>ASSISTANCE AU VOL</a>
+		<ul class="hero-light-bg">
+			<li ><a href="{{ path('salListeInter') }}">Carte</a></li>
+			<li ><a href="{{ path('notam') }}">NOTAM</a></li>
+			<li><a href="{{ path('meteoInter') }}" class="nav-link">Prévisions météo</a></li>
+		</ul>
+	</li>
+	{% endif %}
+	<li class="subMenu">
+		<a>RAPPORT</a>
+		<ul class="hero-light-bg">
+			<li>
+				<a href="{{ path('rapportEnt') }}">Mes rapports</a>
+			</li>
+			<li>
+				<a href="{{ path('listeRapport') }}">Partagez un rapport</a>
+			</li>
+			<li>
+
+			</li>
+		</ul>
+	</li>
+	{% if is_granted('ROLE_CLASSIC') or is_granted('ROLE_OTD') %}
+		<li class="subMenu">
+
+			<a>GESTION DU MANEX</a>
+			<ul class="hero-light-bg">
+				<li><a href="{{ path('map') }}">Mon MANEX</a></li>
+
+				<li><a href="{{ path('remplirMap') }}">Compléter mon
+						MANEX</a></li>
+
+
+			</ul>
+		</li>
+	{% endif %}
+	{% if is_granted('ROLE_INFINITE') or is_granted('ROLE_ODI') %}
+		<li class="subMenu">
+			<a>APPELS D'OFFRE</a>
+			<ul class="hero-light-bg">
+				<li><a href="{{ path('listeAppelOffreOtd') }}">Appels d'offre</a></li>
+
+				<li><a href="{{ path('mesReponseAo') }}">Mes réponses</a></li>
+
+				<li><a href=" {{ path('mesAppel') }}" class="">Mes appels d'offre<br>Mes appels à concurrence</a></li>
+
+
+			</ul>
+		</li>
+	{% endif %}
+	<li class="subMenu"><a>NOS PARTENAIRES</a>
+		<ul class="hero-light-bg">
+			<li><a >Assurances</a>
+				<ul class="hero-light-bg">
+					<li><a href="{{ path('partAssurance',{nom:'axa'}) }}" >Axa</a></li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+
+	<li class="subMenu">
+		<a>MESSAGES</a>
+		<ul class="hero-light-bg">
+			<li><a href="{{ path('messageReçu') }}">Messages Reçus</a>
+			</li>
+			<li><a href="{{ path('messaArchi') }}">Historique des messages</a>
+			</li>
+			<li><a href="{{ path('contactDD') }}">Contactez
+					diag-drone.com</a></li>
+
+		</ul>
+	</li>
+	{#  <li>
+		<a href="{{ path('forum') }}" target="_blank">Accéder au forum DIAG-DRONE</a>
+
+	</li>#}
+</ul>

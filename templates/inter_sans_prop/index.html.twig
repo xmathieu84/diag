@@ -1,0 +1,72 @@
+{% extends 'entreprise/baseAE.html.twig' %}
+
+{% block title %}Intervention sans proposition
+{% endblock %}
+
+{% block pageAccueil %}
+	<h4>Intervention non pourvues</h4>
+{% endblock %}
+{% block contenu %}
+	{% if interSansProp is not empty %}
+		<div class="col-12">
+			<div id="accordion01" role="tablist">
+				{% for inter in interSansProp %}
+				<div class="card">
+					<div class="card-header" role="tab" id="demandeur_header">
+						<h5>
+							<a data-toggle="collapse" href="#inter{{ loop.index }}" aria-expanded="false" aria-controls="demandeur" class="text-capitalize">
+								<div class="row">
+									<div class="col-sm-6 col-12 text-dark">
+										{{inter[0].listeInter.nom|capitalize}}<br>
+										{{inter[0].typeInter.nom}}
+									</div>
+									<div class="col-sm-6 col-12 text-dark">
+										{{inter[0].adresse.codePostal}}
+
+										{{inter[0].adresse.ville}}
+									</div>
+								</div>
+							</a>
+						</h5>
+					</div>
+
+					<div id="inter{{ loop.index }}" class="collapse bg-white" role="tabpanel" aria-labelledby="demandeur_header" data-parent="#accordion01">
+						<div class="row text-center">
+
+						</div>
+						<div class="card-body">
+							<div class="row">
+								<div class="col-6 text-dark tableAccueil">Date</div>
+								<div class="col-6 text-dark tableAccueil">
+									{% if inter[0].dateDebut %}
+										<span class="h6">Entre le {{inter[0].dateDebut|format_datetime('short', 'none', locale='fr')}} et le {{inter[0].dateFin|format_datetime('short', 'none', locale='fr')}}</span>
+									{% elseif inter[0].dateWitch %}
+										<span class="h6">Le {{inter[0].dateWitch|format_datetime('short', 'none', locale='fr')}} </span>
+									{% else %}
+										<span class="h6">Non précisé</span>
+									{% endif %}
+								</div>
+								<div class="col-6 text-dark tableAccueil">Distance</div>
+								<div class="col-6 text-dark tableAccueil">
+									<span class="h6">{{inter[1]}} km</span>
+								</div>
+								<div class="col-12 mt-5">
+									<a href="{{ path('validerProp',{id:inter[0].id}) }}" class="btn btn-maincolor2 btn-block text-white">Faire une proposition</a>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				{%endfor%}
+			</div>
+		</div>
+
+		{% else %}
+		<div class="row">
+			<div class="col-12">
+				<p class="h5">Il n'y a aucune intervention sans propositions</p>
+			</div>
+		</div>
+	{% endif %}
+{% endblock %}

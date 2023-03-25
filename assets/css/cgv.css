@@ -1,0 +1,7 @@
+.listecgv{
+    list-style: none;
+
+}
+.listecgv>li,.retract>li{
+    margin-left: 3em;
+}

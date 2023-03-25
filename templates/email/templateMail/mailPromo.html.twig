@@ -1,0 +1,17 @@
+{% extends "email/templateMail/mailPromo.html.twig" %}
+
+
+{% block body %}
+	<h4>Offre promotionnelle</h4>
+
+	<p>DIAG-DRONE! vous offre ce code promotionnel :
+		<span class="codePromo">{{codePromo}}</span>
+	</p>
+
+	<p>Vous bénéficiez de :
+		<span>{{avantage}}.</span>
+	</p>
+	<p>Il est valable jusqu'au :
+		{{dateFin|format_datetime('short', 'none', locale='fr')}}</p>
+
+{% endblock %}

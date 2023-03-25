@@ -1,0 +1,56 @@
+{% extends 'administrateur/baseA.html.twig' %}
+{% block body %}
+	{% block titre %}
+		liste des interventions de l'entreprise
+	{% endblock %}
+	<section class="wrapper">
+		<h3>
+			liste des interventions de
+			{{entreprise.formJuridique}}
+			{{entreprise.denomination}}</h3>
+		<div class="row mt">
+			<div class="col-lg-12">
+				<div class="content-panel">
+					<table class="table table-bordered table-striped table-condensed">
+
+
+						<thead>
+							<tr>
+
+								<th scope="col">Date Intervention</th>
+								<th scope="col">Type intervention</th>
+								<th scope="col">Adresse</th>
+								<th scope="col">Salarié</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for reservation in reservations %}
+								<tr>
+									{% if reservation != null %}
+
+										<th scope="row">{{reservation.intervention.rdvAT|format_datetime(locale='fr')}}</th>
+
+
+										<td>{{reservation.intervention.typeInter.nom}}
+											{{reservation.intervention.listeInter.nom}}
+										</td>
+
+									</td>
+									<td>{{reservation.intervention.adresse.numero}}
+										{{reservation.intervention.adresse.nomVoie}}
+										{{reservation.intervention.adresse.codePostal}}
+										{{reservation.intervention.adresse.ville}}</td>
+
+									<td>{{reservation.salarie.civilite.nom}}
+										{{reservation.salarie.civilite.prenom}}</td>
+								{% endif %}
+
+							</tr>
+
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</section>{% endblock %}

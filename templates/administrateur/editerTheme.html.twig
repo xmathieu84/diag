@@ -1,0 +1,34 @@
+{% extends 'administrateur/baseA.html.twig' %}
+{% block title %}Thèmes{% endblock %}
+{% block body %}
+    <section class="wrapper">
+        <h3>Liste des thèmes du forum</h3>
+        <div class="row mt-2">
+            <div class="col-sm-3 bg-blue pt-2 pl-2 pb-2 pd-2">
+                <p class="h5">Ajouter un thème</p>
+                <input type="text" name="" id="cat" class="form-control-sm form-control">
+                <button class="btn btn-outline-success mt-5">Valider</button>
+            </div>
+            {% for theme in themes  %}
+                <div class="col-sm-3  mt-2">
+
+                    <div class="col-12 bg-darkgrey border pr-2 ">
+                        <p class="h5" >{{ theme.nom }}</p>
+                        <p>Réponses : {{ theme.categories|length }}</p>
+
+                        <div class="row">
+
+                            <div class="col-12">
+                                <a href="{{ path('editeCategorie',{id:theme.id}) }}" class="btn btn-outline-primary">
+                                    Consulter les réponses
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}

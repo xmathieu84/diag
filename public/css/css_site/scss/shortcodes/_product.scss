@@ -1,0 +1,105 @@
+.shortcode-product {
+  &.owl-carousel{
+
+    .owl-dots{
+
+      @media (min-width: 1200px) {
+        margin-top: 0;
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        flex-direction: column;
+        span{
+          margin: 13px 0;
+        }
+      }
+      @media (min-width: 1400px) {
+        left: -5%;
+      }
+      @media (min-width: 1600px) {
+        left: -13%;
+      }
+      @media (min-width: 1700px) {
+        left: -23%;
+      }
+
+    }
+
+    .side-item{
+      .item-media{
+        display: flex;
+        align-items: center;
+        img{
+
+          max-height: 350px;
+          @media(min-width: 1200px){
+            max-width: 690px;
+          }
+        }
+      }
+      .item-content{
+
+        h4{
+          margin-bottom: 70px;
+          @media(max-width: 575px){
+            margin-bottom: 30px;
+          }
+        }
+        .product-features{
+          margin-top: 35px;
+          display: flex;
+          align-items: center;
+          color: $lightColor;
+          @media(max-width: 575px){
+            justify-content: center;
+            flex-direction: column;
+            margin-top: 30px;
+          }
+          .price{
+            font-Size: 30px;
+            opacity: 1;
+            font-weight: 700;
+            margin: 0 70px 0 0;
+            line-height: 0.8;
+            @media(max-width: 575px){
+              margin-right: 0;
+              margin-bottom: 30px;
+            }
+          }
+          .product-color{
+            display: flex;
+            align-items: center;
+            .white{
+              width: 20px;
+              height: 20px;
+              margin: 5px;
+              margin-right: 20px;
+              background-color: $lightColor;
+              display: inline-block;
+              border-radius: 50%;
+              position: relative;
+              &:after{
+                content: '';
+                position: absolute;
+                top: -5px;
+                bottom: -5px;
+                left: -5px;
+                right: -5px;
+                border-radius: 50%;
+                border: 2px solid $lightColor;
+              }
+            }
+          }
+        }
+        .btn{
+          margin-top: 60px;
+          @media(max-width: 575px){
+            margin-top: 30px;
+          }
+        }
+      }
+    }
+  }
+}

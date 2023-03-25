@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Export OTD</title>
+    <style>
+        table,th,td{
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        table{
+            width: 100%;
+        }
+        .entreprise,.telephone{
+            width: 22%;
+            text-align: center;
+        }
+        .dirigeant{
+            width: 20%;
+        }
+        .telephone{
+            width: 15%;
+        }
+        td,th{
+            text-align: center;
+            padding-top: 0.5em;
+            padding-bottom: 0.5em;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <tr>
+            <th class="entreprise">Nom de l'entreprise</th>
+            <th class="dirigeant">Dirigeant</th>
+            <th class="telephone">Télephone</th>
+            <th class="mail">Email</th>
+            <th class="date">Date d'inscription</th>
+
+        </tr>
+        {% for dirigeant in dirigeant %}
+            <tr>
+                <td>{{ dirigeant.entreprise.denomination }}</td>
+                <td>{{ dirigeant.civilite.prenom }} {{ dirigeant.civilite.prenom }}</td>
+                <td>{{ dirigeant.entreprise.telephone.numero }}</td>
+                <td>{{ dirigeant.user.email }}</td>
+                <td>{{ dirigeant.user.dateInscription|format_datetime('short','none',locale='fr') }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
+

@@ -1,0 +1,1929 @@
+#nbe_piece,
+#intemperie,
+.tarif,
+#salarieAE,
+.btn-masque,
+.tva,
+#autoEntrepeneur,
+#rapport_rap_fichier,
+#rapport_donnees_telemetrique,
+#rapport_cerfa_inter,
+#paiement,
+#constat_photo_nom,
+#constat_video,
+.autreBien,
+.accept,
+.materiel,
+.corporel,
+.but,
+#docDiag,
+#rapport_paiement_placeholder,
+#rapport_paiement_placeholder+label,
+#population,
+#entreprise_logo,
+#phase2inscription_licenceDgac_fichierLicence,
+#intervention_dateRdv,
+.siret,
+#modif_salairie_licenceDgac_fichierLicence,#realLicence,
+.emailTierce,.consult,#inter_etape3_photos,#rapport_photos,#rapport_rap_resume,#identite,#kbis,#statut,.odi,.mission ,
+.justificatifAT ,.intempInsti,.typeintemp,.rcPro2,#entreprise_tp_logo,#entreprise_tp_proBtp_bandeauPub,.pub,.basculerAbo,.villeDepart,.refus,.budgetInter,#rc_pro2_fichier,
+#attestation,#attestationComplement,.acompteDevis,.nbrePhotoInter,.nbreVideoInter,.nomPro,.plageDate,#saisieTaridOdi,#buttonFichierTarifOdiServic{
+	display: none;
+}
+p.h4{
+	color: black;
+}
+.ml--60{
+	margin-left: -60px;
+}
+.mr--50{
+	margin-right: -50px
+}
+.tempsVol{
+	background-color: rgb(226, 226, 226);
+	height: 4em;
+	padding-top: 1.2em;
+}
+#interCalendrier {
+	color: black;
+}
+input[type = radio]+label.required{
+	margin-top:-1.3em;
+	margin-right: 1.4em;
+}
+
+#entreprise_siretTva_assujeti{
+	margin-top: 1.5em;
+}
+.h1,.h2,.h3,.h4,.h5,.h6,.h7,p{
+	color: inherit;
+	color:#616d70;
+}
+.accueil{
+	list-style: none;
+}
+.btn-accueil{
+	width: 15em;
+	height: 3em;
+	padding-top: 0.75em;
+}
+.card-titre{
+	font-size: 1.5em;
+	font-weight: bold;
+}
+.formSalarie{
+	background-color: rgb(255, 255, 255);
+}
+.label-licence,.label-numero{
+	font-weight: inherit;
+}
+.label-numero{
+	margin-bottom: 1.3em;
+}
+
+input::-webkit-inner-spin-button,
+input::-webkit-outer-spin-button { 
+	-webkit-appearance: none;
+	margin:0;
+}
+#licence{
+	margin-top: 2%;
+}
+.alignement{
+	margin-top: 3.4%;
+}
+.boutonRemplaceKyc{
+	background-color: #0189bd;
+	width: 100%;
+	height: 3em;
+	border: none;
+	color: white;
+}
+#logo,
+#licence,
+.boutonRemplace,
+#justificatif {
+	background-color: #0189bd;
+	width: 100%;
+	height: 3em;
+	border: none;
+	color: white;
+	
+}
+.prix:focus{
+	background-color: silver;
+}
+
+.numeroLicence,input.identifiantAT,input.passwordAT,input.validite{
+	border: #616d70 1px solid;
+
+    border-radius: 0;
+    box-shadow: none;
+    color: #616d70;
+    font-Size: 16px;
+    font-weight: 300;
+    line-height: 30px;
+    padding: 10px 13px;
+	width: 100%;
+	border: none;
+}
+#periInter{
+	border: #616d70 1px solid;
+    border-radius: 0;
+    box-shadow: none;
+    color: #616d70;
+    font-Size: 16px;
+    font-weight: 300;
+    line-height: 30px;
+    padding: 11px 13px;
+
+}
+
+#asscivile span {
+	display: inline-block;
+	vertical-align: top;
+	background-color: white;
+}
+
+#asscivile span:first-child {
+	overflow: hidden;
+	white-space: nowrap;
+	width: 20em;
+	height: 50px;
+	padding-left: 5px;
+	border: 1px solid rgb(255, 255, 255);
+	text-overflow: ellipsis;
+	font: 100%/25px sans-serif;
+	color: #616d70;
+	border-radius: 3px;
+	font-size: 16px;
+}
+.btn-resume{
+	width: 100%;
+	text-align: center;
+}
+
+#asscivile span + span {
+	width: 13em;
+	height: 50px;
+	margin-left: 5px;
+	text-align: center;
+	background: #ddd;
+}
+
+#asspro span {
+	display: inline-block;
+	vertical-align: top;
+	background-color: white;
+}
+
+#asspro span:first-child {
+	overflow: hidden;
+	white-space: nowrap;
+	width: 20em;
+	height: 50px;
+	padding-left: 5px;
+	border: 1px solid rgb(255, 255, 255);
+	text-overflow: ellipsis;
+	font: 100%/25px sans-serif;
+	color: #616d70;
+	border-radius: 3px;
+	font-size: 16px;
+}
+
+#asspro span + span {
+	width: 13em;
+	height: 50px;
+	margin-left: 5px;
+	text-align: center;
+	background: #ddd;
+}
+
+#licence span {
+	display: inline-block;
+	vertical-align: top;
+	background-color: white;
+}
+
+#licence span:first-child {
+	overflow: hidden;
+	white-space: nowrap;
+	width: 20em;
+	height: 50px;
+	padding-left: 5px;
+	border: 1px solid rgb(255, 255, 255);
+	text-overflow: ellipsis;
+	font: 100%/25px sans-serif;
+	color: #616d70;
+	border-radius: 3px;
+	font-size: 16px;
+}
+
+#licence span + span {
+	width: 13em;
+	height: 50px;
+	margin-left: 5px;
+	text-align: center;
+	background: #ddd;
+}
+
+.presentation {
+	display: flex;
+	justify-content: space-between;
+}
+input#modifier_ent_dirigeant_type_1+label,input#modifier_ent_dirigeant_type_0+label,
+#inter_insti_decollage_1+label , #inter_insti_decollage_0+label,
+#inter_insti_agglo_1+label,#inter_insti_agglo_0+label,#inter_insti_intemp_0+label,
+#inter_insti_intemp_1+label,#institution_contact_type_0+label,#institution_contact_type_1+label,
+#rapport_degatInter_0+label,#rapport_degatInter_1+label,#ajout_agent_civilite_type_0+label,#ajout_agent_civilite_type_1+label,.civilite+label,#ouiIntemp+label,#nonIntemp+label,
+#intervention_renoncementDelaiRetract_0+label,#intervention_renoncementDelaiRetract_1+label,#oui+label,#non+label,#entreprise_siretTva_assujeti_1+label,#entreprise_siretTva_assujeti_0+label,
+#entreprise_dirigeant_type_0+label,#entreprise_dirigeant_type_1+label,#ajoutersalarie_civilite_type_0+label,#ajoutersalarie_civilite_type_1+label,#jour+label,#semaine+label,
+#nonService+label,#ouiService+label,#nonMoyen+label,#ouiMoyen+label,#ouiJournee+label,#nonJournee+label,#ouiDemiJournee+label,#nonDemiJournee+label,
+#ouiMarketPlace+label,#nonMarketPlace+label,#vendre+label,#louer+label,#adresse_inter_sameFact_0+label,#adresse_inter_sameFact_1+label{
+	background: none;
+}
+
+
+
+
+.form-group div div label:first-child {
+	display: inline-block;
+	margin-right: 0.5em;
+}
+.text-resume,#texte,
+#presentation,
+#information,
+#intervenant,
+#finance,
+#juridique,
+#complement{
+	resize: none;
+
+}
+#rapport {
+	margin-bottom: 2em;
+}
+
+#message button:first-child {
+	display: inline-flex;
+	flex-direction: column;
+	align-items: flex-end;
+	justify-content: start;
+}
+
+#reponse textarea {
+	background-color: #f5f5f5;
+	border: black solid 1px;
+	margin-bottom: -4em;
+}
+
+#fermer {
+	border-radius: 100%;
+	background-color: white;
+	border: none;
+}
+
+#fichier {
+	width: inherit;
+	padding: inherit;
+	position: relative;
+}
+
+#boutonAjouter {
+	position: relative;
+	cursor: default;
+}
+
+#transfertVideo {
+	margin-left: 2em;
+	color: black;
+
+}
+
+#fichierVideo {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+#entreprise_denomination,
+#entreprise_enseigne {
+	text-transform: uppercase;
+}
+#message {
+	font-size: 0.8em;
+}
+#depart_debut,
+#depart_depart {
+	width: 50%;
+	background-color: #eeeeee;
+}
+#entreprise_typeInter {
+	margin-top: 0.5em;
+}
+.modifSalarie {
+	margin-right: 2em;
+}
+#ajoutersalarie_licenceDgac_fichierLicence,
+#assurance_ent_ass_pro_fichier {
+	display: none;
+}
+button.boutonAssu {
+	width: -webkit-fill-available;
+	height: 3.2em;
+	border: none;
+	background-color: #0189bd;
+
+}
+.boutonFichier {
+	width: 28em;
+	height: 3.2em;
+	border: none;
+	background-color: #0189bd;
+}
+
+.boutonModifier {
+	margin-top: 3em;
+	height: 8em;
+	text-align: center;
+	width: 15em;
+	background-color: #0189bd;
+	border: none;
+}
+.liste {
+	display: inline;
+	margin-top: 2em;
+}
+.nbreInter {
+	margin-top: 2em;
+	background-color: #f5f5f5;
+}
+.softmenu,
+.liste {
+	list-style: none;
+	margin-left: 0;
+	padding-left: 0;
+}
+.soft {
+	margin-left: 4em;
+	display: none;
+}
+.softmenu:hover .soft {
+	display: block;
+}
+.boutonModif {
+	width: 3em;
+}
+#btn-inter {
+	font-size: 0.8em;
+	color: white;
+	border: 1px #0019fd solid;
+	margin-left: 5.5em;
+	padding: 0.2em;
+	background-color: #0019fd;
+	cursor: pointer;
+}
+
+.infobulle {
+	position: relative;
+	cursor: help;
+}
+
+.infobulle:hover::after,
+.infobulle:focus::after {
+	content: attr(aria-label);
+	position: absolute;
+	top: -1.4em;
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: 1;
+	white-space: nowrap;
+	font-weight: 200;
+	font-size: small;
+	font-style: italic;
+}
+
+.btn-prs,.btn-prs2 {
+	width: 25em;
+	height: 6em;
+	margin-bottom: 2em;
+}
+.btn-prs2{
+	background-color: #b32c2c;
+}
+.inscriTitre {
+	font-size: 3.6em;
+	margin-top: 2em;
+	font-weight: 600;
+}
+.tableAbo {
+	text-align: center;
+}
+
+.fermeture {
+	text-align: end;
+}
+.active {
+	cursor: pointer;
+}
+
+.donnee > .required::before,
+.secteur > .required::before {
+	content: none;
+}
+.donnee > .required {
+	display: inline-block;
+}
+#intervention_donneeType_2 + .required {
+	background-image: url('/css/css_site/img/home-video-camera-2369189_640.png');
+	background-repeat: no-repeat;
+	background-size: 10em;
+	width: 10em;
+	height: 10em;
+	background-position: top;
+	border: 2px solid #d4d4d4;
+	border-radius: 15%;
+	text-align: center;
+	margin-right: 0.5em;
+	color: black;
+}
+#intervention_donneeType_2:checked + .required {
+	border: 2px solid #77e046;
+}
+#intervention_donneeType_3 + .required {
+	background-image: url('/css/css_site/img/publicdomainq-digital-point-and-shoot-camera.svg');
+	background-repeat: no-repeat;
+	background-size: 10em;
+	width: 10em;
+	height: 10em;
+	background-position: bottom;
+	border: 2px solid #d4d4d4;
+	border-radius: 15%;
+	text-align: center;
+	color: black;
+	margin-right: 0.5em;
+}
+#intervention_donneeType_3:checked + .required {
+	border: 2px solid #77e046;
+}
+#intervention_donneeType_4 + .required {
+	background-image: url('/css/css_site/img/Thermographie_de_rue.jpg');
+	background-repeat: no-repeat;
+	background-size: 10em;
+	width: 10em;
+	height: 10em;
+	background-position: bottom;
+	border: 2px solid #d4d4d4;
+	border-radius: 15%;
+	text-align: center;
+	color: black;
+	margin-right: 0.5em;
+}
+#intervention_donneeType_4:checked + .required {
+	border: 2px solid #77e046;
+}
+#intervention_donneeType_5 + .required {
+	background-image: none;
+	background-repeat: no-repeat;
+	background-size: 10em;
+	width: 10em;
+	height: 10em;
+	background-position: bottom;
+	border: 2px solid #d4d4d4;
+	border-radius: 15%;
+	text-align: center;
+	color: black;
+	margin-right: 0.5em;
+}
+#intervention_donneeType_5:checked + .required {
+	border: 2px solid #77e046;
+}
+.secteur > input[type='radio'] {
+	display: none;
+}
+#intervention_SecteurIntervention_1 + .required {
+	background-image: url('/css/css_site/img/btp.png');
+	background-repeat: no-repeat;
+	background-size: 10em;
+	width: 10em;
+	height: 10em;
+	background-position: bottom;
+	border: 2px solid #d4d4d4;
+	border-radius: 15%;
+	text-align: center;
+	color: black;
+	margin-right: 1em;
+}
+#intervention_SecteurIntervention_1:checked + .required {
+	border: 2px solid #77e046;
+}
+#intervention_SecteurIntervention_2 + .required {
+	background-image: url('/css/css_site/img/realtorsales-returned-home-hurr.jpg');
+	background-repeat: no-repeat;
+	background-size: 10em;
+	width: 10em;
+	height: 10em;
+	background-position: bottom;
+	border: 2px solid #d4d4d4;
+	border-radius: 15%;
+	text-align: center;
+	color: black;
+	margin-right: 1em;
+}
+#intervention_SecteurIntervention_2:checked + .required {
+	border: 2px solid #77e046;
+}
+#intervention_SecteurIntervention_3 + .required {
+	background-image: url('/css/css_site/img/assurance.jpg');
+	background-repeat: no-repeat;
+	background-size: 10em;
+	width: 10em;
+	height: 10em;
+	background-position: bottom;
+	border: 2px solid #d4d4d4;
+	border-radius: 15%;
+	text-align: center;
+	color: black;
+	margin-right: 1em;
+}
+#intervention_SecteurIntervention_3:checked + .required {
+	border: 2px solid #77e046;
+}
+#intervention_SecteurIntervention_4 + .required {
+	background-image: url('/css/css_site/img/inspection.jpg');
+	background-repeat: no-repeat;
+	background-size: 10em;
+	width: 10em;
+	height: 10em;
+	background-position: bottom;
+	border: 2px solid #d4d4d4;
+	border-radius: 15%;
+	text-align: center;
+	color: black;
+	margin-right: 1em;
+}
+#intervention_SecteurIntervention_4:checked + .required {
+	border: 2px solid #77e046;
+}
+/*#intervention_SecteurIntervention_5 + .required {
+	background-image: url('/css/css_site/img/energie.jpg');
+	background-repeat: no-repeat;
+	background-size: 10em;
+	width: 10em;
+	height: 10em;
+	background-position: bottom;
+	border: 2px solid #d4d4d4;
+	border-radius: 15%;
+	text-align: center;
+	color: black;
+	margin-right: 1em;
+}*/
+#intervention_SecteurIntervention_5:checked + .required {
+	border: 2px solid #77e046;
+}
+.temps {
+	width: 50%;
+}
+.temprature {
+	height: 7.1em;
+}
+.btn-inter{
+	
+	border: none;
+	background-color: #ff5656;
+	width: fit-content;
+	margin-top: 2em;
+}
+
+.choixDate{
+	text-align: center;
+	font-size: 2.2em;
+	color: #000000;
+}
+.suivant,.precedent{
+	border: #30bff8 solid 1px;
+	background-color: #30bff8;
+	width: 3em;
+	height: 1.5em;
+}
+.liste > .h6::before,
+.interType > .h6::before {
+	content: none;
+}
+#listeInter_0 +.h6{
+	background-image: url('/css/css_site/img/diag-drone-interventions-aeriennes.jpg');
+	background-repeat: no-repeat;
+	background-size: 14em;
+	width: 10em;
+	height: 10em;
+	background-position: center;
+	border: 2px solid #d4d4d4;
+	border-radius: 15%;
+	text-align: center;
+	margin-right: 0.5em;
+	color: black;
+	
+}
+#listeInter_1 +.h6{
+	background-image: url('/css/css_site/img/diag-drone-interventions-terrestres.jpg');
+	background-repeat: no-repeat;
+	background-size: 14em;
+	width: 10em;
+	height: 10em;
+	background-position: center;
+	border: 2px solid #d4d4d4;
+	border-radius: 15%;
+	text-align: center;
+	margin-right: 0.5em;
+	color: black;
+	
+}
+#listeInter_2 +.h6{
+	background-image: url('/css/css_site/img/diag-drone-interventions-aquatiques.jpg');
+	background-repeat: no-repeat;
+	background-size: 14em;
+	color: #ffffff;
+	width: 10em;
+	height: 10em;
+	background-position: center;
+	border: 2px solid #d4d4d4;
+	border-radius: 15%;
+	text-align: center;
+	margin-right: 0.5em;
+	
+	
+}
+#listeInter_2:checked + .h6{
+	border: 4px solid #77e046;
+}
+ #listeInter_0:checked + .h6{
+	border: 4px solid #77e046;
+}
+#listeInter_1:checked + .h6{
+	border: 4px solid #77e046;
+}	
+#typeInter_1IA+ .h6{
+background-image: url('/css/css_site/img/photoInter/diag-drone-captation-audiovisuelle.jpg');
+background-repeat: no-repeat;
+background-size:14em;
+color: white;
+}
+#typeInter_2IA+ .h6{
+	background-image: url('/css/css_site/img/photoInter/diag-drone-rapport-visuel-diagnostic.jpg');
+background-repeat: no-repeat;
+background-size: 14em;
+color: black;
+}
+#typeInter_3IA+ .h6{
+	background-image: url('/css/css_site/img/photoInter/diag-drone-thermographie.jpg');
+background-repeat: no-repeat;
+background-size: 14em;
+color: black;
+}
+#typeInter_4IA+ .h6{
+	background-image: url('/css/css_site/img/photoInter/diag-drone-cartgraphie-topographie.jpg');
+background-repeat: no-repeat;
+background-size:14em;
+color: black;
+
+}
+#typeInter_5IA+ .h6{
+background-image: url('/css/css_site/img/photoInter/diag-drone-photogrammetrie.jpg');
+background-repeat: no-repeat;
+background-size: 14em;
+color: black;
+}
+#typeInter_16IA+ .h6{
+	background-image: url('/css/css_site/img/photoInter/diag-drone-suivi-de-chantier.jpg');
+background-repeat: no-repeat;
+background-size: 14em;
+color: rgb(163, 221, 255);
+}
+#typeInter_6IA+ .h6{
+background-image: url('/css/css_site/img/photoInter/diag-drone-transports-speciaux-livraison.jpg');
+background-repeat: no-repeat;
+background-size: 14em;
+color: black;
+}
+#typeInter_7IA+ .h6{
+	background-image: url('/css/css_site/img/photoInter/diag-drone-prelevements-physico-chimique.jpg');
+background-repeat: no-repeat;
+background-size: 14em;
+color: white;
+}
+#typeInter_13IA+ .h6{
+	background-image: url('/css/css_site/img/photoInter/diag-drone-lutte-indésirables.jpg');
+background-repeat: no-repeat;
+background-size: 14em;
+color: white;
+}
+#typeInter_15IA+ .h6{
+	background-image: url('/css/css_site/img/photoInter/diag-drone-captation-detection-des-maladies.jpg');
+background-repeat: no-repeat;
+background-size: 14em;
+color: black;
+}
+/*#typeInter_14IA+ .h6{
+	background-image: url('/css/css_site/img/photoInter/largage_lutte_biologique.jpg');
+background-repeat: no-repeat;
+background-size: 14em;
+color: white;
+}*/
+
+#typeInter_12IA+ .h6{
+	background-image: url('/css/css_site/img/photoInter/diag-drone-epandage-ensemencement.jpg');
+background-repeat: no-repeat;
+background-size: 14em;
+color: black;
+}
+#typeInter_1IT+ .h6{
+	background-image: url('/css/css_site/img/photoInter/diag-drone-captation-audiovisuelle-terrestre.jpg');
+background-repeat: no-repeat;
+background-size: 14em;
+color: white;
+}
+#typeInter_7IT+ .h6{
+	background-image: url('/css/css_site/img/photoInter/diag-drone-prelevements-physico-chimique-terrestres.jpg');
+background-repeat: no-repeat;
+background-size: 14em;
+color: salmon;
+}
+#typeInter_2IT+ .h6{
+	background-image: url('/css/css_site/img/photoInter/diag-drone-rapport-visuel-diagnostic-terrestre.jpg');
+background-repeat: no-repeat;
+background-size: 14em;
+color: salmon;
+}
+#typeInter_2IM+ .h6{
+	background-image: url('/css/css_site/img/photoInter/diag-drone-rapport-visuel-diagnostic-IA.jpg');
+background-repeat: no-repeat;
+background-size: 14em;
+color: black;
+}
+#typeInter_1IM+ .h6{
+	background-image: url('/css/css_site/img/photoInter/diag-drone-captation-audiovisuelle-IA.jpg');
+background-repeat: no-repeat;
+background-size: 14em;
+color: black;
+}
+#typeInter_9IM+ .h6{
+	background-image: url('/css/css_site/img/photoInter/diag-drone-inspection-coque-de-bateau.jpg');
+background-repeat: no-repeat;
+background-size: 14em;
+color: black;
+}
+#typeInter_8IM+ .h6{
+	background-image: url('/css/css_site/img/photoInter/diag-drone-bathymétrie.jpg');
+background-repeat: no-repeat;
+background-size: 14em;
+color: white;
+}
+#typeInter_7IM+ .h6{
+	background-image: url('/css/css_site/img/photoInter/diag-drone-captation-prelevement-physico-chimique.jpg');
+background-repeat: no-repeat;
+background-size: 14em;
+color: black;
+}
+#typeInter_16IM+ .h6{
+	background-image: url('/css/css_site/img/photoInter/diag-drone-suivi-de-chantier-aquatique.jpg');
+background-repeat: no-repeat;
+background-size: 14em;
+color: black;
+}
+#typeInter_17IA+ .h6{
+	background-image: url('/css/css_site/img/photoInter/pollinisation.jpg');
+	background-repeat: no-repeat;
+	background-size: 14em;
+	color: black;
+}
+#typeInter_1IA+ .h6,
+#typeInter_2IA+ .h6,
+#typeInter_4IA+ .h6,
+#typeInter_5IA+ .h6,
+#typeInter_3IA+ .h6,
+#typeInter_16IA+ .h6,
+#typeInter_6IA+ .h6,
+#typeInter_7IA+ .h6,
+#typeInter_13IA+ .h6,
+#typeInter_15IA+ .h6,
+#typeInter_14IA+ .h6,
+#typeInter_12IA+ .h6,
+#typeInter_1IT+ .h6,
+#typeInter_7IT+ .h6,
+#typeInter_2IT+ .h6,
+#typeInter_2IM+ .h6,
+#typeInter_1IM+ .h6,
+#typeInter_9IM+ .h6,
+#typeInter_8IM+ .h6,
+#typeInter_7IM+ .h6,
+#typeInter_16IM+ .h6,
+#typeInter_17IA + .h6
+{	
+	width: 10em;
+	height: 10em;
+	background-position: center;
+	border: 2px solid #d4d4d4;
+	border-radius: 15%;
+	text-align: center;
+	margin-right: 0.5em;
+}
+#typeInter_1IA:checked+.h6,
+#typeInter_2IA:checked+.h6,
+#typeInter_4IA:checked+.h6,
+#typeInter_5IA:checked+.h6,
+#typeInter_3IA:checked+.h6,
+#typeInter_16IA:checked+.h6,
+#typeInter_6IA:checked+.h6,
+#typeInter_7IA:checked+.h6,
+#typeInter_13IA:checked+.h6,
+#typeInter_15IA:checked+.h6,
+#typeInter_14IA:checked+.h6,
+#typeInter_12IA:checked+.h6,
+#typeInter_1IT:checked+.h6,
+#typeInter_7IT:checked+.h6,
+#typeInter_2IT:checked+.h6,
+#typeInter_2IM:checked+.h6,
+#typeInter_16IM:checked+.h6,
+#typeInter_9IM:checked+.h6,
+#typeInter_8IM:checked+.h6,
+#typeInter_7IM:checked+.h6,
+#typeInter_1IM:checked+.h6,
+#typeInter_16IM:checked+.h6,
+#typeInter_17IA:checked + .h6
+{
+	border: 4px solid #77e046;
+}
+.appareil{
+	border: none;	
+	width: 400px;
+	height: 200px;
+	background-color: #f3f3f3;
+	
+}
+.choixAppareil{
+	align-items: center;
+	vertical-align: middle;
+	background-color: #c0c0c0;
+}
+#select,.drone{
+	height: 2.75em;
+}
+dialog.modifier{
+	border: none;
+	opacity: 0.8;
+}
+
+.CGU{
+	margin-top: 2em;
+}
+.case-tarif{
+	width: 33%;
+	text-align: center;
+}
+.input-table{
+	margin-top: 12px;
+}
+
+.table-tarif>thead>tr>th{
+	background-color: rgb(198, 198, 252);
+	text-align: center;
+}
+.btn-mandat{
+	width: 100%;
+	background-color: #7bff8d;
+	text-align: center;
+}
+.btn-changer{
+	height: 1.5em;
+	font-size: 0.8em;
+	
+	padding: inherit;
+	background-color: #cefda7;
+}
+.changer{
+	margin-top: 1em;
+}
+.btn-cerfa{
+	width: 93%;
+	background-color: #ff9090;
+	height: 3.5em;
+}
+.mandatCerfa{
+	color:#616d70;
+}
+td.dateCerfa{
+	width: 20%;
+}
+td.adresseCerfa{
+	width: 25%;
+}
+td.aggloCerfa{
+	width: 7%;
+}
+td.salarieCerfa{
+	width: 7%;
+}
+td.droneCerfa{
+	width: 15%;
+}
+td.voirCerfa{
+	width: 5%;
+}
+td.envoyerCerfa{
+	width: 5%;
+}
+.btn-envoie{
+	background-color: #888aff;
+}
+.btn-voir{
+	background-color: #fc66b8;
+}
+.h7{
+	font-size : 0.9rem
+}
+th.fabricant,th.type,th.numero,th.poids{
+	width: 14%;
+	font-size: 0.875em;
+		
+}
+
+th.captif{
+	width:21% ;
+	font-size: 0.875em;
+	
+	
+}
+th.captif>label{
+	font-size: 0.875em;
+	
+}
+th.classe{
+	width: 23%;
+	font-size: 0.875em;
+	
+}
+#calendrier{
+color: black;
+}
+#abonnement1{
+/*background-image: url('/css/css_site/images/So free.jpg');*/
+	background-repeat: no-repeat;
+	background-size: 160%;
+	color: black;
+}
+#abonnement2 {
+	/*background-image: url('/css/css_site/images/Access.jpg');*/
+	background-repeat: no-repeat;
+	background-size: 190%;
+	color: black;
+}
+span.plan-price,span.plan-month,span.plan-decimals{
+	color: inherit;
+color: black;
+}
+
+#abonnement3 {
+	/*background-image: url('/css/css_site/images/Premium.jpg');*/
+	background-repeat: no-repeat;
+	background-size: 210%;
+	color: black;
+}
+#abonnement4 {
+	/*background-image: url('/css/css_site/images/Infinite.jpg');*/
+	background-repeat: no-repeat;
+	background-size: 250%;
+	color: black;
+}
+
+.supprimer{
+	background-image: url('/css/css_site/images/supprimer.png');
+	background-repeat: no-repeat;
+	border: none;
+	border-radius : 100%;
+	width: 31px;
+	height: 31px;
+}
+.minAbo{
+	font-size: 1.2em;
+}
+.projet-plus{
+	margin-left: 3.5em;
+	font-size: 4em;
+	font-weight: 800;
+}
+.text-accueil{
+	color: black;
+	font-style: italic;
+	font-weight: bold;
+	
+}
+#img-infinite{
+	width: 55em;
+	/*height: 80em;*/
+	
+}
+#img-premium{
+	width: 590px;
+	/*height: 1000px;*/
+}
+#img-free{
+	width: 37.5em;
+	/*height: 40em;*/
+}
+#img-access{
+	/*height: 58em;*/
+}
+.annonce{
+	background: #dff2ff;
+}
+#email,#montant{
+	background-color: white;
+}
+#email:focus,#montant:focus{
+	border: 1px dotted red;
+}
+.table-inter+td{
+	text-align: center;
+}
+.table-inter{
+	width: 30%;
+}
+.table-ville{
+	width: 25%;
+}
+.table-distance{
+	width: 15%;
+}
+.table-date{
+	width: 15%;
+}
+.table-btn{
+	width: 15%;
+}
+.btn-prop{
+	width: 40%;
+	font-size: 0.75em;
+}
+.inputProp{
+	background-color: rgb(218, 218, 218);
+}
+.inputProp:focus{
+	background-color: rgb(190, 190, 190);
+}
+
+.btnAt{
+	margin-top: 3em;
+	margin-bottom: 5em;
+}
+.supAbo{
+	font-size: 1.5em;
+}.btn-prs3{
+	width: 95%;
+	height: 5em;
+	padding-top: 2em;
+}
+
+#inter_insti_intemp_1{
+	margin-left: 1.5em;
+	margin-right: -1em;
+}
+#inter_insti_intemp_0{
+	margin-right: -1em;
+}
+#retraitMontant{
+	background-color: #c9c9c9;
+}
+#retraitMontant:focus{
+	background-color: #9b9b9b;
+}
+#inter_etape3_inter_precision{
+	background-color: #c9c9c9;
+}
+hr.demande{
+	
+  height: 2px; 
+  
+  color:#c2c2c2;
+  background-color: #c2c2c2;
+  
+	
+}
+
+.notif{
+background-color: rgb(250, 110, 110);
+
+border-radius: 100%;
+color: cornsilk;
+}
+#mailDestinataire,#destinataire{
+	background-color: white;
+}
+.identifiant{
+	margin-top: 0.5em;
+	display: inline-flex;
+}
+.btn-agent{
+	width: 100%;
+	background: #0d47a1;
+}
+.btn-generer{
+	width: 100%;
+	margin-top: 0.45em;
+	background: red;
+}
+.foncAgent{
+	margin-left: 0.45em;
+}
+.bat{
+	color: black;
+}
+.fc-scroller-harness{
+	color: black;
+}
+
+#constat_constatation{
+	resize: none;
+}
+.btn-photoRapport,.btn-videoRapport{
+	width: 100%;
+	height: 3.2em;
+	background: #0189bd;
+	border: none;
+}
+
+/*#inter_etape3_typeDemande_0+label{
+	margin-right: 2em;
+}
+#inter_etape3_typeDemande_1+label{
+	margin-right: 5em;
+}
+#inter_etape3_typeDemande_2+label{
+	margin-right: 2em;
+}
+#inter_etape3_typeDemande_3+label{
+	margin-right: 3em;
+}*/
+
+
+.tags-input-wrapper{
+	background: transparent;
+	padding: 10px;
+	border-radius: 4px;
+	height: 10em;
+	border: 1px solid #ccc
+}
+.tags-input-wrapper input{
+	border: none;
+	background: transparent;
+	outline: none;
+	width: 350px;
+}
+.tags-input-wrapper .tag{
+	display: inline-block;
+	background-color: #0189bd;
+	color: white;
+	font-size: 14px;
+	border-radius: 40px;
+	padding: 0px 3px 0px 7px;
+	margin-right: 5px;
+	margin-bottom:7px;
+
+}
+.tags-input-wrapper .tag a {
+	margin: 0 7px 3px;
+	display: inline-block;
+	cursor: pointer;
+}
+.btn-blanc{
+	color: black;
+	background-color: white;
+	border-color: #fc544b;
+	-webkit-box-shadow: 0 .125rem .25rem 0 rgba(58,59,69,.2)!important;
+	box-shadow: 0 .125rem .25rem 0 rgba(58,59,69,.2)!important;
+	border-radius: .25rem;
+}
+.exclusion,.satelite{
+	height: 500px;
+	width: 100%;
+}
+#modale {
+
+	border: none;
+	opacity: 0.9;
+	overflow: scroll;
+	width: 100%;
+}
+
+#modaleCgv,#modaleTravaux {
+	max-width: 80%;
+}
+
+#agentModale{
+	max-width: 100%;
+}
+#modalePack{
+	max-width: 75%;
+}
+.validerAgent{
+	position:absolute;
+	bottom: 2.3em;
+	width:100%;
+	padding-top:50px;
+	height:50px;
+}
+#inter_etape3_intemperie_1,
+#inter_etape3_intemperie_2,
+#inter_etape3_intemperie_3,
+#inter_etape3_intemperie_4,
+#inter_etape3_intemperie_5{
+	margin-left: 1em;
+}
+.carte{
+	height: 30em;
+
+}
+.toolTipMarqueur{
+	width: 25em;
+	font-size: 0.7em;
+	white-space: break-spaces;
+
+}
+#loupe{
+	cursor: pointer;
+}
+
+[role="tablist"] .card-header a.planning:before{
+	content: none;
+}
+[role="tablist"] .card-header a.planning{
+	padding: 1em;
+}
+.resp{
+	width: 40%;
+	text-align: center;
+}
+.boutonPlanning{
+	width: 20%;
+}
+.listPack>li{
+
+	margin-right: 0.5em;
+	list-style-type: circle;
+}
+.good-review-score{
+	background-color:#66CC33;
+	color:white;
+	text-align: center;
+	float: left;
+	margin-right: 5px;
+	padding-top: 0.8em;
+	padding-bottom: 0.8em;
+	width: 100%;
+
+	line-height: 30px;
+}
+.employe{
+	float: left;
+	width: 75%;
+	margin-top: 0.2em;
+}
+.texte{
+	float: left;
+	width: 100%;
+}
+.table-pack{
+	width: 100%;
+}
+.intitulePack{
+	width: 50%;
+}
+.total{
+	float: right;
+	width: 20%;
+	height: 6em;
+	border: 1px solid black;
+}
+.ht{
+	border-top: 1px solid black;
+	height: 50%;
+}
+.ttc{
+	height: 50%;
+}
+
+.btnreponse {
+	display: none;
+}
+
+.preview, .next {
+	font-size: 1.3em;
+	font-weight: bolder;
+}
+
+#boutonStatut, #boutonKbis {
+	margin-top: 1em;
+}
+
+.btn-appelOffre {
+	width: inherit;
+	height: 3.5em;
+}
+
+#resume {
+	resize: none;
+}
+
+#dropzone {
+	width: 100%;
+	min-height: 15em;
+
+	max-height: max-content;
+	border: 1px solid black;
+	background: rgba(120, 128, 178, 0.34);
+}
+
+.fichier {
+
+	float: left;
+	width: 30%;
+	margin-top: 0.5em;
+}
+
+.up {
+	color: black;
+}
+
+.fileIndication, .mess {
+	color: black;
+}
+
+#fichierAO {
+	display: none;
+}
+.vueDossier{
+	max-width: 75%;
+	color: black;
+}
+#next{
+	background-image: url("/css/css_site/img/next.png");
+	background-repeat: no-repeat;
+}
+#previous{
+	background-image: url("/css/css_site/img/previous.png");
+	background-repeat: no-repeat;
+}
+
+.rappelAbo{
+	font-size: 1.2em;
+	font-weight: 900;
+	color: black;
+}
+.majuscule{
+	text-transform: uppercase;
+}
+span.mois{
+	text-transform: uppercase;
+}
+.btn-drone{
+	height: 6em;
+	width: 15em;
+	vertical-align: middle;
+	font-size: 1.75em;
+	padding-top: 2.5em;
+
+
+}
+a.btn-drone:hover{
+	color: white;
+}
+#modalDrone{
+	max-width: 80em;
+	height: 100%;
+}
+#modalresult{
+	border: none;
+	opacity: 0.9;
+	overflow: scroll;
+	width: 100%;
+	align-items: center;
+}
+#modalAdressDemandeur{
+	max-width: 60em;
+	height: 100%;
+}
+.listeCg{
+	list-style-type: decimal;
+	color: #616d70;
+}
+.adresseCg{
+	list-style: none;
+	color: #616d70;
+}
+.autorizationGCI{
+	color: #616d70;
+}
+.rondCarte{
+	border: 1px solid #0189bd;
+	padding-left: 0.5em;
+	padding-right: 0.25em;
+	border-radius: 50% ;
+	text-align: center;
+	background: #0189bd;
+	color: white;
+	margin-right: 0.25em;
+}
+.switch {
+	position: relative;
+	display: inline-block;
+	width: 60px;
+	height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+	opacity: 0;
+	width: 0;
+	height: 0;
+}
+
+/* The slider */
+.slider {
+	position: absolute;
+	cursor: pointer;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: #ccc;
+	-webkit-transition: .4s;
+	transition: .4s;
+}
+
+.slider:before {
+	position: absolute;
+	content: "";
+	height: 26px;
+	width: 26px;
+	left: 4px;
+	bottom: 4px;
+	background-color: white;
+	-webkit-transition: .4s;
+	transition: .4s;
+}
+
+input:checked + .slider {
+	background-color: #2196F3;
+}
+
+input:focus + .slider {
+	box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+	-webkit-transform: translateX(26px);
+	-ms-transform: translateX(26px);
+	transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+	border-radius: 34px;
+}
+
+.slider.round:before {
+	border-radius: 50%;
+}
+.interNotifEnt{
+	border: 1px solid red;
+	border-radius : 100%;
+	padding-left: 0.5em;
+	padding-right: 0.5em;
+	background: red;
+	color: white;
+}
+.fc-event-title{
+	white-space: normal;
+}
+.particularité{
+	color: #0a3a82;
+	font-weight: bolder;
+}
+.delete{
+	cursor: pointer;
+}
+.btnSupprimer{
+	padding: .25rem .5rem;
+	font-Size: .875rem;
+	line-height: 1.5;
+	border-radius: .2rem;
+	min-width: 2em;
+}
+li{
+	color: black;
+}
+
+.footerProfil{
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+}
+.profilGc,
+.profilInsti,
+.abonnementOtd,.codePrm{
+	display: none;
+}
+
+.resultAboCoPro{
+	background: #FFDD00;
+}
+#btn-linkAdmin{
+	font-weight: 400;
+	color: #537bf6;
+	text-decoration: none;
+}
+.banqueAdmin{
+	width: 100%;
+}
+.marginInterface{
+	margin-top: 2.7em;
+}
+.bg-propAttente{
+	background: #7af857;
+}
+ .noProp{
+	 background: #ffbdbd;
+ }
+ .text-avertissement{
+	 color: red;
+ }
+ #inter_insti_intemperie_0,#inter_insti_intemperie_1,#inter_insti_intemperie_2,#inter_insti_intemperie_3,#inter_insti_intemperie_4,#inter_insti_intemperie_5{
+margin-right: 0.5em;
+	 margin-left: 1.5em;
+}
+ #inter_insti_typeDemande_0,#inter_insti_typeDemande_1,#inter_insti_typeDemande_2,#inter_insti_typeDemande_3, #inter_insti_typeDemande_4{
+	 margin-right: 0.5em;
+	 margin-left: 1.5em;
+ }
+ .typeDemande{
+	columns: 2;
+ }
+ .typeDemande>li{
+	 margin-right: 1.5em;
+ }
+ .modalAdminEmail{
+	 width: 10em;
+	 height: 10em;
+	 position: fixed;
+	 display: block;
+ }
+ .table-admin{
+	 margin-top: -1em;
+ }
+ .dialogAttente{
+	 width: 500px;
+	 height: 500px;
+	 position: absolute;
+	 z-index: 10000;
+	 /* left: 50%; */
+	 top: 50%;
+	 border: none;
+	 padding-top: 200px;
+	 background: #7F828A;
+ }
+ #entreprise_tp_siretTva_assujeti,#entreprise_tp_civilite_type,#entreprise_tp_abonnementPub{
+	 display: inline-flex;
+ }
+ .listeTravaux{
+	 columns: 2;
+	 list-style: none;
+ }
+ .checkPerso>ul>li>input[type=checkbox]{
+	 width: inherit;
+
+ }
+.imgPub{
+	max-width: 100%;
+	max-height: 132px
+}
+#cartePremium{
+	height: 40em;
+}
+.listeAbo{
+	list-style: none;
+}
+.cercle1{
+	display: inline-block;
+	border : 2px solid #FF0F00;
+	height: 2.5em;
+	width: 2.5em;
+	background-color: #FF4200;
+	opacity: 0.5;
+	border-radius: 100%;
+}
+.cercle2{
+	display: inline-block;
+	border : 2px solid #004CFF;
+	height: 2.5em;
+	width: 2.5em;
+	background-color: #0067FF;
+	opacity: 0.5;
+	border-radius: 100%;
+}
+.swiper {
+	width: 25%;
+	height: 300px;
+}
+
+#inter_etape3_budgetInter>div>label{
+	display: none;
+}
+
+input[type=radio]:checked + label,input[type=checkBox].packOdi:checked + label{
+	background: blue;
+}
+
+.ligneBas{
+	border-bottom: 3px dotted black;
+}
+.priceDone{
+	background: #84FF33;
+}
+.priceNone{
+	background: #FF9E9E;
+}
+.userConnecte{
+	columns: 3;
+	list-style-type: disclosure-closed;
+}
+#inter_etape3_photoOnly,#inter_etape3_videoOnly{
+	margin-left: 1em;
+
+}
+#inter_etape3_typeMedia{
+	text-align: center;
+}
+.border-silver{
+	border: 1px solid #dee2e6;
+}
+
+.breadcrumb-wrap {
+	margin-top: 60px;
+	border-bottom: 1px solid #CCC;
+	padding-bottom: 31px;
+}
+
+
+.modal-dialog {
+	max-width: 100%;
+}
+
+/*table {
+	display: block;
+	width: 100%;
+	overflow-x: auto;
+	-webkit-overflow-scrolling: touch;
+	-ms-overflow-style: -ms-autohiding-scrollbar;
+}*/
+
+.top-includes {
+	position: relative;
+}
+
+.entry-content {
+	margin-top: 120px;
+}
+
+@media only screen and (min-width: 992px) {
+
+
+
+	.modal-dialog {
+		max-width: 75%;
+	}
+
+	[role="tablist"] .card-body {
+		background: #fff;
+		padding: 0 20px 40px 90px;
+	}
+
+}
+@media only screen and (max-width: 1199px) {
+
+	.login__li, .login-form-btn {
+		position: absolute;
+		right: 55px;
+		z-index: 9999;
+		top: 0;
+		background: #1111;
+		padding: 0.4rem 0.8rem;
+		border-radius: 3px;
+		display: block;
+	}
+
+	.login-form-btn.back__office  {
+		right: 10px;
+		top: -20px;
+	}
+
+
+
+
+
+	.page_header_side.header_side_sticked .toggle_menu_side {
+		/* right: -60px; */
+		/* top: 0; */
+		transition: 0.5s ease-in-out;
+		position: fixed!important;
+		top: 37px!important;
+		right: 10px!important;
+		width: 32px;
+		height: 32Px;
+	}
+
+}
+
+
+@media only screen and (max-width: 991px) {
+
+	.login-form-btn.back__office  {
+		right: 60px;
+		top: -20px;
+	}
+
+	.login__li small , .login-form-btn small {
+		position: absolute;
+		bottom: -18px;
+		left: -23px;
+		width: max-content;
+	}
+
+}
+
+
+@media only screen and (max-width: 768px) {
+
+
+	.menu-click.dashbord.menuPrincipal {
+		padding-top: 50px;
+	}
+
+	.header__prev_next {
+		position: relative;
+		margin-top: 40px;
+	}
+
+	[role="tablist"] .card-body {
+		padding: 10px!important;
+		overflow: hidden;
+	}
+	[role="tablist"] .card-header a:before {
+		top: 50%;
+		transform: translateY(-50%)!important;
+		left: 8px;
+	}
+
+	[role="tablist"] .card-header a {
+			font-size: 14px;
+	}
+
+	.header__prev_next .mois, .header__prev_next #mois, .header__prev_next #moisDevis {
+		position: absolute;
+		top: -42px;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 200px;
+	}
+	#precedent, #suivant, #precedentDevis, #suivantDevis, .btn.btn-maincolor.prec, .btn.btn-maincolor.suiv {
+		min-width: initial!important;
+	}
+	#precedent, #precedentDevis, .btn.btn-maincolor.prec, #suivant, #suivantDevis, .btn.btn-maincolor.suiv{
+		margin: 10px;
+	}
+
+	#mois, #moisDevis, .mois {
+		font-size: 1.3rem;
+		margin-left: 10px;
+		margin-right: 10px;
+		color: #111111;
+	}
+
+
+	.fc-toolbar-chunk {
+		position: relative;
+		margin-top: 40px;
+	}
+	.fc .fc-toolbar-title {
+		font-size: 1rem;
+		position: absolute;
+		top: -52px;
+		left: 7px;
+		width: 200px;
+	}
+
+
+	span.plan-price, span.plan-month, span.plan-decimals {
+		font-size: 3rem;
+		margin-top: 22px;
+	}
+
+	.row.row_price .form_inside {
+		padding: 0;
+	}
+
+}
+
+
+@media only screen and (max-width: 767px) {
+	table.dataTable tbody th {
+		font-size: .9rem;
+	}
+
+	.login__li, .login-form-btn {
+		right: -70px;
+	}
+
+	.breadcrumb {
+		margin-left: 0;
+	}
+
+}
+
+@media only screen and (max-width: 730px) {
+	.login__li, .login-form-btn {
+		right: 10px;
+	}
+}
+
+@media only screen and (max-width: 462px) {
+	.page_header .login-form-btn {
+		flex-direction: column-reverse;
+		align-items: center;
+		justify-content: center;
+	}
+	.page_header .login-form-btn small {
+		margin-top: 5px;
+		font-size: .7rem;
+	}
+}
+.tableAccueil{
+	border: 1px solid #dedfe0;
+	padding-top: 1em;
+	padding-bottom: 1em;
+	writing-mode: horizontal-tb;
+	hyphens: auto
+}
+@media only screen and (max-width: 462px){
+	.font-table {
+		font-size: 0.65em;
+		border: 1px solid black;
+
+	}
+
+}
+.deleteMission{
+	color: white;
+	background: red;
+	border-radius: 100%;
+	border: 1px solid red;
+	font-weight: 950;
+	cursor: grab;
+	margin-left: 2em;
+}
+.modalPackPerso{
+	height: 20em;
+	width: 80em;
+	border: none;
+}
+.footerPackPerso{
+	 bottom: 0;
+	 position: absolute;
+	 width: 99%;
+
+ }
+.lienTemps{
+	border: 1px solid #dedfe0;
+	width: 16.666666%;
+	text-align: center;
+
+}
+.pb-70{
+	padding-bottom: 8em;
+}
+#vendre:checked+label,#louer:checked+label{
+	border:4px solid #1BFE01;
+}
+.zoneTypeBien{
+	height: 6.5em;
+	width: 100%;
+}
+.inputTypeBien:checked+label{
+	border: 4px solid #1BFE01;
+	background: none;
+}
+
+
+

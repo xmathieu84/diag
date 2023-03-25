@@ -1,0 +1,57 @@
+{% extends 'institution/baseInsti.html.twig'%}
+
+{% block title %}
+Mes informations
+{% endblock %}
+{% block pageAccueil %}
+<h3>Information de {{ institution.profil}} {{ institution.nom }}</h3>
+{% endblock %}
+{% block contenu %}
+    <div class="row bg-white">
+
+
+    <div class="col-sm-12 col-12 table-responsive">
+        <table>
+            <tbody>
+            <tr class="text-dark">
+                <th class="text-center">Responsable du compte</th>
+                <td class="text-center">{{ responsable.civilite.nom }} {{ responsable.civilite.prenom }}</td>
+            </tr>
+            <tr class="text-dark">
+                <th class="text-center">Adresse</th>
+                <td class="text-center">{{ institution.adresse.numero }} {{ institution.adresse.nomVoie }} {{ institution.adresse.codePostal }} {{ institution.adresse.ville }}</td>
+            </tr>
+            <tr class="text-dark">
+                <th class="text-center">Numéro de téléphone</th>
+                <td class="text-center">{{ institution.telephon.numero }}</td>
+            </tr>
+            <tr class="text-dark">
+                <th class="text-center">Informations légales</th>
+                <td class="text-center">SIREN : {{ institution.sirettva.siret }} <br> TVA : {{ institution.siretTva.tva }}</td>
+            </tr>
+            {% if is_granted('ROLE_BTP') ==false and is_granted('ROLE_GRANDCOMPTE') ==false%}
+
+
+            <tr class="text-dark">
+                <th class="text-center">{% if is_granted('ROLE_GRANDCOMPTE') %}
+                        Nombre d'agents
+                        {% else %}
+                            Nombre de collaborateurs
+                    {% endif %}</th>
+                <td class="text-center">{{ nombreA }}</td>
+            </tr>
+            <tr class="text-dark">
+                <th class="text-center">{% if is_granted('ROLE_INSTITUTION') %}
+                        Nombre d'agents maximum
+                        {% else %}
+                        Nombre de collaborateurs maximum
+                    {% endif %}</th>
+                <td class="text-center">{{ nombre }}</td>
+            </tr>
+            {% endif %}
+            </tbody>
+        </table>
+    </div>
+    </div>
+{% endblock %}
+

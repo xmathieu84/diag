@@ -1,0 +1,85 @@
+{% extends template %}
+{% block title %}{{ theme.nom }}
+{% endblock %}
+
+{% block contenu %}
+
+	<div class="row">
+
+		<div class="col-6 text-center">
+			{# <span class="h2">{{categorie.theme.nom|capitalize}}</span>#}
+		</div>
+		<div class="col-6">
+			<button type="button" class="btn btn-maincolor btn-block" data-toggle="modal" data-target="#sujetForum">Ajouter un sujet</button>
+		</div>
+	</div>
+
+	<div class="container mt-5">
+		<div id="accordion01" role="tablist">
+
+			{% for categorie in categories %}
+				<div class="card">
+					<div class="card-header" role="tab" id="collapse{{ loop.index }}_header">
+						<div class="row">
+							<div class="col-12">
+								<p class="h5">
+									<a class="collapsed" data-toggle="collapse" href="#collapse{{ loop.index }}" aria-expanded="false" aria-controls="collapse{{ loop.index }}">
+										{{ categorie.nom }} créé le {{ categorie.date|format_datetime('short','none',locale="fr") }}
+									</a>
+
+								</p>
+							</div>
+
+						</div>
+
+
+					</div>
+					<div id="collapse{{ loop.index }}" class="collapse" role="tabpanel" aria-labelledby="collapse{{ loop.index }}_header" data-parent="#accordion01">
+						<div class="card-body">
+							<div class="row">
+								<div class="col-12">
+									<p class="h6">{{ categorie.contenu }}</p>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+
+		</div>
+	</div>
+	<div class="modal fade" id="sujetForum" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="staticBackdropLabel">Créer votre sujet</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+
+						<div class="col-sm-6 col-12">
+							<p class="h6">Titre</p>
+							<input type="text" id="titre" class="form-control">
+						</div>
+
+						<div class="col-12">
+							<p class="h6">Votre message:
+							</p>
+							<textarea name="" id="cat" cols="30" rows="10" class="form-control"></textarea>
+						</div>
+
+						<div class="col-12 mt-4 text-right">
+							<button class="btn btn-maincolor3" data-categorie="{{ theme.id }}">Valider</button>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

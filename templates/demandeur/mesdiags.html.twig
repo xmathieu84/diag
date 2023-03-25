@@ -1,0 +1,242 @@
+{% extends template %}
+
+{% block title %}Mes diagnostics
+{% endblock %}
+{% block titredemandeur %}
+<h1>Mes diagnostics</h1>
+{% endblock %}
+{% block contenu %}
+
+{% block stylesheets %}
+<style type="text/css">
+	[data-toggle="collapse"]:after {
+		font-size: 13px;
+		top: unset;
+		margin-top: unset;
+	}
+</style>
+{% endblock %}
+
+<div role="tablist">
+	<div class="card">
+		<div class="card-header" role="tab" id="collapse01_header">
+			<h5>
+				<a data-toggle="collapse" href="#collapse01" aria-expanded="true" aria-controls="collapse01" class="">
+					Interventions en cours
+					<span class="h7 color_blue float-right mr-3">({{ (reservations|length) + (interDiagEnCours|length) }})</span>
+
+				</a>
+			</h5>
+		</div>
+
+		<div id="collapse01" class="collapse" role="tabpanel" aria-labelledby="collapse01_header" data-parent="#accordion01" style="">
+			<div class="card-body">
+				<div class="row text-center">
+					{% if reservations is not empty or interDiagEnCours is not empty %}
+					{% for reservation in reservations %}
+
+					{% if reservation %}
+					<div class="col-12 col-md-6 mb-3">
+						<div class="card">
+							<div class="card-header">
+								<p class="card-titre p-3 bg-maincolor mb-3">Intervention le
+								{{reservation.intervention.rdvAt|format_datetime('full', 'none', locale='fr')}}</p>
+
+							</div>
+							<div class="card-body">
+								<h6 class="card-title souligne">Adresse :
+								</h6>
+								<p class="card-text">{{reservation.intervention.adresse.adresseComplete}}
+								</p>
+								<h6 class="souligne">Type d'intervention :
+
+								</h6>
+								<p class="card-text">{{reservation.intervention.listeInter.nom}}
+
+								{{reservation.intervention.typeInter.nom}}</p>
+
+								<p class="card-text">
+									{% if is_granted('ROLE_INSTITUTION') or is_granted('ROLE_GRANDCOMPTE') %}
+									<a href="/uploads/factureDD/{{ reservation.intervention.facture	 }}" target="_blank">
+
+										<button class="btn btn-danger" type="button">Facture</button>
+									</a>
+									{% else %}
+									<a href="/uploads/factureDD/{{ reservation.intervention.facture	 }}" target="_blank">
+										<button class="btn btn-danger" type="button">Facture</button>
+									</a>
+									<a href="/uploads/factureDD/{{ reservation.intervention.devis }}" class="btn btn-danger" target="_blank">Facture d'acompte</a>
+
+
+									{% endif %}
+
+								</p>
+
+							</div>
+						</div>
+					</div>
+
+
+					{% endif %}
+
+					{% endfor %}
+						<hr class="demande">
+						{% for interDiagEncour in interDiagEnCours %}
+							<div class="col-12 col-md-6 mb-3">
+								<div class="card">
+									<div class="card-header">
+
+										<p class="card-titre p-3 bg-maincolor mb-3">Intervention le
+											{{interDiagEncour.dateRdv|format_datetime('full', 'none', locale='fr')}}</p>
+
+									</div>
+									<div class="card-body">
+										<h6 class="card-title souligne">Adresse :
+										</h6>
+										<p class="card-text">{{interDiagEncour.adresse.adresseComplete}}
+										</p>
+										<h6 class="souligne">Missions :
+
+										</h6>
+										<p class="card-text">
+											{% for mission in interDiagEncour.missions %}
+												{{ mission.nom }}<br>
+											{% endfor %}
+										</p>
+
+										<p class="card-text">
+											{% if is_granted('ROLE_INSTITUTION') or is_granted('ROLE_GRANDCOMPTE') %}
+												<a href="/uploads/factureDD/{{ interDiagEncour.facture	 }}" target="_blank">
+
+													<button class="btn btn-danger" type="button">Facture</button>
+												</a>
+											{% else %}
+												<a href="/uploads/factureDD/{{ interDiagEncour.facture	 }}" target="_blank">
+													<button class="btn btn-danger" type="button">Facture</button>
+												</a>
+												<a href="/uploads/factureDD/{{ interDiagEncour.factureAcompte }}" class="btn btn-danger" target="_blank">Facture d'acompte</a>
+
+
+											{% endif %}
+
+										</p>
+
+									</div>
+								</div>
+							</div>
+						{% endfor %}
+					{% else %}
+					<p class="h5">Vous n'avez aucune intervention en attente.</p>
+
+
+					{% endif %}
+
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<hr id="demande">
+
+	<div class="card">
+		<div class="card-header" role="tab" id="collapse02_header">
+			<h5>
+				<a class="collapsed" data-toggle="collapse" href="#collapse02" aria-expanded="false" aria-controls="collapse02">
+					Interventions terminées
+					<span class="h7 color_blue float-right mr-3">({{ reservationTermine|length }})</span>
+				</a>
+			</h5>
+		</div>
+		<div id="collapse02" class="collapse" role="tabpanel" aria-labelledby="collapse02_header" data-parent="#accordion01">
+			<div class="card-body">
+				<div class="row text-center">
+					{% if reservationTermine is not empty %}
+					{% for reservation in reservationTermine %}
+
+					{% if reservation %}
+					<div class="col-12 col-md-6 mb-3">
+						<div class="card">
+							<div class="card-header">
+								<p class="card-titre p-3 bg-maincolor mb-3">Intervention le
+								{{reservation.intervention.rdvAt|format_datetime('full', 'none', locale='fr')}}</p>
+
+							</div>
+							<div class="card-body">
+								<h6 class="card-title souligne">Adresse :
+								</h6>
+								<p class="card-text">{{reservation.intervention.adresse.numero}}
+									{{reservation.intervention.adresse.nomVoie}}
+									{{reservation.intervention.adresse.codePostal}}
+								{{reservation.intervention.adresse.ville}}</p>
+								<h6 class="souligne">Type d'intervention :
+
+								</h6>
+
+
+								{% if reservation.intervention.datePaiement == null %}
+								{% if is_granted('ROLE_INSTITUTION') or is_granted('ROLE_GRANDCOMPTE') %}
+								{% if reservation.intervention.rapports is not empty %}
+								{% for rapport in reservation.intervention.rapports %}
+								<p class="card-text">
+									<a href="{{ path('streamRapportDemandeur',{id:rapport.id}) }}" target="_blank" class="btn btn-danger">
+
+										Rapport n°{{ loop.index }}
+									</a>
+								</p>
+								{% endfor %}
+
+								{% endif %}
+
+								{% else %}
+								<p class="card-text">
+									<a href="{{path('paiement',{type:'intervention',id:reservation.intervention.id})}}">
+
+
+										<button class="btn btn-maincolor" type="button">Payer l'intervention</button>
+									</a>
+								</p>
+
+
+
+								{% endif %}
+
+								{% else %}
+
+
+								{% for rapport in reservation.intervention.rapports %}
+								<p class="card-text">
+									<a href="{{ path('streamRapportDemandeur',{id:rapport.id}) }}" >
+
+										<button class="btn btn-danger" type="button">Rapport n°{{ loop.index }}</button>
+									</a>
+								</p>
+								{% endfor %}
+
+								{% endif %}
+
+								<p class="card-text">
+									<a href="{{ path('facture_pdf',{id: reservation.id})}}" target="_blank">
+										<button class="btn btn-danger" type="button">Facture</button>
+									</a>
+								</p>
+								{% if is_granted('ROLE_DEMANDEUR') %}
+								<a href="/uploads/factureDD/{{ reservation.intervention.devis }}" class="btn btn-danger" target="_blank">Facture d'acompte</a>
+								{% endif %}
+							</div>
+
+						</div>
+					</div>
+					{% endif %}
+					{% endfor %}
+					{% else %}
+					<p class="h5">Vous n'avez pas d'intervention terminée.</p>
+					{% endif %}
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

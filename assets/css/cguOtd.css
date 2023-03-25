@@ -1,0 +1,15 @@
+#ligne3,#ligne2,#ligne1{
+    margin: 0;
+}
+th.case1,th.case3{
+    width: 20%;
+}
+td.lastCase{
+    width: 33%;
+}
+td.case{
+    width: 4.76%;
+}
+.souligne{
+    text-decoration: underline;
+}

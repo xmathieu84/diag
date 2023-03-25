@@ -1,0 +1,91 @@
+{% extends template %}
+
+{% block title %}
+Etape 2 du diagnostic
+{% endblock %}
+
+{% block bodyAccueil %}
+    <input type="hidden" name="" value="{{ inter.identifiat }}">
+
+<section class="ls service-single s-py-xl-150 s-py-lg-130 s-py-md-90 s-py-60 bg-white">
+    <div class="container pb-3">
+        <div class="row">
+        <p class="h5">Date du permis de construire : </p>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-sm-3 col-6">
+                            <input type="radio" name="datePermis" id="a1949" class="inputTypeBien permis" value="Avant 1949" hidden data-amiante=1 data-plomb=1>
+                            <label for="a1949" class="border-gray text-center zoneTypeBien" class="inputTypeBien" style="background: none">Avant 1949</label>
+                        </div>
+                        <div class="col-sm-3 col-6">
+                            <input type="radio" name="datePermis" id="a1949a1997" class="inputTypeBien permis" value="Entre 1949 le 01/07/1997" hidden data-amiante=1 data-plomb=0>
+                            <label for="a1949a1997" class="border-gray text-center zoneTypeBien" class="inputTypeBien" style="background: none">Entre 1949 le 01/07/1997</label>
+                        </div>
+                        <div class="col-sm-3 col-6">
+                            <input type="radio" name="datePermis" id="a1997" class="inputTypeBien permis" value="Après 01/07/1997" data-amiante=0 data-plomb=0 value="Après 01/07/1997" hidden>
+                            <label for="a1997" class="border-gray text-center zoneTypeBien" class="inputTypeBien" style="background: none">Après 01/07/1997</label>
+                        </div>
+                        <div class="col-sm-3 col-6">
+                            <input type="radio" name="datePermis" id="saisPas" class="inputTypeBien permis" value="Ne sais pas" hidden data-amiante=1 data-plomb=1>
+                            <label for="saisPas" class="border-gray text-center zoneTypeBien" class="inputTypeBien" style="background: none">Je ne sais pas</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 mt-4">
+                    <p class="h5">Vous disposez d'une installation gaz : </p>
+                    <div class="row">
+                        <div class="col-sm-3 col-6">
+                            <input type="radio" name="dateGaz" id="moins15Ans" class="inputTypeBien installGaz" data-gaz="0" value="Moins de 15 ans" hidden>
+                            <label for="moins15Ans" class="border-gray text-center zoneTypeBien" style="background: none">Moins de 15 ans</label>
+                        </div>
+                        <div class="col-sm-3 col-6">
+                            <input type="radio" name="dateGaz" id="plus15ans" class="inputTypeBien installGaz" data-gaz="1"  value="Plus de 15 ans" hidden>
+                            <label for="plus15ans" class="border-gray text-center zoneTypeBien" style="background: none">Plus de 15 ans</label>
+                        </div>
+                        <div class="col-sm-3 col-6">
+                            <input type="radio" name="dateGaz" id="pasInstall" class="inputTypeBien installGaz" data-gaz="0" value="Pas d'installation" hidden>
+                            <label for="pasInstall" class="border-gray text-center zoneTypeBien" style="background: none">Pas d'installation</label>
+                        </div>
+                        <div class="col-sm-3 col-6">
+                            <input type="radio" name="dateGaz" id="saisPasGaz" class="inputTypeBien installGaz" data-gaz="1" value="Ne sais pas" hidden>
+                            <label for="saisPasGaz" class="border-gray text-center zoneTypeBien" style="background: none">Je ne sais pas</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 mt-4 elec">
+                    <p class="h5">Vous disposez d'une installation électrique : </p>
+                    <div class="row">
+                        <div class="col-sm-3 col-6">
+                            <input type="radio" name="dateElec" id="moins15AnsElec" class="inputTypeBien elecInstall" data-elec="0" value="Moins de 15 ans" hidden>
+                            <label for="moins15AnsElec" class="border-gray text-center zoneTypeBien" style="background: none">Moins de 15 ans</label>
+                        </div>
+                        <div class="col-sm-3 col-6">
+                            <input type="radio" name="dateElec" id="plus15ansElec" class="inputTypeBien elecInstall" data-elec="1" value="Plus de 15 ans" hidden>
+                            <label for="plus15ansElec" class="border-gray text-center zoneTypeBien" style="background: none">Plus de 15 ans</label>
+                        </div>
+                        <div class="col-sm-3 col-6">
+                            <input type="radio" name="dateElec" id="pasInstallElec" class="inputTypeBien elecInstall"data-elec="0" value=0 hidden>
+                            <label for="pasInstallElec" class="border-gray text-center zoneTypeBien" style="background: none">Pas d'installation</label>
+                        </div>
+                        <div class="col-sm-3 col-6">
+                            <input type="radio" name="dateElec" id="saisPasElec" class="inputTypeBien elecInstall" data-elec="1" value="Ne sais pas" hidden>
+                            <label for="saisPasElec" class="border-gray text-center zoneTypeBien" style="background: none">Je ne sais pas</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-12 mt-4">
+                    <a href="{{ path('createDiag',{identifiant : inter.identifiat}) }}" class="btn btn-secondary">Précédent</a>
+                </div>
+                <div class="col-sm-6 col-12 mt-4 text-right">
+                    <button class="btn btn-maincolor" data-inter="{{  inter.identifiat }}">Continuer</button>
+                </div>
+            </div>
+
+
+    </div>
+    </div>
+</section>
+{% endblock %}
+

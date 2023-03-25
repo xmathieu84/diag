@@ -1,0 +1,149 @@
+{% extends "demandeur/basedemandeur.html.twig" %}
+{% block title %}Consultant
+{% endblock %}
+{% block titreConsultant %}
+	<h1>Accueil</h1>
+{% endblock %}
+
+{% block contenu %}
+
+	<div class="row">
+		<div class="col-lg-12 col-md-12">
+
+			<div class="pricing-plan box-shadow with-features cs">
+				<div class="plan-header">
+					<div class="plan-name">
+						<h5>
+							{{consultant.civilite.type}}
+							{{ consultant.civilite.prenom }}
+							{{ consultant.civilite.nom }}
+						</h5>
+					</div>
+					<div class="plan-name">
+						<h6>
+							Profil :
+							{{consultant.profil}}
+
+						</h6>
+					</div>
+				</div>
+				<div class="price-wrap color-darkgrey">
+					{% if consultant.profil != 'Particulier propriétaire' %}
+						<p class="h4">SIRET :
+							{{ consultant.siretTva.siret }}</p>
+						<p class="h4">TVA intracommunautaire :
+							{{ consultant.siretTva.tva }}</p>
+					{% endif %}
+					<p class="h4">
+						<i class="fas fa-envelope"></i>
+						:
+						{{ consultant.user.email }}</p>
+
+
+				</div>
+				<p class="h4">
+					<i class="fas fa-Téléphone"></i>
+					{{consultant.telephon.numero}}</p>
+				<div class="plan-features">
+					<p>
+						<i class="fas fa-map-marker-alt"></i>
+						{{ consultant.adresse.numero }}
+						{{ consultant.adresse.nomVoie }}
+						{{ consultant.adresse.codePostal }}
+						{{ consultant.adresse.ville }}
+					</p>
+				</div>
+				<div class="presentation">
+					<a href="{{path('desinscription')}}">
+						<button class="btn-sm btn-danger">Se désincrire</button>
+					</a>
+
+					<button class="btn-sm btn-darkgrey">Modifier</button>
+
+				</div>
+			</div>
+		</div>
+
+		<div class="col-sm-12 text-center mt-5">
+			<a href="{{path('devenirDemandeur')}}">
+				<button class="btn btn-outline-maincolor">Devenir Demandeur</button>
+
+			</a>
+
+		</div>
+	</div>
+	<dialog class="modifier">
+		<div class="row text-center">
+			<div class="col-sm-2"></div>
+			<div class="col-sm-8">
+				<p class="h6">Profil</p>
+				<select name="" id="select" class="form-control profil" data-type="profil">
+					<option value="Particulier propriétaire">Particulier propriétaire</option>
+					<option value="Syndic de co-propriété">Syndic de co-propriété</option>
+					<option value="Gestionniaire d'immeuble">Gestionniaire d'immeuble</option>
+					<option value="Commune">Commune</option>
+					<option value="Assureur">Assureur</option>
+					<option value="Entreprise">Entreprise</option>
+					<option value="Expert en assurance">Expert en assurance</option>
+					<option value="Agent immobillier">Agent immobillier</option>
+					<option value="Diagnostiqueur">Diagnostiqueur</option>
+					<option value="Notaire">Notaire</option>
+				</select>
+			</div>
+			<div class="col-sm-2"></div>
+			{% if consultant.siretTva %}
+				<div class="col-sm-6">
+					<p class="h6">Numéro de SIRET</p>
+					<input type="text" class="form-control form-control-sm" value="{{consultant.siretTva.siret}}" data-type="siret">
+				</div>
+			{% endif %}
+			{% if consultant.siretTva %}
+				<div class="col-sm-6">
+					<p class="h6">Numéro de TVA</p>
+					<input type="text" class="form-control form-control-sm" value="{{consultant.siretTva.tva}}" data-type="tva">
+				</div>
+			{% endif %}
+			<div class="col-sm-6">
+				<p class="h6">Prénom</p>
+				<input type="text" class="form-control form-control-sm civilite" value="{{consultant.civilite.prenom}}" data-type="prenom">
+			</div>
+			<div class="col-sm-6">
+				<p class="h6">Nom</p>
+				<input type="text" class="form-control form-control-sm civilite" value="{{consultant.civilite.nom}}" data-type="nom">
+			</div>
+
+			<div class="col-sm-6">
+				<p class="h6">Adresse mail de contact</p>
+				<input type="text" class="form-control form-control-sm user" value="{{consultant.user.email}}" data-type="email">
+			</div>
+			<div class="col-sm-6">
+				<p class="h6">Numéro de téléphone</p>
+				<input type="text" class="form-control form-control-sm" value="0{{consultant.telephon.numero}}" data-type="telephone">
+
+			</div>
+			<div class="col-sm-6">
+				<p class="h6">Numéro de la voie</p>
+				<input type="text" class="form-control form-control-sm adresse" value="{{consultant.adresse.numero}}" data-type="numero">
+
+			</div>
+			<div class="col-sm-6">
+				<p class="h6">Nom de la voie</p>
+				<input type="text" class="form-control form-control-sm adresse" value="{{consultant.adresse.nomVoie}}" data-type="voie">
+			</div>
+			<div class="col-sm-6">
+				<p class="h6">Code Postal</p>
+				<input type="text" class="form-control form-control-sm adresse" value="{{consultant.adresse.codePostal}}" data-type="postal">
+			</div>
+			<div class="col-sm-6">
+				<p class="h6">Ville</p>
+				<input type="text" class="form-control form-control-sm adresse" value="{{consultant.adresse.ville}}" data-type="ville">
+			</div>
+			<div class="col-sm-12 text-center">
+				<button type="button" class="btn btn-maincolor">Valider</button>
+			</div>
+
+
+		</div>
+	</dialog>
+
+{% endblock %}

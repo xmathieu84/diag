@@ -1,0 +1,1086 @@
+{% include 'pdf/headerRapport.html.twig' %}
+
+<div class="presentation">
+    <span>
+        <b>PRESENTATION DU DIAGNOSTIC
+</b>
+    </span>
+</div>
+<div class="typeInter">
+    <span>Type d’intervention : constat visuel</span>
+</div>
+<div class="caracteristique">
+    <span>Caractéristique d’intervention : drone aérien</span>
+</div>
+<div class="drone">
+
+    <span>Date de la mission : {{ rapport.intervention.rdvAt|format_datetime('short', 'none', locale='fr') }}</span>
+</div>
+<div class="barre4"></div>
+<div class="demandeur">
+    {% if rapport.intervention.intDem.civilite %}
+        <span>Demandeur: {{ rapport.intervention.intDem.civilite.type }} {{ rapport.intervention.intDem.civilite.nom }} {{ rapport.intervention.intDem.civilite.prenom }}</span>
+        <br>
+        <span>Profil : {{ rapport.intervention.intDem.profil }}</span>
+    {% else %}
+        <span>Demandeur: {{ rapport.intervention.intDem.profil }} {{ rapport.intervention.intDem.nom }} </span><br>
+        <span>Profil : {{ rapport.intervention.intDem.profil }}</span>
+    {% endif %}
+
+</div>
+<div class="emmission">
+    <span>Ref DIAG DRONE : DD{{ rapport.intervention.intDem.id }}</span><br>
+    <span>Rèf OTD:  OTD{{ rapport.intervention.reservation.salarie.id }}</span><br>
+    <span>Rèf Demandeur : Dem{{ rapport.intervention.intDem.id }}</span>
+</div>
+<div class="barre5"></div>
+<div class="consultant">
+    <span>Consultant(s) autorisé(s) : OUI
+</span>
+    <br>
+    <span>Liste des consultants
+</span>
+</div>
+<div class="barre6"></div>
+<div class="typeBien">
+    <span>TYPE DE BIEN ET SITE D’INTERVENTION </span>
+</div>
+
+<div class="barre7"></div>
+<div class="denom">
+    <span>DÉNOMINATION DU DEMANDEUR
+</span>
+</div>
+<div class="tableInter" style="">
+    <table>
+        <tr>
+            <td class="bien">Type de bien</td>
+            <td class="bien">{{ rapport.intervention.typeDeBien }}</td>
+        </tr>
+        <tr>
+            <td class="bien">Adresse</td>
+            <td class="bien">{{ rapport.intervention.adresse.numero }} {{ rapport.intervention.adresse.nomVoie }}
+                <br> </td>
+        </tr>
+        <tr>
+            <td class="bien">Code Postal</td>
+            <td class="bien">{{ rapport.intervention.adresse.codePostal }}</td>
+        </tr>
+        <tr>
+            <td class="bien">Ville</td>
+            <td class="bien">{{ rapport.intervention.adresse.ville }}</td>
+        </tr>
+        <tr>
+            <td class="bien">Département</td>
+            <td class="bien">{% if rapport.intervention.adresse.departement %}{{ rapport.intervention.adresse.departement.nomdepartement }}{% endif %}</td>
+        </tr>
+
+    </table>
+</div>
+<div class="barre8"></div>
+<div class="tableDem" style="border: 1px solid black">
+    <table>
+        <tr>
+            {% if  rapport.intervention.intDem.civilite %}
+                <td class="denomDem">Nom/Prénom</td>
+                <td class="denomDem2">{{ rapport.intervention.intDem.civilite.nom }} {{ rapport.intervention.intDem.civilite.prenom }}</td>
+            {% else %}
+                <td class="denomDem">Nom</td>
+                <td class="denomDem2">{{ rapport.intervention.intDem.profil }} {{ rapport.intervention.intDem.nom }}</td>
+            {% endif %}
+
+        </tr>
+        <tr>
+            <td class="denomDem">E-mail</td>
+            {% if rapport.intervention.createdAt %}
+                {% if rapport.intervention.intDem.user %}
+                    <td class="denomDem2">{{ rapport.intervention.intDem.user.email }}</td>
+                {% else %}
+                    <td class="denomDem2">{{ responsable.user.email }}</td>
+                {% endif %}
+                {% else %}
+                <td class="denomDem2">Pas d'Email renseigné</td>
+            {% endif %}
+
+        </tr>
+        <tr>
+            <td class="denomDem">Adresse</td>
+            <td class="denomDem2">{{ rapport.intervention.intDem.adresse.numero }} {{ rapport.intervention.intDem.adresse.nomVoie }}</td>
+        </tr>
+        <tr>
+            <td class="denomDem">Code Postal</td>
+            <td class="denomDem2">{{ rapport.intervention.intDem.adresse.codePostal }}</td>
+        </tr>
+        <tr>
+            <td class="denomDem">Ville</td>
+            <td class="denomDem2">{{ rapport.intervention.intDem.adresse.ville }}</td>
+        </tr>
+    </table>
+</div>
+{% include 'pdf/footerRapport.html.twig' %}
+
+{% include 'pdf/headerRapport.html.twig' %}
+
+{% include 'pdf/footerRapport.html.twig' %}
+<div class="juridique">
+    <span>
+        <b>
+            CONTEXTE JURIDIQUE DU DIAGNOSTIQUE TECHNIQUE
+
+        </b>
+    </span>
+</div>
+<div class="zoneTexte">
+    <p ><b class="souligne">1/ Concernant « Votre rapport d’intervention »</b></p>
+    <span class="souligne"><b>Rappel :</b></span><br>
+    <span class="souligne">Contexte juridique de la présente intervention : Constat visuel – état des lieux</span>
+    <p>Cette intervention a été réalisée à la demande et pour le compte du demandeur dans le cadre strict d’établir un constat visuel à un instant « T ». Ce constat ne présume en rien de l’origine d’un éventuel désordre ni de son étendue et/ou de ses conséquences.
+        Le présent rapport ne constitue ni une expertise ni un diagnostic technique au sens de la conformité ou non du bâtiment à son usage propre ou de son état, même apparent.
+    </p>
+    <hr>
+    <p>Le présent « rapport d’intervention » doit être considéré comme un constat visuel, permettant d’établir un état des lieux et de figer une situation en lui conférant date certaine par son enregistrement sur notre plateforme dédiée.
+        Dès lors, ce constat devient opposable aux tiers.
+    </p>
+    <p>Ce constat devient alors un outil indispensable notamment pour l’expert en assurance qui se basera pour partie, sur ce dernier, pour déterminer les mesures conservatoires à prendre d’urgence, pré-chiffrer les dégâts apparents, les dommages, ordonner avec précision les travaux à chiffer et réaliser.</p>
+    <p>Ce rapport permet une intervention plus sereine par les entreprises pour prendre toutes les mesures conservatoires nécessaires et obligatoires dans tous contrats d’assurance.
+        Il devient un outil à la fois de mise en œuvre mais aussi de contrôle des devis des entreprises intervenantes.
+    </p>
+    <p>Un nouveau constat pourra être réalisé après ces mesures conservatoires et bien entendu à la fin des travaux pour une réception totalement validée de ces derniers.</p>
+</div>
+{% include 'pdf/header2Rapport.html.twig' %}
+<div class="juridique">
+    <span>
+        <b>
+            CONTEXTE JURIDIQUE DU DIAGNOSTIQUE TECHNIQUE
+
+        </b>
+    </span>
+</div>
+<div class="zoneTexte zone2">
+    <p ><b class="souligne">2/ Concernant « la limite d’interprétation et de responsabilité de l’Opérateur Télépilote de Drone »</b></p>
+
+
+    <p>Les commentaires complémentaires stipulés sur le rapport par l’opérateur dit « OTD » sont purement indicatifs et visuels. Ce constat ne présume en rien de l’origine d’un éventuel désordre ni de son étendue et/ou de ses conséquences.
+    </p>
+
+    <p>Ce constat visuel ne peut, en aucun cas, être assimilé à une expertise ou un diagnostic technique du bâtiment ou du site ou une intervention en assistance à maîtrise d'œuvre, permettant directement une interprétation exacte des éventuels dommages et travaux à réaliser.
+        Il ne permet pas l’appréciation au sens de la conformité ou non du bâtiment à son usage propre ou de son état, même apparent.
+       <br>Cela reste du domaine du diagnostiqueur, de l’expert et/ou de l’entreprise.
+   </p>
+    <p>En revanche, ce rapport permet de s’assurer que, dans un éventuel devis à venir, les solutions proposées seront conformes aux désordres visualisés.</p>
+    <p>Aucune interprétation ne peut donc être réalisée par l’OTD <b class="souligne">sauf à ce que ce dernier soit habilité à cette interprétation par des compétences autres que celles liées à sa qualification d’Opérateur Télépilote de Drone.</b></p>
+    <p>Par exemple, diagnostiqueur, maître d’œuvre, architecte, Bureau d’étude …</p>
+</div>
+{% include 'pdf/footerRapport.html.twig' %}
+{% include 'pdf/header2Rapport.html.twig' %}
+
+{% include 'pdf/footerRapport.html.twig' %}
+<div class="titrePage4">
+    <span>
+        <b>RAPPORT D’INTERVENTION / CONSTAT VISUEL
+        </b>
+    </span>
+</div>
+<div class="videPage4"></div>
+<div class="intervenantPage4">
+    <span>
+        <b>
+            A/ INTERVENANT
+        </b>
+    </span>
+</div>
+<div class="vide2Page4"></div>
+<div class="vide3Page4"></div>
+<div class="A1">
+    <span>A/1</span>
+</div>
+<div class="coorPresta">
+    <span>Coordonnées du prestataire</span>
+</div>
+<div class="vide4Page4"></div>
+<div class="vide5Page4"></div>
+<div class="tablePage4">
+    <table class="coordonnee">
+        <tr>
+            <td class="caseTable">Forme juridique</td>
+            <td class="caseTable2">{{ rapport.intervention.reservation.salarie.entreprise.formJuridique  }}</td>
+        </tr>
+        <tr>
+            <td class="caseTable">Dénomination
+            </td>
+            <td class="caseTable2">{{ rapport.intervention.reservation.salarie.entreprise.denomination }}</td>
+        </tr>
+        <tr>
+            <td class="caseTable">N° SIRET</td>
+            <td class="caseTable2">{{ rapport.intervention.reservation.salarie.entreprise.siretTva.siret }}</td>
+        </tr>
+        <tr>
+            <td class="caseTable">Nom responsable légal</td>
+            <td class="caseTable2">{{ rapport.intervention.reservation.salarie.entreprise.dirigeant.nom }}</td>
+        </tr>
+        <tr>
+            <td class="caseTable">Prénom responsable légal
+            </td>
+            <td class="caseTable2">{{ rapport.intervention.reservation.salarie.entreprise.dirigeant.prenom }}</td>
+        </tr>
+        <tr>
+            <td class="caseTable">N° téléphone
+            </td>
+            <td class="caseTable2">{{ rapport.intervention.reservation.salarie.entreprise.telephone.numero }}</td>
+        </tr>
+        <tr>
+            <td class="caseTable">Mail
+            </td>
+            <td class="caseTable2">{{ rapport.intervention.reservation.salarie.entreprise.salaries[0].user.email }}</td>
+        </tr>
+        <tr>
+            <td class="caseTable">Numéro de la voie
+            </td>
+            <td class="caseTable">{{ rapport.intervention.reservation.salarie.entreprise.adresse.numero }}</td>
+        </tr>
+        <tr>
+            <td class="caseTable">Nom de la voie
+            </td>
+            <td class="caseTable">{{ rapport.intervention.reservation.salarie.entreprise.adresse.nomVoie }}</td>
+        </tr>
+        <tr>
+            <td class="caseTable">Code postal
+            </td>
+            <td class="caseTable">{{ rapport.intervention.reservation.salarie.entreprise.adresse.codePostal }}</td>
+        </tr>
+        <tr>
+            <td class="caseTable">Ville
+            </td>
+            <td class="caseTable">{{ rapport.intervention.reservation.salarie.entreprise.adresse.ville }}</td>
+        </tr>
+    </table>
+</div>
+{% include 'pdf/header2Rapport.html.twig' %}
+
+{% include 'pdf/footerRapport.html.twig' %}
+<div class="titrePage5">
+    <span>
+        <b>RAPPORT D’INTERVENTION / CONSTAT VISUEL</b>
+    </span>
+</div>
+<div class="intervenantPage5">
+    <span>
+        <b>A/ INTERVENANT <span class="suite">(suite)</span>
+</b>
+    </span>
+</div>
+<div class="prestatairePage5">
+    <div class="A2">
+        <span>A/2</span>
+    </div>
+    <div class="caracPrestaPage5">
+        <span>Caractéristiques du prestataire
+    </span>
+    </div>
+</div>
+<div class="tableCaracPrestaPage5">
+    <table class="tableCaracPage5">
+        <tr>
+            <td class="prestaCase1">Inscrit sur DIAG DRONE depuis le</td>
+            <td class="prestaCase2">{{ dirigeant.user.dateInscription|format_datetime('short', 'none', locale='fr') }}</td>
+        </tr>
+
+
+    </table>
+</div>
+<div class="interPage5">
+    <div class="A3">
+        <span>A/3</span>
+    </div>
+    <div class="caracInterPage5">
+        <span>Caractéristiques de l'intervention
+    </span>
+    </div>
+</div>
+<div class="tableCaracInterPage5">
+    <table class="tableInterPage5">
+        <tr>
+            <td class="interCase1">Nom de l’opérateur</td>
+            <td class="interCase2">{{ rapport.intervention.reservation.salarie.civilite.nom }}</td>
+        </tr>
+        <tr>
+            <td class="interCase1">Prénom de l'opérateur</td>
+            <td class="interCase2">{{ rapport.intervention.reservation.salarie.civilite.prenom }}</td>
+        </tr>
+        <tr>
+            <td class="interCase1">Identifiant du certificat d’aptitude <br>(copie du CA en annexe)</td>
+            <td class="interCase2">{{ rapport.intervention.reservation.salarie.licenceDGAC.numeroDeLicence }}</td>
+        </tr>
+        <tr>
+            <td class="interCase1">Identifiant RC professionnelle <br>(copie de la RC en annexe)</td>
+            <td class="interCase2">{{ rapport.intervention.reservation.salarie.entreprise.entAss.assPro }}</td>
+        </tr>
+        <tr>
+            <td class="intercase1">Numéro d'exploitant</td>
+            <td class="interCase2">{{ rapport.intervention.reservation.salarie.licenceDgac.exploitant }}</td>
+        </tr>
+        <tr>
+            <td class="interCase1">Déclaration de vol </td>
+            <td class="interCase2">Voir en annexe</td>
+        </tr>
+        <tr>
+            <td class="interCase1">Marque du drone utilisé</td>
+            <td class="interCase2">{{ rapport.intervention.drone.nomFabriquant }}</td>
+        </tr>
+        <tr>
+            <td class="interCase1">Modèle du drone utilisé</td>
+            <td class="interCase2">{{ rapport.intervention.drone.typeDrone }}</td>
+        </tr>
+        <tr>
+            <td class="interCase1">Masse de l’appareil</td>
+            <td class="interCase2">{{ rapport.intervention.drone.poidDrone }} kg</td>
+        </tr>
+        <tr>
+            <td class="interCase1">Marque CEE</td>
+            <td class="interCase2">{{ rapport.intervention.drone.marqueCEE }}</td>
+        </tr>
+        <tr>
+            <td class="interCase1">Marquage balise électronique</td>
+            <td class="interCase2">{{ rapport.intervention.drone.trame }}</td>
+        </tr>
+
+    </table>
+</div>
+{% include 'pdf/header2Rapport.html.twig' %}
+
+{% include 'pdf/footerRapport.html.twig' %}
+<div class="titrePage6">
+    <span>
+        <b>RAPPORT D’INTERVENTION / CONSTAT VISUEL
+</b>
+    </span>
+</div>
+<div class="demandeurPage6">
+    <span>
+        <b>B/ Demandeur</b>
+    </span>
+</div>
+<div class="coorDemPage6">
+    <div class="B1">
+        <span>B/1</span>
+    </div>
+    <div class="demPage6">
+        <span>Coordonnées du demandeur</span>
+    </div>
+</div>
+<div class="tableCoordDemPage6">
+    <table class="coordDemPage6">
+        {% if rapport.intervention.intDem.civilite %}
+            <tr>
+
+                <td class="demCase1">Nom</td>
+                <td class="demCase2">{{ rapport.intervention.intDem.civilite.nom }}</td>
+            </tr>
+            <tr>
+                <td class="demCase1">Prénom</td>
+                <td class="demCase2">{{ rapport.intervention.intDem.civilite.prenom }}</td>
+            </tr>
+        {% else %}
+            <tr>
+
+                <td class="demCase1">Profil</td>
+                <td class="demCase2">{{ rapport.intervention.intDem.profil }}</td>
+            </tr>
+            <tr>
+                <td class="demCase1">Nom</td>
+                <td class="demCase2">{{ rapport.intervention.intDem.nom }}</td>
+            </tr>
+        {% endif %}
+
+        <tr>
+            <td class="demCase1">Adresse</td>
+            <td class="demCase2">{{ rapport.intervention.intDem.adresse.numero }} {{ rapport.intervention.intDem.adresse.nomVoie }}</td>
+        </tr>
+        <tr>
+            <td class="demCase1">Code postal</td>
+            <td class="demCase2">{{ rapport.intervention.intDem.adresse.codePostal }}</td>
+        </tr>
+        <tr>
+            <td class="demCase1">Ville</td>
+            <td class="demCase2">{{ rapport.intervention.intDem.adresse.ville }}</td>
+        </tr>
+        <tr>
+            <td class="demCase1">Téléphone</td>
+            <td class="demCase2">{% if rapport.intervention.intDem.telephon %}
+                    {{ rapport.intervention.intDem.telephon.numero }}
+                {% endif %}</td>
+        </tr>
+        <tr>
+            <td class="demCase1">E-Mail</td>
+            <td class="demCase2">{% if rapport.intervention.createdAt  %}
+                    {% if rapport.intervention.intDem.user %}
+                        {{ rapport.intervention.intDem.user.email }}
+                    {% else %}
+                        {{ responsable.user.email }}
+                    {% endif %}
+                    {% else %}
+                       Pas d'Email renseigné
+                {% endif %}</td>
+        </tr>
+    </table>
+</div>
+<div class="caracDemPage6">
+    <div class="B2">
+        <span>B/2</span>
+    </div>
+    <div class="caracPage6">
+        <span>Caractéristiques de la demande</span>
+    </div>
+</div>
+<div class="tableCaracDemPage6">
+    <table class="caracDemandePage6">
+        <tr>
+            <td class="case1DemPage6">Type de bien</td>
+            <td class="case2DemPage6">{{ rapport.intervention.typeDeBien }}</td>
+        </tr>
+        <tr>
+            <td class="case1DemPage6">Adresse</td>
+            <td class="case2DemPage6">{{ rapport.intervention.adresse.numero }} {{ rapport.intervention.adresse.nomVoie }}</td>
+        </tr>
+        <tr>
+            <td class="case1DemPage6">Code Postal</td>
+            <td class="case2DemPage6">{{ rapport.intervention.adresse.codePostal }}</td>
+        </tr>
+        <tr>
+            <td class="case1DemPage6">Ville</td>
+            <td class="case2DemPage6">{{ rapport.intervention.adresse.ville }}</td>
+        </tr>
+    </table>
+</div>
+{% include 'pdf/header2Rapport.html.twig' %}
+
+{% include 'pdf/footerRapport.html.twig' %}
+<div class="titrePage6">
+    <span>
+        <b>RAPPORT D’INTERVENTION / CONSTAT VISUEL
+</b>
+    </span>
+</div>
+<div class="demandeurPage6">
+    <span>
+        <b>
+            LOCALISATION DE L'INTERVENTION
+        </b>
+    </span>
+</div>
+<div class="mapImageWrapper">
+    <img class="mapImage" src="{{ coordInterImgURL }}" alt="Lieu d'intervention" width="800px" height="600px">
+</div>
+{% include 'pdf/header2Rapport.html.twig' %}
+
+{% include 'pdf/footerRapport.html.twig' %}
+<div class="titrePage6">
+    <span>
+        <b>RAPPORT D’INTERVENTION / CONSTAT VISUEL
+</b>
+    </span>
+</div>
+<div class="demandeurPage6">
+    <span>
+        <b>B/ Demandeur <span class="suite">(suite)</span></b>
+    </span>
+</div>
+<div class="caracDemPage6">
+    <div class="B2">
+        <span>B/3</span>
+    </div>
+    <div class="caracPage6">
+        <span>Données de la demande</span>
+    </div>
+</div>
+<div class="tableCaracDemPage6">
+    <table class="donneeDem">
+        <tr>
+            <td class="donneCase1">Type d’intervention</td>
+            <td class="donneCase2">{{ rapport.intervention.listeInter.nom }} {{ rapport.intervention.typeInter.nom }}</td>
+        </tr>
+        <tr>
+            <td class="donneCase1">Date de la demande</td>
+            <td class="donneCase2">{{ rapport.intervention.createdAt|format_datetime('short', 'none', locale='fr') }}</td>
+        </tr>
+        <tr>
+            <td class="donneCase1">Date de l’intervention</td>
+            <td class="donneCase2">{{ rapport.intervention.rdvAt|format_datetime('short', 'none', locale='fr') }}</td>
+        </tr>
+        <tr>
+            <td class="donneCase1">Intervention suite à sinistre</td>
+            <td class="donneCase2">{% if rapport.intervention.intemperie %}
+                    oui
+                    {% else %}
+                    non
+                {% endif %}
+
+                </td>
+        </tr>
+        <tr>
+            <td class="donneCase1">Type de sinistre supposé</td>
+            <td class="donneCase2">{% if rapport.intervention.intemperie   %}
+                    {% for intemp   in rapport.intervention.intemperie[1].intemp %}
+                        {{ intemp }}
+                    {% endfor %}
+
+
+                {% endif %}</td>
+        </tr>
+        <tr>
+            <td class="donneCase1">Date du sinistre supposé</td>
+            <td class="donneCase2">{% if rapport.intervention.intemperie  %}{{ rapport.intervention.intemperie[0]['dateIntemp']['date']|format_datetime('short', 'none', locale='fr')}}{% endif %}</td>
+        </tr>
+        <tr>
+            <td class="donneCase1">Eléments structurels impactés à contrôler</td>
+            <td class="donneCase2">
+                {% for travaux in rapport.intervention.travauxes %}
+                {{ travaux.nom }} -
+                {% endfor %}
+                {{ rapport.intervention.typeDemande }}
+            </td>
+        </tr>
+        <tr>
+            <td class="donneCase1">Consignes du demandeur</td>
+            <td class="donneCase2">Voir en annexe</td>
+        </tr>
+        <tr>
+            <td class="donneCase1">Photos fournies par le demandeur</td>
+            <td class="donneCase2">Voir en annexe</td>
+        </tr>
+    </table>
+</div>
+{% include 'pdf/header2Rapport.html.twig' %}
+
+
+{% include 'pdf/footerRapport.html.twig' %}
+
+<div class="titrePage6">
+    <span>
+        <b>RAPPORT D’INTERVENTION / CONSTAT VISUEL
+</b>
+    </span>
+</div>
+<div class="demandeurPage6">
+    <span>
+        <b>C/ Données collectées</b>
+    </span>
+</div>
+<div class="caracDemPage6">
+    <div class="B2">
+        <span>C/1 </span>
+    </div>
+    <div class="caracPage6">
+        <span>Données de la demande</span>
+    </div>
+</div>
+<div class="tableCaracDemPage6">
+    <table class="caracDemandePage6">
+        <tr>
+            <td class="case1DemPage6">Nombre d’images captées <br>(voir toutes les photos en annexe)</td>
+            <td class="case2DemPage6">{{ rapport.photos|length }}</td>
+        </tr>
+        <tr>
+            <td class="case1DemPage6">Nombre de vidéos captées <br>(voir toutes les vidéos dans le dossier numérique joint)</td>
+            <td class="case2DemPage6">{{ rapport.videos|length }}</td>
+        </tr>
+        <tr>
+            <td class="case1DemPage6">Données météorologiques</td>
+            <td class="case2DemPage6">Voir en annexe</td>
+        </tr>
+        <tr>
+            <td class="case1DemPage6">Données télémétriques</td>
+            <td class="case2DemPage6">Voir en annexe</td>
+        </tr>
+        <tr>
+            <td class="case1DemPage6">Commentaires de l’opérateur</td>
+            <td class="case2DemPage6">Voir en annexe</td>
+        </tr>
+    </table>
+</div>
+<div class="caracDemPage6">
+    <div class="B2">
+        <span>C/2</span>
+    </div>
+    <div class="caracPage6">
+        <span>Incidents lors de l’intervention</span>
+    </div>
+</div>
+<div class="tableCaracDemPage6">
+    <table class="donneeDem">
+        <tr>
+            <td class="donneCase1">Y-a-t-il eu un incident <br>lors de l’intervention ?
+            </td>
+            <td class="donneCase2">{% if(rapport.intervention.incident) %}OUI {% else %}NON{% endif %}</td>
+        </tr>
+        <tr>
+            <td class="donneCase1">Y-a-t-il des dégâts matériels ?
+            </td>
+            <td class="donneCase2">{% if(rapport.intervention.incident) %}{{ rapport.intervention.incident.degatMateriel }}{% else %}NON{% endif %}</td>
+        </tr>
+        <tr>
+            <td class="donneCase1">Y-a-t-il des dégâts corporels ?</td>
+            <td class="donneCase2">{% if(rapport.intervention.incident) %}{{ rapport.intervention.incident.degatCorporel }}{% else %}NON{% endif %}</td>
+        </tr>
+    </table>
+</div>
+{% include 'pdf/header2Rapport.html.twig' %}
+
+{% include 'pdf/footerRapport.html.twig' %}
+<div class="titrePage6">
+    <span>
+        <b>RAPPORT D’INTERVENTION / CONSTAT VISUEL
+</b>
+    </span>
+</div>
+<div class="demandeurPage6">
+    <span>
+        <b>D/ Liste des documents en annexe</b>
+    </span>
+</div>
+<div class="caracDemPage6">
+    <div class="B2">
+        <span>D/1 </span>
+    </div>
+    <div class="caracPage6">
+        <span>Documents concernant le demandeur</span>
+    </div>
+</div>
+<div class="tableCaracDemPage6">
+    <table class="caracDemandePage6">
+        <tr>
+            <td class="case1DemPage6">Commentaires du demandeur (le cas échéant)</td>
+        </tr>
+        <tr>
+            <td class="case1DemPage6">Photos fournies par le demandeur</td>
+
+        </tr>
+
+    </table>
+</div>
+<div class="caracDemPage6">
+    <div class="B2">
+        <span>D/2 </span>
+    </div>
+    <div class="caracPage6">
+        <span>Documents concernant l’intervention
+</span>
+    </div>
+</div>
+<div class="tableCaracDemPage6" style="margin-bottom: 10em;">
+    <table class="caracDemandePage6">
+        <tr>
+            <td class="case1DemPage6">Photo captées</td>
+        </tr>
+
+        <tr>
+            <td class="case1DemPage6">Données météorologiques</td>
+        </tr>
+        <tr>
+            <td class="case1DemPage6">Documents présents dans le dossier numérique
+            </td>
+
+        </tr>
+        <tr>
+            <td class="case1DemPage6">Commentaires (le cas échéant)
+            </td>
+
+        </tr>
+
+    </table>
+</div>
+
+
+{% for photo in rapport.intervention.photoInter %}
+    {% include 'pdf/header2Rapport.html.twig' %}
+
+    {% include 'pdf/footerRapport.html.twig' %}
+    <div class="titrePage6">
+    <span>
+        <b>RAPPORT D’INTERVENTION / CONSTAT VISUEL
+</b>
+    </span>
+    </div>
+    <div class="demandeurPage6">
+    <span>
+        <b>Annexe D/1</b>
+    </span>
+    </div>
+    <div class="caracDemPage6">
+        <div class="B2">
+            <span>D/1 </span>
+        </div>
+        <div class="caracPage6">
+        <span>Documents concernant le demandeur</span>
+        </div>
+    </div>
+<div class="tableCaracDemPage6">
+    <table class="caracDemandePage6">
+        <tr>
+            <td class="case1DemPage6">Photos fournies par le demandeur</td>
+        </tr>
+    </table>
+</div>
+    <div class="imageDem">
+        <img src="../public/uploads/photoInter/{{ photo.nom }}" alt="" width="480px" height="280px">
+    </div>
+
+{% endfor %}
+{% include 'pdf/header2Rapport.html.twig' %}
+
+{% include 'pdf/footerRapport.html.twig' %}
+<div class="demandeurPage6">
+    <span>
+        <b>Annexe D/1</b>
+    </span>
+</div>
+<div class="caracDemPage6">
+    <div class="B2">
+        <span>D/1 </span>
+    </div>
+    <div class="caracPage6">
+        <span>Documents concernant le demandeur</span>
+    </div>
+</div>
+<div class="tableCaracDemPage6">
+    <table class="caracDemandePage6">
+        <tr>
+            <td class="case1DemPage6">Commentaires du demandeur (le cas échéant)</td>
+        </tr>
+    </table>
+</div>
+<div class="commentaireDem">
+    {{ rapport.intervention.interPrecision }}
+</div>
+{# Mettre photo ici #}
+{% for photos in rapport.photos %}
+    {% include 'pdf/header2Rapport.html.twig' %}
+
+    {% include 'pdf/footerRapport.html.twig' %}
+    <div class="titrePage6">
+    <span>
+        <b>RAPPORT D’INTERVENTION / CONSTAT VISUEL</b>
+    </span>
+    </div>
+    <div class="demandeurPage6">
+    <span>
+        <b>Annexe D/2</b>
+    </span>
+    </div>
+    <div class="caracDemPage6">
+        <div class="B2">
+            <span>D/2 </span>
+        </div>
+        <div class="caracPage6">
+            <span>Documents concernant l’intervention</span>
+        </div>
+    </div>
+    <div class="tableCaracDemPage6">
+        <table class="caracDemandePage6">
+            <tr>
+                <td class="case1DemPage6">Photos captées n°{{ loop.index }}</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="imageDem">
+        <img src="../public/uploads/photoRapport/{{ photos.nom }}" alt="" width="500px" height="400px">
+    </div>
+
+{% endfor %}
+{% if rapport.intervention.meteoInter %}
+
+
+    {% include 'pdf/header2Rapport.html.twig' %}
+
+    {% include 'pdf/footerRapport.html.twig' %}
+    <div class="titrePage6">
+    <span>
+        <b>RAPPORT D’INTERVENTION / CONSTAT VISUEL</b>
+    </span>
+    </div>
+    <div class="demandeurPage6">
+    <span>
+        <b>Annexe D/2</b>
+    </span>
+    </div>
+    <div class="caracDemPage6">
+        <div class="B2">
+            <span>D/2</span>
+        </div>
+        <div class="caracPage6">
+            <span>Documents concernant l’intervention</span>
+        </div>
+    </div>
+    <div class="tableCaracDemPage6">
+        <table class="caracDemandePage6">
+            <tr>
+                <td class="case1DemPage6">Données météorologiques</td>
+            </tr>
+        </table>
+    </div>
+    <div class="meteo">
+        <table class="tableMeteo">
+            <tr>
+                <td class="meteoCase1">Température</td>
+                <td class="meteoCase2">{{ rapport.intervention.meteoInter.temperature }} °C</td>
+            </tr>
+            <tr>
+                <td class="meteoCase1">Vitesse du vent</td>
+                <td class="meteoCase2">{{ rapport.intervention.meteoInter.vent }} km/h</td>
+            </tr>
+            <tr>
+                <td class="meteoCase1">Couverture nuageuse</td>
+                <td class="meteoCase2">{{ rapport.intervention.meteoInter.nuage }}</td>
+            </tr>
+        </table>
+    </div>
+{% endif %}
+{% include 'pdf/header2Rapport.html.twig' %}
+
+{% include 'pdf/footerRapport.html.twig' %}
+<div class="titrePage6">
+    <span>
+        <b>RAPPORT D’INTERVENTION / CONSTAT VISUEL</b>
+    </span>
+</div>
+<div class="demandeurPage6">
+    <span>
+        <b>Annexe D/2</b>
+    </span>
+</div>
+<div class="caracDemPage6">
+    <div class="B2">
+        <span>D/2 </span>
+    </div>
+    <div class="caracPage6">
+        <span>Documents concernant l’intervention</span>
+    </div>
+</div>
+<div class="tableCaracDemPage6">
+    <table class="caracDemandePage6">
+        <tr>
+            <td class="case1DemPage6">Commentaires de l’intervenant
+                <br>(le cas échéant)
+            </td>
+        </tr>
+    </table>
+    <div class="commentaire">
+        {% for resume  in rapport.rapResume%}
+            <p>{{ resume }}</p>
+        {% endfor %}
+    </div>
+
+</div>
+{% include 'pdf/header2Rapport.html.twig' %}
+
+    {% include 'pdf/footerRapport.html.twig' %}
+<div class="titrePage6">
+    <span>
+        <b>RAPPORT D’INTERVENTION / CONSTAT VISUEL</b>
+    </span>
+</div>
+<div class="demandeurPage6">
+    <span>
+        <b>Annexe D/2</b>
+    </span>
+</div>
+<div class="caracDemPage6">
+    <div class="B2">
+        <span>D/2 </span>
+    </div>
+    <div class="caracPage6">
+        <span>Documents concernant l’intervention</span>
+    </div>
+</div>
+<div class="tableCaracDemPage6">
+    <table class="caracDemandePage6">
+        <tr>
+            <td class="case1DemPage6">Documents présents dans le dossier numérique joint
+            </td>
+        </tr>
+    </table>
+    <ul class="listeAnnexe">
+        <li>Rc professionnelle</li>
+        <li>Vidéos captées</li>
+        <li>Déclaration de vol</li>
+        <li>Données télémétriques (le cas échéant)</li>
+        <li>Données thermiques (le cas échéant)</li>
+        <li>Certificat d’aptitude</li>
+    </ul>
+
+</div>
+{#
+
+{% include 'pdf/header2Rapport.html.twig' %}
+
+    {% include 'pdf/footerRapport.html.twig' %}
+<div class="titrePage6">
+    <span>
+        <b>RAPPORT D’INTERVENTION / CONSTAT VISUEL</b>
+    </span>
+</div>
+<div class="demandeurPage6">
+    <span>
+        <b>Annexe D/2</b>
+    </span>
+</div>
+<div class="caracDemPage6">
+    <div class="B2">
+        <span>D/3 </span>
+    </div>
+    <div class="caracPage6">
+        <span>Documents concernant l’intervention</span>
+    </div>
+</div>
+<div class="tableCaracDemPage6">
+    <table class="caracDemandePage6">
+        <tr>
+            <td class="case1DemPage6">Vidéos captées
+                <br>(Voir le dossier numérique joint)
+            </td>
+        </tr>
+    </table>
+    <div class="fichierPdf"></div>
+
+</div>
+{% include 'pdf/header2Rapport.html.twig' %}
+
+{% include 'pdf/footerRapport.html.twig' %}
+<div class="titrePage6">
+    <span>
+        <b>RAPPORT D’INTERVENTION / CONSTAT VISUEL</b>
+    </span>
+</div>
+<div class="demandeurPage6">
+    <span>
+        <b>Annexe D/2</b>
+    </span>
+</div>
+<div class="caracDemPage6">
+    <div class="B2">
+        <span>D/3 </span>
+    </div>
+    <div class="caracPage6">
+        <span>Documents concernant l’intervention</span>
+    </div>
+</div>
+<div class="tableCaracDemPage6">
+    <table class="caracDemandePage6">
+        <tr>
+            <td class="case1DemPage6">Déclaration de vol
+                <br>(Voir le dossier numérique joint)
+            </td>
+        </tr>
+    </table>
+    <div class="fichierPdf"></div>
+
+</div>
+
+
+
+{% include 'pdf/header2Rapport.html.twig' %}
+
+    {% include 'pdf/footerRapport.html.twig' %}
+
+<div class="titrePage6">
+    <span>
+        <b>RAPPORT D’INTERVENTION / CONSTAT VISUEL</b>
+    </span>
+</div>
+<div class="demandeurPage6">
+    <span>
+        <b>Annexe D/2</b>
+    </span>
+</div>
+<div class="caracDemPage6">
+    <div class="B2">
+        <span>D/3 </span>
+    </div>
+    <div class="caracPage6">
+        <span>Documents concernant l’intervention</span>
+    </div>
+</div>
+<div class="tableCaracDemPage6">
+    <table class="caracDemandePage6">
+        <tr>
+            <td class="case1DemPage6">Données télémétriques (le cas échéant)
+                <br>(Voir le dossier numérique joint)
+            </td>
+        </tr>
+    </table>
+    <div class="fichierPdf"></div>
+
+</div>
+{% include 'pdf/header2Rapport.html.twig' %}
+
+    {% include 'pdf/footerRapport.html.twig' %}
+<div class="titrePage6">
+    <span>
+        <b>RAPPORT D’INTERVENTION / CONSTAT VISUEL</b>
+    </span>
+</div>
+<div class="demandeurPage6">
+    <span>
+        <b>Annexe D/2</b>
+    </span>
+</div>
+<div class="caracDemPage6">
+    <div class="B2">
+        <span>D/2</span>
+    </div>
+    <div class="caracPage6">
+        <span>Documents concernant l’intervention</span>
+    </div>
+</div>
+<div class="tableCaracDemPage6">
+    <table class="caracDemandePage6">
+        <tr>
+            <td class="case1DemPage6">Données thermiques (le cas échéant)
+                <br>(Voir le dossier numérique joint)
+            </td>
+        </tr>
+    </table>
+    <div class="fichierPdf"></div>
+
+</div>
+    {% include 'pdf/header2Rapport.html.twig' %}
+
+    {% include 'pdf/footerRapport.html.twig' %}
+
+<div class="titrePage6">
+    <span>
+        <b>RAPPORT D’INTERVENTION / CONSTAT VISUEL
+</b>
+    </span>
+</div>
+<div class="demandeurPage6">
+    <span>
+        <b>Annexe D/3
+</b>
+    </span>
+</div>
+<div class="caracDemPage6">
+    <div class="B2">
+        <span>D/3</span>
+    </div>
+    <div class="caracPage6">
+        <span>Documents concernant l’intervenant</span>
+    </div>
+</div>
+<div class="tableCaracDemPage6">
+    <table class="caracDemandePage6">
+        <tr>
+            <td class="case1DemPage6">Certificat d’aptitude <br>(Voir le dossier numérique joint)
+            </td>
+        </tr>
+    </table>
+<div class="fichierPdf"></div>
+#}
+
+
+
+
+
+
+

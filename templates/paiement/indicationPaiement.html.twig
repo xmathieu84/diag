@@ -1,0 +1,29 @@
+{% extends "demandeur/basedemandeur.html.twig" %}
+{% block title %}Paiement en attente
+{% endblock %}
+{% block titreSection %}Paiement en attente
+
+{% endblock %}
+{% block titrePage %}Paiement en attente
+
+{% endblock %}
+
+{% block contenu %}
+<div class="row">
+	<div class="col-sm-12">
+		<p class="h5">Votre intervention est en attente de votre virement.</p>
+
+		<p class="h5">Cliquez sur l'un des liens suivant pour quitter cette page.</p>
+
+	</div>
+	<div class="col-sm-6 text-center">
+		<a href="{{path('demandeur')}}" class="btn btn-maincolor">Retour à l'accueil</a>
+
+	</div>
+	<div class="col-sm-6 text-center">
+		<a href="{{path('security_logout')}}" class="btn">Se déconnecter</a>
+
+
+	</div>
+
+</div>

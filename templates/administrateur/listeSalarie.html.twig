@@ -1,0 +1,53 @@
+{% extends "administrateur/baseA.html.twig" %}
+{% block body %}
+<section class="wrapper">
+    <div class="row mt">
+        <div class="col-lg-12">
+            <div class="content-panel">
+                <h2>{{entreprise.formJuridique}} {{entreprise.denomination}}</h2>
+                <section id="unseen">
+                    <table class="table table-bordered table-striped table-condensed">
+                        <thead>
+                            <tr>
+                                <th>Salarié</th>
+                                <th>Numéro de licence</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for salarie in salaries %}
+                            {% if salarie.licenceDgac %}
+                            <tr>
+                                <td>{{salarie.civilite.nom}} {{salarie.civilite.prenom}}</td>
+                                <td>{{salarie.licenceDgac.numeroDeLicence}}</td>
+
+
+
+                                <td><a href="/uploads/licence/{{salarie.licenceDgac.fichierLicence}}"
+                                        target="_blank"><button class="btn btn-primary btn-round btn-block">Télécharger
+                                            la
+                                            licence</button></a>
+                                </td>
+                                {% if salarie.validation == 'en cours' %}
+                                <td><a href="{{path('validation',{id:salarie.id})}}"><button
+                                            class="btn btn-success btn-round btn-block">Valider
+                                            l'inscription</button></a></td>
+                                {% else %}
+                                <td><a href="{{path('suspendre',{id:salarie.id})}}"><button
+                                            class="btn btn-warning btn-round btn-block">Suspendre
+                                            l'inscription</button></a></td>
+                                {% endif %}
+                            </tr>
+                            {% endif %}
+                            {% endfor %}
+
+                        </tbody>
+
+                    </table>
+                </section>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

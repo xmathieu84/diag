@@ -1,0 +1,140 @@
+<ul class="menu-click dashbord menuPrincipal" style="border-top:none;">
+    <li class="d-xl-none">
+        <a href="/DIAG DRONE - Guide de l'utilisateur - Interface Institutionnels et Grands Comptes.pdf" target="_blank">Guide d'utilisation</a>
+    </li>
+    <li>
+        <a href="{{ path('homeInsti') }}">Accueil</a>
+    </li>
+    {% if is_granted('ROLE_MANITOU') or is_granted('ROLE_BTP') %}
+        {% if is_granted('ROLE_SYNDICAT') %}
+            <li class="subMenu"><a>SYNDICAT DE CO-PROPRIÉTÉ</a>
+                <ul class="hero-light-bg">
+                    <li><a href="{{ path('mesDemAccesCours',{code:code}) }}">Demandes d'accès</a></li>
+                    <li><a href="{{ path('revoquerAccès',{code:code}) }}">Révoquer un accès</a></li>
+                </ul>
+            </li>
+        {% endif %}
+
+    <li class="subMenu"><a>MES INFORMATIONS</a>
+        <ul class="hero-light-bg">
+            <li><a href="{{ path('infoInsti') }}" class="liensSyndic">Informations du compte</a></li>
+            <li><a href="{{ path('modifInfoInsti') }}"class="liensSyndic">Modifier les informations du compte</a></li>
+            {% if is_granted('ROLE_GRANDCOMPTE') or is_granted('ROLE_INSTITUTION') %}
+                <li><a href="{{ path('listeAutorisation') }}"class="liensSyndic">Modifier les autorisations</a></li>
+            {% endif %}
+
+        </ul>
+
+    </li>
+    {% endif %}
+    {% if is_granted('ROLE_MANITOU') or is_granted('ROLE_BTP') %}
+        <li class="subMenu">
+
+            <a>ABONNEMENTS</a>
+            <ul class="hero-light-bg">
+                <li><a href="{{ path('monAbonnement') }}" class="liensSyndic">{% if is_granted('ROLE_GRANDCOMPTE')==false and is_granted('ROLE_BTP') %}
+                            Mon abonnement
+                            {% else %}
+                                Acquérir des
+                                packs
+                        {% endif %}</a></li>
+                <li><a href="{{ path('factureAbonnement') }}" class="liensSyndic">Factures abonnement</a></li>
+            </ul>
+        </li>
+    {% endif %}
+
+    {% if is_granted("ROLE_NIVEAU1") ==true and is_granted("ROLE_ABONNE") ==true %}
+        <li class="subMenu">
+            <a>INTERVENTIONS</a>
+            <ul class="hero-light-bg">
+                <li>
+                    <a href="{{ path('new_inter',{code:code}) }}" class="liensSyndic">Réservez une intervention</a>
+                </li>
+                <li>
+                    <a href="{{ path('demandeur_encours',{code:code}) }}"class="liensSyndic">Interventions en attente de proposition(s)
+                        <span class="notif cours"></span>
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="{{ path('demandeur_diag',{code:code}) }}"class="liensSyndic">Interventions en cours / terminées
+                        <span class="notif terminees"></span>
+                    </a>
+
+                </li>
+                {% if is_granted('ROLE_NIVEAU1') %}
+                    <li class="subMenu">
+                        <a >Interventions drone à proximité</a>
+                        <ul class="hero-light-bg">
+                            <li>
+                                <a href="{{ path('instituListeInter',{code:code}) }}" class="liensSyndic">Voir les interventions prévues </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('parVille',{code:code}) }}" class="liensSyndic">Recherche par
+                                    ville</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                {% endif %}
+                <li>
+                    <a href="{{ path('listeRapportDem',{code:code}) }}"class="liensSyndic">Partagez un rapport
+
+                    </a>
+
+                </li>
+            </ul>
+        </li>
+    {% endif %}
+
+    {% if is_granted('ROLE_ABONNE') and is_granted('ROLE_NIVEAU1') %}
+    <li class="subMenu">
+        <a>APPEL D'OFFRE / Á CONCURRENCE</a>
+        <ul class="hero-light-bg">
+            <li><a   href="{{ path('listeAppelOffre',{code:code}) }}"class="liensSyndic">Publiez un appel d'offre/ à concurrence</a></li>
+            <li><a   href="{{ path('mesAO',{code:code,etat:null}) }}"class="liensSyndic">Tout vos appels d'offre/ à concurrence</a></li>
+            <li><a   href="{{ path('mesAOPublie',{code:code,etat:null}) }}"class="liensSyndic">- Vos appels d'offre/ à concurrence publiés</a></li>
+            <li><a   href="{{ path('mesAOsuspendu',{code:code,etat:null}) }}"class="liensSyndic">- Vos appels d'offre/ à concurrence suspendus</a></li>
+            <li><a   href="{{ path('mesAOResponse',{code:code,etat:null}) }}"class="liensSyndic">- Vos appels d'offre/ à concurrence en cours</a></li>
+        </ul>
+
+    </li>
+    {% endif %}
+    {% if (is_granted('ROLE_NIVEAU1')  ) %}
+        <li class="subMenu">
+            <a style="text-transform: uppercase">{{ noms }}</a>
+            <ul class="hero-light-bg">
+                {% if is_granted('ROLE_MANITOU') %}
+                    <li><a  class="" href="{{ path('listeAgent') }}">Gérez vos
+                            {{ noms }}</a></li>
+                    {% if is_granted('ROLE_ABONNE') %}
+                        <li><a  href="{{ path('planning') }}"class="liensSyndic">Éditez l'agenda des {{ noms }}</a></li>
+
+                    <li><a  href="{{ path('agenda') }}">Consultez l'agenda  des
+                        {{ noms }}</a></li>
+
+
+                {% endif %}
+                {% endif %}
+            </ul>
+
+        </li>
+    {% endif %}
+
+    {% if is_granted('ROLE_NIVEAU3') and is_granted("ROLE_ABONNE") ==true %}
+        <li class="subMenu">
+            <a>GESTION DES DOSSIERS</a>
+            <ul class="hero-light-bg">
+                {% if is_granted('ROLE_NIVEAU1') %}
+                    <li><a   href="{{ path('creerDossier') }}" class="liensSyndic">Créer un dossier</a></li>
+                {% endif %}
+
+                <li><a  href="{{ path('listeDossier') }} " class="liensSyndic">Consulter un dossier</a></li>
+
+
+            </ul>
+
+        </li>
+    {% endif %}
+</ul>

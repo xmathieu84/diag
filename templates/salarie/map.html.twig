@@ -1,0 +1,99 @@
+{% extends 'entreprise/baseAE.html.twig' %}
+
+{% block title %}Mon MANEX
+{% endblock %}
+
+{% block contenu %}
+<div class="row">
+	<div class="col-sm-12 text-center mb-2 ">
+		<h4>Mon MANEX</h4>
+	</div>
+	<div class="col-sm-12 text-center tempsVol mt-5 mb-5">
+
+		<p class="h5">Temps de vol :
+			{{temps}}</p>
+	</div>
+	<div class="col-sm-12 text-center mb-5">
+		<a href="{{path('mapPdf',{id:otd.id})}}" class="btn btn-outline-maincolor" target="_blank">Exporter au format PDF</a>
+	</div>
+	<div class="table-responsive">
+
+		<table>
+			<thead>
+				<tr>
+					<th>Date</th>
+					<th>Appareil</th>
+					<th>Nature du vol</th>
+					<th>Lieu de décollage</th>
+					<th>Lieu d'atterissage</th>
+					<th>Durée</th>
+					<th>Observations</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for intervention in interventions %}
+					<tr>
+						<td>
+							<span class="h7">{{intervention.rdvAT|format_datetime('short', 'short', locale='fr')}}</span>
+						</td>
+
+
+						<td>
+							<span class="h7">{{intervention.drone.nomFabriquant}}-{{intervention.drone.typeDrone}}</span>
+						</td>
+
+
+						<td>
+							<span class="h7">{{intervention.typeInter.nom}}</span>
+						</td>
+
+
+						<td>
+							<span class="h7">
+								{% if intervention.adresse.numero %}
+
+									{{intervention.adresse.numero}}
+
+
+								{% endif %}
+								{{intervention.adresse.nomVoie}}</span><br>
+							<span class="h7">{{intervention.adresse.codePostal}}
+								{{intervention.adresse.ville}}</span>
+
+						</td>
+
+
+						<td>
+							<span class="h7">{{intervention.adresse.numero}}
+								{{intervention.adresse.nomVoie}}</span><br>
+							<span class="h7">{{intervention.adresse.codePostal}}
+								{{intervention.adresse.ville}}</span>
+
+						</td>
+
+
+						<td>
+							{% if intervention.map %}
+							<span class="h7">{{ intervention.map.dureeVol|date(" %h h %i ") }}</span>
+							{% endif %}
+
+						</td>
+
+						<td>
+							{% if intervention.map %}
+
+
+							<div class="overflow-scroll">
+								<span class="h7 ">{{intervention.map.observation}}</span>
+							</div>
+							{% endif %}
+						</td>
+					</tr>
+				</td>
+			{% endfor %}
+			</tbody>
+
+		</table>
+	</div>
+	</div>
+{% endblock %}

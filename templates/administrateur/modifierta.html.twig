@@ -1,0 +1,29 @@
+{% extends 'administrateur/baseA.html.twig' %}
+{% block titre %}
+
+Modifier un tarif
+{% endblock %}
+
+{% block body %}
+<section class="wrapper site-min-height">
+	{# position d'un titre'#}
+	<div class="row mt">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="col-md-4 col-sm-4 mb">
+					<div class="green-panel pn">
+						{{form_start(form)}}
+						<h3>{{ form_label(form.nom, 'Nom du tarif', {'label_attr': {'class': 'control-label'}}) }}</h3>
+						{{form_row(form.nom,{'label':' ' ,'attr':{'class':'form-control-sm','readonly':'readonly'}})}}
+						<h3>{{ form_label(form.prix, 'Prix', {'label_attr': {'class': 'control-label'}}) }}</h3>
+						{{form_row(form.prix,{'label':' ' ,'attr':{'class':'form-control-sm'}})}}
+						<button type="submit" class="btn btn-success btn-round">Valider les modifications</button>
+						{{form_end(form)}}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+{% endblock %}

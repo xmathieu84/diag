@@ -1,0 +1,304 @@
+{% extends 'institution/baseInsti.html.twig' %}
+{% block title %}{% if is_granted('ROLE_INSTITUTION') %}
+    Ajouter un agent
+    {% else %}
+    Ajouter un collaborateur
+{% endif %}{% endblock %}
+{% if is_granted(('ROLE_GRANDCOMPTE')) %}
+    {% set role='ROLE_GRANDCOMPTE' %}
+    {% else %}
+        {% set role= 'ROLE_INSTITUTION' %}
+{% endif %}
+{% block pageAccueil %}
+    {% if is_granted('ROLE_INSTITUTION') %}
+        <h4>Ajouter un ou plusieurs agents</h4>
+        {% else %}
+            <h4>Ajouter un ou plusieurs collaborateurs</h4>
+    {% endif %}
+
+{% endblock %}
+{% block contenu %}
+
+
+
+        <div id="accordion10000" role="tablist">
+            <div class="card">
+                <div class="card-header" role="tab" id="collapse10000_header">
+                   <div class="row">
+                       <div class="col-6">
+                           <h5>
+                               <a data-toggle="collapse" href="#collapse10000" aria-expanded="false"
+                                  aria-controls="collapse10000" class="collapsed">
+                                   {{ institution.civilite.prenom }} {{ institution.civilite.nom }}
+                               </a>
+                           </h5>
+                       </div>
+
+                       <div class="col-sm-6">
+                           <a href="{{ path('creationPlanning',{id:institution.id}) }}" class="btn btn-sm btn-outline-maincolor mt-4 planning">Planning</a>
+                       </div>
+                   </div>
+                </div>
+
+                <div id="collapse10000" class="collapse" role="tabpanel" aria-labelledby="collapse10000_header" data-parent="#accordion10000" style="">
+                    <table class="shop_table shop_table_responsive cart">
+                        <thead>
+                        <tr>
+                            <th class="product-remove">&nbsp;</th>
+                            <th class="product-name">Prénom - Nom </th>
+                            <th class="product-price">Adresse E-mail</th>
+
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for agent in agents %}
+
+                            <tr class="cart_item">
+
+                                <td class="product-remove">
+
+                                </td>
+
+                                <td class="product-thumbnail">
+                                    <p class="h6">{{ agent.civilite.prenom }} {{ agent.civilite.prenom }}</p>
+                                </td>
+
+                                <td >
+                                    <p class="h6">{{ agent.user.email }}</p>
+                                </td>
+
+
+
+                            </tr>
+                        {% endfor %}
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+    {% for responsable in responsables %}
+        <div id="accordion{{ loop.index }}" role="tablist">
+            <div class="card">
+                <div class="card-header" role="tab" id="collapse{{ loop.index }}_header">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h5>
+                                <a data-toggle="collapse" href="#collapse{{ loop.index }}" aria-expanded="false" aria-controls="collapse{{ loop.index }}" class="collapsed">
+                                    {{ responsable.civilite.prenom }} {{ responsable.civilite.nom }}
+                                </a>
+                            </h5>
+                        </div>
+                        <div class="col-sm-6">
+                            <a href="{{ path('creationPlanning',{id:responsable.id}) }}" class="btn btn-sm btn-outline-maincolor mt-4 planning">Planning</a>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div id="collapse{{ loop.index }}" class="collapse" role="tabpanel" aria-labelledby="collapse{{ loop.index }}_header" data-parent="#accordion{{ loop.index }}" style="">
+                    <table class="shop_table shop_table_responsive cart">
+                        <thead>
+                        <tr>
+                            <th class="product-remove">&nbsp;</th>
+                            <th class="product-name">Prénom - Nom </th>
+                            <th class="product-price">Adresse E-mail</th>
+
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for agent in responsable.chef %}
+
+                            <tr class="cart_item">
+
+                                <td class="product-remove">
+                                    <a href="#" class="remove" aria-label="Remove this item" data-product_id="73" data-product_sku="">×</a>
+                                </td>
+
+                                <td class="product-thumbnail">
+                                    <p class="h6">{{ agent.civilite.prenom }} {{ agent.civilite.prenom }}</p>
+                                </td>
+
+                                <td >
+                                    <p class="h6">{{ agent.user.email }}</p>
+                                </td>
+
+
+
+                            </tr>
+                        {% endfor %}
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    {% endfor %}
+    <div class="row mt-5">
+        <div class="col-sm-12 text-center">
+            {% if maxAgent<=nbreActuel %}
+                <a href="{{ path('monAbonnement') }}">
+                    <button type="button" class="btn  btn-maincolor2" style="width: 100%">Acquérir un pack d'utlisateurs supplémentaires</button>
+                </a>
+            {% else %}
+                {% if is_granted('ROLE_GRANDCOMPTE') %}
+                    <button type="button" class="btn btn-agent" data-toggle="modal" data-target="#modalAgent">
+                        Ajouter un collaborateur
+                    </button>
+
+                {% else %}
+                    <button type="button" class="btn btn-agent" data-toggle="modal" data-target="#modalAgent">
+                        Ajouter un agent
+                    </button>
+
+                {% endif %}
+            {% endif %}
+
+        </div>
+    </div>
+
+    <div class="modal" id="modalAgent" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered"id="agentModale">
+            <div class="modal-content">
+                <div class="row text-center">
+                    <div class="col-sm-6">
+                        <div class="modal-header ">
+                            <h5 class="modal-title " id="exampleModalLabel">Ajouter un agent</h5>
+
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Rôle des agents</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-body">
+                    <div class="row">
+
+                        <div class="col-sm-6">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <label for="civilite">Choisissez</label>
+                                    <select name="" id="civilite">
+                                        <option value="" disabled selected>Civilité</option>
+                                        <option value="Monsieur">Monsieur</option>
+                                        <option value="Madame">Madame</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label>Prénom</label>
+                                    <input type="text" class="prenom">
+                                </div>
+                                <div class="col-sm-6">
+                                    <label>Nom</label>
+                                    <input type="text" class="nom">
+                                </div>
+                                <div class="col-sm-6 mt-3">
+                                    <label>Adresse E-mail :</label>
+                                    <input type="email" class="mailAgent">
+
+
+                                </div>
+                                <div class="col-sm-6 mt-3">
+                                    <label>Mot de passe :</label>
+                                    <input type="text" class="passe">
+
+
+                                </div>
+                                <div class="col-sm-6 mt-3">
+                                    <label for="role">Rôle de l'agent</label>
+                                    <select name="" id="role">
+                                        <option value="" disabled selected>Rôle de l'agent</option>
+                                        <option value="RESPONSABLE">Responsable</option>
+                                        <option value="NIVEAU1">Agent niveau 1</option>
+                                        <option value="NIVEAU2">Agent niveau 2</option>
+                                        <option value="NIVEAU3">Agent niveau 3</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-sm-6 mt-3 superieur">
+
+                                </div>
+                                <div class="col-sm-12 validerAgent">
+                                    <button type="button" class="btn btn-secondary mr-5 ml-5" data-dismiss="modal">Annuler</button>
+                                    <button type="button" class="btn btn-primary ml-5" data-role="{{ role }}">Enregistrer</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="table-responsive text-center">
+                                <table>
+                                    <thead>
+                                    <th></th>
+                                    <th>Réserver une intervention</th>
+                                    <th>Création d'un dossier</th>
+                                    <th>Supprimer un dossier</th>
+
+                                    <th>Ajouter une pièce au dossier</th>
+                                    <th>Consultation d'un dossier</th>
+
+                                    <th>Annoter un dossier</th>
+
+                                    </thead>
+                                    <tbody style="color: black">
+                                    <tr>
+                                        <td>Admin</td>
+                                        <td><img src="/css/css_site/img/validation.png" alt="" width="20px" height="20px"></td>
+                                        <td><img src="/css/css_site/img/validation.png" alt="" width="20px" height="20px"></td>
+                                        <td><img src="/css/css_site/img/validation.png" alt="" width="20px" height="20px"></td>
+                                        <td><img src="/css/css_site/img/validation.png" alt="" width="20px" height="20px"></td>
+                                        <td><img src="/css/css_site/img/validation.png" alt="" width="20px" height="20px"></td>
+                                        <td><img src="/css/css_site/img/validation.png" alt="" width="20px" height="20px"width="20px" height="20px"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Niveau 1</td>
+                                        <td></td>
+                                        <td><img src="/css/css_site/img/validation.png" alt="" width="20px" height="20px"></td>
+                                        <td><img src="/css/css_site/img/validation.png" alt="" width="20px" height="20px"></td>
+                                        <td><img src="/css/css_site/img/validation.png" alt="" width="20px" height="20px"></td>
+                                        <td><img src="/css/css_site/img/validation.png" alt="" width="20px" height="20px"></td>
+                                        <td><img src="/css/css_site/img/validation.png" alt="" width="20px" height="20px"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Niveau 2</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td><img src="/css/css_site/img/validation.png" alt="" width="20px" height="20px"></td>
+                                        <td><img src="/css/css_site/img/validation.png" alt="" width="20px" height="20px"></td>
+                                        <td><img src="/css/css_site/img/validation.png" alt="" width="20px" height="20px"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Niveau 3</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td><img src="/css/css_site/img/validation.png" alt="" width="20px" height="20px"></td>
+                                        <td><img src="/css/css_site/img/validation.png" alt="" width="20px" height="20px"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

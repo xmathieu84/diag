@@ -1,0 +1,304 @@
+{% extends 'institution/baseInsti.html.twig' %}
+{% block title %}Ajout pièces{% endblock %}
+{% block titreSection %}FICHE d’information concernant L’APPEL A CONCURENCES et/ou l’APPEL D’OFFRES{% endblock %}
+{% block titrePage %}FICHE d’information concernant L’APPEL A CONCURENCES et/ou l’APPEL D’OFFRES{% endblock %}
+{% block pageAccueil  %} <h4>Votre dossier d'{{ appel.type }}</h4>{% endblock %}
+{% block contenu %}
+    <div class="row">
+        <div class="col-sm-12 mb-5">
+            <p class="h6">
+                Si vous souhaitez donner quelques informations succinctes complémentaires, et/ou si les éléments ci-dessous ne sont pas inclus dans votre APPEL D’OFFRE,
+                nous vous proposons des champs libres à remplir et de télécharger différentes pièces complémentaires.
+            </p>
+        </div>
+        <div class="col-sm-4 mb-5">
+            <p class="h6">Note explicative (texte informatif – contexte et problématique)</p>
+            <button class="btn btn-maincolor2" data-toggle="modal" data-target="#note">Note explicative <br><span class="nbreFile"></span></button>
+        </div>
+        <div class="col-sm-4 mb-5">
+            <p class="h6">Règlement de consultation – admission à l’appel</p>
+            <button class="btn btn-maincolor2" data-toggle="modal" data-target="#reglement">Règlement de consultation
+                <br><span class="nbreFile"></span></button>
+        </div>
+        <div class="col-sm-4 mb-5">
+            <p class="h6">Contexte et contraintes législatives et techniques</p>
+            <button class="btn btn-maincolor2"data-toggle="modal" data-target="#contrainte">contraintes législatives
+                <br><span class="nbreFile"></span></button>
+        </div>
+        <div class="col-sm-4 mb-5">
+            <p class="h6">Cahier des charges – notes méthodologiques</p>
+            <button class="btn btn-maincolor2" data-toggle="modal" data-target="#cdc">Cahier des charges – notes méthodologiques <span class="nbreFile"></span></button>
+        </div>
+        <div class="col-sm-4 mb-5">
+            <p class="h6">Descriptifs techniques et autres documents (plans-photos…)</p>
+            <button class="btn btn-maincolor2" data-toggle="modal" data-target="#descriptifstechniques">Descriptifs techniques et autres documents (plans-photos…)
+                <br><span class="nbreFile"></span></button>
+        </div>
+        <div class="col-sm-4 mb-5">
+            <p class="h6">Pièces exigibles pour l’admission</p>
+            <button class="btn btn-maincolor2" data-toggle="modal" data-target="#pieceAdmission">Pièces exigibles pour l’admission
+                <br><span class="nbreFile"></span></button>
+        </div>
+        <div class="col-sm-4 mb-5">
+            <p class="h6">Note de synthèse</p>
+            <button class="btn btn-maincolor2" data-toggle="modal" data-target="#noteSynthese">Note de synthèse <br><span class="nbreFile"></span></button>
+        </div>
+
+        <div class="col-sm-4 mb-5">
+            <p class="h6">Autres pièces complémentaires</p>
+            <button class="btn btn-maincolor2" data-toggle="modal" data-target="#pieceComplementaire">Autres pièces complémentaires <span class="nbreFile"></span></button>
+        </div>
+        <div class="col-sm-12 mt-5 text-center">
+            <a href="{{ path('precisionAO',{id:appel.id,code:code}) }}" class="btn btn-maincolor">Étape suivante </a>
+        </div>
+
+    </div>
+    <div class="modal fade" id="note" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="noteBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog" id="noteExplicative">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="noteBackdropLabel">Note explicative (texte informatif – contexte et problématique)</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <label for="noteExFile">Ajouter des fichier</label>
+                            <button class="btn btn-maincolor fakeFile">Ajouter des fichiers </button>
+                            <input type="file" name="" class="file" multiple accept="application/pdf">
+                        </div>
+                        <div class="col-sm-12">
+                            <label for="noteEx"></label>
+                            <textarea name="" class="textInfo" cols="30" rows="10"></textarea>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary validerPiece" data-type="Note explicative" data-id="{{ appel.id }}">Valider</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="reglement" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="reglementBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog" id="reglementConsult">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="reglementBackdropLabel">Règlement de consultation – admission à l’appel</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <label for="noteExFile">Ajouter des fichier</label>
+                            <button class="btn btn-maincolor fakeFile">Ajouter des fichiers</button>
+                            <input type="file" name="" class="file" multiple accept="application/pdf">
+                        </div>
+                        <div class="col-sm-12">
+                            <label for="noteEx"></label>
+                            <textarea name="" class="textInfo" cols="30" rows="10"></textarea>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary validerPiece" data-type="Règlement de consultation" data-id="{{ appel.id }}">Valider</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="contrainte" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="contrainteBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog" id="contrainteTechnique">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="contrainteBackdropLabel">Contexte et contraintes législatives et techniques</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <label for="noteExFile">Ajouter des fichier</label>
+                            <button class="btn btn-maincolor fakeFile">Ajouter des fichiers</button>
+                            <input type="file" name="" class="file" multiple accept="application/pdf">
+                        </div>
+                        <div class="col-sm-12">
+                            <label for="noteEx"></label>
+                            <textarea name="" class="textInfo" cols="30" rows="10"></textarea>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary validerPiece" data-type="Contexte et contraintes législatives et techniques"data-id="{{ appel.id }}">Valider</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="cdc" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="cdcBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog" id="cahierCharge">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="cdcBackdropLabel">Cahier des charges – notes méthodologiques</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <label for="noteExFile">Ajouter des fichier</label>
+                            <button class="btn btn-maincolor fakeFile">Ajouter des fichiers</button>
+                            <input type="file" name="" class="file" multiple accept="application/pdf">
+                        </div>
+                        <div class="col-sm-12">
+                            <label for="noteEx"></label>
+                            <textarea name="" class="textInfo" cols="30" rows="10"></textarea>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary validerPiece" data-type="Cahier des charges – notes méthodologiques"data-id="{{ appel.id }}">Valider</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="descriptifstechniques" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="descriptifstechniquesBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog" id="descriptifTech">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="descriptifstechniquesBackdropLabel">Descriptifs techniques et autres documents (plans-photos…)</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <label for="noteExFile">Ajouter des fichier</label>
+                            <button class="btn btn-maincolor fakeFile">Ajouter des fichiers</button>
+                            <input type="file" name="" class="file" multiple accept="application/pdf">
+                        </div>
+                        <div class="col-sm-12">
+                            <label for="noteEx"></label>
+                            <textarea name="" class="textInfo" cols="30" rows="10"></textarea>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary validerPiece" data-type="Descriptifs techniques et autres documents (plans-photos…)"data-id="{{ appel.id }}">Valider</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="pieceAdmission" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="pieceAdmissionBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog" id="pieceAdmi">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="pieceAdmissionBackdropLabel">Pièces exigibles pour l’admission</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <label for="noteExFile">Ajouter des fichier</label>
+                            <button class="btn btn-maincolor fakeFile">Ajouter des fichiers</button>
+                            <input type="file" name="" class="file" multiple accept="application/pdf">
+                        </div>
+                        <div class="col-sm-12">
+                            <label for="noteEx"></label>
+                            <textarea name="" class="textInfo" cols="30" rows="10"></textarea>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary validerPiece" data-type="Pièces exigibles pour l’admission"data-id="{{ appel.id }}">Valider</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="noteSynthese" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="noteSyntheseBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog" id="noteSy">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="noteSyntheseBackdropLabel">Note de synthèse</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <label for="noteExFile">Ajouter des fichier</label>
+                            <button class="btn btn-maincolor fakeFile">Ajouter des fichiers</button>
+                            <input type="file" name="" class="file" multiple accept="application/pdf">
+                        </div>
+                        <div class="col-sm-12">
+                            <label for="noteEx"></label>
+                            <textarea name="" class="textInfo" cols="30" rows="10"></textarea>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary validerPiece" data-type="Note de synthèse"data-id="{{ appel.id }}">Valider</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="pieceComplementaire" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="pieceComplementaireBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog" id="pieceComp">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="pieceComplementaireBackdropLabel">Autres pièces complémentaires</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <label for="noteExFile">Ajouter des fichier</label>
+                            <button class="btn btn-maincolor fakeFile">Ajouter des fichiers</button>
+                            <input type="file" name="" class="file" multiple accept="application/pdf">
+                        </div>
+                        <div class="col-sm-12">
+                            <label for="noteEx"></label>
+                            <textarea name="" class="textInfo" cols="30" rows="10"></textarea>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary validerPiece" data-type="Autres pièces complémentaires"data-id="{{ appel.id }}">Valider</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

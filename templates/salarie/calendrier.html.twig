@@ -1,0 +1,111 @@
+{% extends 'entreprise/baseAE.html.twig' %}
+{% block stylesheets %}
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/core@4.1.0/main.min.css"/>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@4.1.0/main.min.css"/>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@4.1.0/main.min.css"/>
+{% endblock %}
+{% block title %}Calendrier
+{% endblock %}
+{% block pageAccueil %}
+	<h4>Votre Agenda</h4>
+{% endblock %}
+
+
+{% block contenu %}
+	{% if app.user.role('ROLE_ODI') %}
+		{% set role = "odi" %}
+		{% set class = "d-none" %}
+		{% else %}
+			{% set role = "otd" %}
+		{% set class=" " %}
+	{% endif %}
+
+		<input type="hidden" name="" id="idSalarie" value="{{ salarie.id }}" data-role="{{ role }}">
+		<div id='calendrier'></div>
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" style="display: none"></button>
+
+		<!-- Modal -->
+		<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-scrollable" id="modaleCalendrier">
+				<div class="modal-content" id="corpsModalInter">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Détails de l'intervention</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-12 table-responsive">
+								<table>
+									<tr>
+										<th>
+											Type d'intervention
+										</th>
+										<td class="text-dark typeInter"></td>
+									</tr>
+									<tr>
+										<th>
+											Adresse de l'intervention
+										</th>
+										<td class="text-dark adresse"></td>
+									</tr>
+									<tr>
+										<th>
+											Demandeur
+										</th>
+										<td class="text-dark demandeur"></td>
+									</tr>
+
+									<tr class="{{ class }}">
+										<th>
+											Détails de l'intervention
+										</th>
+										<td class="text-dark detail"></td>
+									</tr>
+									<tr class="{{ class }}">
+										<th>
+											Drone utlilisé
+										</th>
+										<td class="text-dark drone"></td>
+									</tr>
+									<tr>
+										<th>
+											Date et heure de rendez-vous
+										</th>
+										<td class="text-dark rdv"></td>
+									</tr>
+									<tr >
+										<th>
+											Durée aproximative du déplacement
+										</th>
+										<td class="text-dark temps"></td>
+									</tr>
+									<tr>
+										<th>
+											Distance
+										</th>
+										<td class="text-dark distance"></td>
+									</tr>
+								</table>
+							</div>
+
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+{% endblock  %}
+{% block javascripts %}
+	<script src="/js/js_site/logoEnt.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@4.1.0/main.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@4.1.0/main.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@4.1.0/main.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@4.1.0/main.min.js"></script>
+{% endblock %}

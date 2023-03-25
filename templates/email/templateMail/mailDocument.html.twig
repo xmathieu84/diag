@@ -1,0 +1,40 @@
+{% extends "email/templateMail/baseMail.html.twig" %}
+
+{% block sujet %}Activation de votre compte{% endblock %}
+{% block body %}
+    <p style="font-size: 14px; line-height: 140%;">Bonjour,</p>
+    <p style="font-size: 14px; line-height: 140%;">&nbsp;</p>
+    <p style="font-size: 14px; line-height: 140%;">Afin de finaliser votre inscription sur DiagDrone certaines pièces justificatives sont nécessaires  :</p>
+    <p style="font-size: 14px; line-height: 140%;">Si vous êtes un Auto-entrepreneur, une Entreprise individuelle à responsabilité limitée (EIRL), une Collectivité locale/territoriale ou une Entreprise individuelle déclarée auprès de la chambre d'agriculture, vous devrez fournir les documents qui suivent : </p>
+    <ul style="font-size: 14px; line-height: 140%;">
+        <li>Une copie recto verso sur une seule page de votre pièce d'identité OU de votre permis de conduire OU de votre passeport. Ces documents doivent être encours de validité.</li>
+        <li>Un avis de situation URSAFF de moins de 3 mois OU un avis de situation SIRENE de moins de 3 mois. Vous trouverez ce document ici :
+            <a href="https://avis-situation-sirene.insee.fr/">https://avis-situation-sirene.insee.fr/</a></li>
+        <li>Votre RIB</li>
+        <li>Une copie de votre assurance professionnelle (RCP)</li>
+        <li>Une copie du certificat d’aptitude théorique de télépilote (C.A.T.T).</li>
+        <li>Votre numéro d’exploitant DGAC.</li>
+
+    </ul>
+    <p style="font-size: 14px; line-height: 140%;">Si vous êtes une Société Anonyme (SA), une Société à Responsabilité Limitée (SARL), une Entreprise Unipersonnelle à Responsabilité Limitée (EURL), une Société par Actions Simplifiée (SAS), une Société par Actions Simplifiée Unipersonnelle (SASU), une Exploitation Agricole à Responsabilité Limitée (EARL),une Société en Nom Collectif (SNC), un Groupement d'Intérêt Économique (GIE) ou un Groupement Agricole d'Exploitation en Commun (GAEC), vous devrez fournir les documents qui suivent : </p>
+    <ul style="font-size: 14px; line-height: 140%;">
+        <li>Une copie recto verso sur une seule page de votre pièce d'identité OU de votre permis de conduire OU de votre passeport. Ces documents doivent être encours de validité.</li>
+        <li>Un extrait Kbis de moins de 3 mois. Vous le trouverez à cette adresse <a href="https://www.infogreffe.fr/recherche-siret-entreprise/chercher-siret-entreprise.html">https://www.infogreffe.fr/recherche-siret-entreprise/chercher-siret-entreprise.html .</a></li>
+        <li>Les statuts de votre structure à jour et signés. </li>
+        <li>Votre RIB</li>
+        <li>Une copie de votre assurance professionnelle (RCP)</li>
+        <li>Une copie du certificat d’aptitude théorique de télépilote (C.A.T.T).</li>
+        <li>Votre numéro d’exploitant DGAC.</li>
+
+    </ul>
+
+{% endblock %}
+{% block lien %}
+    <div align="center">
+        <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-spacing: 0; border-collapse: collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;font-family:helvetica,sans-serif;"><tr><td style="font-family:helvetica,sans-serif;" align="center"><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="https://www.diag-drone.com" style="height:36px; v-text-anchor:middle; width:222px;" arcsize="11%" stroke="f" fillcolor="#3AAEE0"><w:anchorlock/><center style="color:#FFFFFF;font-family:helvetica,sans-serif;"><![endif]-->
+        <a href="https://www.diag-drone.com" target="_blank" style="box-sizing: border-box;display: inline-block;font-family:helvetica,sans-serif;text-decoration: none;-webkit-text-size-adjust: none;text-align: center;color: #FFFFFF; background-color: #3AAEE0; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; width:auto; max-width:100%; overflow-wrap: break-word; word-break: break-word; word-wrap:break-word; mso-border-alt: none;">
+            <span style="display:block;padding:10px 20px;line-height:120%;"><span style="font-size: 14px; line-height: 16.8px;">DIAG-DRONE</span></span>
+        </a>
+        <!--[if mso]></center></v:roundrect></td></tr></table><![endif]-->
+    </div>
+{% endblock %}

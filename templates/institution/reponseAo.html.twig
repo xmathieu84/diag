@@ -1,0 +1,35 @@
+{% extends 'institution/baseInsti.html.twig' %}
+{% block title %}Ajout pièces{% endblock %}
+{% block titreSection %}Reponse à l'{{ appel.type }} {{ appel.denomination }}{% endblock %}
+{% block titrePage %}Reponse à l'{{ appel.type }} {{ appel.denomination }}{% endblock %}
+{% block pageAccueil  %} <h3>Liste des réponses</h3>{% endblock %}
+{% block contenu %}
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th scope="col">Fiche de l'{{ appel.type }}</th>
+                            <th scope="col">Fiche de la réponse</th>
+                            <th scope="col">Dossier de la réponse</th>
+                            <th>&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for reponse in appel.reponseAos %}
+                        <tr>
+                            <td><a href="{{ path('ficheAO',{id:appel.id}) }}" class="btn btn-outline-success" target="_blank">Fiche</a></td>
+                            <td><a href="{{ path('ficheReponse',{id:reponse.id}) }}" class="btn btn-outline-maincolor" target="_blank">Fiche</a></td>
+                            <td><a href="{{ path('uploadDossierAo',{id:reponse.id}) }}" ><img src="/css/css_site/img/zipcouleur.png" alt=""></a></td>
+                            <td>
+                                <a href="{{ path('accpeterReponse',{id:reponse.id}) }}" class="btn btn-maincolor">Accepter</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

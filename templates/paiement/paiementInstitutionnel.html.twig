@@ -1,0 +1,51 @@
+{% extends "demandeur/basedemandeur.html.twig" %}
+{% block title %}Paiement institutionnel
+{% endblock %}
+{% block titreSection %}Paiement de l'intervention
+{% endblock %}
+{% block titrePage %}Paiement de l'intervention
+{% endblock %}
+
+
+{% block contenu %}
+	<div class="row">
+		<div class="col-sm-12">
+			<img src="/css/css_site/images/paiement/mangopay.png" alt="" height="80%">
+
+		</div>
+
+		<div class="col-sm-12 mb-5 mt-3">
+			<p class="h3">Paiement de votre intervention</p>
+		</div>
+
+
+		<div class="col-sm-12">
+			<p class="h6">Veuillez effectuer le virement sur le compte de notre prestataire de paiement MANGOPAY</p>
+			<p class="h5">IBAN :
+				{{paiement.PaymentDetails.BankAccount.Details.IBAN}}</p>
+			<p class="h5">BIC :
+				{{paiement.PaymentDetails.BankAccount.Details.BIC}}</p>
+			<p class="h5">Renseigner la référence de paiement suivante :
+				{{paiement.PaymentDetails.WireReference}}</p>
+
+		</div>
+		<div class="col-sm-12 mt-5"></div>
+		<div class="col-sm-12 mt-5 text-center">
+			<a href="https://www.mangopay.com/terms/PSP/PSP_MANGOPAY_FR.pdf">Condition générales de notre prestataire de paiement MANGO PAY</a><br>
+
+			<a href="{{path('cguOtdDemandeur',{id:user.userDem.id})}}" target="_blank"><input type="checkbox" name="" id="accord" data-inter={{idInter}}>
+
+
+				<label for="accord"></label>
+				<span class="h6">
+					J'ai lu et j'accepte les conditions générales de vente
+				</span>
+			</a>
+
+
+		</div>
+		<div class="col-sm-12 mt-3 zoneBouton text-center"></div>
+	</div>
+
+
+{% endblock %}

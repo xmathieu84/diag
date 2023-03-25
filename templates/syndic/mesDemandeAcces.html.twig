@@ -1,0 +1,42 @@
+{% extends 'syndic/baseSyndic.hml.twig' %}
+
+{% block title %}
+Mes demande d'accès
+{% endblock %}
+
+{% block contenu %}
+    <div class="row bg-white">
+        <div class="col-12 text-center mt-5 mb-5">
+
+                <button id="btnFiltre" type="button" class="btn btn-maincolor  text-center" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filtrer</button>
+                <div class="dropdown-menu" aria-labelledby="btnFiltre">
+                    <a class="dropdown-item" href="{{ path('mesDemandesAcces',{statut:'Accès demandé'}) }}">Accès demandé</a>
+                    <a class="dropdown-item" href="{{ path('mesDemandesAcces',{statut:'Accès annulé'}) }}">Accès annulé</a>
+                    <a href="{{ path('mesDemandesAcces',{statut:'Accès refusé'}) }}" class="dropdown-item">Accès refusé</a>
+                </div>
+
+        </div>
+        <div class="table-responsive pl-4 pr-4">
+            <table>
+                <thead>
+                <tr>
+                    <th class="text-center">Date de la demande</th>
+                    <th class="text-center">Adresse</th>
+                    <th class="text-center">Statut</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for demande in demandes %}
+                    <tr>
+                        <td class="text-dark text-center">{{ demande.date|format_datetime('short','none',locale='fr') }}</td>
+                        <td class="text-dark text-center">{{ demande.syndicat.demandeur.adresse.numero }} {{ demande.syndicat.demandeur.adresse.nomVoie }}
+                            <br>{{ demande.syndicat.demandeur.adresse.codePostal }} {{ demande.syndicat.demandeur.adresse.ville }}</td>
+                        <td class="text-dark text-center">{{ demande.statut }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
+

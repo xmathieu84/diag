@@ -1,0 +1,352 @@
+<style>
+    @page  {
+        margin: 15px;
+    }
+    .diagdrone{
+        font-size: 1em;
+        width: 100%;
+        position:absolute;
+        bottom:3em;
+        text-align: center;
+        padding-top:50px;
+
+    }
+    .date{
+        width: 100%;
+        margin-top: 1.2em;
+        text-align: center;
+    }
+    .logo{
+        float: left;
+        width: 100%;
+    }
+    .client{
+        float: left;
+        width: 45%;
+        margin-left: 30em;
+        margin-top: 1.5em;
+    }
+    table{
+        width: 100%;
+        border-collapse: collapse;
+        text-align:center ;
+        margin-top: 1em;
+    }
+    th,td{
+        border: 1px solid black;
+        padding-top: 1.2em;
+        padding-bottom: 1.2em;
+    }
+    footer{
+
+        position:absolute;
+        bottom:0;
+        width:100%;
+        padding-top:50px;
+        height:50px;
+
+    }
+    .premiere{
+        border: none;
+    }
+
+    .sousTotal{
+        float: right;
+        width: 30%;
+        text-align: center;
+
+    }
+
+    .aujour{
+        float: left;
+        width: 50%;
+        margin-top: 1em;
+        margin-bottom: 1em;
+    }
+    .numeroFact{
+        width: 50%;
+        font-size: 1.3em;
+
+    }
+    .final{
+        float: left;
+        width: 100%;
+    }
+    .ht,.tva,.ttc,.vide{
+        float: left;
+        width: 40%;
+
+    }
+    .montantHt,.montantTva,.montantTtc,.trait{
+        float: left;
+        width: 58%;
+    }
+    .trait{
+        border-top: 1px solid black;
+    }
+    .vide{
+        border-top: 1px solid white;
+    }
+
+</style>
+{% if type =='drone' %}
+    {% set entreprise = intervention.propositionChoisie.salarie.entreprise %}
+    {% else %}
+    {% set entreprise = intervention.odi.entreprise %}
+{% endif %}
+<div class="logo">
+    <img src="../public/css/css_site/images/logo-diagdrone.png" alt="" width="493px" height="193px">
+</div>
+<div class="client">
+    <span>{{entreprise.formJuridique}} {{entreprise.denomination}}</span><br>
+    <span>{{entreprise.adresse.numero}} {{entreprise.adresse.nomVoie}}</span><br>
+    <span>{{entreprise.adresse.codePostal}} {{entreprise.adresse.ville}}</span><br>
+    <span>Numéro de siret : {{entreprise.siretTva.siret}}</span><br>
+    {% if entreprise.siretTva.tva %}
+        <span>TVA : {{entreprise.siretTva.tva }}</span>
+    {% endif %}
+
+</div>
+<div class="aujour">
+    Le {{ aujour|format_datetime('short', 'none', locale='fr') }}
+</div>
+<div class="numeroFact">
+    Facture n°{{ numero }}OTD
+</div>
+<div class="date">
+    {% if type =='drone' %}
+        <b>Facture de la commission DIAG DRONE pour l'intervention du  {{ intervention.rdvAT|format_datetime('short', 'none', locale='fr') }}</b>
+        {% else %}
+            <b>Facture de la commission DIAG DRONE pour l'intervention du  {{ intervention.dateRdv|format_datetime('short', 'none', locale='fr') }}</b>
+    {% endif %}
+
+</div>
+<table>
+    <tr>
+        <th class="premiere"></th>
+        <th>Prix HT</th>
+
+    </tr>
+    <tr>
+        <td>{% if type =='drone' %}
+                {{ intervention.listeInter.nom}} {{ intervention.typeInter.nom }}
+                Le {{ intervention.rdvAT|format_datetime('short', 'short', locale='fr') }}<br>
+                {% else %}
+                Diagnostic(s) immobilier
+                    Le {{ intervention.dateRdv|format_datetime('short', 'none', locale='fr') }} {{ intervention.heureRdv|format_datetime('short', 'none', locale='fr')  }}<br>
+            {% endif %} <br>
+
+            Adresse: {{ intervention.adresse.numero }} {{ intervention.adresse.nomVoie }} <br>
+            {{ intervention.adresse.codePostal }} {{ intervention.adresse.ville }}
+        </td>
+        <td>{{ (intervention.prix/taux)|number_format(2) }} €</td>
+
+    </tr>
+
+
+</table>
+<br>
+<table>
+    <tr>
+        <td width="78.5%">Commission DIAG-DRONE : {{ entreprise.commission }} %</td>
+        <td>{{ ((entreprise.commission/100/taux))|number_format(2) }} €</td>
+
+    </tr>
+</table>
+
+<div class="sousTotal">
+    <div class="ht">
+        <p>Total HT : </p>
+    </div>
+    <div class="montantHt">
+        <p>{{ ((intervention.prix*entreprise.commission/100/taux))|number_format(2) }} €</p>
+    </div>
+    <div class="tva">
+        <p>TVA {{ tva }} %</p>
+    </div>
+    <div class="montantTva">
+        <p>{{ ((intervention.prix*entreprise.commission/100)-(intervention.prix*entreprise.commission/100/taux) )| number_format(2)}} €</p>
+
+    </div>
+    <div class="vide"></div>
+    <div class="trait">
+
+    </div>
+    <div class="ttc">
+        <p>Total TTC</p>
+    </div>
+    <div class="montantTtc">
+        <p> {{ intervention.prix*entreprise.commission/100 }} €</p>
+
+    </div>
+
+</div>
+<div class="final">
+    {% if type=='drone' %}
+        {% if (intervention.intDem.user == null) %}
+            <p>Le montant de {{ (intervention.prix*entreprise.commission/100)|number_format(2) }} € sera prélevé sur votre compte bancaire lors du prélèvement de votre abonnement .</p>
+        {% else %}
+            <p>Le montant a été prélevé au moment du paiement de l'acompte sur votre wallet MANGOPAY</p>
+        {% endif %}
+        {% else %}
+            {% if (intervention.demandeur.user == null) %}
+                <p>Le montant de {{ (intervention.prix*entreprise.commission/100)|number_format(2) }} € sera prélevé sur votre compte bancaire lors du prélèvement de votre abonnement .</p>
+            {% else %}
+                <p>Le montant a été prélevé au moment du paiement de l'acompte sur votre wallet MANGOPAY</p>
+            {% endif %}
+    {% endif %}
+
+
+
+</div>
+<div class="diagdrone">
+    <span>SAS DIAG DRONE</span><br>
+    <span>200 rue Michel de Montaigne</span><br>
+    <span>84140 AVIGNON</span><br>
+    <span class="infoPdf">Numéro de SIREN
+	</span>
+    <span>
+		: 880431580</span><br>
+    <span class="infoPdf">Numéro de SIRET:
+	</span>
+    <span>88043158000013</span><br>
+    <span class="infoPdf">RSC AVIGNON</span>
+    <span>
+		 880431580</span><br>
+    <span class="infoPdf">Numéro TVA
+	</span>
+    <span>
+		: FR78880431580</span><br>
+
+</div>
+<footer>
+    <p>Vous pouvez retrouver votre facture dans votre espace  sur <a href="https://diag-drone.com/" target="_blank">DIAG-DRONE</a></p>
+</footer>
+
+{#
+<style>
+    @page  {
+        margin: 15px;
+    }
+    .diagdrone{
+        float: left;
+        margin-left: 0.75em;
+        margin-top: 1.5em;
+        width: 45%;
+    }
+    .date{
+        margin-top: 1.2em;
+    }
+    .logo{
+        float: left;
+        width: 45%;
+    }
+    .client{
+        float: left;
+        width: 45%;
+        margin-left: 30em;
+        margin-top: 1.5em;
+    }
+    table{
+        width: 100%;
+        border-collapse: collapse;
+        text-align:center ;
+        margin-top: 1em;
+    }
+    th,td{
+        border: 1px solid black;
+        padding-top: 1.2em;
+        padding-bottom: 1.2em;
+    }
+    footer{
+
+        font-size: 0.6em;
+        position:absolute;
+        bottom:0;
+        width:100%;
+        padding-top:50px;
+        height:50px;
+
+    }
+    .premiere{
+        border: none;
+    }
+    .final{
+        margin-top: 1.2em;
+    }
+</style>
+
+<div class="diagdrone">
+    <span>SAS DIAG DRONE</span><br>
+    <span>200 rue Michel de Montaigne</span><br>
+    <span>84140 AVIGNON</span><br>
+    <span class="infoPdf">Numéro de SIREN
+	</span>
+    <span>
+		: 880431580</span><br>
+    <span class="infoPdf">Numéro de SIRET:
+	</span>
+    <span>88043158000013</span><br>
+    <span class="infoPdf">Numéro TVA
+	</span>
+    <span>
+		: FR78880431580</span><br>
+    <span class="infoPdf">Code NAF / APE</span>
+    <span>
+		: 6312Z (portails Internet)</span>
+</div>
+<div class="logo">
+    <img src="../public/css/css_site/images/logo-diagdrone.png" alt="" width="493px" height="193px">
+</div>
+<div class="client">
+    <span>{{reservation.salarie.entreprise.formJuridique}} {{reservation.salarie.entreprise.denomination}}</span><br>
+    <span>{{reservation.salarie.entreprise.adresse.numero}} {{reservation.salarie.entreprise.adresse.nomVoie}}</span><br>
+    <span>{{reservation.salarie.entreprise.adresse.codePostal}} {{reservation.salarie.entreprise.adresse.ville}}</span><br>
+
+    <span>Numéro de siret : {{reservation.salarie.entreprise.siretTva.siret}}</span><br>
+    {% if reservation.salarie.entreprise.siretTva.tva %}
+        <span>{{ reservation.salarie.entreprise.siretTva.tva }}</span>
+    {% endif %}
+</div>
+<div class="date">
+    <b >Facture de la commission DIAG DRONE pour l'intervention du  {{ reservation.intervention.rdvAT|format_datetime('short', 'none', locale='fr') }}</b>
+</div>
+
+<table>
+    <tr>
+        <th class="premiere"></th>
+        <th>Prix HT</th>
+        <th>Prix TTC</th>
+    </tr>
+    <tr>
+
+        <td>{{ reservation.intervention.prix|number_format(2) }} €</td>
+    </tr>
+    <tr>
+        <td>Acompte versé</td>
+        <td>{{ (reservation.intervention.acommpte/1.2)|number_format(2) }} €</td>
+        <td>{{ reservation.intervention.acommpte|number_format(2) }} €</td>
+    </tr>
+
+    <tr>
+        <td>Commission DIAG-DRONE :{{ reservation.salarie.entreprise.commission }}%</td>
+        <td>{{ ((reservation.intervention.prix*reservation.salarie.entreprise.commission/100)/1.2)|number_format(2) }} €</td>
+        <td>{{ (reservation.intervention.prix*reservation.salarie.entreprise.commission/100)|number_format(2) }} €</td>
+    </tr>
+
+
+</table>
+<div class="final">
+    {% if (reservation.intervention.intDem.user == null) %}
+        <p>Le montant de {{ (reservation.intervention.prix*reservation.salarie.entreprise.commission/100)|number_format(2) }} € sera prélevé sur votre compte bancaire.</p>
+    {% else %}
+        <p>Le montant a été prélevé au moment du paiement de l'acompte sur votre wallet MANGOPAY</p>
+    {% endif %}
+
+
+</div>
+<footer>
+    <p>Vous pouvez retrouver votre facture dans votre espace entreprise sur <a href="https://diag-drone.com/" target="_blank">DIAG-DRONE</a></p>
+</footer>
+
+#}

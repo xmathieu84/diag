@@ -1,0 +1,66 @@
+{% extends 'administrateur/baseA.html.twig' %}
+{% block titre %}
+	modifier les taux
+{% endblock %}
+
+{% block body %}
+
+	<h1>Liste des taux appliqués</h1>
+	<div class="row mt">
+		<div class="col-lg-12">
+			<div class="row">
+
+				{% for taux in tauxs %}
+					<div class="col-sm-4 carte mr-5 text-center">
+						<div class="card-body">
+							<h2 class="card-title">{{taux.nom}}</h2>
+							<h3 class="card-text">{{taux.taux}}
+								%</h3>
+
+							<footer class="footer">
+								<div class="row">
+									<div class="col-sm-6">
+										<a href="{{path('modifierTaux',{id:taux.id})}}">
+											<button class="btn btn-success btn-round btn-sm">Modifier</button>
+										</a>
+									</div>
+									<div class="col-sm-6">
+										<a href="{{path('supprimerTaux',{id:taux.id})}}" class="ml-5">
+											<button class="btn btn-danger btn-round btn-sm">Supprimer</button>
+										</a>
+									</div>
+
+								</div>
+							</footer>
+
+						</div>
+					</div>
+
+
+				{% endfor %}
+				<div class="col-md-4 col-sm-4 mb">
+					<div class="grey-panel pn donut-chart" id="abonnement">
+
+
+						{{form_start(form)}}
+						<h3>Nouveau taux</h3>
+						<div class="card-body">
+							<h3>{{ form_label(form.nom, "Nom", {'label_attr': {'class': 'control-label'}})}}
+							</h3>
+							{{form_row(form.nom,{'label': ' ','attr':{'class':'form-control-sm '}})}}
+							<h3>{{ form_label(form.nom, "taux", {'label_attr': {'class': 'control-label'}})}}
+							</h3>
+							{{form_row(form.taux,{'label': ' ','attr':{'class':'form-control-sm '}})}}
+
+							<button type="submit" class="btn btn-primary btn-round btn-sm">Valider</button>
+
+						</div>
+
+						{{form_end(form)}}
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

@@ -1,0 +1,35 @@
+.budget,.restreint,.appel,.file,#appel_dossier,.zonePrecision{
+    display: none;
+}
+#appel_ouvert_0+label,#appel_ouvert_1+label,#appel_budgetExistant_0+label,#appel_budgetExistant_1+label{
+    background: none;
+    margin-right: 2em;
+    margin-left: -1.5em;
+}
+#note,#reglement,#contrainte
+,#cdc
+,#descriptifstechniques
+,#pieceAdmission
+,#noteSynthese
+,#pieceComplementaire{
+
+    border: none;
+    opacity: 0.9;
+    width: 100%;
+}
+#noteExplicative,#reglementConsult,#contrainteTechnique,#cahierCharge,#descriptifTech,#pieceAdmi,#noteSy,#pieceComp{
+    max-width: 60%;
+}
+.textInfo{
+    resize: none;
+}
+.btn-dossierAo{
+    width: 100%;
+}
+#reponse_ao_precision_1+label,#reponse_ao_precision_0+label{
+    background: none;
+}
+.effacer{
+    cursor : pointer;
+}
+

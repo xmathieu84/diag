@@ -1,0 +1,32 @@
+{% extends template %}
+{% block titreSection %}Liste des bâtiments{% endblock %}
+{% block titrePage %}Liste des bâtiments{% endblock %}
+{% block title %}Liste des bâtiments{% endblock %}
+{% block pageAccueil %}{% endblock %}
+
+{% block contenu %}
+    <table class="table table-striped bat">
+        <thead>
+            <tr>
+                <th scope="col">Numéro natif</th>
+                <th scope="col">Numéro interne</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Adresse</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for batiment in batiments %}
+            <tr>
+                <td >{{ batiment.id }}</td>
+                <td>{{ batiment.numeroInterne }}</td>
+                <td>{{ batiment.nom }}</td>
+                <td>{{ batiment.adresse.numero }} {{ batiment.adresse.nomVoie }} <br>
+                    {{ batiment.adresse.codePostal }} {{ batiment.adresse.ville }}</td>
+                <td><a href="{{ path('creerDiag',{id:batiment.id}) }}" class="btn btn-maincolor">Ajouter un <br> diagnostic</a></td>
+            </tr>
+        {% endfor %}
+
+
+        </tbody>
+    </table>
+{% endblock %}

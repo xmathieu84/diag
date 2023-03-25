@@ -1,0 +1,99 @@
+{% extends template %}
+
+{% block title %}Mes demandes en cours
+{% endblock %}
+{% block titredemandeur %}
+	<h1>Mes demandes en cours</h1>
+{% endblock %}
+{% block titreSection %}Vos demandes d'interventions
+{% endblock %}
+{% block titrePage %}Vos demandes d'interventions
+{% endblock %}
+
+{% block contenu %}
+
+	<div class="row text-center">
+		<div class="col-sm-12 mb-5">
+			<h5>Interventions en attente de proposition(s)</h5>
+
+		</div>
+		{% if reservations is not empty %}
+
+
+		{% for reservation in reservations %}
+			{% if reservation %}
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-header">
+							{% if reservation.intervention.dateWitch  %}
+                            <p class="card-titre pb-4">
+									Intervention prévue le
+									{{ reservation.intervention.dateWitch|format_datetime('full', 'none', locale='fr') }}
+									{% elseif reservation.intervention.dateDebut and reservation.intervention.dateFin %}
+							<p class="card-titre pb-4">
+										Intervention prévue entre le
+										{{ reservation.intervention.dateDebut|format_datetime('short', 'none', locale='fr') }} et
+										{{ reservation.intervention.dateFin|format_datetime('short', 'none', locale='fr') }}
+									{% else %}
+							<p class="card-titre pb-5">
+									Intervention sans date précise <br> ( créée le {{ reservation.intervention.createdAt|format_datetime('short',"none",locale="fr") }})
+								{% endif %}
+							</p>
+
+                        </div>
+                        <div class="card-body">
+							<div class="row">
+								<div class="col-12">
+									<h6 class="card-title souligne">Adresse :
+									</h6>
+									<p class="h6">{% if reservation.intervention.intemperie %}
+											{{ reservation.intervention.intemperie[0]['dateIntemp']['date']|format_datetime('full', 'none', locale='fr') }}
+										{% endif %}</p>
+									<p class="card-text">{{ reservation.intervention.adresse.numero }}
+										{{ reservation.intervention.adresse.nomVoie }}
+										{{ reservation.intervention.adresse.codePostal }}
+										{{ reservation.intervention.adresse.ville }}</p>
+									<h6 class="souligne">Type d'intervention :</h6>
+									<p class="card-text">{{ reservation.intervention.listeInter.nom }}
+
+										{{ reservation.intervention.typeInter.nom }}</p>
+									<h6 class="souligne">Télé opérateur correspondant :</h6>
+
+									<p class="card-text">{{reservation.intervention.propositions|length}}
+										{% if reservation.intervention.propositions|length >1 %}
+											opérateurs
+										{% else %}
+											opérateur
+										{% endif %}
+										{% if reservation.intervention.propositions|length >0 %}
+											<a href="{{path('proposition',{id:reservation.intervention.id,code:code})}}">
+
+												<button class="btn btn-maincolor">Voir les propositions</button>
+											</a>
+										{% endif %}
+
+
+									</p>
+								</div>
+
+							</div>
+
+						</div>
+					</div>
+
+				</div>
+			{% else %}
+				<p>Vous n'avez pas de réservation en attente</p>
+			{% endif %}
+
+		{% endfor %}
+			{% else %}
+				<div class="col-12 text-center mt-5">
+					<p class="h5">Vous n'avez aucune intervention en attente de proposition(s)</p>
+				</div>
+
+		{% endif %}
+		<div class="col-sm-12">{{ knp_pagination_render(reservations) }}</div>
+	</div>
+
+{% endblock %}

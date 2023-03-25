@@ -1,0 +1,35 @@
+{% extends "administrateur/baseA.html.twig" %}
+{% block titre %}
+Envoyer message
+{% endblock  %}
+{% block body %}
+<section class="wrapper">
+
+    <div class="row mt">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-8">
+            {{form_start(form)}}
+
+            {{form_label(form.sujet,'Sujet du message',{'label_attr':{'class':'control-label col-md-3'}})}}
+            {{form_row(form.sujet,{'label':' ','attr':{'class':'form-control'}})}}
+            <div class="col-lg-12" id="destinataire">
+                {{form_label(form.selectionDestinataire,'Sélection des destinataires',{'label_attr':{'class':'control-label col-md-6'}})}}
+                {{form_row(form.selectionDestinataire,{'label':' ','attr':{'class':'form-control'}})}}
+
+            </div>
+            <div class="col-lg-6" id="mail">
+                {{form_label(form.mail,'Entrez un email',{'label_attr':{'class':'control-label col-md-6'}})}}
+                {{form_row(form.mail,{'label':' ','attr':{'class':'form-control'}})}}
+
+            </div>
+
+            {{form_label(form.contenu,'Message',{'label_attr':{'class':'control-label col-md-3'}})}}
+            {{form_row(form.contenu,{'label':' ','attr':{'class':'form-control','rows':'20'}})}}
+            <button type="submit" class="btn btn-primary">Envoyer</button>
+            {{form_end(form)}}
+        </div>
+
+        <div class="col-lg-2"></div>
+    </div>
+</section>
+{% endblock body %}

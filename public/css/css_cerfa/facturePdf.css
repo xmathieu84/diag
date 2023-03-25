@@ -1,0 +1,87 @@
+.imageFactAdmin{
+    text-align: center;
+}
+.imgPdf {
+	width: 40%;
+	height: 16%;
+}
+.diagdrone{
+    margin-top: 2.5em;
+    float: left;
+    width: 70%;
+    font-size: 0.8em;
+}
+.infoPdf{
+    text-decoration: underline;
+}
+.client{
+    margin-top: 2.5em;
+    float: right;
+    width: 30%;   
+    font-size: 0.8em;
+}
+.factPdf{
+    margin-top: 1.5em;
+    width: 100%;
+}
+.table{
+    margin-top: 3em;
+    width: 100%;
+   
+}
+.facture{
+    border-collapse: collapse;
+    border: 1px solid black;
+    text-align: center;
+    width: 100%;   
+    
+}
+.designation{
+    width: 38%;
+background-color: #ECEFF1;
+ border: 1px solid black;
+}
+.reference,
+.quantite,
+.unite,
+.unitaire,
+.taxe,
+.horsTaxe{    
+background-color: #ECEFF1;
+ border: 1px solid black;
+}
+.reference{
+    width: 12%;
+}
+.quantite{
+    width: 12%;
+}
+.unite{
+    width: 7%;
+}
+td{
+    font-weight: normal;
+    border: 1px solid black;
+}
+.piedDePage{
+    float: right;
+        margin-top: 1em;
+   width: 25%;   
+   background-color: #ECEFF1;
+   font-size: 0.9em;
+   padding-bottom: 0%;
+   text-align: right;
+
+}
+
+footer{
+   position:absolute;
+
+bottom:1em;
+
+width:100%;
+
+padding-top:50px;
+
+height:50px; 
+}

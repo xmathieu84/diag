@@ -1,0 +1,122 @@
+.drapeau{
+   
+   float: left;
+   width: 15%;
+   height: 3em;
+   opacity: 0.9;
+}
+.videEntete{
+    float: left;
+    width: 68%;
+    height: 4.6em;
+     
+    
+}
+.numeroForm{
+    float: right;
+    padding-top: 2em;
+    width: 16%;
+    font-size: 0.75em;
+    height: 4.15em;
+     color: #808080; 
+      font-family: 'Calibri';
+}
+.titredrapeau{
+    float: left;
+    font-size: 0.66em;
+    text-align: center;
+    width: 15%;
+    padding-left: 0.6em;
+    color: #808080; 
+    
+}
+.titre{
+    float: left;
+    font-size: 1.3em;
+    width: 70%;
+    text-align: center;
+    font-family: 'Century Gothic';
+    font-weight:  bold;
+    color: #808080;
+    
+}
+.videTitre{
+    float: right;
+    width: 13%;
+    
+    height: 3.4em;
+}
+.intro{
+    font-size: 0.95em;
+}
+.case1,.case3,.case5,.case7,.case9,.case11,.case13,.case15{
+    width: 100%;
+    padding-left: 0.5em;
+    background: #8DB3E2;
+    margin-top: 1em;
+    font-size: 1.05em;
+    padding: 0.2em 0 0.2em 0.3em;
+}
+.case2,.case4,.case6,.case8,.case10,.case12,.case14,.case16{
+    width: 100%;
+    background: #DBE5F1;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    margin-top: 0.5em;
+    
+}
+.risqueVieprivee{
+    width: 100%;
+    background-color: white;
+    height: 5em;
+    border: 1px solid black;
+    
+}
+.traitementDonnee,.traiteDonnee{
+    background-color: white;
+    padding-left: 0.5em;
+    font-size: 0.9em;
+}
+.intitule{
+    width: 50%;
+    float: left;
+}
+.oui{
+    width: 12%;
+    float: left;
+}
+.non{
+    width: 36%;
+    float: right;
+    text-align: left;
+}
+.info{
+    margin-top: 1em;
+    font-size: 0.75em;
+}
+.reste{
+    font-size: 0.68em;
+    margin-top: 1.5em;
+}
+.nombre{
+    float: left;
+    width: 5%;
+    margin-top: 0.7em;
+}
+.texte{
+    float: left;
+    width: 95%;
+}
+.bleu{
+    color:#0000FF ;
+}
+.tiret{
+    float: left;
+    width: 6%;
+    text-align: right;
+    margin-top: 0.7em;
+}
+.texte2{
+    float: left;
+    width: 94%;
+}

@@ -1,0 +1,78 @@
+{% extends template %}
+
+{% block title %}
+Complémentaire
+{% endblock %}
+
+{% block contenu %}
+    <section class="ls bg-white">
+        <div class="container">
+            <div class="row mt-5">
+                {% if entreprise.cgv == false %}
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-8 text-center">
+                        <h5>Progression de votre Inscription</h5>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 65%;" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100">65%</div>
+                        </div>
+
+
+                    </div>
+                    <div class="col-sm-2"></div>
+
+                {% endif %}
+
+                <div class="col-12 text-center">
+
+                    <h4 class="d-inline">Informations assurantielles complémentaire</h4>
+
+                </div>
+
+            </div>
+            {{form_start(form)}}
+            <div class="row mt-5">
+                {% for message in app.flashes('notice') %}
+                    <div class="flash-notice">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-12 mb-5">
+                            <p class="h5">Veuillez remplir ici vos informations d'assurance RC Profesionnelle complémentaire {% if is_granted('ROLE_OTD') %}
+                                    type aérienne-aviation
+                                {% endif %} si non incluse dans le contrat précédent.</p>
+                            <p class="h5">Dans le cas contraire, nous vous invitons à cliquer sur <span class="h4"><b>"Je n'en ai pas besoin, passer cette étape"</b></span> en bas de page.</p>
+                        </div>
+                        <div class="col-6">
+                            {{form_row(form.compagnie,{'label':"Nom de votre compagnie d'assurance complémentaire* ",'attr':{'class':'form-control'}})}}
+                        </div>
+                        <div class="col-6">
+                            {{form_row(form.numero,{'label':"Numéro de contrat d'assurance complémentaire* ",'attr':{'class':'form-control'}})}}
+                        </div>
+                        <div class="col-6 mt-5">
+                            {{form_row(form.fichier,{'label':" Télécharger votre Rc Pro complémentaire",'attr':{'accept':"application/pdf"}})}}
+                            <button class="boutonAssu" type="button" id="assu">Télécharger ici votre Rc Pro *</button>
+                        </div>
+                    </div>
+                    <div class="col-12 text-right mt-5">
+                        <button type="submit" class="btn btn-maincolor">Valider et passer à l'étape suivante</button>
+                    </div>
+                </div>
+
+                {% if entreprise.cgv ==false %}
+                    <div class="col-12 text-center mt-5" >
+                        <a href="{{ path('kyc_ubo') }}" class="h4" style="color: #0189bd" id="bdp">Je n'en ai pas besoin, passer cette étape</a>
+                    </div>
+                {% endif %}
+
+                {{ form_widget(form._token) }}
+
+                {{ form_end(form ,{'render_rest': false}) }}
+
+
+            </div>
+        </div>
+    </section>
+{% endblock %}
+

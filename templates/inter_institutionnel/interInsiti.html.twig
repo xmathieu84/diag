@@ -1,0 +1,149 @@
+{% extends 'institution/baseInsti.html.twig' %}
+
+{% block title %}Nouvelle Intervention institutionnel
+{% endblock %}
+{% block titreSection %}Nouvelle Intervention
+{% endblock %}
+
+{% block titrePage %}Nouvelle Intervention
+{% endblock %}
+
+{% block pageAccueil %}{% endblock %}
+
+
+{% block contenu %}
+
+
+	{{form_start(form)}}
+	<div class="row text-center">
+
+		<div class="col-sm-12">
+			<div class="form-group">
+				<label class="h6">Disposez-vous d'un espace suffisant pour le décollage et
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																						l'atterissage d'un drone ?</label>
+				{{ form_row (form.decollage,{'label': ' ','attr':{'class':'text-center',}})}}
+			</div>
+		</div>
+		<div class="col-sm-12">
+			<div class="form-group">
+
+				<p class="h6">Êtes vous situé dans une agglomération?</p>
+				{{ form_row (form.agglo,{'label': ' ','attr':{'class':'text-center'}})}}
+			</div>
+		</div>
+		<legend>Adresse de l'Intervention</legend>
+		<div class="col-sm-6">
+			<div class="form-group has-placeholder">
+
+				<p class="h6">Numéro de la voie</p>
+				{{ form_row (form.adresse.numero,{'label':' ','attr':{'placeholder' : 'N° de la voie','class': 'form-control form-control bg-white',}})}}
+			</div>
+
+		</div>
+
+		<div class="col-sm-6">
+			<div class="form-group has-placeholder">
+				<p class="h6">Nom de la voie*:</p>
+				{{ form_row (form.adresse.nomVoie,{'label': ' ','attr':{'placeholder' : 'Nom de la voie *','class': 'form-control form-control-lg bg-white'}})}}
+			</div>
+		</div>
+
+		<div class="col-sm-6">
+			<div class="form-group has-placeholder">
+				<p class="h6">Code postal*:</p>
+				{{ form_row (form.adresse.codePostal,{'label': ' ','attr':{'placeholder' : 'Code postal *','class': 'form-control form-control-lg bg-white','value':codePostal,'readonly':'readonly'}})}}
+
+
+			</div>
+		</div>
+		<div class="col-sm-6">
+			<div class="form-group has-placeholder">
+				<p class="h6">Ville*(Tapez d'abord le code postal):</p>
+				{{ form_row (form.adresse.ville,{'label': ' ','attr':{'class': 'form-control form-control-lg bg-white','value':ville,'readonly':'readonly'}})}}
+
+
+			</div>
+		</div>
+		<legend>Détail de l'intervention</legend>
+		<div class="col-sm-12">
+			<div class="form-group">
+				<p class="h6">Votre demande fait-elle suite à une intempérie ?</p>
+				{{ form_row(form.intemp,{'label':' '}) }}
+
+
+			</div>
+
+		</div>
+		<div class="col-12 intempInsti">
+
+			<div class="row">
+			<div class="col-sm-12 mb-5 ">
+
+				<p class="h6">Date de l'intemperie :</p>
+
+				 {{ form_row (form.dateIntemperie,{'label': ' ','attr':{'class':'form-control bg-white text-dark'}})}}
+
+			</div>
+			<div class="col-sm-12 text-center ">
+
+				<div class="form-group">
+					<p class="h6">Type d'intemperie :</p>
+					{{ form_row(form.intemperie) }}
+
+				</div>
+			</div>
+			</div>
+		</div>
+			<div class="col-sm-12 mt-5" id="inter">
+				<div id="intervention">
+					<div class="form-group text-center">
+						<p class="h6">Votre demande concerne :</p>
+						<ul class="typeDemande">
+							<li>{{ form_row(form.gros,{'label':" "}) }}</li>
+							<li>{{ form_row(form.toiture,{'label':" "}) }}</li>
+							<li>{{ form_row(form.menuiserie,{'label':" "}) }}</li>
+							<li>{{ form_row(form.electricite,{'label':" "}) }}</li>
+							<li>{{ form_row(form.reseaux,{'label':" "}) }}</li>
+							<li>{{ form_row(form.exterieur,{'label':" "}) }}</li>
+						</ul>
+						</div>
+					<p class="h6">Autre : </p>
+				{{ form_row(form.autreType,{'label':" ",'attr':{"class":'bg-white'}}) }}
+
+
+
+
+					</div>
+				</div>
+
+
+		</div>
+		<div class="col-sm-12 mt-5">
+
+			<p class="h6">Télécharger des photos de l'intervention</p>
+			<div class="form-group text-center">
+				<button class="boutonRemplace" type="button">Télécharger des photos</button>
+
+				{{form_row(form.photos,{'label':' ','attr':{'class' :'custom-file-input'}})}}
+
+			</div>
+			<div>
+				<p class="h6 infoFichier"></p>
+			</div>
+		</div>
+		<div class="col-sm-12">
+
+			<p class="h6">Précisions:</p>
+			{{ form_row (form.inter_precision,{'label': ' ','attr':{'class':'form-control bg-white', 'placeholder': "Merci d'indiquer le maximum de détails.",'rows':'10'}})}}
+
+		</div>
+		<div class="col-sm-12 mt-5">
+			<button type="submit" class="btn btn-maincolor">Valider</button>
+		</div>
+
+
+
+	{{form_end(form)}}
+
+
+{% endblock %}

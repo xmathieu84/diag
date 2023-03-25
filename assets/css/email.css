@@ -1,0 +1,37 @@
+
+.logo{
+    text-align: center;
+    float: left;
+    width: 100%;
+
+}
+.codePromo{
+    font-size: 1.3em;
+    background-color: white;
+    color: blue;
+    font-weight:600 ;
+}
+.identifiant{
+    font-size: 3em;
+    margin-left: 1em;
+}
+.texte{
+    text-align: center;
+    padding-top: 0.75em;
+    padding-bottom: 0.75em;
+}
+.lienMail{
+    text-align: center;
+    margin-top: 2em;
+}
+.avertisssement{
+    font-size: 1.5em;
+}
+.ddConf{
+    text-align: center;
+    font-size: 0.9em;
+}
+.vide{
+    width: 30%;
+}
+

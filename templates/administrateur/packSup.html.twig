@@ -1,0 +1,43 @@
+{% extends 'administrateur/baseA.html.twig' %}
+
+{% block title %}
+    Ajouter des packs
+{% endblock %}
+
+
+{% block body %}
+    <div class="row">
+        <div class="col-sm-12 text-center mb-5">
+            <p class="h3">Ajout pack supplémentaire</p>
+            <p class="h6">Uniquement pour les grands comptes - institutionnel</p>
+        </div>
+        <div class="col-sm-6 mb-2">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Ajouter un pack</h5>
+                    {{ form_start(form) }}
+                    {{ form_row(form.employe,{'label':"Nombre d'employé",'attr':{'class':'form-control form-control-sm'}}) }}
+                    {{ form_row(form.prix,{'label':"Prix",'attr':{'class':'form-control form-control-sm'}}) }}
+                    {{ form_row(form.nom,{'label':'Nom du pack','attr':{'class':'form-control form-control-sm'}}) }}
+                    <button class="btn btn-success mt-3" type="submit">Valider</button>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+
+        {% for pack in packs %}
+            <div class="col-sm-6 mb-2">
+                <div class="card">
+                    <div class="card-body cardPack">
+                        <h5 class="card-title nom">{{ pack.nom }}</h5>
+                        <p class="card-text prixpack">Prix : <span class="prix">{{ pack.prix }}</span> €</p>
+                        <p class="card-text agentpack">Nombre d'employés : <span
+                                    class="employePack">{{ pack.employe }}</span></p>
+                        <a href="{{ path('listePack',{id:pack.id}) }}" class="btn btn-outline-danger mt-5"
+                           data-pack="{{ pack.id }}">Modifier</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

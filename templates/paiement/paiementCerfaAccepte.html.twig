@@ -1,0 +1,29 @@
+{% extends template %}
+
+{% block title %}Paiement validé
+{% endblock %}
+{% block titreSection %}Paiement
+						validé
+{% endblock %}
+{% block titrePage %}Paiement
+						validé
+{% endblock %}
+
+{% block contenu %}
+	<div class="row">
+		<div class="col-sm-12 mt-5">
+			<p class="h5">Votre paiement a été effectué.</p>
+
+
+		</div>
+
+		<div class="col-sm-12 text-center">
+			<a href="{{path('mesinter')}}" class="btn btn-maincolor">Retourner à liste de mes interventions</a>
+
+
+		</div>
+
+	</div>
+
+
+{% endblock %}

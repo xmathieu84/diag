@@ -1,0 +1,196 @@
+{% extends 'entreprise/baseAE.html.twig' %}
+
+{% block title %}
+Vos assurances
+{% endblock %}
+
+{% block contenu %}
+    {% if entreprise.entAss %}
+        <div class="table-responsive bg-white pr-1 pl-1">
+            <div class="col-12 mt-5 mb-5">
+                <p class="h3">Votre RC professionnelle</p>
+            </div>
+            <table class="table-bordered mb-5">
+                <tr>
+                    <th class="text-center">Nom de la compagnie</th>
+                    <th class="text-center">Numéro de contrat</th>
+                    <th class="text-center">Attestation</th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <td class="text-center">{{ entreprise.entAss.nomCompagnie }}</td>
+                    <td class="text-center">{{ entreprise.entAss.assPro }}</td>
+                    <td class="text-center">
+                        <a href="/uploads/assurances/{{ entreprise.entAss.assProFichier }}" target="_blank">
+                            <figure>
+                                <img src="/css/css_site/images/pdfmoyen.png" alt="">
+                                <figcaption>{{ entreprise.entAss.assProFichier }}</figcaption>
+                            </figure>
+                        </a>
+                    </td>
+                    <td class="text-center"><buttton class="btn btn-maincolor principal" data-toggle="modal" data-target="#modalModifPrincipale">Modifier</buttton></td>
+                </tr>
+            </table>
+            {% if entreprise.entAss.rcComplement %}
+                <div class="col-12">
+                    <p class="h3">RC Professionnelle complémentaire {% if is_granted('ROLE_OTD') %}
+                            type aérienne-aviation
+                        {% endif %}</p>
+                </div>
+                <table class="table-bordered mb-5">
+                    <tr>
+                        <th class="text-center">Nom de la compagnie</th>
+                        <th class="text-center">Numéro de contrat</th>
+                        <th class="text-center">Attestation</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <td class="text-center">{{ entreprise.entAss.rcComplement.compagnie }}</td>
+                        <td class="text-center">{{ entreprise.entAss.rcComplement.numero }}</td>
+                        <td class="text-center">
+                            <figure>
+                                <img src="/css/css_site/images/pdfmoyen.png" alt="">
+                                <figcaption>{{ entreprise.entAss.rcComplement.fichier }}</figcaption>
+                            </figure>
+                        </td>
+                        <td class="text-center"><buttton class="btn btn-maincolor complementaire" data-toggle="modal" data-target="#modalComplementaire">Modifier</buttton></td>
+                        <td class="text-center">
+                            <button class="btn btn-danger" data-type="{{ entreprise.entAss.rcComplement.id }}">Supprimer</button>
+                        </td>
+                    </tr>
+                </table>
+
+            {% else %}
+                <div class="text-center mb-5">
+                    <button class="btn btn-maincolor" data-toggle="modal" data-target="#ajoutComplementaire">Ajouter une RC Professionnelle complémentaire {% if is_granted('ROLE_OTD') %}
+                            type aérienne-aviation
+                        {% endif %}</button>
+                </div>
+
+            {% endif %}
+        </div>
+        {% else %}
+        <div class="row">
+            <div class="col-12">
+                <p class="h5">Vous n'avez pas renseigné de RC profesionnelle.</p>
+                <p class="h5">Nous vous proposons l'assurance RC professionnelle de notre partenaire AXA.</p>
+            </div>
+            <div class="col-12 text-center mt-5">
+
+                    <a href="{{ path('partAssurance',{nom:"axa"}) }}"><button class="btn-maincolor btn" style="height: 6em">Accéder à l'offre de notre partenaire</button></a>
+
+            </div>
+
+        </div>
+    {% endif %}
+    <div class="modal fade" id="modalModifPrincipale" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Modifier votre RC Professionnelle</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="compagnie" class="h5">Nom de la compagnie d'assurance</label>
+                            <input type="text" id="compagnie" data-type="compagnie">
+                        </div>
+                        <div class="col-6">
+                            <label for="contrat">Numéro de contrat</label>
+                            <input type="text" id="contrat" data-type="contrat">
+                        </div>
+                        <div class="col-6 mt-5">
+                            <label for="attestation">Attestation RC professionelle</label>
+                            <input type="file" name="" id="attestation" data-type="attestation">
+                            <button class="boutonAssu" id="assu">Attestation RC professionnelle</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                    <a href="{{ path('voirAssu') }}"><button type="button" class="btn btn-primary">Valider mes modifications</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="ajoutComplementaire" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog" >
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Ajouter une RC Professionnelle complémentaire {% if is_granted('ROLE_OTD') %}
+                            type aérienne-aviation
+                        {% endif %}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {{ form_start(form) }}
+                    <div class="row">
+                        <div class="col-12 mb-5">
+                            <p class="h5">Veuillez remplir ici vos informations d'assurance RC Profesionnelle {% if is_granted('ROLE_OTD') %}
+                                    complémentaire type aérienne-aviation
+                                {% endif %} si non incluse dans le contrat ci-dessus.</p>
+
+                        </div>
+                        <div class="col-6">
+                            {{form_row(form.compagnie,{'label':"Nom de votre compagnie d'assurance complémentaire* ",'attr':{'class':'form-control'}})}}
+                        </div>
+                        <div class="col-6">
+                            {{form_row(form.numero,{'label':"Numéro de contrat d'assurance complémentaire* ",'attr':{'class':'form-control'}})}}
+                        </div>
+                        <div class="col-6 mt-5">
+                            {{form_row(form.fichier,{'label':" Télécharger votre Rc Pro complémentaire",'attr':{'accept':"application/pdf"}})}}
+                            <button class="boutonAssu" type="button" id="complement">Télécharger ici votre Rc Pro *</button>
+                        </div>
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                    <button type="button" class="btn btn-primary validerForm">Valider mes modifications</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modalComplementaire" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Modifier RC Professionnelle {% if is_granted("ROLE_OTD") %}
+                            complémentaire type aérienne-aviation
+                        {% endif %}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="compagnieComplement" class="h5">Nom de la compagnie d'assurance</label>
+                            <input type="text" id="compagnieComplement" data-type="compagnie">
+                        </div>
+                        <div class="col-6">
+                            <label for="contratComplement">Numéro de contrat</label>
+                            <input type="text" id="contratComplement" data-type="contratComplement">
+                        </div>
+                        <div class="col-6 mt-5">
+                            <label for="attestationComplement">Attestation RC professionelle</label>
+                            <input type="file" name="" id="attestationComplement" data-type="attestation">
+                            <button class="boutonAssu" id="assuComplement">Attestation RC professionnelle</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                    <a href="{{ path('voirAssu') }}"><button type="button" class="btn btn-primary">Valider mes modifications</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

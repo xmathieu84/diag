@@ -1,0 +1,69 @@
+{% extends template %}
+{% block title %}
+	Suivi du chiffre d'affaires
+{% endblock title %}
+{% block TitreEntreprise %}
+	<h1>Suivi du chiffre d'affaires</h1>
+{% endblock  %}
+{% block entreprise %}
+	<section class="ls s-py-xl-160 s-py-lg-130 s-py-md-90 s-py-60 c-gutter-60">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12 text-center header__prev_next">
+
+
+					<button id="precedent" class="btn btn-maincolor">&#60 &#60</button>
+					<span id="mois" class="h1 text-center"></span>
+					<button id="suivant" class="btn btn-maincolor">&#62 &#62</button>
+
+
+				</div>
+				<div class="col-sm-12 text-center">
+					<table class="table table-bordered table-hover">
+						<thead>
+							<tr class="table-info">
+								<th></th>
+								<th></th>
+
+								<th>HT</th>
+								<th>Montant TVA</th>
+								<th>TTC</th>
+							</tr>
+
+						</thead>
+						<tbody>
+							<tr>
+								<th>Interventions</th>
+								<td id="nbreInter"></td>
+
+								<td id="prixInterHT"></td>
+								<td id="interTVA"></td>
+								<td id="prixInterTTC"></td>
+							</tr>
+							<tr>
+								<th>Type d'abonnement</th>
+								<td>{{abonnement.nom}}</td>
+
+								<td id="abonnementHT">{{ (abonnement.prix/1.2)|number_format(2)}}</td>
+								<td id="abonnementTVA">{{(abonnement.prix-abonnement.prix/1.2)|number_format(2)}}</td>
+								<td id="abonnementTTC">{{abonnement.prix |number_format(2)}}</td>
+							</tr>
+
+							<tr>
+								<th>Total</th>
+
+								<td></td>
+								<td id="totalHT"></td>
+								<td id="totalTVA"></td>
+								<td id="totalTTC"></td>
+							</tr>
+
+						</tbody>
+					</table>
+
+				</div>
+
+			</div>
+		</div>
+	</div>
+</section>{% endblock entreprise %}

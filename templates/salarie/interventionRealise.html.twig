@@ -1,0 +1,38 @@
+{% extends 'entreprise/baseAE.html.twig' %}
+
+{% block contenu %}
+<div class="row">
+    <div class="col-sm-12 col-12 text-center header__prev_next ">
+        <button class="btn btn-maincolor prec">&lt &LT</button>
+        <span class="text-dark mois"></span>
+        <button class="btn btn-maincolor suiv">&gt &GT</button>
+    </div>
+    <div class="col-12">
+        <div class="row">
+            <div class="col-4 text-dark tableAccueil">Date de l'intervention</div>
+            <div class="col-4 text-dark tableAccueil">Type d'intervention</div>
+            <div class="col-4 text-dark tableAccueil">Adresse de l'intervention</div>
+        </div>
+        <div class="row reponseInter">
+
+            {% for intervention in interventions %}
+                <div class="col-4 text-dark tableAccueil">{{ intervention.rdvAT|format_datetime('short','none',locale='fr') }}</div>
+                <div class="col-4 text-dark tableAccueil">
+                    {{ intervention.typeInter.nom|capitalize }} <br>{{ intervention.listeInter.nom|capitalize }}
+                </div>
+                <div class="col-4 text-dark tableAccueil">
+                    {{ intervention.adresse.numero }} {{ intervention.adresse.nomVoie }}
+                    <br>{{ intervention.adresse.codePostal }} {{ intervention.adresse.ville }}
+                </div>
+
+            {% endfor %}
+        </div>
+
+    </div>
+</div>
+{% endblock %}
+
+{% block title %}
+Interventions réalisées
+{% endblock %}
+

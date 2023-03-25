@@ -1,0 +1,12 @@
+{% include 'pdf/headerRapport.html.twig' %}
+<div class="tablePage3">
+    <table class="tableRapport1">
+        <tr>
+            <td class="tableTitre">Date d’émission <br> {{ date |format_datetime('short', 'none', locale='fr') }}</td>
+            <td class="tableTitre">Réf OTD <br>{{ rapport.intervention.reservation.salarie.id }}</td>
+            <td class="tableTitre">Réf Demandeur <br>{{ rapport.intervention.intDem.id }}</td>
+            <td class="tableTitre">Réf DIAG DRONE <br>{{ rapport.id }}</td>
+        </tr>
+    </table>
+</div>
+<div class="barre10"></div>

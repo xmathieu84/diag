@@ -1,0 +1,35 @@
+{% extends 'accueil/baseaccueil.html.twig' %}
+
+{% block bodyAccueil %}
+	<section class="ls ms s-pt-xl-150 s-pt-lg-130 s-pt-md-90 s-pt-60 s-pb-xl-140 s-pb-lg-120 s-pb-md-80 s-pb-50 c-mb-10 c-gutter-60">
+		<div class="container">
+			<div class="row">
+				<div class="col-12 my-50">
+					<h4>Félicitation, votre compte est désormais
+						<span class="color_blue">activé.</span>
+					</h4>
+				</div>
+				<div class="col-12 my-50">
+					<p>Merci de votre inscription sur notre plateforme
+						<span class="color_blue">DIAGDRONE</span>, nous vous invitons maintenant à vous connecter à votre espace personnel pour compléter vos informations d'inscription</p>
+				</div>
+
+				<div class="col-12">
+					<div class="row">
+						<div class="col-md-6 col-xs-12 text-right">
+							<a href="{{path('home')}}" class="btn btn-outline-maincolor">Revenir à l'accueil
+							</a>
+						</div>
+						<div class="col-md-6 col-xs-12 text-left">
+							<a href="{{path('app_login')}}" class="btn btn-outline-maincolor">Se connecter
+							</a>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+{% endblock %}

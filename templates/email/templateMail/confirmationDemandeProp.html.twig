@@ -1,0 +1,17 @@
+{% extends 'email/templateMail/baseMail.html.twig' %}
+
+{% block sujet %}Votre demande d'intervention par drone est confirmée{% endblock %}
+
+{% block body %}
+    <p style="font-size: 14px; line-height: 140%;">Madame, Monsieur</p>
+    <p style="font-size: 14px; line-height: 140%;">&nbsp;</p>
+    <p style="font-size: 14px; line-height: 140%;">Votre demande a bien été prise en compte par notre équipe
+        <a href="www.diag-drone.com">www.diag-drone.com</a></p>
+    <p style="font-size: 14px; line-height: 140%;">&nbsp;</p>
+    <p style="font-size: 14px; line-height: 140%;">Nous allons étudier votre demande et nous vous préviendrons par mail dès qu'une décision aura été prise.</p>
+    <p style="font-size: 14px; line-height: 140%;">&nbsp;</p>
+
+    <p style="font-size: 14px; line-height: 140%;">Toute l'équipe de Diag Drone vous remercie pour votre confiance.</p>
+    <p style="font-size: 14px; line-height: 140%;">&nbsp;</p>
+
+{% endblock %}

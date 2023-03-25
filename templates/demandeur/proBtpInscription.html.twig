@@ -1,0 +1,403 @@
+{% extends 'accueil/baseaccueil.html.twig' %}
+
+{% block title %}
+Inscription Pro-Btp
+{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="/css/css_site/css/inscription.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
+
+
+
+{% endblock %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+{% block bodyAccueil %}
+
+<div class="container">
+    <div class="row mt-108">
+        <div class="col-12">
+            <div class="py-2 px-5 text-center">
+                <h4 class="d-inline">Inscription</h4>
+                <p class="h6">Les champs marqués d'une * sont obligatoires</p>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-12 mt-3 mb-3 bg-white">
+        {{form_start(form)}}
+        <div class="stepwizard">
+            <div class="row align-items-top justify-content-around pt-3 text-center">
+                <div class="col-3">
+                    <div>
+							<span class="page-item active">
+								<a class="page-link mb-1" href="#" onclick="goToTab(0)">
+									1
+								</a>
+							</span>
+                        <div class="h7">
+                            <a onclick="goToTab(0)">
+                                Informations société
+                                <i class="text-success fa fa-check d-none"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div>
+							<span class="page-item">
+								<a class="page-link mb-1"  href="#" onclick="goToTab(1)">
+									2
+								</a>
+							</span>
+
+                        <div class="h7">
+                            <a onclick="goToTab(1)">
+                                Civilité
+                                <i class="text-success fa fa-check d-none"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div>
+							<span class="page-item">
+								<a class="page-link mb-1" href="#" onclick="goToTab(2)">
+									3
+								</a>
+							</span>
+
+                        <div class="h7">
+                            <a onclick="goToTab(2)">
+                                Adresse de facturation
+                                <i class="text-success fa fa-check d-none"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div>
+							<span class="page-item">
+								<a class="page-link mb-1" href="#" onclick="goToTab(2)">
+									4
+								</a>
+							</span>
+
+                        <div class="h7">
+                            <a onclick="goToTab(2)">
+                                Votre abonnement
+                                <i class="text-success fa fa-check d-none"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class=" float-top mb-0 mt-2" />
+        </div>
+        <div class="tab">
+
+            <div class="row align-items-center">
+                <div class="col-sm-6 col-12 mt-4">
+                    <span class="h5">Profil : </span><span class="h6">Entreprise BTP et autres </span>
+                </div>
+                <div class="col-sm-6 col-12 mt-4">
+                    {{ form_row(form.nom,{'label':'Nom de votre entreprise','label_attr':{"class":'h5'}}) }}
+                </div>
+            </div>
+            <div class="row align-items-end">
+                <div class="col-sm-4 col-12 mt-4">
+
+                    {{ form_row (form.siretTva.siret,{'label': 'Numéro de SIRET ','label_attr':{'class':'h5'},'attr':{'placeholder': 'Numéro de SIREN','class': 'form-control form-control-lg border-dark','minlength':'14', 'maxlength':'14'}})}}
+
+                </div>
+                <div class="col-sm-4 col-12 mt-4">
+                    {{form_row(form.siretTva.assujeti,{'label' : 'Êtes-vous assujétis à la TVA ? * ' , 'label_attr':{'class':'h5 mb-3','for': form.vars.id ~ '[' ~ form.siretTva.vars.name ~ ']' ~ '[' ~ form.siretTva.assujeti.vars.name ~ ']'}})}}
+                </div>
+                <div class="col-sm-4 col-12 mt-4 tva">
+
+                    {{ form_row (form.siretTva.tva,{'label': 'Numéro de TVA intracommunautaire ','label_attr':{'class':'h5'},'attr':{'placeholder' : 'Numéro de TVA intracommunautaire','class': 'form-control form-control-lg border-dark',"placeholder":"Numéro de TVA",'minlength':'13', 'maxlength':'13'}})}}
+
+                </div>
+                <div class="col-sm-6 col-12 mt-4">
+                    <label for="entreprise_logo">Télécharger votre logo</label>
+                    <button id="logo" type="button" class="btn">Télécharger votre logo (taille idéale 336 px X 280 px)</button>
+                    <div class="d-none">
+                        {{form_row(form.logo,{ 'label' : ' ','attr':{'class':"form-control-file"}})}}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="tab">
+            <div class="row align-items-center">
+                <div class="col-xl-4 col-lg-4 col-12 text-center">
+                    {{form_row(form.civilite.type, {'label_attr':{'for': form.vars.id ~ "[" ~ form.civilite.vars.name ~ "]" ~ "[" ~ form.civilite.type.vars.name ~ "]" }})}}
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-6 col-12 mt-4">
+                    {{form_row(form.civilite.nom,{'label' : 'Nom du reponsable légal * ' ,'attr':{'class':"form-control form-control-lg","placeholder":"Nom du reponsable légal *"}})}}
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-6 col-12 mt-4">
+                    {{form_row(form.civilite.prenom,{'label' : 'Prénom du reponsable légal * ' ,'attr':{'class':"form-control form-control-lg","placeholder":"Prénom du reponsable légal *"}})}}
+                </div>
+            </div>
+            <div class="row align-items-start">
+                <div class="col-sm-6 col-12 mt-4">
+                    {{form_row(form.telephon.numero,{'label' : 'Numéro de téléphone mobile * ' ,'attr':{'class':"form-control form-control-lg","placeholder":"Numéro de téléphone *"}})}}
+                </div>
+                <div class="col-sm-6 col-12 mt-4">
+                    {{form_row(form.user.email,{'label' : 'Adresse E-mail de contact * ' ,'attr':{'class':"form-control form-control-lg","placeholder":"Email *","pattern":"[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"}})}}
+                </div>
+                <div class="col-sm-6 col-12 mt-4">
+                    {{form_row(form.user.password,{'label' : 'Mot de passe *(8 caractères min.) ' ,'attr':{'class':"password form-control form-control-lg","placeholder":"Mot de passe *"}})}}
+                    <i class="fa fa-eye-slash text-muted float-right togglePassword" onclick="togglePasswordVisibility(event)"></i>
+                </div>
+                <div class="col-sm-6 col-12 mt-4">
+                    {{form_row(form.user.confirm_password,{'label' : 'Confirmez votre mot de passe * ' ,'attr':{'class':"confirm_password form-control form-control-lg","placeholder":"Confirmez le mot de passe *"}})}}
+
+                    <div class="passwordHelper h7 text-danger d-none">Les mots de passe saisis doivent correspondre</div>
+                </div>
+            </div>
+        </div>
+        <div class="tab">
+            <div class="row align-items-start">
+                <div class="col-sm-3 col-12 mt-4">
+                    {{form_row(form.adresse.numero,{'label' : 'Numéro de votre voie ' ,'attr':{'class':"form-control form-control-lg","placeholder":"Numéro de la voie *"}})}}
+                </div>
+                <div class="col-sm-9 col-12 mt-4">
+                    {{form_row(form.adresse.nomVoie,{'label' : 'Nom de votre voie * ' ,'attr':{'class':"form-control form-control-lg","placeholder":"Nom de la voie *"}})}}
+
+                </div>
+                <div class="col-sm-6 col-12 mt-4">
+                    {{form_row(form.adresse.codePostal,{'label' : 'Code postal * ' ,'attr':{'class':" form-control-lg","placeholder":"Code postal *"}})}}
+
+                </div>
+                <div class="col-sm-6 col-12 mt-4">
+                    {{form_row(form.adresse.ville,{'label' : "Ville*(Tapez d'abord votre code postal)" ,'attr':{'class':"form-control form-control-lg","placeholder":"Ville*(Tapez d'abord votre code postal)",'list':"city"}})}}<datalist id="city"></datalist>
+
+                </div>
+            </div>
+        </div>
+        <div class="tab">
+            <div class="row align-items-start">
+                {% if type =='gc' %}
+
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-8 col-12 mt-5">
+                        {{ form_row(form.abonnement,{'attr':{'class':'form-control form-control-lg'},'label':"Votre abonnement Grand Compte :",'label_attr':{"class":'h5'}}) }}
+                    </div>
+                    <div class="col-sm-2"></div>
+
+                    <div class="col-12 mt-5 text-center">
+                        {{form_row(form.abonnementPub, {'label':"Souhaitez vous devenir partenaire de DIAGDRONE sur votre secteur et bénéficier d'une communication géolocalisée et ciblée ? ",'label_attr':{'for': form.vars.id ~ "[" ~ form.abonnementPub.vars.name ~ "]" }})}}
+
+                    </div>
+
+                {% endif %}
+
+                {% if type =="gc" %}
+                <div class="col-12 pub">
+                    {% else %}
+                    <div class="col-12">
+                        {% endif %}
+
+                        <div class="row align-items-start">
+                            <div class="col-6 mt-5">
+                                {{ form_row(form.proBtp.departZoneInter,{'label_attr':{'for': form.vars.id ~ '[' ~ form.proBtp.vars.name ~ ']' ~ '[' ~ form.proBtp.departZoneInter.vars.name ~ ']'},'label':"Comment souhaitez vous définir votre zone d'intervention ?"}) }}
+                            </div>
+                            <div class="col-sm-6 col-12 mt-5 villeDepart">
+                                {{ form_row(form.proBtp.villeDepart,{'label_attr':{'class':'h5'},'label':'Nouvelle ville de départ','attr':{'list':'cities'}}) }}
+                                <datalist id="cities"></datalist>
+                            </div>
+
+                            <div class="col-sm-6 col-12 mt-5" >
+                                <label for="" class="h5">Type de travaux</label>
+                                {{ form_row(form.proBtp.travaux,{'label':" "}) }}
+
+
+                            </div>
+                            <div class="col-sm-6 col-12 mt-5">
+                                {{ form_row(form.proBtp.abonnement,{'attr':{'class':'form-control form-control-lg'},'label':'Choisissez votre abonnement publicitaire','label_attr':{'class':"h5"}}) }}
+                            </div>
+                            <div class="col-sm-6 col-12 mt-5">
+                                {{ form_row(form.proBtp.siteWeb,{'label':'Ajoutez votre site web (Si vous en possédez un)','label_attr':{'class':"h5"}}) }}
+                            </div>
+
+
+                            <div class="col-sm-9 col-9 mt-5">
+                                <label for="distanceInterPremium">Distance d'intervention (maximum <span id="distanceFinaleInter">100</span> km)</label>
+                                {{ form_row(form.proBtp.distanceInter,{'label':" ",'label_attr':{'class':"h5"}}) }}
+                            </div>
+                            <div class="col-3 mt-5">
+                                <span class="h1 distanceSouscrit">0</span> <span class="h1"> Km</span>
+                            </div>
+
+                        </div>
+                    </div>
+                    {% if type =='proBtp' %}
+                        <div class="col-12 mt-5 text-center">
+                            {{ form_row(form.abonnementPub,{'label':"Souhaitez vous souscrire un abonnement grand comte et ainsi profiter de toutes les fonctionnalités associées à votre compte ? ",'label_attr':{'for': form.vars.id ~ '[' ~ form.abonnementPub.vars.name ~ ']'}}) }}
+                        </div>
+                        <div class="col-12 pub">
+                            <div class="row">
+
+                                <div class="col-sm-2"></div>
+                                <div class="col-sm-8 col-12 mt-5 mb-5">
+                                    {{ form_row(form.abonnement,{'attr':{'class':'form-control form-control-lg'}}) }}
+                                </div>
+                                <div class="col-sm-2"></div>
+                            </div>
+                        </div>
+
+                    {% endif %}
+                </div>
+            </div>
+            <div class="d-flex flex-row-reverse justify-content-between mt-3 pb-3">
+                <button class="btn btn-maincolor" type="button" id="nextBtn" onclick="nextPrev(1)">Suivant</button>
+                <button class="btn btn-outline-darkgrey" type="button" id="prevBtn" onclick="nextPrev(-1)">Précédent</button>
+            </div>
+            {{form_widget(form._token)}}
+
+            {{ form_end(form, {'render_rest': false})}}
+        </div>
+    </div>
+
+    <div class="d-none">
+        <button type="button" class="btn btn-primary btnPresentation" data-toggle="modal" data-target="#modalePresentation">
+        </button>
+        <button type="button" class="btn btn-primary btnCarte" data-toggle="modal" data-target="#modaleCarte">
+        </button>
+    </div>
+
+    <div class="modal fade" id="modalePresentation" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog" style="max-width: 75%">
+            <div class="modal-content">
+                <div class="modal-header">
+                    {% if type =='gc' %}
+                        <h5 class="modal-title" id="staticBackdropLabel">Publicité géolocalisé</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    {% endif %}
+                    {% if type =='proBtp' %}
+                        <h5 class="modal-title" id="staticBackdropLabel">Abonnements grand compte</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    {% endif %}
+
+
+                </div>
+                <div class="modal-body">
+                    {% if type =='gc' %}
+                        <p class="h2">Abonnement Premium diffusion</p>
+                        <p class="h5">Votre logo ainsi que vos coordonnées apparaitront en première vue dans les 4 premières
+                            Entreprises partenaires sur le bandeau comme dans le listing</p>
+                        <p class="h2">Abonnement classique diffusion</p>
+                        <p class="h5">Votre logo ainsi que vos coordonnées apparaitront après la 4ème entreprises
+                            dans le bandeau comme dans le listing</p>
+                    {% endif %}
+                    {% if type == 'proBtp' %}
+                        <div id="carouselExampleSlidesOnly" class="carousel slide carousel-fade" data-ride="carousel">
+                            <p class="h2">Présentation des fonctionnaliltés Grands comptes</p>
+                            <div class="carousel-inner">
+                                <div class="carousel-item active" data-interval="2000">
+                                    <figure>
+                                        <img src="/css/css_site/img/Dossier.jpg" class="d-block w-100" alt="...">
+                                        <figcaption class="h5">Gestion des dossiers</figcaption>
+                                    </figure>
+                                </div>
+                                <div class="carousel-item" data-interval="4000">
+                                   <figure>
+                                       <img src="/css/css_site/img/espaceperso.jpg" class="d-block w-100" alt="...">
+                                       <figcaption class="h5">Une interface personalisée</figcaption>
+                                   </figure>
+                                </div>
+                                <div class="carousel-item" data-interval="6000">
+                                    <figure>
+                                        <img src="/css/css_site/img/menu.png" class="d-block w-100" alt="...">
+                                        <figcaption class="h5"></figcaption>
+                                    </figure>
+
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modaleCarte" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog" style="max-width: 80%">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Liste des abonnements Premium</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="cartePremium"></div>
+                    <div class="row mt-5">
+                        <div class="col-12">
+
+                            <p class="h5">Les  <span class="cercle1"> </span>représentent les zones d'interventions des entreprises qui effectuent les mêmes prestation que vous et ayant un abonnement PREMIUM . </p>
+                            <p class="h5">Le <span class="cercle2"> </span> représente votre votre zone d'intervention modifiable avec le curseur ci-dessous .</p>
+                            <p class="h5">Si 4 zones ou plus d'interventions d'entreprises croisent la votre , vous serez proposés après ces entreprises.</p>
+                        </div>
+                        <div class="col-8 text-center">
+                            <label for="formControlRange">Indiquez votre rayon d'intervention</label>
+                            <input type="range" class="form-control-range" id="formControlRange" min="0" max="30" step="1" value="0">
+
+                        </div>
+                        <div class="col-4">
+                           <span class="h1 distance">0</span> <span class="h1">Km</span>
+                        </div>
+                        <div class="col-12 text-center mt-5">
+                            <label for="">Souhaitez-vous maintenir votre demande d’abonnement en PREMIUM ?</label><br>
+                            <div class="form-check form-check-inline mr-5">
+                                <input type="radio" name="demandeAbo" id="" class="form-check-input" value="oui">
+                                <label class="form-check-label" for="" >Oui</label>
+                            </div>
+                            <div class="form-check form-check-inline ml-5">
+                                <input type="radio" name="demandeAbo" id=""class="form-check-input" value="non">
+                                <label class="form-check-label" for="">Non</label>
+                            </div>
+
+
+                        </div>
+                        <div class="col-12 text-center basculerAbo mt-5">
+                            <label for="">Souhaitez-vous basculer en abonnement classique sur la totalité de votre secteur de <span class="distance"></span> km (maximum 100 km) ?</label><br>
+                            <div class="form-check form-check-inline mr-5">
+                                <input type="radio" name="basculer" id=""class="form-check-input" value="oui">
+                                <label class="form-check-label" for="">Oui</label>
+                            </div>
+                            <div class="form-check form-check-inline ml-5">
+                                <input type="radio" name="basculer" id=""class="form-check-input" value="non">
+                                <label for=""class="form-check-label">Non</label>
+                            </div>
+
+                        </div>
+                        <div class="col-12 mt-5 refus">
+                            <p class="h5">Désolé mais vous comprendrez que nous ne pouvons donner suite à votre demande, votre secteur étant déjà pour partie intégré à des abonnements PREMIUM</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block javascripts %}
+    <script src="/js/js_site/inscription.js"></script>
+
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
+{% endblock %}
+

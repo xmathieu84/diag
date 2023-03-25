@@ -1,0 +1,357 @@
+{% extends 'accueil/baseaccueil.html.twig' %}
+
+{% block title %}
+	Inscription
+{% endblock %}
+{% block stylesheets %}
+	<link rel="stylesheet" href="/css/css_site/css/inscription.css">
+{% endblock %}
+
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{% block bodyAccueil %}
+	<section class="ls bg-grey-light">
+		<div class="container mt-108 pt-7">
+			<div class="row">
+				<div class="col-sm-12">
+					{% for message in app.flashes('alerte') %}
+						<p class="h4 alert-danger">{{message}}</p>
+					{% endfor %}
+				</div>
+				<div class="col-12 text-center">
+						<h4 class="d-inline" data-type="{{type}}">Inscription</h4>
+					<p class="h6">Les champs marqués d'une * sont obligatoires</p>
+				</div>
+				<div class="col-12 mt-3 bg-white">
+					{{form_start(form)}}
+					<div class="stepwizard">
+						<div class="row align-items-top justify-content-around pt-3 text-center">
+							<div class="col-4">
+								<div>
+									<span class="page-item active">
+										<a class="page-link mb-1" href="#" onclick="goToTab(0)">
+											1
+										</a>
+									</span>
+									<div class="h7">
+										<a onclick="goToTab(0)">
+											Informations générales
+											<i class="text-success fa fa-check d-none"></i>
+										</a>
+									</div>
+								</div>
+							</div>
+							<div class="col-4">
+								<div>
+									<span class="page-item">
+										<a class="page-link mb-1"  href="#" onclick="goToTab(1)">
+											2
+										</a>
+									</span>
+									
+									<div class="h7">
+										<a onclick="goToTab(1)">
+											Contact
+											<i class="text-success fa fa-check d-none"></i>
+										</a>
+									</div>
+								</div>
+							</div>
+							<div class="col-4">
+								<div>
+									<span class="page-item">
+										<a class="page-link mb-1" href="#" onclick="goToTab(2)">
+											3
+										</a>
+									</span>
+									
+									<div class="h7">
+										<a onclick="goToTab(2)">
+											Adresse de facturation
+											<i class="text-success fa fa-check d-none"></i>
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<hr class=" float-top mb-0 mt-2" />
+					</div>
+					{{ form_row(form.cpAmbassadeur) }}
+					<div class="tab">
+						<div class="row align-items-end">
+										{% if type =='institutionnel' %}
+											<div class="col-sm-4 text-center ">
+												<div class="form-group has-placeholder">
+
+													<div class="form-group has-placeholder">
+														{{ form_row (form.profilInsti,{'label': 'Profil *','attr':{'class':'form-control form-control-lg text-center'}}) }}
+													</div>
+												</div>
+											</div>
+										{% elseif type =='Grand compte' %}
+											<div class="col-sm-4 text-center ">
+												<div class="form-group has-placeholder">
+
+													<div class="form-group has-placeholder">
+														{{ form_row(form.profilGc,{'label': 'Profil *','attr':{'class':'form-control form-control-lg text-center'}}) }}
+
+													</div>
+												</div>
+											</div>
+										{% else %}
+											<div class="col-sm-12 text-center">
+												<div class="form-group has-placeholder">
+													<div class="form-group has-placeholder">
+														{{ form_row (form.profil,{'label': 'Profil *','attr':{'class':'form-control form-control-lg text-center'}}) }}
+
+													</div>
+												</div>
+											</div>
+										{% endif %}
+										{% if type =='institutionnel' %}
+											<div class="col-sm-4">
+												<div class="form-group has-placeholder">
+
+													<div class="form-group has-placeholder" id="population">
+														{{ form_row (form.habitant,{'label': "Population estimée *",'attr':{'class':'form-control form-control-lg text-center'}}) }}
+													</div>
+												</div>
+											</div>
+										{% elseif type == 'Grand compte' %}
+											<div class="col-sm-4">
+												<div class="form-group has-placeholder">
+
+													<div class="form-group has-placeholder" >
+														{{ form_row (form.utilisateur,{'label': "Utilisateur(s) au commencement *",'attr':{'class':'form-control form-control-lg text-center'}}) }}
+													</div>
+												</div>
+											</div>
+										{% endif %}
+										{% if type =='institutionnel' %}
+											<div class="col-sm-4 text-center">
+												<div class="form-group has-placeholder">
+
+													<div class="form-group has-placeholder">
+														{{ form_row (form.nom,{'label': 'Nom','attr':{'class':'form-control form-control-lg text-center','required':'required','list':"communauteCom"}}) }}
+														<datalist id="communauteCom"></datalist>
+													</div>
+												</div>
+											</div>
+										{% elseif type =='Grand compte' %}
+											<div class="col-sm-4 text-center">
+												<div class="form-group has-placeholder">
+
+													<div class="form-group has-placeholder">
+														{{ form_row (form.nom,{'label': 'Nom','attr':{'class':'form-control form-control-lg text-center','required':'required'}}) }}
+													</div>
+												</div>
+											</div>
+										{% else %}
+
+
+										{% endif %}
+										<div class="col-sm-6 siret">
+											<div class="form-group has-placeholder">
+												<p class="h6">Numéro de SIRET</p>
+												{{ form_row (form.siretTva.siret,{'label': ' ','attr':{'placeholder': 'Numéro de SIRET','class': 'form-control form-control-lg border-dark','minlength':'14', 'maxlength':'14'}})}}
+
+											</div>
+										</div>
+										<div class="col-sm-6 tva">
+											<div class="form-group has-placeholder">
+												<p class="h6">Numéro de TVA</p>
+												{{ form_row (form.siretTva.tva,{'label': ' ','attr':{'placeholder' : 'TVA','class': 'form-control form-control-lg border-dark',"placeholder":"Numéro de TVA",'minlength':'13', 'maxlength':'13'}})}}
+
+											</div>
+										</div>
+										{% if type == 'demandeur' %}
+											<div class="col-sm-6 text-center nomPro">
+												<div class="form-group has-placeholder">
+
+													<div class="form-group has-placeholder">
+														{{ form_row (form.nom,{'label': 'Nom','attr':{'class':'form-control form-control-lg text-center','required':'required','list':"communauteCom"}}) }}
+
+													</div>
+												</div>
+											</div>
+										{% endif %}
+
+										{% if type =='institutionnel' or type =='Grand compte' %}
+											<div class="col-12 text-center">
+												<div class="form-group has-placeholder">
+													{{ form_row(form.infoCodeProm,{'label':' '}) }}
+
+												</div>
+											</div>
+											<div class="col-12 codePrm">
+												<div class="row">
+													<div class="col-6">
+														<div class="form-groupr has-placeholder">
+															<div class="form-groupr has-placeholder">
+																{{ form_row(form.codePromo,{'label':'Code promotionnel','attr':{'class':'form-control form-control-sm'}}) }}
+															</div>
+														</div>
+													</div>
+													<div class="col-6 pt-4">
+														<button type="button" class="btn btn-sm btn-outline-success mt-2">Vérifier</button>
+													</div>
+												</div>
+
+											</div>
+
+										{% endif %}
+										<div class="col-12 mt-5">
+											<div class="row">
+												<div class="col-6 resultAbonnement ml-3 pt-4 pb-4"></div>
+											</div>
+										</div>
+									</div>
+					</div>
+					<div class="tab">
+						<div class="row align-items-center">
+							<div class="col-xl-4 col-lg-4 col-12 text-center pt-2">
+								{{form_row(form.civilite.type, {'label_attr':{'for': form.vars.id ~ "[" ~ form.civilite.vars.name ~ "]" ~ "[" ~ form.civilite.type.vars.name ~ "]" }})}}
+							</div>
+							<div class="col-xl-4 col-lg-4 col-12 mt-4">
+									{{form_row(form.civilite.nom,{'label' : 'Nom * ' ,'attr':{'class':"form-control form-control-lg","placeholder":"Nom *"}})}}
+							</div>
+							<div class="col-xl-4 col-lg-4 col-12 mt-4">
+								{{form_row(form.civilite.prenom,{'label' : 'Prénom * ' ,'attr':{'class':"form-control form-control-lg","placeholder":"Prénom  *"}})}}
+							</div>
+						</div>
+						<div class="row align-items-start">
+							<div class="col-sm-6 col-12  mt-4">
+								{{form_row(form.telephon.numero,{'label' : 'Numéro de téléphone mobile * ' ,'attr':{'class':"form-control form-control-lg","placeholder":"Numéro de téléphone *"}})}}
+							</div>
+							<div class="col-sm-6 col-12  mt-4">
+								{{form_row(form.user.email,{'label' : 'Adresse mail de contact * ' ,'attr':{'class':"form-control form-control-lg","placeholder":"Email *"}})}}
+							</div>
+							<div class="col-sm-6 col-12  mt-4">
+								{{form_row(form.user.password,{'label' : 'Mot de passe *(8 caractères minimum)' ,'attr':{'class':"password form-control form-control-lg","placeholder":"Mot de passe *"}})}}
+								<i class="fa fa-eye-slash text-muted float-right togglePassword" onclick="togglePasswordVisibility(event)"></i>
+							</div>
+							<div class="col-sm-6 col-12  mt-4">
+								{{form_row(form.user.confirm_password,{'label' : 'Confirmez votre mot de passe *' ,'attr':{'class':"confirm_password form-control form-control-lg","placeholder":"Confirmez le mot de passe *"}})}}
+								<div class="passwordHelper h7 text-danger d-none">Les mots de passe saisis doivent correspondre</div>
+							</div>
+						</div>
+					</div>
+					<div class="tab">
+						<div class="row align-items-end">
+							<div class="col-sm-3 col-12  mt-4">
+								{{form_row(form.adresse.numero,{'label' : 'Numéro de votre voie' ,'attr':{'class':"form-control form-control-lg","placeholder":"Numéro de la voie *"}})}}
+							</div>
+							<div class="col-sm-9 col-12  mt-4">
+								{{form_row(form.adresse.nomVoie,{'label' : 'Nom de votre voie*' ,'attr':{'class':"form-control form-control-lg","placeholder":"Nom de la voie *"}})}}
+							</div>
+						</div>
+						<div class="row align-items-start">
+							<div class="col-sm-6 col-12  mt-4">
+								{{form_row(form.adresse.codePostal,{'label' : 'Code postal * ' ,'attr':{'class':"form-control form-control-lg","placeholder":"Code postal *"}})}}
+							</div>
+							<div class="col-sm-6 col-12  mt-4">
+
+								{{form_row(form.adresse.ville,{'label' : "Ville*(Tapez d'abord votre code postal)" ,'attr':{'class':"form-control form-control-lg","placeholder":"Ville*(Tapez d'abord votre code postal)",'list':"city"}})}}
+								<datalist id="city"></datalist>
+							</div>
+						</div>
+					</div>
+
+					<div class="d-flex flex-row-reverse justify-content-between mt-3 pb-3">
+						<button class="btn btn-maincolor" type="button" id="nextBtn" onclick="nextPrev(1)">Suivant</button>
+						<button class="btn btn-outline-darkgrey" type="button" id="prevBtn" onclick="nextPrev(-1)">Précédent</button>
+					</div>
+					{{form_widget(form._token)}}
+
+					{{ form_end(form, {'render_rest': false})}}
+				</div>
+
+			</div>
+
+		</div>
+
+
+	</section>
+	<button type="button" id="btnInsti" data-toggle="modal" data-target="#modalInsti" style="display: none"></button>
+	<button type="button" id="btnGc" data-toggle="modal" data-target="#modalGc" style="display: none"></button>
+	<button type="button" id="btnAboI" data-toggle="modal" data-target="#modalAboI" style="display: none"></button>
+	<button type="button" id="btn-promo"data-toggle="modal" data-target="#modalePromo" style="display: none"></button>
+
+	<div class="modal fade" id="modalInsti" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticmodalInsti" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="staticmodalInsti">Information</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					Souhaitez-vous découvrir notre interface dédiées pour les institutionnels ?
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Je ne suis pas interréssé</button>
+					<a href="{{ path('lesProfils',{type:'institution',id:app.request.get('id')}) }}" class="btn btn-primary">Découvrir mon interface dédiée</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="modalGc" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticmodalGc" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="staticmodalGc">Information</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					Savez vous que nous proposons une interface dédiée pour les clients grand compte ?
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Je ne suis pas interréssé</button>
+					<a href="{{ path('lesProfils',{type:'Grands Comptes',id:app.request.get('id')}) }}" class="btn btn-primary">Découvrir mon interface dédiée</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="modalAboI" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Votre abonnement</h5>
+
+				</div>
+				<div class="modal-body">
+					<p class="h5">Le prix de votre abonnement sera de <span id="prixAbo"></span> mensuel.</p>
+					<p class="h5">Le nombre d'utilisateur(s) sera de <span id="utilisateur"></span> . Vous pourrez obtenir des utilisateurs supplémentaires en achetant des packs.</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="modalePromo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Votre abonnement</h5>
+
+				</div>
+				<div class="modal-body messagePromo">
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler le code promotionnel</button>
+					<button type="button" class="btn btn-primary validerCodePromo" data-dismiss="modal">Valider le code promotionnel</button>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock  %}
+
+{% block javascripts %}
+	<script src="/js/js_site/inscription.js"></script>
+{% endblock %}

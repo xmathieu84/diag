@@ -1,0 +1,68 @@
+{% extends "base.html.twig" %}
+{% block stylesheets %}{% endblock %}
+{% block header %}
+
+
+{% endblock %}
+{% block mobileConnect %}{{path('app_login')}}{% endblock %}
+
+{% block titre %}
+	<div class="modal fade" id="login-form" tabindex="-1" role="dialog" aria-labelledby="login-form" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered modal-xl modal-lg modal-sm" role="document">
+			<div class="modal-content ls container-px-0">
+				<div class="container ">
+					<div class="row align-items-center c-gutter-0">
+						<div class="col-lg-6 d-none d-lg-block">
+							<a href="{{path('home')}}"><img src="/css/css_site/images/gallery/full/05.jpg" alt=""></a>
+
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+{% endblock  %}
+{% block menu %}
+	<nav class="top-nav justify-nav-end">
+		<ul class="nav">
+
+			<li>
+				<a href="{{path('quiSomme')}}">Qui sommes-nous ?</a>
+			</li>
+			<li>
+				<a href="{{ path('typeintervention') }}" >Types d'interventions</a>
+
+			</li>
+
+			<li>
+				<a href="{{ path('interfaceDeddies') }}" >Interfaces dediées</a>
+			</li>
+
+			<li>
+				<a href="/blog-drone/">Actus</a>
+			</li>
+			<li>
+				<a href="{{ path('nosParts') }}" >Nos partenaires</a>
+
+			</li>
+
+
+
+
+		</ul>
+
+	</nav>
+{% endblock %}
+{% block body %}
+
+
+
+	{% block bodyAccueil %}{% endblock %}
+
+{% endblock %}
+
+
+{% block javascripts %}{% endblock %}

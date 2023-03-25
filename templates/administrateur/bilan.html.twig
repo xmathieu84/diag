@@ -1,0 +1,80 @@
+{% extends 'administrateur/baseA.html.twig' %}
+{% block titre %}
+	Suivi du chiffre d'affaires
+
+
+{% endblock %}
+
+{% block body %}
+	<section class="wrapper">
+
+		<div class="row ">
+			<div class="col-sm-12 header__prev_next">
+
+				<button id="precedentDevis" class="btn btn-maincolor">&#60 &#60</button>
+				<span id="moisDevis" class="h1 text-center"></span>
+				<button id="suivantDevis" class="btn btn-maincolor">&#62 &#62</button>
+
+			</div>
+
+			<div class="col-lg-12">
+				<div class="content-panel">
+					<section id="unseen">
+						<table class="table table-bordered table-striped table-condensed">
+							<thead>
+								<tr>
+									<th></th>
+									<th>Nombre</th>
+									<th>Prix</th>
+									<th>HT</th>
+									<th>Montant TVA</th>
+									<th>TTC</th>
+								</tr>
+
+							</thead>
+							<tbody>
+								<tr>
+									<td>Interventions</td>
+									<td id="nbreInter"></td>
+									<td id="prix"></td>
+									<td id="prixInterHT"></td>
+									<td id="interTVA"></td>
+									<td id="prixInterTTC"></td>
+								</tr>
+								<tr>
+									<td>Abonnement premium</td>
+									<td id="nbrePremium"></td>
+									<td id="prixPremium"></td>
+									<td id="premiumHT"></td>
+									<td id="premiumTVA"></td>
+									<td id="premiumTTC"></td>
+								</tr>
+								<tr>
+									<td>Abonnement classique</td>
+									<td id="nbreClassique"></td>
+									<td id="prixClassique"></td>
+									<td id="classiqueHT"></td>
+									<td id="classiqueTVA"></td>
+									<td id="classiqueTTC"></td>
+								</tr>
+								<tr>
+									<td>Total</td>
+									<td></td>
+									<td></td>
+									<td id="totalHT"></td>
+									<td id="totalTVA"></td>
+									<td id="totalTTC"></td>
+								</tr>
+
+							</tbody>
+						</table>
+
+					</section>
+
+
+				</div>
+
+			</div>
+		</div>
+	</section>
+{% endblock %}

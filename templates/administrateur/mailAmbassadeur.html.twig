@@ -1,0 +1,24 @@
+{% extends 'administrateur/baseA.html.twig' %}
+
+{% block body %}
+<div class="row">
+    <div class="col-12">
+        <p class="h5">Envoie d'un mail ambassadeur</p>
+    </div>
+
+    <div class="col-3"></div>
+    <div class="col-6">
+        <label for="mail">Adresse mail de l'ambassadeur</label>
+        <input type="text" id="mail" class="form-control">
+    </div>
+    <div class="col-3"></div>
+    <div class="col-12 text-center mt-5">
+        <button class="btn btn-success">Valider</button>
+    </div>
+</div>
+{% endblock %}
+
+{% block title %}
+Envoie mail unique ambassadeur
+{% endblock %}
+

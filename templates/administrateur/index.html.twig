@@ -1,0 +1,132 @@
+{% extends 'administrateur/baseA.html.twig' %}
+
+{% block titre %}
+  accueil
+{% endblock %}
+
+{% block body %}
+  <section class="wrapper">
+    <div class="row">
+      <div class="col-12">
+        <p class="h4">
+          Bienvenue dans l'espace administrateur du site Diag-drone.
+        </p>
+      </div>
+      <div class="col-6 mt-5">
+          <div class="row">
+              <div class="col-12 border border-success bg-gradient-success text-center pt-4 pb-4 ">
+                  <span class="h4 font-weight-bold text-white">OTD</span>
+              </div>
+              <div class="col-sm-4 col-12 pt-4 pb-4 border border-info">
+                  <span >{{ entrepriseOtd }} entreprises OTD inscrites</span>
+              </div>
+              <div class="col-sm-4 col-12 pt-4 pb-4 border border-info">
+                 <span> {{ otd + entrepriseOtd }} otd inscrits</span>
+              </div>
+              <div class="col-sm-4 col-12 pt-4 pb-4 border border-info">
+                  <span><a href="{{ path('exportOtd') }}" class="btn btn-outline-info" target="_blank">Exporter en PDF</a></span>
+              </div>
+          </div>
+
+      </div>
+      <div class="col-6 mt-5">
+          <div class="row pl-3">
+              <div class="col-12 bg-gradient-primary text-center pt-4 pb-4">
+                  <span class="h4 font-weight-bold text-white">Demandeur</span>
+              </div>
+              <div class="col-12 text-center pt-5 pb-4 border border-info">
+                  <span>{{ demandeur }} demandeurs inscrits</span>
+              </div>
+          </div>
+
+      </div>
+        <div class="col-6 mt-5">
+            <div class="row">
+                <div class="col-12 bg-light pt-4 pb-4 bg-gradient-dark text-center border border-light">
+                    <span class="h4 font-weight-bold text-white">Grands comptes</span>
+                </div>
+                <div class="col-sm-6 col-12 pt-4 pb-4 border border-light">
+                    <span>{{ grandC }} grands comptes ouverts</span>
+                </div>
+                <div class="col-sm-6 col-12 pt-4 pb-4 border border-light">
+                    <span>{{ agentGc }} agents inscrits</span>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-6 mt-5">
+            <div class="row pl-3">
+                <div class="col-12 bg-light pt-4 pb-4 bg-gradient-warning text-center border border-light">
+                    <span class="h4 font-weight-bold text-white">Institutionnels</span>
+                </div>
+                <div class="col-sm-6 col-12 pt-4 pb-4 border border-light">
+                    <span>{{ intsi }} clients institutionnels</span>
+                </div>
+                <div class="col-sm-6 col-12 pt-4 pb-4 border border-light">
+                    <span>{{ agentI }} agents inscrits</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 mt-5">
+            <div class="row">
+                <div class="col-12 bg-gradient-danger border border-danger pt-4 pb-4">
+                    <span class="h4 text-white font-weight-bold">Interventions</span>
+                </div>
+                <div class="col-sm-4 col-12 border border-danger text-center pt-4 pb-4">
+                    <span>Nouvelles demandes</span>
+                </div>
+                <div class="col-sm-4 col-12 border border-danger text-center pt-4 pb-4">
+                    <span>Interventions en cours</span>
+                </div>
+                <div class="col-sm-4 col-12 border border-danger text-center pt-4 pb-4">
+                    <span>Interventions terminées</span>
+                </div>
+                <div class="col-sm-4 col-12 border border-danger text-center pt-4 pb-4">
+                    <span>{{ interDemande }}</span>
+                </div>
+                <div class="col-sm-4 col-12 border border-danger text-center pt-4 pb-4">
+                    <span>{{ interValide }}</span>
+                </div>
+                <div class="col-sm-4 col-12 border border-danger text-center pt-4 pb-4">
+                    <span>{{ intertermine }}</span>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-12 mt-5">
+            <p class="h4">OTD actuellement
+                 connectés  sur l'application ({{ salaries|length}})</p>
+            <ul class="userConnecte">
+                {% for salarie in salaries %}
+                    <li class="h5">{{ salarie.civilite.prenom }} {{ salarie.civilite.nom }} ({{ salarie.entreprise.denomination }})</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="col-12 mt-5">
+            <p class="h4">Grands actuellement comptes connectés  sur l'application ({{ collaborateurs|length}})</p>
+            <ul class="userConnecte">
+                {% for collabo in collaborateurs %}
+                    <li class="h5">{{ collabo.civilite.prenom }} {{ collabo.civilite.nom }} ({{ collabo.demandeur.profil }} {{ collabo.demandeur.nom }})</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="col-12 mt-5">
+            <p class="h4">Institutionnels actuellement connectés  sur l'application ({{ collaborateurs|length}})</p>
+            <ul class="userConnecte">
+                {% for agent in agents %}
+                    <li class="h5">{{ agent.civilite.prenom }} {{ agent.civilite.nom }} ({{ agent.demandeur.profil }} {{ agent.demandeur.nom }})</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="col-12 mt-5">
+            <p class="h4">Demandeurs actuellement connectés  sur l'application ({{ collaborateurs|length}})</p>
+            <ul class="userConnecte">
+                {% for demandeur in demandeurs %}
+                    <li class="h5">{{ demandeur.civilite.prenom }} {{ demandeur.civilite.nom }} </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+  </section>
+{% endblock %}

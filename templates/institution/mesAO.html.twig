@@ -1,0 +1,104 @@
+{% extends 'institution/baseInsti.html.twig' %}
+{% block title %}Mes appels d'offres{% endblock %}
+{% block titreSection %}Mes appels d'offres{% endblock %}
+{% block titrePage %}Mes appels d'offres{% endblock %}
+{% block pageAccueil  %}{% endblock %}
+{% block contenu %}
+<div class="row">
+    <div class="col-12 col-sm-3 mb-3"></div>
+    <div class="col-12 col-sm-3 mb-3"></div>
+    <div class="col-12 col-sm-3 mb-3"></div>
+    <div class="col-12 col-sm-3 mb-3"></div>
+
+    <div class="col-sm-3"></div>
+    <div class="col-sm-12 mt-5 appelOffre">
+        {% if appels is not empty %}
+
+
+        {% for appel in appels %}
+            <div class="card mb-2">
+                <div class="card-header" role="tab" id="collapse{{ loop.index }}_header">
+                    <h5>
+                        <a class="collapsed" data-toggle="collapse" href="#collapse{{ loop.index }}" aria-expanded="false" aria-controls="collapse{{ loop.index }}">
+                            {{ appel.denomination }} {{ appel.reference }} en date du {{ appel.date|format_datetime('short', 'none', locale='fr') }}
+                        </a>
+                    </h5>
+                </div>
+                <div id="collapse{{ loop.index }}" class="collapse" role="tabpanel" aria-labelledby="collapse{{ loop.index }}_header" data-parent="#accordion01">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12 mb-5 text-center">
+                                <a href="{{ path('ficheAO',{id:appel.id}) }}" target="_blank"  class="btn btn-maincolor">Fiche de l'appel d'offre</a>
+                            </div>
+                            {% for info in appel.infoComplementaires %}
+                                <div class="col-sm-7 mb-2">
+                                    <p class="h6">{{ info.texte }}</p>
+                                </div>
+                                <div class="col-sm-5 mb-2">
+                                    <div class="row">
+                                    {% for fichier in info.fichierInfoComplementaires %}
+                                        <div class="col-sm-8">
+                                            <a href="/uploads/appelOffre/{{ fichier.nom }}" target="_blank">
+                                                <figure>
+                                                    <img src="/css/css_site/images/pdfmoyen.png" alt="">
+                                                    <figcaption class="nomFile">{{ fichier.nom }}</figcaption>
+                                                </figure>
+                                            </a>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <a href="">
+                                                <figure>
+                                                    <img src="/css/css_site/images/supprimerpetit.png" alt="">
+                                                </figure>
+                                            </a>
+                                        </div>
+
+                                    {% endfor %}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                            {% if appel.reponseChoisie is null %}
+                            {% if appel.etat =='publie' %}
+                                <div class="col-sm-6 text-center">
+                                    <a href="{{ path('actionAO',{id:appel.id,action:'suspendu',code:code}) }}" class="btn btn-warning">Suspendre</a>
+                                </div>
+
+                                    
+
+                                {% if appel.reponseAos is not empty %}
+                                    <div class="col-sm-6 text-center">
+
+                                            <a href="{{ path('reponseAoInsti',{id:appel.id}) }}" class="btn btn-success">Voir les reponses</a>
+
+
+                                    </div>
+                                {% endif %}
+
+                                {% else %}
+                                    <div class="col-sm-4">
+                                        <a href="{{ path('actionAO',{id:appel.id,action:'publie',code:code}) }}" class="btn btn-success">Publier</a>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <a href="{{ path('modifierAppelOffre',{id:appel.id,code:code}) }}" class="btn btn-info">Modifier</a>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <a href="" class="btn btn-danger">Supprimer</a>
+                                    </div>
+                            {% endif %}
+                                {% else %}
+                                    <div class="col-sm-12 text-center">
+                                        <p class="h5">Un OTD a déjà été choisi</p>
+                                    </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        {% endfor %}
+            {% else %}
+            <p class="h5">Vous n'avez pas d'appel d'offres / à concurrence .</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

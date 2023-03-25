@@ -1,0 +1,99 @@
+{% extends 'entreprise/baseAE.html.twig' %}
+{% block title %}
+	Lire un message
+{% endblock  %}
+{% block TitreEntreprise %}
+	<h1>Lire un message</h1>
+{% endblock TitreEntreprise %}
+{% block entreprise %}
+	<section class="ls s-pt-xl-150 s-pt-lg-130 s-pt-md-90 s-pt-60 s-pb-xl-90 s-pb-lg-70 s-pb-md-30 s-pb-0 c-mb-60">
+		<div class="container">
+			<div class="row">
+				{% if entreprise.entAss and entreprise.abonnements %}
+
+
+					<div class="col-lg-3"></div>
+					<div class="col-lg-6 col-md-6">
+						<div class="pricing-plan box-shadow with-features ls">
+							<div class="plan-header">
+								<div class="plan-name">
+									<h5>
+										{{ message.sujet }}
+									</h5>
+								</div>
+								<div class="plan-description">
+									<h6 class="thin">
+										{{message.date|format_datetime('short','short',locale = 'fr')}}
+									</h6>
+								</div>
+							</div>
+							<div class="price-wrap color-darkgrey"></div>
+							<div class="plan-features">
+								<p>
+									{{ message.contenu }}
+								</p>
+							</div>
+							<div id="message">
+								{% if message.statut != 'lu' %}
+
+									<a href="{{path('lu',{id:message.id})}}" id="chemin">
+										<button class="btn-sm btn-info">Marquer comme
+											                lu</button>
+									</a>
+								{% endif %}
+
+								<button class="btn-sm btn-primary" id="repondre">Répondre</button>
+
+							</div>
+						</div>
+					</div>
+				{% else %}
+					<div class="col-sm-12 text-center">
+						<div class="row">
+							{% if entreprise.entAss == null %}
+								<div class="col-sm-6">
+									<a href="{{path('finalisation')}}">
+										<button class="btn btn-maincolor3 big-btn">Compléter votre inscription</button>
+									</a>
+								</div>
+							{% endif %}
+							{% if entreprise.abonnements == null %}
+								<div class="col-sm-6">
+
+									<a href="{{path('abonnement')}}">
+										<button type="button" class="btn btn-maincolor3 big-btn">Choisissez votre abonnement</button>
+									</a>
+								</div>
+							{% endif %}
+						</div>
+
+					</div>
+				{% endif %}
+			</div>
+		</section>
+
+
+		<dialog id="reponse">
+			<button id="fermer">X</button>
+			<section class="ls ms s-py-xl-150 s-py-lg-130 s-py-md-90 s-py-60">
+				<div class="container">
+					<div class="row">
+						<div class="col-12 ">
+							{{form_start(form)}}
+							<div class=" row">
+								<div class="col-sm-12">
+									<div class="form-group has-placeholder">
+										{{form_row(form.reponse,{'label':' ', 'attr':{'class':'form-control','rows':'15','cols':'60',"placeholder":"Écrivez ici votre réponse"}})}}
+									</div>
+								</div>
+								<div class="col-sm-8">
+									<button type="submit" class="btn btn-sm btn-maincolor">Envoyer</button>
+								</div>
+							</div>
+							{{form_end(form)}}
+						</div>
+					</div>
+				</div>
+			</section>
+		</dialog>
+	{% endblock %}

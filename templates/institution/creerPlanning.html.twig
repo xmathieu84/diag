@@ -1,0 +1,84 @@
+{% extends 'institution/baseInsti.html.twig' %}
+{% block title %}Créer planning{% endblock %}
+{% block titreSection %}Créer planning{% endblock %}
+{% block titrePage %}Créer planning{% endblock %}
+{% block pageAccueil %}{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/core@4.1.0/main.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@4.1.0/main.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@4.1.0/main.min.css">
+{% endblock %}
+{% block contenu %}
+<div class="row bg-white pt-2">
+
+
+    <div class="col-sm-12 mb-3">
+        <p class="h6">Ajoutez un temps de travail <i>(glisser et déposer). Vous pouvez étendre celui-ci avec votre souris </i></p>
+        <p class="h6">Cliquez sur une zone du calendrier pour la supprimer</p>
+        <div class="row mt-2 text-center">
+            <div class="col-sm-6 mb-5">
+                <label for="couleur"><span class="number">1</span> : Choisissez la couleur</label><br>
+                <select name="" id="couleur">
+                    <option value="" disabled selected>Votre couleur</option>
+                    <option value="green">Vert</option>
+                    <option value="blue">Bleu</option>
+                    <option value="yellow">Jaune</option>
+                    <option value="orange">Orange</option>
+                    <option value="red">Rouge</option>
+                </select>
+                <input type="hidden" name="" value="{{ agent.civilite.prenom }} {{ agent.civilite.nom }}" id="agent">
+            </div>
+            <div class="col-sm-6">
+                <label for="intitule"><span class="number">2</span> : Choisissez la tâche à éffectuer</label><br>
+                <input type="text" name="" id="intitule" class="form-control form-control-sm">
+            </div>
+            <div class="col-sm-6 mt-3">
+                <label ><span class="number">3</span> : Journée entière</label><br>
+                <input type="radio" name="journee" id="ouiJour" value="oui"><label for="ouiJour">Oui</label>
+                <input type="radio" name="journee" id="nonJour" value="non"><label for="nonJour">Non</label>
+            </div>
+            <div class="col-sm-6">
+                <label ><span class="number">4</span> : Glisser sur le calendrier</label><br>
+                <div class="action" data-event></div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="row bg-transparent mt-3">
+    <input type="hidden" name="" id="idAgent" value="{{ agent.id }}">
+    <div class="col-sm-12"><div id="planning" class="bg-white"></div></div>
+    <div class="col-sm-12 text-center mt-5">
+        <button class="btn btn-maincolor" id="bouton" type="button">Valider</button>
+    </div>
+</div>
+    <alert>
+        <div id="overlay" >
+
+        </div>
+        <div id="alertPanel" >
+            <div class="row">
+                <div class="col-sm-12 mb-3">
+                    <p class="h3">Voulez-vous supprimer?</p>
+                </div>
+                <div class="col-sm-6">
+                    <button class="btn btn-outline-danger">Supprimer</button>
+                </div>
+                <div class="col-sm-6">
+                    <button class="btn btn-outline-success">Annuler</button>
+                </div>
+            </div>
+        </div>
+    </alert>
+
+
+
+{% endblock %}
+{% block js %}
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@4.1.0/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@4.1.0/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@4.1.0/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@4.1.0/main.min.js"></script>
+{% endblock %}

@@ -1,0 +1,348 @@
+/*
+** Bootstrap Overrides
+*/
+@import 'override_bootstrap/breadcrumbs';
+@import 'override_bootstrap/forms';
+@import 'override_bootstrap/carousel';
+@import 'override_bootstrap/tabs';
+@import 'override_bootstrap/collapse';
+@import 'override_bootstrap/dropdowns';
+@import 'override_bootstrap/columns5';
+
+//making container 1170px width for wide screens
+@media (min-width: 1300px) {
+  .container {
+    max-width: 1200px;
+  }
+}
+
+
+
+//other bootstrap elements
+/* modal */
+.modal.show, .modal-open {
+  padding-right: 0 !important;
+}
+
+.modal-backdrop.show {
+  background-color: $darkgreyColor;
+  opacity: 0.8;
+}
+.modal#login-form, .modal#contact-form{
+  img{
+    height: 550px;
+    object-fit: cover;
+  }
+}
+
+.modal-content {
+  border-radius: 1px;
+  [class*="col-"]:last-child {
+    margin-bottom: 0;
+  }
+}
+
+/* bootstrap buttons */
+.btn {
+  font-Size: 16px;
+  text-transform: capitalize;
+  line-height: 1;
+  padding: 10px 35px;
+  text-align: center;
+  min-width: 150px;
+  border-radius: 0;
+  font-weight: 400;
+  margin-bottom: 4px;
+  white-space: pre-wrap;
+  border-width: 2px;
+  &.only-link{
+    padding: 0;
+    min-width: auto;
+    border: none;
+  }
+  & > i{
+    margin-left: 4px;
+    position: relative;
+    top: 2px;
+  }
+  &.medium-btn{
+    padding: 15px 35px;
+  }
+  &.big-btn{
+    padding: 19px 35px;
+
+  }
+  &.btn-with-border{
+    padding: 0;
+    background-color: transparent;
+    border-bottom: 1px solid $darkColor;
+    border-radius: 0;
+    min-width: auto;
+    &.btn-darkgrey{
+      color: $darkgreyColor;
+    }
+  }
+  //for icons
+  &.round,
+  &.rounded {
+    padding: 3px 2px;
+    line-height: 2.5;
+
+    min-width: 50px;
+
+    text-transform: lowercase;
+  }
+
+}
+
+.many-buttons{
+  @media(max-width: 575px){
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .btn +.btn{
+    margin-left: 20px;
+    @media(max-width: 575px){
+      margin-left: 0;
+      margin-top: 20px;
+    }
+  }
+}
+
+/* media elements */
+.media > img {
+  display: block;
+}
+.media{
+  &.icon-top{
+    .icon-styled{
+      display: flex;
+      @media(max-width: 575px){
+        justify-content: center;
+        margin-bottom: 10px;
+      }
+    }
+    h6{
+      margin-top: 0;
+    }
+  }
+  @media(max-width: 575px){
+    flex-direction: column;
+    align-items: center;
+    .icon-styled{
+      width: 100%;
+      line-height: 1;
+    }
+  }
+  &.right-icon{
+    @media(max-width: 991px){
+      flex-direction: row-reverse;
+      .icon-styled{
+        margin-left: 0;
+      }
+      .media-body{
+        margin-left: 30px;
+      }
+    }
+    @media(max-width: 575px){
+     flex-direction: column-reverse;
+      .media-body{
+        margin-left: 0;
+      }
+    }
+  }
+}
+.media-body {
+  h3, h4, h5{
+    line-height: 1;
+    margin-top: 0.4em;
+    margin-bottom: 0.4em;
+  }
+   h6 {
+    line-height: 1;
+    margin-top: 20px;
+    margin-bottom: 0.5em;
+
+     @media(max-width: 575px){
+       margin-top: 10px;
+     }
+  }
+
+  * + &,
+  & + * {
+    margin-left: 30px;
+    @media(max-width: 575px){
+      margin-left: 0;
+    }
+  }
+}
+
+//for media component inside table - for dashboard
+td .media-body {
+  width: auto;
+}
+
+// our custom video placeholser
+.embed-responsive-3by2 {
+  //height property removed in v4
+  height: 0;
+  padding-bottom: 41%;
+
+  &:before{
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    height: 100%;
+    background-color: rgba($darkgreyColor, 0.6);
+
+
+  }
+  iframe{
+    z-index: 66;
+
+  }
+
+
+}
+
+.embed-placeholder, .side-video{
+  background-color: rgba($darkgreyColor, 0.6);
+  &:after {
+    transition: all 0.3s ease-in-out;
+    content: '\f04b';
+    font-family: 'Font Awesome 5 Free', sans-serif;
+    font-weight: 600;
+    font-Size: 14px;
+    color: $lightColor;
+    position: absolute;
+    background-color: transparent;
+    border: 4px solid $lightColor;
+    padding-left: 2px;
+    line-height: 55px;
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    border-radius: 50%;
+    left: 50%;
+    top: 50%;
+    z-index: 3;
+    margin-left: -30px;
+    margin-top: -30px;
+
+    animation: pulse 1.5s infinite;
+
+  }
+  &:hover:after {
+    opacity: 0.8;
+  }
+}
+
+.alert {
+  border-radius: 0;
+  border-width: 0 0 0 4px;
+  padding: 30px;
+  margin-bottom: 40px;
+}
+
+.mark, mark {
+  background-color: transparent;
+}
+
+button.close {
+  min-width: 0;
+}
+
+/* small in headings */
+.h1 .small,
+.h1 small,
+.h2 .small,
+.h2 small,
+.h3 .small,
+.h3 small,
+.h4 .small,
+.h4 small,
+.h5 .small,
+.h5 small,
+.h6 .small,
+.h6 small,
+h1 .small,
+h1 small,
+h2 .small,
+h2 small,
+h3 .small,
+h3 small,
+h4 .small,
+h4 small,
+h5 .small,
+h5 small,
+h6 .small,
+h6 small {
+  color: inherit;
+  font-weight: 300;
+}
+
+/* labels */
+.label-success {
+  color: $lightColor;
+  background-color: $colorSuccess;
+}
+
+.label-info {
+  color: $lightColor;
+  background-color: $colorInfo;
+}
+
+.label-warning {
+  color: $lightColor;
+  background-color: $colorWarning;
+}
+
+.label-danger {
+  color: $lightColor;
+  background-color: $colorDanger;
+}
+
+/*
+progressbar*/
+p + .progress {
+  margin-top: -12px;
+}
+
+.progress-title {
+  font-Size: 16px;
+  text-transform: capitalize;
+  margin-bottom: 26px !important;
+  padding-right: 45px;
+  line-height: 1.6;
+
+}
+
+.progress {
+  height: 4px!important;
+  overflow: visible;
+  margin-bottom: 42px;
+  background-color: $greyColor;
+  position: relative;
+  padding: 0 !important;
+  [data-transitiongoal] {
+    width: 0;
+  }
+  .progress-bar {
+    transition: width 0.5s ease 0.2s;
+    padding: 2px 0 !important;
+    border-radius: 5px;
+  }
+
+  span {
+    position: absolute;
+    right: -3px;
+    top: -38px;
+    font-Size: 16px;
+    color:$darkgreyColor;
+  }
+}

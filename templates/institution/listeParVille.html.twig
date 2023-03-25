@@ -1,0 +1,64 @@
+{% extends 'institution/baseInsti.html.twig' %}
+
+{% block title %}Recherche par ville{% endblock %}
+{% block titrePage %}Recherche par ville{% endblock %}
+{% block pageAccueil %}
+    <p class="h4">Recherche d'interventions par ville</p>
+{% endblock %}
+{% block contenu %}
+    <div class="row">
+
+        <div class="col-sm-12 bg-white mt-5">
+            <div class="row">
+                <div class="col-sm-4 text-center">
+                    <label>Ville</label>
+                    <input type="text" class="ville form-control-sm">
+                </div>
+                <div class="col-sm-4 text-center">
+                    <label for="">Délai</label>
+                    <select name="" id="delai">
+                        <option value="P7D">1 semaine</option>
+                        <option value="P14D">2 semaines</option>
+                        <option value="P1M">1 mois</option>
+                    </select>
+                </div>
+                <div class="col-sm-4 text-center">
+                    <label for="">Distance de recherche (km)</label>
+                    <input type="text" class="distance form-control-sm">
+                </div>
+                <div class="col-sm-12 text-center mt-3">
+                    <button class="btn btn-maincolor">Rechercher</button>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Date de l'intervention</th>
+                        <th>Lieux de l'intervention</th>
+                        <th>Type d'intervention</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody class="intervention"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div id="modalInterInsti" class="modal-container" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modalSurchargeInter">
+
+
+            <section class="modal__content">
+                <p>Diag Drone a bien détecté qu'un Opérateur Télépilote de Drone (OTD) est disponible et ce à partir de l'horaire indiqué. </p>
+                <p>Vous pouvez, en quelques clics, demander un devis à cet opérateur ou consulter ses propositions définitives. Pour ce faire, cliquez sur "Continuer" et remplissez les champs.</p>
+                <p>Attention, le type intervention sera identique à celle affichée dans la case "Type d'intervention".  </p>
+            </section>
+
+            <footer class="modal__footer">
+                <button class="btn btn-maincolor2" id="continuer">Continuer</button>
+                <button id="close-modal" class="btn btn-maincolor3">Annuler</button>
+            </footer>
+        </div>
+    </div>
+{% endblock %}

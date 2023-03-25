@@ -1,0 +1,54 @@
+.valueNumber, .textValue{
+    border: none;
+}
+.OTD{
+    display: none;
+}
+.textValue{
+    width: 24em;
+    
+}
+
+
+.table-facture{
+    border: 1px solid black;
+    border-collapse: collapse;
+    text-align: center;
+    width: 100%;
+}
+.design,.quant,.unit,.PUV,.TVA,.mHT,.case{
+    border: 1px solid black;
+}
+.design,.quant,.unit,.PUV,.TVA,.ref,.mHT{
+    background-color: #ECEFF1;
+
+}
+
+
+.btn-pdf{
+    border: none;
+    background-color: #6cff84;
+    width: 20em;
+    height: 3em;
+    font-size: 1.5em;
+}
+
+
+
+.case{
+    background-color: white;
+    height: 6em;
+}
+.btn-fact{
+    border: none;
+    background-color: teal;
+}
+
+
+
+
+
+
+
+
+

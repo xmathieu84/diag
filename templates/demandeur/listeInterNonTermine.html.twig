@@ -1,0 +1,86 @@
+{% extends 'demandeur/basedemandeur.html.twig' %}
+
+{% block title %}
+Pousuivre votre demande d'intervention
+{% endblock %}
+
+{% block contenu %}
+<div class="row">
+    <div class="col-12">
+        <div id="accordion01" role="tablist">
+            {% for intervention in interventions %}
+                <div class="card mb-3">
+                    <div class="card-header" role="tab" id="collapse{{ loop.index }}_header">
+                        <h5>
+                            <a class="collapsed" data-toggle="collapse" href="#collapse{{ loop.index }}" aria-expanded="false" aria-controls="collapse{{ loop.index }}">
+                                {{ intervention.listeInter.nom|capitalize }} {{ intervention.typeInter.nom|capitalize }} créée le {{ intervention.createdAT|format_datetime('short','none',locale='fr') }}
+                            </a>
+                        </h5>
+                    </div>
+                    <div id="collapse{{ loop.index }}" class="collapse" role="tabpanel" aria-labelledby="collapse{{ loop.index }}_header" data-parent="#accordion01">
+                        <div class="card-body">
+                             <div class="row">
+                                 <div class="col-sm-6 col-12 mt-5">
+                                     <p class="h6">Type : {{ intervention.listeInter.nom }} {{ intervention.typeInter.nom }}</p>
+                                 </div>
+                                 <div class="col-sm-6 col-12 mt-5">
+                                     <p class="h6">Date de création : {{ intervention.createdAT|format_datetime('short','none',locale='fr') }}</p>
+                                 </div>
+                                 {% if intervention.adresse %}
+                                     <div class="col-sm-8 col-12 mt-5">
+                                         <p class="h6">Lieu de l'intervention : {{ intervention.adresse.numero }} {{ intervention.adresse.nomVoie }}
+                                         {{ intervention.adresse.codePostal }} {{ intervention.adresse.ville }}</p>
+                                     </div>
+                                 {% endif %}
+                                 <div class="col-sm-6 col-12  mt-5">
+                                     <button class="btn btn-danger" data-toggle="modal" data-target="#supprimerModal{{ loop.index }}">Supprimer ma demande</button>
+                                 </div>
+                                 <div class="col-sm-6 col-12 text-right mt-5">
+                                     {% if intervention.adresse ==null %}
+                                         <a href="{{ path('etape3',{id:intervention.id}) }}"><button class="btn btn-maincolor">Poursuivre ma demande</button></a>
+                                     {% endif %}
+                                     {% if intervention.adresse %}
+                                         <a href="{{ path('etape4',{id:intervention.id}) }}"><button class="btn btn-maincolor">Poursuivre ma demande</button></a>
+                                     {% endif %}
+                                 </div>
+
+                             </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="supprimerModal{{ loop.index }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" >
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Avertissment</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                               <p class="h5">Souhaitez vous réellement supprimer cette demande d'intervention ?</p>
+
+                            </div>
+                            <div class="modal-footer">
+                                <div class="row">
+                                    <div class="col-sm-6 col-12">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
+                                    <div class="col-sm-6 col-12">
+                                        <a href=""><button class="btn btn-danger">Supprimer ma demande</button></a>
+                                    </div>
+                                </div>
+
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+
+        </div>
+    </div>
+</div>
+{% endblock %}
+

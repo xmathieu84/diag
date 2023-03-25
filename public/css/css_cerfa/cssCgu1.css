@@ -1,0 +1,62 @@
+.titre{
+    text-align: center;
+}
+.paragraphe{
+    list-style: decimal;
+    
+}
+.proprieteIntelect{
+    list-style: square;
+}
+.corps{
+    font-size: 15px;
+}
+.formuleAbo
+{
+    float: left;
+    border: 1px solid black;
+    width: 25%;
+    height: 4em;
+    text-align: center;
+
+}
+.service{   
+    float: left;
+    border: 1px solid black;
+    width: 49.41%;
+    height: 4em;
+    text-align: center;
+    
+}
+.prix,.montant{    
+    float:right;
+    border: 1px solid black;
+    width: 25%;
+    height: 4em;
+    margin-top: -4em;
+    margin-left: inherit;
+    text-align: center;
+}
+.access{
+    float: left;
+    border: 1px solid black;
+    width: 25%;
+    height: 4em;
+    text-align: center;
+}
+.case{
+    float: left;
+    border: 1px solid black;
+    width: 6.77%;
+    height: 4em;
+    text-align: center;
+}
+.souligne{
+    text-decoration:underline;
+}
+.tiret{
+    list-style: none;
+}
+.adresse{
+    margin-bottom: 0;
+}

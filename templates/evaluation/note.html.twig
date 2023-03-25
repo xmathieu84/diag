@@ -1,0 +1,38 @@
+{% extends template %}
+{% block titredemandeur %}
+	<h1>Intervention du
+		{{intervention.rdvAT|format_datetime('full', 'short', locale='fr') }}</h1>
+{% endblock  %}
+{% block body %}
+	<section class="ls ms s-py-xl-150 s-py-lg-130 s-py-md-90 s-py-60">
+		<div class="container">
+			<div class="row">
+				<div class="col-12 contact-us animate" data-animation="scaleAppear">
+					<h2></h2>
+
+					{{form_start(form)}}
+					<div class="row">
+						<div class="col-sm-6">
+							<div class="form-group">
+								<p class="h6">Donnez une note de 0(mauvais) à 10(rien à redire)</p>
+								{{form_row(form.note,{'label' : ' ' , 'attr':{'class':"form-control form-control-lg border-dark"}})}}
+							</div>
+						</div>
+						<div class="col-sm-8" id="rapport">
+							<div class="form-group">
+								{{form_row(form.commentaire,{'label' : ' ' , 'attr':{'class':"form-control form-control-lg border-dark",'rows':'15',"palceholder":"Laissez un commentaire sur votre intervention"}})}}
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<button type="submit" class='btn btn-maincolor btn-sm'>Valider</button>
+						</div>
+
+
+					</div>
+
+					{{form_end(form)}}
+				</div>
+			</div>
+		</div>
+	</section>
+{% endblock %}

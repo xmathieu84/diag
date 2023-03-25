@@ -1,0 +1,34 @@
+{% extends template %}
+
+{% block body %}
+	<section class="ls ms s-py-xl-150 s-py-lg-130 s-py-md-90 s-py-60">
+		<div class="container">
+			<div class="row">
+				<div class="col-12 contact-us animate" data-animation="scaleAppear">
+
+					{{form_start(form)}}
+					<div class="row">
+						<div class="col-sm-6 ">
+							<div class="form-group has-placeholder">
+								<p class="h6">Distance d'intervention</p>
+								{{form_row(form.periInter,{'label':' ','attr':{'class':'form-control-lg border-dark'}})}}
+							</div>
+						</div>
+						<div class="col-sm-12">
+							<p class="h6">Type d'intervention que vous pouver réaliser :
+							</p>
+							{{form_row(form.typeInters)}}
+
+
+						</div>
+						<div class="col-sm-12">
+							<button type="submit" class="btn btn-maincolor">Valider les modifications</button>
+						</div>
+					</div>
+					{{form_end(form)}}
+				</div>
+			</div>
+		</div>
+
+	</section>
+{% endblock %}

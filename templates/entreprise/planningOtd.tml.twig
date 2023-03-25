@@ -1,0 +1,32 @@
+{% extends 'entreprise/baseAE.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/core@4.1.0/main.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@4.1.0/main.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@4.1.0/main.min.css"/>
+{% endblock %}
+{% block title %}
+    {% if app.user.role('ROLE_OTD') %}
+        Planning OTD
+    {% else %}
+        Planning ODI
+    {% endif %}
+{% endblock %}
+{% block pageAccueil %}
+    {% if app.user.role('ROLE_OTD') %}
+        <h4>Planning OTD</h4>
+        {% else %}
+            <h4>Planning ODI</h4>
+    {% endif %}
+
+{% endblock %}
+{% block contenu %}
+<div id="calendrier"></div>
+{% endblock %}
+{% block javascripts %}
+    <script src="/js/js_site/logoEnt.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@4.1.0/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@4.1.0/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@4.1.0/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@4.1.0/main.min.js"></script>
+{% endblock %}
+

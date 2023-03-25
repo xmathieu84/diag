@@ -1,0 +1,125 @@
+/* bootstrap collapse*/
+//unstyled
+[data-toggle="collapse"] {
+  display: block;
+  position: relative;
+  padding: 0.5em;
+
+  &:after {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    margin-top: -7px;
+    font-Size: 10px;
+    font-family: "Font Awesome 5 Free", sans-serif;
+    content: "\f078";
+    font-weight: 900;
+  }
+
+  &.collapsed {
+    &:after {
+      content: "\f054";
+    }
+
+  }
+}
+
+//cards as tabs
+[role="tablist"] {
+  & + & {
+    margin-top: 57px;
+  }
+
+  & > div {
+
+    [data-toggle="collapse"]:after {
+      margin-top: 0;
+      transform: translateY(-50%);
+    }
+  }
+
+  .card {
+    border-radius: 0;
+    border: none;
+    background: none;
+    box-shadow: $boxShadow;
+
+
+    & + .card {
+      margin-top: 10px;
+    }
+  }
+
+  .card-header {
+    padding: 0;
+    background: $lightColor;
+    border: none;
+    h5{
+      font-weight: 300;
+    }
+    a {
+      font-Size: 20px;
+      margin: 0;
+      line-height: 1;
+      padding: 40px 15px 40px 85px;
+      position: relative;
+      @media(max-width: 575px) {
+        padding: 20px 15px 20px 45px;
+      }
+
+      &:after {
+        display: none;
+      }
+
+      &:before {
+        content: '+';
+        font-weight: 500;
+        font-Size: 30px;
+        position: absolute;
+        color: $lightColor;
+        background-color: $colorMain;
+        width: 30px;
+        height: 30px;
+        top: 35px;
+        left: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transform: rotate(0deg);
+        transform-origin: center;
+        transition: all .3s ease-in-out;
+        @media(max-width: 575px) {
+          left: 7px;
+          top: 14px;
+        }
+      }
+
+      &.collapsed {
+        &:before {
+
+          transform: rotate(90deg);
+          transform-origin: center;
+          transition: all .3s ease-in-out;
+        }
+
+        &:after {
+          display: none;
+        }
+
+      }
+    }
+  }
+
+  .card-body {
+    padding: 0 20px 40px 90px;
+    background: $lightColor;
+    @media(max-width: 575px) {
+      padding: 0 15px 20px 45px;
+    }
+  }
+
+  .media img {
+    max-width: 80px;
+  }
+}

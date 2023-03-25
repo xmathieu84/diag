@@ -1,0 +1,30 @@
+{% extends  'entreprise/baseAE.html.twig'%}
+{% block titrePage %}Refus d'une intervention
+{% endblock %}
+{% block pageAccueil %}<h4>Refus d'une intervention</h4>
+{% endblock %}
+
+
+{% block contenu %}
+
+
+	{{form_start(form)}}
+	<div class="row">
+		<div class="col-sm-12 text-center">
+
+			<div class="form-group text-center" id="annulation">
+				<span class="h6">Souhaitez vous refusez cette intervention (elle ne vous sera plus proposée)?</span>
+				{{form_row(form.validation,{'label':' ','attr':{}})}}
+			</div>
+		</div>
+		<div class="col-sm-12 text-center mt-3">
+			{{form_row(form.raison,{'attr':{'class':'form-control bg-white'}})}}
+		</div>
+		<div class="col-sm-12 text-center mt-5">
+			<button type="submit" class="btn btn-maincolor btn-sm">Valider</button>
+
+		</div>
+	</div>
+
+	{{form_end(form)}}
+{% endblock %}

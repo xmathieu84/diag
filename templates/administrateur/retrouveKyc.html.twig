@@ -1,0 +1,22 @@
+{% extends 'administrateur/baseA.html.twig' %}
+
+{% block body %}
+<div class="row">
+    <div class="col-6">
+        <label for="">Numéro kyc du doc</label>
+        <input type="text" class="form-control form-control-sm" id="kyc">
+    </div>
+    <div class="col-6">
+        <label for="">Identifiant</label>
+        <input type="text" class="form-control form-control-sm" id="identifiant">
+    </div>
+    <div class="col-8">
+        <button class="btn btn-primary">Valider</button>
+    </div>
+</div>
+{% endblock %}
+
+{% block title %}
+Retrouver doc
+{% endblock %}
+

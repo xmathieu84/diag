@@ -1,0 +1,152 @@
+.imgPdf {
+    width: 40%;
+    height: 16%;
+}
+.image {
+    text-align: center;
+}
+.logoEntreprise{
+    width: 6.5em;
+}
+
+.entreprise {
+    float: left;
+    width: 35%;
+
+    font-size: 1.1em;
+}
+
+.demandeur {
+    width: 35%;
+    float: right;
+    font-size: 1.1em;
+    text-align: right;
+
+}
+.intitule {
+    text-decoration: underline;
+}
+.intitule-entreprise {
+    margin-bottom: 0;
+    margin-top: 0.5em;
+}
+.date {
+    text-align: center;
+    font-size: 1.5em;
+}
+
+th.colonne1,
+th.colonne2 {
+    height: 8em;
+    font-size: 1.4em;
+}
+th.facture2,
+th.facture1 {
+    height: 6em;
+    font-size: 1.5em;
+    text-align: center;
+}
+.colonne1,
+.facture1 {
+    width: 70%;
+    text-align: center;
+}
+
+.colonne2,
+.facture2 {
+    width: 30%;
+    text-align: center;
+}
+
+td.colonne1,
+td.colonne2 {
+    height: 4.4em;
+    font-size: 1.1em;
+}
+td.colonne1-facture,
+td.facture2 {
+    height: 3.8em;
+    font-size: 1.1em;
+}
+.prixInter {
+    border: 1px solid black;
+    width: 100%;
+    border-collapse: collapse;
+}
+.colonne1,
+.colonne2,
+.facture2,
+.facture1 {
+    border: 1px solid black;
+}
+.indice {
+    font-size: 0.5em;
+}
+#piedDepage {
+    margin-top: 2.5em;
+    font-size: 0.8em;
+}
+#piedDepage2 {
+    margin-top: 1.5em;
+    font-size: 0.8em;
+}
+.versement {
+    margin: 0;
+}
+.logoDD {
+    float: left;
+}
+.logoEnt {
+    float: right;
+}
+.listeEnt {
+    margin-bottom: 5em;
+    font-weight: bold;
+}
+.infoEnt {
+    float: left;
+    margin-top: 1.5em;
+    width: 45%;
+}
+.facture {
+    float: right;
+    width: 30%;
+    font-weight: bold;
+}
+.adresse {
+    margin-top: 3em;
+    width: 100%;
+}
+.adresseDem {
+    float: left;
+    width: 70%;
+}
+.adresseFact {
+    float: right;
+    width: 30%;
+}
+.factEnt1,
+.factEnt2,
+.factEnt3 {
+    border: 1px solid black;
+    text-align: center;
+}
+th.factEnt1,
+th.factEnt2,
+th.factEnt3 {
+    height: 6em;
+    font-size: 1.5em;
+}
+td.factEnt2,
+td.factEnt3 {
+    height: 4em;
+}
+.factENt {
+    margin-top: 3em;
+}
+
+.propdemandeur,.factDemandeur,.factEntreprise{
+    width: 75%;
+    border: 1px black solid;
+
+}

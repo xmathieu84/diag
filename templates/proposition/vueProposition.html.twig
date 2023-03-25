@@ -1,0 +1,256 @@
+{% extends template %}
+
+{% block title %}Liste OTDs
+{% endblock %}
+{% block titredemandeur %}
+	<h1>Liste des télé-opérateur correspondant à votre demande</h1>
+{% endblock  %}
+{% block titreSection %}Liste OTD
+{% endblock %}
+{% block titrePage %}Liste OTD
+{% endblock %}
+{% block pageAccueil %}
+	<h5><span class="color_blue">DIAG-DRONE</span> a détecté <span class="color_blue">{{ (propositionsPrix|length)+(propositionsSansPrix|length) }}</span>
+		<span class="color_blue">O</span>pérateur(s) <span class="color_blue">T</span>élé-pilote de <span class="color_blue">D</span>rone </h5>
+	<p class="h6">Ces {{ (propositionsPrix|length)+(propositionsSansPrix|length) }} OTD viennent d'être contacté(s) et peuvent accéder à toutes les informations qui concerne votre intervention.</p>
+	<p class="h6">Vous serez alerté en temps réel (via mail et sms) de leur proposition définitive via DIAG DRONE.</p>
+	<p class="h6">Si un ou plusieurs OTD ont indiqué leur tarif définitif, vous pouvez immédiatement procéder à une réservation auprès de l'OTD de votre choix.</p>
+{% endblock %}
+{% block contenu %}
+	<div id="accordion01" role="tablist">
+		{% if propositionsPrix|length > 0 %}
+		<div class="card">
+			<div class="card-header" role="tab" id="collapse01_header">
+				<h5>
+						<a data-toggle="collapse" href="#collapse01" aria-expanded="true" aria-controls="collapse01" class="bg-propAttente">
+							Devis définitifs - Réservation immédiate possible ({{ propositionsPrix|length }})
+						</a>
+				</h5>
+			</div>
+
+			<div id="collapse01" class="collapse show" role="tabpanel" aria-labelledby="collapse01_header" data-parent="#accordion01">
+				<div class="card-body">
+					<div class="row">
+						<main class="col-lg-12 col-xl-12">
+							<div class="columns-1">
+								<ul class="products">
+									{% set somme = 0 %}
+									{% set nombre = 0 %}
+
+									{% for proposition in propositionsPrix %}
+										<li class="product">
+											<a class="woocommerce-LoopProduct-link" href="shop-product-right.html">
+												<div class="img-wrap">
+													<img src="/css/css_site/images/shop/{{loop.index}}.jpg" alt="">
+												</div>
+											</a>
+
+											<h2 class="text-center">Opérateur Télé-pilote de Drone n°{{loop.index}}</h2>
+											<div class="star-rating">
+												{% for notes in proposition.salarie.notes %}
+
+													{% if notes %}
+														{% set somme = (somme + notes.note) %}
+														{% set nombre = loop.length %}
+														{{((somme / nombre)/2) |number_format(2) }}/10
+													{% else %}
+													{% endif %}
+												{% endfor %}
+											</div>
+											<div class="prix">
+												{% set prixFinal = proposition.indemnite + proposition.prix %}
+
+
+												<span class="price" data-type="{{proposition.inter.typeInter.id}}" data-liste="{{proposition.inter.listeInter.id}}" data-salarie="{{proposition.salarie.id}}">
+
+										{% if proposition.salarie.entreprise.siretTva.assujeti %}
+											<p class="h4">
+										<b class="color_blue">{{prixFinal|number_format(2)}} € TTC</b>
+										</p>
+											<p class="h6">
+											{{ (prixFinal/(1+tva.taux/100))|number_format(2) }} € HT
+										</p>
+										{% else %}
+											<p class="h4">
+										<b class="color_blue">{{prixFinal|number_format(2)}} € NET</b>
+
+										</p>
+
+										{% endif %}
+											<p class="h6">Dont
+												déplacement :
+												{{proposition.indemnite|number_format(2)}}€
+
+											</p>
+											<p class="h5">Date proposée pour l'intervention : <span class="color_blue">le {{ proposition.datePropose|format_datetime("short","none",locale="fr") }} à {{ proposition.datePropose|format_datetime("none","short",locale="fr") }}</span></p>
+
+
+										</span>
+
+
+
+											</div>
+
+
+
+
+
+										</li>
+										<button class="btn btn-maincolor" data-toggle="modal" data-target="#modalProp{{ loop.index }}">Réservez l'intervention</button>
+
+										<div class="modal fade" id="modalProp{{ loop.index }}" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+											<div class="modal-dialog">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h5 class="modal-title" id="staticBackdropLabel">Récapitulatif de votre réservation : </h5>
+														<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+															<span aria-hidden="true">&times;</span>
+														</button>
+													</div>
+													<div class="modal-body">
+														<ul class="reservation">
+															<li>Type d'intervention : {{ proposition.inter.listeInter.nom }}</li>
+															<li>Caractéristique de l'intervention : {{ proposition.inter.typeInter.nom }}</li>
+															<li>Adresse de l'intervention : {{ proposition.inter.adresse.numero }} {{ proposition.inter.adresse.nomVoie }} {{ proposition.inter.adresse.codePostal }} {{ proposition.inter.adresse.ville }} </li>
+															<li>Date de l'intervention : {{ proposition.inter.rdvAt|format_datetime('short','none',locale='Fr') }}</li>
+															<li>Heure de l'intervention : {{ proposition.inter.rdvAt|format_datetime('none','short',locale='Fr') }}</li>
+														</ul>
+													</div>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+														<a href="{{path('accordProposition',{id:proposition.id,code:code})}}" class="btn btn-primary">Confirmer la réservation</a>
+													</div>
+												</div>
+											</div>
+										</div>
+									{% endfor %}
+								</ul>
+							</div>
+						</main>
+					</div>
+				</div>
+			</div>
+		</div>
+		{% endif %}
+		<div class="card">
+			<div class="card-header" role="tab" id="collapse02_header">
+				<h5>
+					<a class="collapsed noProp" data-toggle="collapse" href="#collapse02" aria-expanded="false" aria-controls="collapse02" >
+						Devis en attente - Réservation immédiate non disponible   ({{ propositionsSansPrix|length }})
+					</a>
+
+				</h5>
+				<div class="pl-5 pb-2 pr-5">
+					{% if propositionsSansPrix|length >0 %}
+						<p class="h6">Ces {{ propositionsSansPrix|length }} OTD viennent d'être contactés</p>
+						<p class="h6">Toutes les informations relatives à votre demande leur ont été transmises.</p>
+						<p class="h6">Vous serez informés en temps réel, par SMS et par mail, dès qu'un devis définitif vous sera proposé. Une réservation immédiate sera alors possible .</p>
+						<p class="h6">Dans l'attente, vous pouvez consulter des tarifs indicatifs. </p>
+					{% endif %}
+
+				</div>
+			</div>
+			<div id="collapse02" class="collapse" role="tabpanel" aria-labelledby="collapse02_header" data-parent="#accordion01">
+				<div class="card-body">
+					<div class="row">
+						<main class="col-lg-7 col-xl-9">
+							<div class="columns-2">
+								<ul class="products">
+									{% set somme = 0 %}
+									{% set nombre = 0 %}
+
+									{% for proposition in propositionsSansPrix %}
+										<li class="product">
+											<a class="woocommerce-LoopProduct-link" href="shop-product-right.html">
+												<div class="img-wrap">
+													<img src="/css/css_site/images/shop/{{loop.index}}.jpg" alt="">
+												</div>
+											</a>
+
+											<h2 class="text-center">Opérateur Télé-pilote de Drone n°{{loop.index}}</h2>
+											<div class="star-rating">
+												{% for notes in proposition.salarie.notes %}
+
+													{% if notes %}
+														{% set somme = (somme + notes.note) %}
+														{% set nombre = loop.length %}
+														{{(somme / nombre)/2 |number_format(2) }}/10
+													{% else %}
+													{% endif %}
+												{% endfor %}
+											</div>
+											<div class="prix">
+												{% set prixFinal = proposition.indemnite + proposition.prix %}
+
+
+												<span class="price" data-type="{{proposition.inter.typeInter.id}}" data-liste="{{proposition.inter.listeInter.id}}" data-salarie="{{proposition.salarie.id}}">
+									{% if proposition.prix %}
+										{% if proposition.salarie.entreprise.siretTva.assujeti %}
+											<p class="h4">
+										<b>{{prixFinal|number_format(2)}} € TTC</b>
+										</p>
+											<p class="h6">
+											{{ (prixFinal/(1+tva.taux/100))|number_format(2) }} € HT
+										</p>
+										{% else %}
+											<p class="h4">
+										<b>{{prixFinal|number_format(2)}} € NET</b>
+										</p>
+										{% endif %}
+										{% else %}
+										<p>Cet OTD est informé de votre demande</p>
+									{% endif %}
+
+
+
+								</span>
+												<div class="coutMin mb-2">
+													<p class="h4">Tarifs indicatifs donnés par l'OTD</p>
+													<p class="h6">Intervention :
+
+													</p>
+
+												</div>
+
+
+											</div>
+											<div class="horaire">
+												<p class="h6">Taux horaire :
+												</p>
+											</div>
+											<div class="frais">
+												<p class="h6">Dont
+													déplacement :
+													{{proposition.indemnite|number_format(2)}}€
+
+												</p>
+											</div>
+
+											{% if proposition.prix != null %}
+												<a href="{{path('accordProposition',{id:proposition.id,code:code})}}" class="button product_type_simple add_to_cart_button">Choisir ce télé-pilote</a>
+
+											{% endif %}
+
+											<div class="mt-5">
+												<p class="h4">Appareils possédés : </p>
+												<ul class="list-group">
+													{% for drone in proposition.salarie.entreprise.drones %}
+														<li>{{ drone.nomFabriquant }}-{{ drone.typeDrone }}</li>
+													{% endfor %}
+												</ul>
+											</div>
+										</li>
+									{% endfor %}
+								</ul>
+
+							</div>
+						</main>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+
+{% endblock %}

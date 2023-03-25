@@ -1,0 +1,157 @@
+{% extends 'entreprise/baseAE.html.twig' %}
+
+{% block title %}
+Pack entreprise
+{% endblock %}
+
+{% block contenu %}
+<div class="col-sm-12">
+    <div id="accordion01" role="tablist">
+        <div class="card">
+            <div class="card-header" role="tab" id="collapse1_header">
+                <h5>
+                    <a data-toggle="collapse" href="#collapse1" aria-expanded="false" aria-controls="collapse1" class="collapsed">
+                        Packs proposés par DiagDrone
+                    </a>
+                </h5>
+            </div>
+
+            <div id="collapse1" class="collapse" role="tabpanel" aria-labelledby="collapse1_header" data-parent="#accordion1">
+                <div class="card-body">
+                    <div class="row row_price">
+                        {% if packs is empty %}
+                            <div class="col-12">
+                                <p class="h5">Aucun pack proposé par Diag-Drone ne correspond aux missions de votre ODI .</p>
+                            </div>
+                            {% else %}
+                                {% for pack in packs %}
+
+                                    <div class="col-lg-4 col-sm-12 col-12">
+                                        <div class="form-check form-check-inline select_p">
+                                            {% if pack in packSouscrit%}
+                                                <input type="checkbox" name="" id="inlineRadio{{loop.index}}" class="form-check-input no_opacity packOdi" value="{{pack.id}}" checked="checked" data-salarie="{{ salarie.id }}">
+                                            {% else %}
+                                                <input type="checkbox" name="" id="inlineRadio{{loop.index}}" class="form-check-input no_opacity packOdi" value="{{pack.id}}" data-salarie="{{ salarie.id }}">
+                                            {% endif %}
+
+                                            <label class="form-check-label pricing-plan version_two box-shadow with-features ls blockSelect pt-1"  for="inlineRadio{{loop.index}}">
+                                                <div class="form_inside" id="pack{{loop.index}}">
+                                                    <div class="plan-header">
+                                                        <div class="plan-name">
+                                                            <h5 class="abo_title">
+                                                                {{ pack.nom }}
+                                                                <span class="color_blue"></span>
+                                                            </h5>
+                                                        </div>
+                                                    </div>
+                                                    <div class="plan-features mt-3">
+                                                        <ul class="list-unstyled text-left">
+                                                            {% for mission in pack.missions %}
+                                                                {% if mission.actif %}
+                                                                    <li class="h7">
+                                                                        {{mission.nom}}
+                                                                    </li>
+                                                                {% endif %}
+
+                                                            {% endfor %}
+                                                        </ul>
+
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-12 align-items-center text-center">
+                                                            {% if pack in packSouscrit %}
+                                                                <button class="btn btn-danger selectAbo mt-2" >Retirer</button>
+                                                                <button class="btn btn-maincolor selectAbo mt-2" style="display: none" >Sélectionner</button>
+                                                                {% else %}
+                                                                    <button class="btn btn-danger selectAbo mt-2"style="display: none"  >Retirer</button>
+                                                                    <button class="btn btn-maincolor selectAbo mt-2">Sélectionner</button>
+                                                            {% endif %}
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                        {% endif %}
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="card">
+            <div class="card-header" role="tab" id="collapse2_header">
+                <h5>
+                    <a data-toggle="collapse" href="#collapse2" aria-expanded="false" aria-controls="collapse2" class="collapsed">
+                        Packs proposés par votre entreprise
+                    </a>
+                </h5>
+            </div>
+
+            <div id="collapse2" class="collapse" role="tabpanel" aria-labelledby="collapse2_header" data-parent="#accordion1">
+                <div class="card-body">
+                    <div class="row row_price">
+                        {% if packs is empty %}
+                            <div class="col-12">
+                                <p class="h5">Aucun pack proposé par votre entreprise ne correspond aux missions de votre ODI .</p>
+                            </div>
+                        {% else %}
+                            {% for pack in packPerso %}
+                                <div class="col-lg-4 col-sm-12 col-12">
+                                    <div class="form-check form-check-inline select_p">
+                                        {% if pack in salarie.packOdis%}
+                                            <input type="checkbox" name="" id="inlineRadioP{{loop.index}}" class="form-check-input no_opacity packOdi" value="{{pack.id}}" checked="checked" data-salarie="{{ salarie.id }}">
+                                        {% else %}
+                                            <input type="checkbox" name="" id="inlineRadioP{{loop.index}}" class="form-check-input no_opacity packOdi" value="{{pack.id}}" data-salarie="{{ salarie.id }}">
+                                        {% endif %}
+
+                                        <label class="form-check-label pricing-plan version_two box-shadow with-features ls blockSelect pt-1"  for="inlineRadioP{{loop.index}}">
+                                            <div class="form_inside" id="pack{{loop.index}}">
+                                                <div class="plan-header">
+                                                    <div class="plan-name">
+                                                        <h5 class="abo_title">
+                                                            {{ pack.nom }}
+                                                            <span class="color_blue"></span>
+                                                        </h5>
+                                                    </div>
+                                                </div>
+                                                <div class="plan-features mt-3">
+                                                    <ul class="list-unstyled text-left">
+                                                        {% for mission in pack.missions %}
+                                                            <li class="h7">
+                                                                {{mission.nom}}
+                                                            </li>
+                                                        {% endfor %}
+                                                    </ul>
+
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-12 align-items-center text-center">
+                                                        {% if pack in packSouscrit %}
+                                                            <button class="btn btn-danger selectAbo mt-2" >Retirer</button>
+                                                            <button class="btn btn-maincolor selectAbo mt-2" style="display: none" >Sélectionner</button>
+                                                        {% else %}
+                                                            <button class="btn btn-danger selectAbo mt-2"style="display: none"  >Retirer</button>
+                                                            <button class="btn btn-maincolor selectAbo mt-2">Sélectionner</button>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+

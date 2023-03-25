@@ -1,0 +1,44 @@
+{% extends 'entreprise/baseAE.html.twig' %}
+
+{% block contenu %}
+<div class="row align-items-end bg-white" >
+    
+    <div class="col-12 mb-5">
+        <p class="h2">Vos informations bancaires</p>
+    </div>
+
+    <div class="col-sm-6 mb-3">
+        <span class="h5 souligne">IBAN :</span>
+        <span class="h5 mt-1" id="iban" >{{ banque.iban }}</span>
+    </div>
+    <div class="col-sm-6 mb-3">
+        <span class="h5 souligne">Code BIC :</span>
+        <span class="h5 mt-1" id="iban" >{{ banque.bic }}</span>
+
+    </div>
+    <div class="col-sm-6 mb-3">
+        <span class="h5 souligne">Dénomination :</span>
+        <span class="h5 mt-1" id="iban" >{{ banque.nom }}</span>
+    </div>
+    <div class="col-sm-6 mb-3">
+        <span class="h5 souligne">Adresse de votre banque :</span>
+        <span class="h5 mt-1" id="iban" >{{ banque.adresse }}</span>
+    </div>
+    <div class="col-12 mt-5">
+        <p class="h2">Pour modifier vos informations bancaires, merci de nous contacter via le formulaire.</p>
+    </div>
+    <div class="col-12">
+        <label for="texte">Indiquez ici votre demande :</label>
+        <textarea name="" id="texte" cols="30" rows="10" class="form-control"></textarea>
+    </div>
+    <div class="col-12 text-center mt-5">
+        <button type="button" class="btn btn-maincolor">Valider et envoyer ma demande</button>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block title %}
+Changer banque
+{% endblock %}
+

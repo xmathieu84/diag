@@ -1,0 +1,145 @@
+{% extends "administrateur/baseA.html.twig" %}
+{% block title %}Promo abonnement{% endblock %}
+{% block body %}
+
+<div class="row">
+    <div class="col-12 text-center mb-5">
+        <button class="btn btn-success" data-toggle="modal" data-target="#modalCodePromom">Créer un code promotionnel</button>
+    </div>
+    <div class="col-12">
+        <p class="h5">Liste des codes promotionnels crée</p>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <tr>
+                    <th>Activer  /désactiver - Nom</th>
+                    <th>Date début</th>
+                    <th>Date Fin</th>
+                    <th>Abonnement</th>
+                    <th>Remise</th>
+                </tr>
+                {% for code in codes %}
+                    <tr>
+                        <td>{% if code.actif  %}
+                                <input type="checkbox" name="" id="" class="actif" checked="checked" data-id="{{ code.id }}">
+                                {% else %}
+                                    <input type="checkbox" name="" id="" class="actif"  data-id="{{ code.id }}">
+                            {% endif %}
+                            <label for="">{{ code.codeReduc }}</label>
+                        </td>
+                        <td>{{ code.dateDebut|format_datetime('short','none',locale='fr') }}</td>
+                        <td>{{ code.dateFin|format_datetime('short','none',locale='fr') }}</td>
+                        <td>{% if code.abonnementGci %}
+                                {{ code.abonnementGci.nom }}
+                                {% else %}
+                                {{ code.abonnementOtd.nom }}
+                            {% endif %}
+                        </td>
+                        <td>{{ code.remise }} %</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+    <div class="modal fade" id="modalCodePromom" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Création d'un code promotionnel</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12">
+                            
+                        </div>
+                        <div class="col-12 mb-5">
+                            <p class="h5">Sur quel type de profil va s'appliquer le code promotionnel ?</p>
+                        </div>
+                        <div class="col-4 text-center"><input type="radio" name="type" id="otd" value="otd"><label for="otd">OTD</label></div>
+                        <div class="col-4 text-center"><input type="radio" name="type" id="gc" value="gc"><label for="gc">Grand compte</label></div>
+                        <div class="col-4 text-center"><input type="radio" name="type" id="insti" value="insti"><label for="insti">Institution</label></div>
+                        <div class="col-6 text-center profilGc ">
+                            <label for="profilGc">Profil</label>
+                            <select name="" id="profilGc" class="form-control grandCompte">
+                                <option value=""disabled selected>Choisissez un profil</option>
+
+                                <option value="Notaire">Notaire</option>
+                                <option value="Entreprise">Entreprise</option>
+                                <option value="Syndicat de copropriété">Syndicat de copropriété</option>
+                                <option value="Gestionnaire d'immeuble">Gestionnaire d'immeuble</option>
+                                <option value="Agent Immobilier">Agent Immobilier</option>
+                                <option value="Compagnie d’assurance, agent général, courtier en assurance">Compagnie d’assurance, agent général, courtier en assurance</option>
+                                <option value="Bureau d’étude">Bureau d’étude</option>
+                                <option value="Huissier">Huissier</option>
+                                <option value="Association de droit privé">Association de droit privé</option>
+                            </select>
+                        </div>
+                        <div class="col-6 text-center profilInsti ">
+                            <label for="profilInsti">Profil</label>
+                            <select name="" id="profilInsti" class="form-control institution">
+                                <option value=""disabled selected>Choisissez un profil</option>
+
+                                <option value="200">Jusqu'à 300 habitants</option>
+                                <option value="499">Jusqu'à 500 habitants</option>
+                                <option value="999">Jusqu'à 1 000 habitant</option>
+                                <option value="4999">Jusqu'à 5 000 habitants</option>
+                                <option value="9999">Jusqu'à 10 000 habitants</option>
+                                <option value="49999">Jusqu'à 50 000 habitants</option>
+                                <option value="99999">Jusqu'à 100 000 habitants</option>
+                                <option value="499999">Jusqu'à 500 000 habitants</option>
+                                <option value="499999999">+ 500 000 habitants</option>
+                                <option value="9999999999">Mairie , communautée de commune etc..</option>
+                                <option value="Association de droit privé">Association de droit privé</option>
+                                <option value="Communautés religieuses">Communautés religieuses</option>
+                                <option value="Établissement public">Établissement public</option>
+                                <option value="Société d'Économie Mixte">Société d'Économie Mixte</option>
+                                <option value="Société Coopérative d'Intérêt Collectif">Société Coopérative d'Intérêt Collectif</option>
+                            </select>
+                        </div>
+
+                        <div class="col-6 abonnementOtd">
+                            <label for="abpoOtd">Abonnement</label>
+                            <select name="" id="abpoOtd" class="form-control abonnement">
+                                <option value=""disabled selected>Choisissez un Abonnement</option>
+
+                                {% for abonnement in abonnements %}
+                                    <option value="{{ abonnement.id }}">{{ abonnement.nom }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-6 ">
+                            <label for="remise">Montant de la remise (pourcentage)</label>
+                            <input type="number" class="form-control" id="remise">
+
+                        </div>
+                        <div class="col-4">
+                            <label for="debut">
+                                Date début
+                            </label>
+                            <input type="date" name="" id="debut" class="form-control">
+                        </div>
+                        <div class="col-4">
+                            <label for="fin">
+                                Date fin
+                            </label>
+                            <input type="date" name="" id="fin" class="form-control">
+                        </div>
+                        <div class="col-4">
+                            <label for="codePromo">Code promotionnel</label>
+                            <input type="text" class="form-control" id="codePromo">
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer et annuler</button>
+                    <button type="button" class="btn btn-primary">Valider</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

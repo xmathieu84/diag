@@ -1,0 +1,51 @@
+{% extends 'institution/baseInsti.html.twig' %}
+
+{% block title %}
+Ajout type de dossier
+{% endblock %}
+{% block titreSection %}Type de dossier{% endblock %}
+{% block titrePage %}Type de dossier{% endblock %}
+{% block pageAccueil %}
+
+        <a href="{{ path('listeDossier',{code:code}) }}">ListeDossier</a><span class="color-dark">->Type de dossier</span>
+
+
+{% endblock %}
+{% block contenu %}
+<div class="row text-center zoneSupprimer">
+
+    {% for dossier in dossiers %}
+            <div class="col-sm-2 dossier" data-id="{{ dossier.id }}">
+                <div class="row">
+                    <div class="col-6">
+                        <a href="{{ path('FinaliserDossier',{nom:dossier.type,id:dossier.id,code:code}) }}">
+                            <figure>
+                                <img src="/css/css_site/img/dossierJaune.png" alt="" >
+                                <figcaption class="text-dark">{{ dossier.nom }}</figcaption>
+                            </figure>
+                        </a>
+                    </div>
+                    <div class="col-6 text-left">
+                        <div class="btn-group " role="group" >
+                            <button  type="button" class="btnMenu dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">+</button>
+                            <div class="dropdown-menu" aria-labelledby="btnGroupDrop1"style="z-index: 1000000;">
+                                <a class="dropdown-item"  href="{{ path('FinaliserDossier',{nom:dossier.type,id:dossier.id,code:code}) }}" >Ouvrir</a>
+                                <a class="dropdown-item" href="{{ path('FinaliserDossier',{nom:dossier.type,id:dossier.id,code:code}) }}" target="_blank">Ouvrir dans un nouvel onglet</a>
+
+                                <a href="#" class="dropdown-item delete">Supprimer le dossier</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+    {% endfor %}
+
+
+</div>
+
+
+{% endblock %}
+

@@ -1,0 +1,33 @@
+{% extends 'demandeur/basedemandeur.html.twig' %}
+{% block titredemandeur %}
+	<h1>Intervention du
+		{{rapport.intervention.rdvAT|format_datetime('full', 'short',locale='fr')}}</h1>
+{% endblock  %}
+{% block body %}
+	<section class="ls s-py-xl-160 s-py-lg-130 s-py-md-90 s-py-60 c-gutter-60">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12">
+					<p class="text-center">{{rapport.rapResume}}</p>
+					<div class="row">
+						<div class="col-sm-1"></div>
+						<div class="col-sm-3">
+							<a href="{{path('rapportDemandeurPDF',{id:rapport.id})}}">
+								<button class="btn btn-maincolor big-btn">Télecharger au format PDF</button>
+							</a>
+						</div>
+						<div class="col-sm-4"></div>
+						<div class="col-sm-3">
+							<a href="{{path('telechargerMedia',{id:rapport.id})}}">
+								<button class="btn btn-maincolor big-btn">Télécharger tout les documents</button>
+							</a>
+						</div>
+						<div class="col-sm-1"></div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</section>
+
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends "entreprise/baseAE.html.twig" %}
+{% block title %}
+	finalisation
+{% endblock  %}
+{% block titresalarie %}
+	<h1>Finalisation de l'intervention</h1>
+{% endblock  %}
+{% block titreSection %}Date de fin de l'intervention
+{% endblock %}
+{% block titrePage %}Date de fin de l'intervention
+{% endblock %}
+
+{% block contenu %}
+
+
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="card border-success mb-3 mt-5">
+
+				<div class="card-header">
+					<p class="h4">Intervention le :
+						{{reservation.intervention.rdvAT|format_datetime('full', 'short',locale='fr')|capitalize}}</p>
+				</div>
+
+				<div class="card-body">
+					{{form_start(form)}}
+					<div class="form-group has-placeholder">
+						<div class="col-sm-12">
+							{{form_row(form.debut,{'label':' ','attr':{'class':'form-control'}})}}
+
+						</div>
+					</div>
+
+					<div class="form-group has-placeholder">
+						<div class="col-sm-12">
+							{{form_row(form.depart,{'label':' ','attr':{'class':'form-control'}})}}
+						</div>
+					</div>
+
+					<button type="submit" class="btn btn-maincolor" id="valider">Valider</button>
+					{{form_end(form)}}
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

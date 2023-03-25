@@ -1,0 +1,189 @@
+{% extends template %}
+
+{% block title %}
+Choix des packs ODI
+{% endblock %}
+
+{% block contenu %}
+    <div class="row mb-5">
+        <div class="col-12">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium at aut blanditiis cupiditate delectus deserunt, dicta eveniet facilis iure labore molestiae nisi pariatur quibusdam reiciendis sint sunt tenetur velit voluptatem! (Explications à fournir)</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta, impedit, nesciunt. Consequatur delectus dolorem fuga maxime obcaecati ratione sapiente suscipit vel voluptate voluptatibus? Cum ex, explicabo harum optio quae tempore. (Explications à fournir)</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab ad aspernatur beatae ea exercitationem fugiat, illum labore laboriosam magni modi, necessitatibus nostrum officia perferendis quis, quo recusandae vel voluptatem voluptates.(Explications à fournir)</p>
+        </div>
+    </div>
+    <div id="accordion01" role="tablist">
+    <div class="row">
+        {% if packs is empty %}
+            <div class="col-12">
+                <p class="h5">Aucun pack ne correspond à vos missions</p>
+            </div>
+        {% endif %}
+        {% for pack in packs %}
+            <div class="col-sm-4 col-12">
+                <div class="card">
+                    <div class="card-header" role="tab" id="collapse{{loop.index}}_header">
+                        <h5>
+                            <a data-toggle="collapse" href="#collapse{{loop.index}}" aria-expanded="false" aria-controls="collapse{{loop.index}}" class="collapsed">
+                                {{pack.nom|upper}}
+                            </a>
+                        </h5>
+                    </div>
+                    <div id="collapse{{loop.index}}" class="collapse" role="tabpanel" aria-labelledby="collapse{{loop.index}}_header" data-parent="#accordion01">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-12 text-center pr-5">
+                                    <ul class="list-group">
+                                {% for mission in pack.missions %}
+                                    <li class="list-group-item">{{ mission.nom }}</li>
+                                {% endfor %}
+                                    </ul>
+                                </div>
+                                <div class="col-12 mt-5">
+                                    <label for="pack{{ loop.index }}">Choisir ce pack</label>
+                                    <input type="checkbox" id="pack{{ loop.index }}" class="packOdi" value="{{ pack.id }}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+    <div class="row">
+        <div class="col-12 mt-5 text-center">
+            <span class="h5">Souhaitez vous créer des packs personnalisés supplémentaires ?</span>
+            <div class="row text-center mt-5">
+                <div class="col-6">
+                    <a href="{{path('tarifOdi')}}">
+                        <button class="btn btn-danger pt-5 pb-5">Non</button>
+                    </a>
+                </div>
+                <div class="col-6">
+                    <button class="btn btn-maincolor2 pt-5 pb-5" data-toggle="modal" data-target="#modalPack">Oui</button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <hr>
+    <div class="row mt-3">
+        <div class="col-12">
+            <div class="row">
+
+                {% for pack in packPersos %}
+                    <div class="col-lg-4 col-sm-6 col-12">
+                        <div class="card">
+
+                            <div class="card-body">
+                                <h5 class="card-title">{{ pack.nom }}</h5>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                {% for mission in pack.missions %}
+                                    <li class="list-group-item">{{ mission.nom }}</li>
+                                {% endfor %}
+                            </ul>
+                            <div class="card-body">
+                                <a href="{{path('suppimerPack',{id:pack.id})}}" class="card-link supprimerPackOdi"><button class="btn btn-warning ">Supprimer</button></a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+        <div class="modal fade" id="modalPack" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Définir mes packs</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                       <div class="row">
+                           <div class=" col-12 mb-5">
+                               <label for="nomPack">Nom de votre pack</label>
+                               <input type="text" name="" id="nomPack">
+                           </div>
+                           <div class="col-12">
+                               <span class="h4"></span>
+                           </div>
+                            <div class="col-12 mt-4 mb-4">
+                                <span class="h4">A quel type de bâtiment est destiné le pack ?</span>
+                            </div>
+                           {% for type in types %}
+                               <div class="col-sm-6 col-12">
+                                   <div class="row">
+                                       <div class="col-1">
+                                           <input type="radio" name="type" value="{{ type.id }}" id="type{{ loop.index}}" class="typeBien">
+                                       </div>
+                                       <div class="col-11">
+                                           <label for="type{{ loop.index }}">{{ type.nom|capitalize }}</label>
+                                       </div>
+                                   </div>
+                               </div>
+                           {% endfor %}
+                           {% for key in liste|keys %}
+                               <div class="col-12 mt-5 text-dark h4 text-center">
+                                   <span class="h4">{{key}}</span>
+                                   <div class="row mt-3">
+                                       {% for nom in liste[key]|keys %}
+                                          <div class="col-12 text-dark text-left h5">
+                                              {{nom}}
+                                             <div class="row">
+                                                 {% for mission in liste[key][nom] %}
+                                                     <div class="col-sm-6 col-12">
+                                                         <div class="row">
+                                                             <div class="col-1">
+                                                                 <input type="checkbox" name="" class="packPersoOdi" id="{{mission.id}}" data-nom="{{mission.nom}}" data-type="{{nom}}" value="{{mission.id}}">
+                                                             </div>
+                                                             <div class="col-11">
+                                                                 <label for="">{{mission.nom}}</label>
+                                                             </div>
+                                                         </div>
+                                                     </div>
+                                                 {% endfor %}
+                                             </div>
+                                              <hr>
+                                          </div>
+                                       {% endfor %}
+
+                                   </div>
+                               </div>
+                           {% endfor %}
+                       </div>
+                    </div>
+                    <div class="modal-footer ">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                        <button type="button" class="btn btn-primary">Valider</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <dialog class="modalPackPerso">
+        <div class="text-center">
+            <p class="h5">Souhaitez vous créer des packs personnalisés supplémentaires ?</p>
+        </div>
+
+           <div class="row footerPackPerso">
+               <div class="col-6 text-center">
+                   <button class="btn btn-success validerPackPerso">Oui</button>
+               </div>
+               <div class="col-6 text-center">
+                   <button class="btn btn-danger">
+                       <a href="{{path('tarifOdi')}}">Non</a>
+                   </button>
+               </div>
+           </div>
+
+
+
+    </dialog>
+{% endblock %}
+

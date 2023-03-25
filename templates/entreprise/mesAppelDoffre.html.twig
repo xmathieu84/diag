@@ -1,0 +1,82 @@
+{% extends 'entreprise/baseAE.html.twig' %}
+
+{% block contenu %}
+    {% if reponse is not empty %}
+
+
+    {% for reponse in reponses %}
+        <div class="card">
+            <div class="card-header" role="tab" id="collapse02_header">
+                <h5>
+                    <a class="collapsed" data-toggle="collapse" href="#collapse02" aria-expanded="false" aria-controls="collapse02">
+                        {{ reponse.appel.type }} pour {{ reponse.appel.agents.demandeur.nom }}
+                    </a>
+                </h5>
+            </div>
+            <div id="collapse02" class="collapse" role="tabpanel" aria-labelledby="collapse02_header" data-parent="#accordion01">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-12 mt-3">
+                            <p class="h5 souligne"><b>Présentation succincte de l’opérateur soumissionnaire:</b></p>
+                            <p class="h6">{{ reponse.presentation }}</p>
+                        </div>
+                        <div class="col-sm-12 mt-3">
+                            <p class="h5 souligne"><b>Qualifications de l’entreprise à répondre :</b></p>
+                            <p class="h6">{{ reponse.qualification }}</p>
+                        </div>
+                        {% if reponse.contexte %}
+                            <div class="col-sm-12 mt-3">
+                                <p class="h5 souligne"><b>Contexte général de la réponse  :</b></p>
+                                <p class="h6">{{ reponse.contexte }}</p>
+                            </div>
+                        {% endif %}
+                        <div class="col-sm-12 mt-3">
+                            <p class="h5 souligne"><b>Montant financier global de l'offre  :</b></p>
+                            <p class="h6">{{ reponse.prix }} €</p>
+                        </div>
+                        {% if reponse.precisionCom %}
+                            <div class="col-sm-12">
+                                <p class="h5 souligne"><b>Renseignements et/ou précisions complémentaires d’ordre technique   :</b></p>
+                                <p class="h6">{{ reponse.precisionCom }}</p>
+                            </div>
+                        {% endif %}
+                        <div class="col-sm-12 text-center">
+                            <legend>VOTRE DOSSIER COMPLET avec votre OFFRE </legend>
+                        </div>
+                        {% for dossier in reponse.dossierOtdAos %}
+                            <div class="col-sm-2">
+                                <a href="/uploads/appelOffre/{{ dossier.fichier }}" target="_blank">
+                                    <figure>
+                                        <img src="/css/css_site/img/filepetit.png" alt="">
+                                        <figcaption>{{ dossier.fichier }}</figcaption>
+                                    </figure>
+                                </a>
+                            </div>
+                        {% endfor %}
+                        <div class="col-sm-2">
+                            <a href="{{ path('telechargerDossierAo',{id:reponse.appel.id}) }}" target="_blank">
+                                <figure>
+                                    <img src="/css/css_site/img/zipcouleur.png" alt="">
+                                    <figcaption>{{ reponse.appel.type }} {{ reponse.appel.denomination }}</figcaption>
+                                </figure>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+        {% else %}
+        <div class="row">
+            <div class="col-12">
+                <p class="h5">Il n'y a pas d'appel d'offres ou à concurrence en cours.</p>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block title %}
+Mes appel d'offre
+{% endblock %}
+

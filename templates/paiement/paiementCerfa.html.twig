@@ -1,0 +1,162 @@
+{% extends template %}
+{% block title %}Paiement cerfa
+{% endblock %}
+{% block titrePage %}Paiement cerfa
+{% endblock %}
+{% block titreSection %}Paiement cerfa
+{% endblock %}
+
+
+{% block contenu %}
+<div class="col-sm-12 mb-5">
+	<img src="/css/css_site/images/paiement/mangopay.png" alt="" height="80%">
+</div>
+
+<div class="form-group bg-white pl-2 pr-2">
+
+	<div class="text-center">
+		<p class="h6">Type de paiement</p>
+	</div>
+	<div class="row">
+
+
+		<div class="col-sm-3 typeCarte  mt-3 text-center">
+
+
+			<input type="radio" name="typeCard" id="visa" value="CB_VISA_MASTERCARD">
+			<label for="visa" id="labelVisa"></label>
+
+			<p class="h6">Visa</p>
+
+		</div>
+
+		<div class="col-sm-3 typeCarte mt-3 text-center">
+
+
+			<input type="radio" name="typeCard" id="mastercard" value="CB_VISA_MASTERCARD">
+			<label for="mastercard" id="labelMastercard"></label>
+
+			<p class="h6">Mastercard</p>
+
+		</div>
+		<div class="col-sm-3 typeCarte  mt-3 text-center">
+
+
+			<input type="radio" name="typeCard" id="maestro" value="MAESTRO">
+			<label for="maestro" id="labelMaestro"></label>
+
+			<p class="h6">Maestro</p>
+
+		</div>
+		<div class="col-sm-3 typeCarte  mt-3 text-center">
+
+
+			<input type="radio" name="typeCard" id="wallet" value="WALLET">
+			<label for="wallet" id="labelWallet"></label>
+
+			<p class="h6">Wallet MangoPay</p>
+
+		</div>
+
+
+	</div>
+
+
+</div>
+
+
+<div class="col-sm-12 text-center bg-white mb-3 pt-5 pb-5">
+	<p class="h5 souligne">Montant du Paiement :
+		{{prix|number_format(2)}}
+		€</p>
+
+</div>
+
+{{form_start(form,{'action':'https://homologation-webpayment.payline.com/webpayment/getToken','attr':{'class':'bg-white pr-5 pl-5','id':'paiementCerfaForm'}})}}
+{% set lien = url %}
+
+<div class="row text-center">
+	{{form_row(form.returnURL,{'value':lien})}}
+
+	<div class="col-sm-4">
+		<div class="form-group has-placeholder">
+			{{form_row(form.accessKeyRef,{'label': ' ','attr':{'class':'form-control form-control-lg '}})}}
+
+		</div>
+	</div>
+	<div class="col-sm-4">
+		<div class="form-group has-placeholder">
+			{{form_row(form.data,{'label': ' ','attr':{'class':'form-control form-control-lg ','placeholder':'cryptogramme'}})}}
+
+		</div>
+	</div>
+
+	<br><br>
+
+	<div class="col-sm-12">
+		<div class="form-group has-placeholder">
+			<p class="h6">Numéro de la carte</p>
+			{{form_row(form.cardNumber,{'label': ' ','attr':{'class':'form-control form-control-lg ','placeholder':'Numéro de la carte','minlength':'16','maxlength':'16'}})}}
+
+
+		</div>
+	</div>
+	<div class="col-sm-6">
+		<div class="form-group has-placeholder">
+			<p class="h6">Date d'expiration (format MMYY)</p>
+			{{form_row(form.cardExpirationDate,{'label': ' ','attr':{'class':'form-control form-control-lg ','placeholder':'Date d\'expiration'}})}}
+
+			</div>
+		</div>
+
+		<div class="col-sm-6">
+			<div class="form-group has-placeholder">
+				<p class="h6">Numero de securité</p>
+				{{form_row(form.cardCvx,{'label': ' ','attr':{'class':'form-control form-control-lg '}})}}
+
+			</div>
+		</div>
+		<div class="col-sm-12 text-center bg-white">
+			<a href="https://www.mangopay.com/terms/PSP/PSP_MANGOPAY_FR.pdf" target="_blank">Condition générales de notre prestataire de paiement MANGO PAY</a><br>
+
+		</div>
+
+
+
+		
+		<div class="col-sm-12 bouton-submit"></div>
+
+
+</div>
+
+{{form_end(form)}}
+
+
+
+<div class="col-sm-12 bg-white montantWallet mb-3 pt-5 pb-5">
+
+	<div class="row text-center ">
+
+
+		<div class="col-sm-12 mb-3">
+			<p class="h6">Montant disponible :
+			</p>
+			<p class="h6 montant"></p>
+		</div>
+		<div class="col-sm-12 boutonWallet mt-5">
+			<a href="{{path('validerPaimentByWallet')}}" class="btn btn-maincolor">Je règle avec ma wallet MangoPay</a>
+		</div>
+
+	</div>
+
+</div>
+
+
+
+	
+
+	
+
+
+
+{% endblock %}

@@ -1,0 +1,164 @@
+{% extends 'demandeur/basedemandeur.html.twig' %}
+
+{% block title %}
+Mes informations
+{% endblock %}
+{% block pageAccueil %}
+<h4>Mes <span class="color_blue">Informations</span></h4>
+{% endblock %}
+{% block contenu %}
+    <div class="row">
+
+            <table>
+                <tr>
+                    <th class="text-center">Adresse E-mail</th>
+                    <td class="text-center text-dark">{{ demandeur.user.email }}</td>
+                    <td class="text-center text-dark">Nous contacter</td>
+                </tr>
+                <tr>
+                    <th class="text-center"width="30%">Adresse</th>
+                    <td class="text-center text-dark"width="30%">{{ demandeur.adresse.numero }} {{ demandeur.adresse.nomVoie }}
+                        <br>{{ demandeur.adresse.codePostal }} {{ demandeur.adresse.ville }}</td>
+                    <td class="text-center" width="30%"><button class="btn btn-maincolor" data-toggle="modal" data-target="#adresseModal">Modifier</button></td>
+                </tr>
+                <tr>
+                    <th class="text-center text-dark">Numéro de téléphone</th>
+                    <td class="text-center text-dark">{{ demandeur.telephon.numero }}</td>
+                    <td class="text-center text-dark"><button class="btn btn-maincolor" data-toggle="modal" data-target="#staticBackdrop">Modifier</button></td>
+                </tr>
+                {% if demandeur.siretTva %}
+                    <tr>
+                        <th class="text-center text-dark">Numéro de TVA intracommunautaire</th>
+                        <td class="text-center text-dark">{{ demandeur.siretTva.tva }}</td>
+                        <td class="text-center"><button class="btn btn-maincolor" data-toggle="modal" data-target="#tvaModal">Modifier</button></td>
+                    </tr>
+                    <tr>
+                        <th class="text-center text-dark">Numéro de SIRET</th>
+                        <td class="text-center text-dark">{{ demandeur.siretTva.siret }}</td>
+                        <td class="text-center"><button class="btn btn-maincolor" data-toggle="modal" data-target="#siretModal">Modifier</button></td>
+                    </tr>
+                {% endif %}
+            </table>
+
+    </div>
+    <div class="modal fade" id="adresseModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog" id="modalAdressDemandeur">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title color_blue" id="staticBackdropLabel">Modifier mon adresse</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12 mb-5">
+                            <p class="h6">Les champs marqués * sont obligatoire</p>
+                        </div>
+                        <div class="col-4 text-center">
+                            <label for="numero">Numéro de la rue</label>
+                            <input type="text" id="numero" value="{{ demandeur.adresse.numero }}">
+                        </div>
+                        <div class="col-8 text-center mb-5">
+                            <label for="voie">Nom de la rue *</label>
+                            <input type="text" id="voie" value="{{ demandeur.adresse.nomVoie }}">
+                        </div>
+                        <div class="col-6">
+                            <label for="cp">Code postal *</label>
+                            <input type="text" id="cp" value="{{ demandeur.adresse.codePostal }}">
+                        </div>
+                        <div class="col-6">
+                            <label for="ville">Ville *</label>
+                            <input type="text" id="ville" value="{{ demandeur.adresse.ville }}">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                    <button type="button" class="btn btn-primary validerAdresse">Valider</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title color_blue" id="staticBackdropLabel">Modifier mon numéro de téléphone</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <label for="telephone">Nouveau numéro de téléphone</label>
+                    <input type="text" id="telephone" value="{{ demandeur.telephon.numero }}">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                    <button type="button" class="btn btn-primary validerTelephone">Valider</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% if demandeur.siretTva %}
+        <div class="modal fade" id="tvaModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog" id="modalTvaDemandeur">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title color_blue" id="staticBackdropLabel">Modifier mon numéro de tva intracommunautaire</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12 mb-5">
+                                <p class="h6">Les champs marqués * sont obligatoire</p>
+                            </div>
+                            <div class="col-4 text-center">
+                                <label for="numero">Numéro de TVA</label>
+                                <input type="text" id="tva" value="{{ demandeur.siretTva.tva }}">
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                        <button type="button" class="btn btn-primary validerTva">Valider</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="siretModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog" id="modalSiretDemandeur">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title color_blue" id="staticBackdropLabel">Modifier mon numéro de SIRET</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12 mb-5">
+                                <p class="h6">Les champs marqués * sont obligatoire</p>
+                            </div>
+                            <div class="col-4 text-center">
+                                <label for="numero">Numéro de SIRET</label>
+                                <input type="text" id="siret" value="{{ demandeur.siretTva.siret }}">
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                        <button type="button" class="btn btn-primary validerSiret">Valider</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+{% endblock %}
+

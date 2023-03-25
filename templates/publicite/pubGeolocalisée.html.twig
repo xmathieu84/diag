@@ -1,0 +1,423 @@
+{% block publicite %}
+    <div id="accordion02" role="tablist" class="mt-5">
+        {% for key , liste in listes %}
+            {% set idSup = loop.index %}
+            {% if loop.index == 1 %}
+                <div>
+                    <div role="tab" id="collapse{{ loop.index }}_header">
+                        <h6>
+                            <a data-toggle="collapse" href="#collapse{{ loop.index }}" aria-expanded="true" aria-controls="collapse01">
+                                {{ key }}
+                            </a>
+                        </h6>
+                    </div>
+
+                    <div id="collapse{{ loop.index }}" class="collapse show" role="tabpanel" aria-labelledby="collapse{{ loop.index }}_header" data-parent="#accordion02">
+
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-3 col-6">
+                                    <div id="carouselExampleSlidesOnly2" class="carousel slide" data-ride="carousel">
+                                        <div class="carousel-inner">
+                                            {% for pro in liste %}
+                                                {% if loop.index ==1 %}
+                                                    <div class="carousel-item active " data-interval="2000">
+                                                        <img src="/uploads/logo/{{ pro.demandeur.logo }}" class="d-block w-100" alt="{{ pro.demandeur.nom }}" width="336" height="280" data-toggle="modal" data-target="#modalInfo{{ loop.index }}{{ idSup }}">
+                                                    </div>
+                                                {% else %}
+                                                    <div class="carousel-item " data-interval="2000">
+                                                        <img src="/uploads/logo/{{ pro.demandeur.logo }}" class="d-block w-100" alt="{{ pro.demandeur.nom }}" width="336" height="280" data-toggle="modal" data-target="#modalInfo{{ loop.index }}{{ idSup }}">
+                                                    </div>
+                                                {% endif %}
+                                                <div class="modal fade" id="modalInfo{{ loop.index }}{{ idSup }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <img src="/uploads/logo/{{ pro.demandeur.logo }}"  alt="{{ pro.demandeur.nom }}" width="336" height="280"">
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                               <div class="row">
+                                                                   <div class="col-6 mt-5">
+                                                                       <span class="h4">Nom de l'entreprise : </span><span class="h5">{{ pro.demandeur.nom }}</span>
+                                                                   </div>
+                                                                   <div class="col-6 mt-5 mb-5">
+                                                                       <span class="h4">Adresse : </span><span class="h5">{{ pro.demandeur.adresse.numero }} {{ pro.demandeur.adresse.nomVoie }} {{ pro.demandeur.adresse.codePostal }} {{ pro.demandeur.adresse.ville }}</span>
+                                                                   </div>
+                                                                   <div class="col-6">
+                                                                       <span class="h4">Numéro de téléphone : </span><span class="h5">{{ pro.demandeur.telephon.numero }}</span>
+                                                                   </div>
+                                                                   <div class="col-6">
+
+                                                                   </div>
+                                                               </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                <button type="button" class="btn btn-primary"><a
+                                                                            href="{{ path('contacterPro',{id:pro.id}) }}">Envoyer un email</a></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 col-6">
+                                    <div id="carouselExampleSlidesOnly2" class="carousel slide" data-ride="carousel">
+                                        <div class="carousel-inner">
+                                            {% for pro in liste %}
+                                                {% if loop.index ==2 %}
+                                                    <div class="carousel-item active " data-interval="2000">
+                                                        <img src="/uploads/logo/{{ pro.demandeur.logo }}" class="d-block w-100" alt="{{ pro.demandeur.nom }}" width="336" height="280" data-toggle="modal" data-target="#modalInfo{{ loop.index }}{{ idSup }}">
+                                                    </div>
+                                                {% else %}
+                                                    <div class="carousel-item " data-interval="2000">
+                                                        <img src="/uploads/logo/{{ pro.demandeur.logo }}" class="d-block w-100" alt="{{ pro.demandeur.nom }}" width="336" height="280" data-toggle="modal" data-target="#modalInfo{{ loop.index }}{{ idSup }}">
+                                                    </div>
+                                                {% endif %}
+                                                <div class="modal fade" id="modalInfo{{ loop.index }}{{ idSup }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog" style="max-width: 75%">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <img src="/uploads/logo/{{ pro.demandeur.logo }}"  alt="{{ pro.demandeur.nom }}" width="336" height="280"">
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="row">
+                                                                    <div class="col-6 mt-5">
+                                                                        <span class="h4">Nom de l'entreprise : </span><span class="h5">{{ pro.demandeur.nom }}</span>
+                                                                    </div>
+                                                                    <div class="col-6 mt-5 mb-5">
+                                                                        <span class="h4">Adresse : </span><span class="h5">{{ pro.demandeur.adresse.numero }} {{ pro.demandeur.adresse.nomVoie }} {{ pro.demandeur.adresse.codePostal }} {{ pro.demandeur.adresse.ville }}</span>
+                                                                    </div>
+                                                                    <div class="col-6">
+                                                                        <span class="h4">Numéro de téléphone : </span><span class="h5">{{ pro.demandeur.telephon.numero }}</span>
+                                                                    </div>
+                                                                    <div class="col-6">
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                <button type="button" class="btn btn-primary"><a
+                                                                            href="{{ path('contacterPro',{id:pro.id}) }}">Envoyer un email</a></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 col-6">
+                                    <div id="carouselExampleSlidesOnly2" class="carousel slide" data-ride="carousel">
+                                        <div class="carousel-inner">
+                                            {% for pro in liste %}
+                                                {% if loop.index ==3 %}
+                                                <div class="carousel-item active " data-interval="2000">
+                                                    <img src="/uploads/logo/{{ pro.demandeur.logo }}" class="d-block w-100" alt="{{ pro.demandeur.nom }}" width="336" height="280" data-toggle="modal" data-target="#modalInfo{{ loop.index }}{{ idSup }}">
+                                                </div>
+                                            {% else %}
+                                                <div class="carousel-item " data-interval="2000">
+                                                    <img src="/uploads/logo/{{ pro.demandeur.logo }}" class="d-block w-100" alt="{{ pro.demandeur.nom }}" width="336" height="280" data-toggle="modal" data-target="#modalInfo{{ loop.index }}{{ idSup }}">
+                                                </div>
+                                                {% endif %}
+                                                <div class="modal fade" id="modalInfo{{ loop.index }}{{ idSup }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog" style="max-width: 75%">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <img src="/uploads/logo/{{ pro.demandeur.logo }}"  alt="{{ pro.demandeur.nom }}" width="336" height="280"">
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="row">
+                                                                    <div class="col-6 mt-5">
+                                                                        <span class="h4">Nom de l'entreprise : </span><span class="h5">{{ pro.demandeur.nom }}</span>
+                                                                    </div>
+                                                                    <div class="col-6 mt-5 mb-5">
+                                                                        <span class="h4">Adresse : </span><span class="h5">{{ pro.demandeur.adresse.numero }} {{ pro.demandeur.adresse.nomVoie }} {{ pro.demandeur.adresse.codePostal }} {{ pro.demandeur.adresse.ville }}</span>
+                                                                    </div>
+                                                                    <div class="col-6">
+                                                                        <span class="h4">Numéro de téléphone : </span><span class="h5">{{ pro.demandeur.telephon.numero }}</span>
+                                                                    </div>
+                                                                    <div class="col-6">
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                <button type="button" class="btn btn-primary"><a
+                                                                            href="{{ path('contacterPro',{id:pro.id}) }}">Envoyer un email</a></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 col-6">
+                                    <div id="carouselExampleSlidesOnly2" class="carousel slide" data-ride="carousel">
+                                        <div class="carousel-inner">
+                                            {% for pro in liste %}
+                                                {% if loop.index ==4 %}
+                                                    <div class="carousel-item active " data-interval="2000">
+                                                        <img src="/uploads/logo/{{ pro.demandeur.logo }}" class="d-block w-100" alt="{{ pro.demandeur.nom }}" width="336" height="280" data-toggle="modal" data-target="#modalInfo{{ loop.index }}{{ idSup }}">
+                                                    </div>
+                                                {% else %}
+                                                    <div class="carousel-item " data-interval="2000">
+                                                        <img src="/uploads/logo/{{ pro.demandeur.logo }}" class="d-block w-100" alt="{{ pro.demandeur.nom }}" width="336" height="280" data-toggle="modal" data-target="#modalInfo{{ loop.index }}{{ idSup }}">
+                                                    </div>
+                                                {% endif %}
+                                                <div class="modal fade" id="modalInfo{{ loop.index }}{{ idSup }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog" style="max-width: 75%">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <img src="/uploads/logo/{{ pro.demandeur.logo }}"  alt="{{ pro.demandeur.nom }}" width="336" height="280"">
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="row">
+                                                                    <div class="col-6 mt-5">
+                                                                        <span class="h4">Nom de l'entreprise : </span><span class="h5">{{ pro.demandeur.nom }}</span>
+                                                                    </div>
+                                                                    <div class="col-6 mt-5 mb-5">
+                                                                        <span class="h4">Adresse : </span><span class="h5">{{ pro.demandeur.adresse.numero }} {{ pro.demandeur.adresse.nomVoie }} {{ pro.demandeur.adresse.codePostal }} {{ pro.demandeur.adresse.ville }}</span>
+                                                                    </div>
+                                                                    <div class="col-6">
+                                                                        <span class="h4">Numéro de téléphone : </span><span class="h5">{{ pro.demandeur.telephon.numero }}</span>
+                                                                    </div>
+                                                                    <div class="col-6">
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                <button type="button" class="btn btn-primary"><a
+                                                                            href="{{ path('contacterPro',{id:pro.id}) }}">Envoyer un email</a></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% else %}
+                    <div>
+                        <div role="tab" id="collapse{{ loop.index }}_header">
+                            <h6>
+                                <a class="collapsed" data-toggle="collapse" href="#collapse{{ loop.index }}" aria-expanded="false" aria-controls="collapse{{ loop.index }}">
+                                        {{ key }}
+                                </a>
+                            </h6>
+                        </div>
+                        <div id="collapse{{ loop.index }}" class="collapse" role="tabpanel" aria-labelledby="collapse{{ loop.index }}_header" data-parent="#accordion02">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-3 col-6">
+                                        <div id="carouselExampleSlidesOnly2" class="carousel slide" data-ride="carousel">
+                                            <div class="carousel-inner">
+                                                {% for pro in liste %}
+                                                    {% if loop.index ==1 %}
+                                                        <div class="carousel-item active " data-interval="2000">
+                                                            <img src="/uploads/logo/{{ pro.demandeur.logo }}" class="d-block w-100" alt="{{ pro.demandeur.nom }}" width="336" height="280" data-toggle="modal" data-target="#modalInfo{{ loop.index }}{{ idSup }}">
+                                                        </div>
+                                                    {% else %}
+                                                        <div class="carousel-item " data-interval="2000">
+                                                            <img src="/uploads/logo/{{ pro.demandeur.logo }}" class="d-block w-100" alt="{{ pro.demandeur.nom }}" width="336" height="280" data-toggle="modal" data-target="#modalInfo{{ loop.index }}{{ idSup }}">
+                                                        </div>
+                                                    {% endif %}
+                                                    <div class="modal fade" id="modalInfo{{ loop.index }}{{ idSup }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog" style="max-width: 75%">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <img src="/uploads/logo/{{ pro.demandeur.logo }}"  alt="{{ pro.demandeur.nom }}" width="336" height="280"">
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <div class="row">
+                                                                        <div class="col-6 mt-5">
+                                                                            <span class="h4">Nom de l'entreprise : </span><span class="h5">{{ pro.demandeur.nom }}</span>
+                                                                        </div>
+                                                                        <div class="col-6 mt-5 mb-5">
+                                                                            <span class="h4">Adresse : </span><span class="h5">{{ pro.demandeur.adresse.numero }} {{ pro.demandeur.adresse.nomVoie }} {{ pro.demandeur.adresse.codePostal }} {{ pro.demandeur.adresse.ville }}</span>
+                                                                        </div>
+                                                                        <div class="col-6">
+                                                                            <span class="h4">Numéro de téléphone : </span><span class="h5">{{ pro.demandeur.telephon.numero }}</span>
+                                                                        </div>
+                                                                        <div class="col-6">
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                    <button type="button" class="btn btn-primary"><a
+                                                                                href="{{ path('contacterPro',{id:pro.id}) }}">Envoyer un email</a></button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                {% endfor %}
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-6">
+                                        <div id="carouselExampleSlidesOnly2" class="carousel slide" data-ride="carousel">
+                                            <div class="carousel-inner">
+                                                {% for pro in liste %}
+                                                    {% if loop.index ==2 %}
+                                                        <div class="carousel-item active " data-interval="2000">
+                                                            <img src="/uploads/logo/{{ pro.demandeur.logo }}" class="d-block w-100" alt="{{ pro.demandeur.nom }}" width="336" height="280" data-toggle="modal" data-target="#modalInfo{{ loop.index }}{{ idSup }}">
+                                                        </div>
+                                                    {% else %}
+                                                        <div class="carousel-item " data-interval="2000">
+                                                            <img src="/uploads/logo/{{ pro.demandeur.logo }}" class="d-block w-100" alt="{{ pro.demandeur.nom }}" width="336" height="280" data-toggle="modal" data-target="#modalInfo{{ loop.index }}{{ idSup }}" >
+                                                        </div>
+                                                    {% endif %}
+                                                {% endfor %}
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-6">
+                                        <div id="carouselExampleSlidesOnly2" class="carousel slide" data-ride="carousel">
+                                            <div class="carousel-inner">
+                                                {% for pro in liste %}
+                                                    {% if loop.index ==3 %}
+                                                        <div class="carousel-item active " data-interval="2000">
+                                                            <img src="/uploads/logo/{{ pro.demandeur.logo }}" class="d-block w-100" alt="{{ pro.demandeur.nom }}" width="336" height="280" data-toggle="modal" data-target="#modalInfo{{ loop.index }}{{ idSup }}">
+                                                        </div>
+                                                    {% else %}
+                                                        <div class="carousel-item " data-interval="2000">
+                                                            <img src="/uploads/logo/{{ pro.demandeur.logo }}" class="d-block w-100" alt="{{ pro.demandeur.nom }}" width="336" height="280" data-toggle="modal" data-target="#modalInfo{{ loop.index }}{{ idSup }}">
+                                                        </div>
+                                                    {% endif %}
+                                                    <div class="modal fade" id="modalInfo{{ loop.index }}{{ idSup }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog" style="max-width: 75%">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <img src="/uploads/logo/{{ pro.demandeur.logo }}"  alt="{{ pro.demandeur.nom }}" width="336" height="280"">
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <div class="row">
+                                                                        <div class="col-6 mt-5">
+                                                                            <span class="h4">Nom de l'entreprise : </span><span class="h5">{{ pro.demandeur.nom }}</span>
+                                                                        </div>
+                                                                        <div class="col-6 mt-5 mb-5">
+                                                                            <span class="h4">Adresse : </span><span class="h5">{{ pro.demandeur.adresse.numero }} {{ pro.demandeur.adresse.nomVoie }} {{ pro.demandeur.adresse.codePostal }} {{ pro.demandeur.adresse.ville }}</span>
+                                                                        </div>
+                                                                        <div class="col-6">
+                                                                            <span class="h4">Numéro de téléphone : </span><span class="h5">{{ pro.demandeur.telephon.numero }}</span>
+                                                                        </div>
+                                                                        <div class="col-6">
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                    <button type="button" class="btn btn-primary"><a
+                                                                                href="{{ path('contacterPro',{id:pro.id}) }}">Envoyer un email</a></button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                {% endfor %}
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-6">
+                                        <div id="carouselExampleSlidesOnly2" class="carousel slide" data-ride="carousel">
+                                            <div class="carousel-inner">
+                                                {% for pro in liste %}
+                                                    {% if loop.index ==4 %}
+                                                        <div class="carousel-item active " data-interval="2000">
+                                                            <img src="/uploads/logo/{{ pro.demandeur.logo }}" class="d-block w-100" alt="{{ pro.demandeur.nom }}" width="336" height="280" data-toggle="modal" data-target="#modalInfo{{ loop.index }}{{ idSup }}">
+                                                        </div>
+                                                    {% else %}
+                                                        <div class="carousel-item " data-interval="2000">
+                                                            <img src="/uploads/logo/{{ pro.demandeur.logo }}" class="d-block w-100" alt="{{ pro.demandeur.nom }}" width="336" height="280" data-toggle="modal" data-target="#modalInfo{{ loop.index }}{{ idSup }}">
+                                                        </div>
+                                                    {% endif %}
+                                                    <div class="modal fade" id="modalInfo{{ loop.index }}{{ idSup }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog" style="max-width: 75%">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <img src="/uploads/logo/{{ pro.demandeur.logo }}"  alt="{{ pro.demandeur.nom }}" width="336" height="280"">
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <div class="row">
+                                                                        <div class="col-6 mt-5">
+                                                                            <span class="h4">Nom de l'entreprise : </span><span class="h5">{{ pro.demandeur.nom }}</span>
+                                                                        </div>
+                                                                        <div class="col-6 mt-5 mb-5">
+                                                                            <span class="h4">Adresse : </span><span class="h5">{{ pro.demandeur.adresse.numero }} {{ pro.demandeur.adresse.nomVoie }} {{ pro.demandeur.adresse.codePostal }} {{ pro.demandeur.adresse.ville }}</span>
+                                                                        </div>
+                                                                        <div class="col-6">
+                                                                            <span class="h4">Numéro de téléphone : </span><span class="h5">{{ pro.demandeur.telephon.numero }}</span>
+                                                                        </div>
+                                                                        <div class="col-6">
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                    <button type="button" class="btn btn-primary"><a
+                                                                                href="{{ path('contacterPro',{id:pro.id}) }}">Envoyer un email</a></button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                {% endfor %}
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            {% endif %}
+        {% endfor %}
+
+
+
+
+    </div>
+
+{% endblock %}
+

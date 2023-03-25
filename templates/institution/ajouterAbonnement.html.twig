@@ -1,0 +1,157 @@
+{% extends 'institution/baseInsti.html.twig' %}
+
+{% block title %}
+
+Ajouter un abonnement {{ type }}
+{% endblock %}
+{% block stylesheets %}
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
+
+
+
+{% endblock %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+{% block contenu %}
+    {% if type =='Entreprise BTP et autres' %}
+        <div class="row mt-5 bg-white">
+            <div class="col-12 pt-3">
+                {% for abonnement in abonnements %}
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="radio" name="abonnement" id="abonnement{{ loop.index }}" value="{{ abonnement.id }}" >
+                        <label class="form-check-label" for="abonnement{{ loop.index }}">
+                           {{ abonnement.nom }} pour une durée {{ abonnement.duree|date("%y")  }} an(s) avec {{ abonnement.utlisateur }} utilisateur(s) inclus au prix de <span class="color_blue">{{ abonnement.prix }} € HT </span>({{ abonnement.prix *1.2 }} € TTC).
+                        </label>
+                    </div>
+                {% endfor %}
+                
+            </div>
+
+            <div class="col-12 text-right mt-5 mb-5">
+                <button class="btn btn-maincolor">Ajouter cet abonnement</button>
+            </div>
+        </div>
+    {% endif %}
+    {% if type =='Pro-Btp' %}
+        {{ form_start(form) }}
+
+    <div class="row align-items-start bg-white">
+        <div class="col-sm-6 mt-5 col-12">
+            {{ form_row(form.departZoneInter,{'label_attr':{'for': form.vars.id ~ '[' ~ form.vars.name ~ ']' ~ '[' ~ form.departZoneInter.vars.name ~ ']'},'label':"Comment souhaitez vous définir votre zone d'intervention ?"}) }}
+        </div>
+        <div class="col-sm-6 col-12 mt-5 villeDepart">
+            {{ form_row(form.villeDepart,{'label_attr':{'class':'h5'},'label':'Nouvelle ville de départ'}) }}
+        </div>
+
+        <div class="col-sm-6 col-12 mt-5" >
+            <label for="" class="h5">Type de travaux</label>
+            {{ form_row(form.travaux,{'label':" "}) }}
+
+
+        </div>
+        <div class="col-sm-6 col-12 mt-5">
+            {{ form_row(form.abonnement,{'attr':{'class':'form-control form-control-lg'},'label':'Choisissez votre abonnement publicitaire','label_attr':{'class':"h5"}}) }}
+        </div>
+        <div class="col-sm-6 col-12 mt-5">
+            {{ form_row(form.siteWeb,{'label':'Ajoutez votre site web (Si vous en possédez un)','label_attr':{'class':"h5"}}) }}
+        </div>
+
+
+        <div class="col-sm-9 col-9 mt-5">
+            <label for="distanceInterPremium">Distance d'intervention (maximum <span id="distanceFinaleInter">100</span> km)</label>
+            {{ form_row(form.distanceInter,{'label':" ",'label_attr':{'class':"h5"}}) }}
+        </div>
+        <div class="col-3 mt-5">
+            <span class="h1 distanceSouscrit">0</span> <span class="h1"> Km</span>
+        </div>
+
+        <div class="col-12 text-right">
+            <button class="btn btn-maincolor btnAlerte" type="button" data-toggle="modal" data-target="#modaleAlert">Valider</button>
+        </div>
+    </div>
+        <div class="modal fade" id="modaleAlert" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog" style="max-width: 50%">
+                <div class="modal-content">
+
+                    <div class="modal-body">
+                        <p class="h4 mb-5">Vous allez souscrire à l'abonnement suivant : </p>
+                        <p class="h5 abonnement"></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                        <button  class="btn btn-primary" type="submit">Je valide cet abonnement</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {{form_widget(form._token)}}
+
+    {{ form_end(form, {'render_rest': false})}}
+        <div class="d-none">
+            <button type="button" class="btn btn-primary btnPresentation" data-toggle="modal" data-target="#modalePresentation">
+            </button>
+
+        </div>
+        <div class="modal fade" id="modaleCarte" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog" style="max-width: 80%">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Liste des abonnements Premium</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="cartePremium"></div>
+                        <div class="row mt-5">
+                            <div class="col-8 text-center">
+                                <label for="formControlRange">Indiquez votre rayon d'intervention</label>
+                                <input type="range" class="form-control-range" id="formControlRange" min="0" max="30" step="1" value="0">
+
+                            </div>
+                            <div class="col-4">
+                                <span class="h1 distance">0</span> <span class="h1">Km</span>
+                            </div>
+                            <div class="col-12 text-center mt-5">
+                                <label for="">Souhaitez-vous maintenir votre demande d’abonnement en PREMIUM ?</label><br>
+                                <div class="form-check form-check-inline mr-5">
+                                    <input type="radio" name="demandeAbo" id="" class="form-check-input" value="oui">
+                                    <label class="form-check-label" for="" >Oui</label>
+                                </div>
+                                <div class="form-check form-check-inline ml-5">
+                                    <input type="radio" name="demandeAbo" id=""class="form-check-input" value="non">
+                                    <label class="form-check-label" for="">Non</label>
+                                </div>
+
+
+                            </div>
+                            <div class="col-12 text-center basculerAbo mt-5">
+                                <label for="">Souhaitez-vous basculer en abonnement classique sur la totalité de votre secteur de <span class="distance"></span> km (maximum 100 km) ?</label><br>
+                                <div class="form-check form-check-inline mr-5">
+                                    <input type="radio" name="basculer" id=""class="form-check-input" value="oui">
+                                    <label class="form-check-label" for="">Oui</label>
+                                </div>
+                                <div class="form-check form-check-inline ml-5">
+                                    <input type="radio" name="basculer" id=""class="form-check-input" value="non">
+                                    <label for=""class="form-check-label">Non</label>
+                                </div>
+
+                            </div>
+                            <div class="col-12 mt-5 refus">
+                                <p class="h5">Désolé mais vous comprendrez que nous ne pouvons donner suite à votre demande, votre secteur étant déjà pour partie intégré à des abonnements PREMIUM</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
+{% block javascripts %}
+
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'institution/baseInsti.html.twig' %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block contenu %}
+<div class="row">
+    <div class="col-12">
+
+        <div id="accordion01" role="tablist">
+
+            {% for demande in demandes %}
+                <div class="card">
+                    <div class="card-header" role="tab" id="collapse02_header">
+                        <h5>
+                            <a class="collapsed" data-toggle="collapse" href="#collapse02" aria-expanded="false" aria-controls="collapse02">
+                                Demande d'accès a votre interface
+                            </a>
+                        </h5>
+                    </div>
+                    <div id="collapse02" class="collapse" role="tabpanel" aria-labelledby="collapse02_header" data-parent="#accordion01">
+                        <div class="card-body">
+                          <div class="row">
+                              <div class="col-12 mb-5">
+                                  <p class="h6"> Le syndic de co-propriété {{ demande.syndic.civilite.prenom|capitalize }} {{ demande.syndic.civilite.nom |capitalize }} demande un accès à votre interface.</p>
+                              </div>
+                              <div class="col-6 text-center">
+                                  <a href="{{ path('resultatDemande',{type:'accepter',id:demande.id}) }}" class="btn btn-success">Accepter</a>
+                              </div>
+                              <div class="col-6 text-center">
+                                  <a href="{{ path('resultatDemande',{type:'refuser',id:demande.id}) }}" class="btn btn-danger">Refuser</a>
+                              </div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+        </div>
+
+
+
+
+    </div>
+</div>
+{% endblock %}
+

@@ -1,0 +1,76 @@
+{% extends 'demandeur/basedemandeur.html.twig' %}
+
+{% block title %}
+	Rapport consultant
+{% endblock %}
+{% block titreConsultant %}
+	<h1>Consulter un rapport
+
+	</h1>
+{% endblock  %}
+
+{% block contenu %}
+
+	<section class="ls ms s-py-xl-150 s-py-lg-130 s-py-md-90 s-py-60">
+		<br><br>
+		<div class="row">
+			<div class="col-12">
+				<p class="h5">Pour identifier un rapport, indiquez ci-dessous le code à 6 chiffres reçu dans le mail "DIAG DRONE : NOUVEAU RAPPORT DISPONIBLE"</p>
+			</div>
+			<div class="col-sm-4"></div>
+			<div class="col-sm-4 mt-3">
+
+				<input type="text" class="form-control form-control-sm" placeholder="Tapez ici le code à 6 chiffres">
+				<button class="btn btn-maincolor mt-5">Rechercher</button>
+			</div>
+			<div class="col-sm-4"></div>
+
+			<div class="col-sm-3"></div>
+			<div class="col-sm-6 resultat"></div>
+			<div class="col-sm-3"></div>
+
+			<div class="col-sm-12 pr-3 pl-3 mt-5">
+				<table class="table table-sm">
+					<tr class="table-primary text-center">
+						<th class="text-center">Date de l'intervention</th>
+						<th class="text-center">Adresse</th>
+						<th class="text-center"></th>
+
+					</tr>
+
+                    {% for rapport in rapports %}
+                        <tr>
+                            <td class="text-center">{{ rapport.intervention.rdvAt|format_datetime('short', 'none', locale='fr') }}</td>
+
+                            <td class="text-center">
+                                {% if rapport.intervention.intDem.civilite %}
+                                    {{ rapport.intervention.intDem.civilite.type }}
+                                    {{ rapport.intervention.intDem.civilite.nom }}
+                                    {{ rapport.intervention.intDem.civilite.prenom }}
+                                {% else %}
+                                    {{ rapport.intervention.intDem.profil }}
+                                    {{ rapport.intervention.intDem.nom }}
+
+                                {% endif %}
+
+                                <br>
+                                {{ rapport.intervention.adresse.numero }}
+                                {{ rapport.intervention.adresse.nomVoie }}
+                                {{ rapport.intervention.adresse.codePostal }}
+                                {{ rapport.intervention.adresse.ville }}
+                            </td>
+                            <td class="text-center">
+                                <a href="{{ path('voirRapportConsultant',{id:rapport.id}) }}">
+                                    <button class="btn btn-danger btn-sm">Consulter les documents</button>
+								</a>
+							</td>
+
+
+						</tr>
+					{% endfor %}
+				</table>
+			</div>
+
+		</div>
+	</section>
+{% endblock %}

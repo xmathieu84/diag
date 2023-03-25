@@ -1,0 +1,141 @@
+{% extends 'entreprise/baseAE.html.twig' %}
+
+{% block contenu %}
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators mt-5">
+            {% for abonnement in abonnements %}
+                <li  data-target="#carouselExampleIndicators" data-slide-to="{{ loop.index }}" class="active color-dark">sdfsdf</li>
+            {% endfor %}
+
+
+        </ol>
+        <div class="carousel-inner">
+            {% for abonnement in abonnements %}
+                {% if  loop.index == 1  %}
+                    {% set class = 'active' %}
+                    {% else %}
+                        {% set class = '' %}
+                {% endif %}
+                <div class="carousel-item {{ class }}">
+                    <div class="form-check form-check-inline select_p mb-5">
+                        <input class="form-check-input no_opacity abonnement" type="radio" id="inlineRadio{{loop.index}}" name="inlineRadioOptions" value="{{abonnement.id}}">
+                        <label class="form-check-label pricing-plan version_two box-shadow with-features ls blockSelect" for="inlineRadio{{loop.index}}">
+
+                            <div class="form_inside" id="abonnement{{abonnement.id}}">
+
+                                <div class="plan-header">
+                                    <div class="plan-name">
+                                        <h5 class="abo_title">
+                                            Abonnement
+                                            <span class="color_blue">{{abonnement.nom|capitalize}}</span>
+
+                                        </h5>
+                                    </div>
+                                </div>
+                                <div class="price-wrap color-darkgrey">
+                                    <span class="plan-sign">€</span>
+                                    <span class="plan-price">{{abonnement.prix}}</span>
+
+                                    <span class="plan-month">/mois</span>
+                                </div>
+                                {% if abonnement.nom == 'Infinite network' %}
+                                    <div class="mt-4">
+                                        <sanp class="text-black minAbo">6 mois d'abonnement minimum</sanp>
+                                    </div>
+
+                                {% endif %}
+                                <div class="plan-features mt-5 pl-5 pr-5">
+                                    <ul class="list-unstyled text-left">
+                                        <li>
+                                            <i class="fa fa-check color_blue" aria-hidden="true"></i>
+                                            <span class="supAbo">{{abonnement.otdMax}}
+													OTD inclus</span>
+                                        </li>
+
+
+                                        <li>
+                                            <i class="fa fa-check color_blue" aria-hidden="true"></i>
+                                            <span class="supAbo">{{abonnement.otdSup}}€ /mois
+																																																																																																																																																																																						par OTD supplémentaires</span>
+                                        </li>
+
+                                    </ul>
+
+                                </div>
+                                <div class="plan-features mt-5 pl-5 pr-5">
+                                    <ul class="list-unstyled text-left">
+
+
+                                        {% for particularite in abonnement.particularites %}
+                                            <li>
+                                                <i class="fa fa-check color_blue" aria-hidden="true"></i>
+                                                {{particularite}}
+
+                                            </li>
+
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                                <div class="plan-button_footer_price mt-50" style="background-color: #75bd18">
+                                    Sélectionner
+                                </div>
+
+
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            {% endfor %}
+
+
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" id="previous" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" id="next" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+
+    <input type="hidden" name="" id="reste" value="{{ mois }}">
+        <div class="container pl-5">
+            <div class="row  bg-white ">
+                <div class="col-sm-12 col-xs-12 mt-50 col-12 pl-5">
+                    <h5>
+                        Choisissez votre
+                        <span class="color_blue">
+									durée d'engagement</span>
+                    </h5>
+                    <p class="h6">Votre nouvel abonnement commencera au moment où vous cliquerez sur le lien de validation</p>
+                    <p class="h6">La durée de votre nouvel abonnement ne peut pas être inferieure à la durée restante de votre ancien abonnement ({{ mois }} mois)</p>
+                </div>
+
+                <div class="col-sm-12 mt-50">
+
+                    <input type="range" value="1" min="1" max="12" list="mois" class="form-control-range timeabo" step="1" data-abonnement="3">
+
+                    <div class="row">
+                        {% for i in 1..12 %}
+                            <div class="col-sm-1 text-center padOnMobile color-dark">{{i}}
+                                mois</div>
+                        {% endfor %}
+
+                        <br>
+                        <br>
+
+
+                    </div>
+                    <div class="col-sm-12 text-center CGU mt-5 mb-5"></div>
+                    <div class="col-sm-12 message"></div>
+                </div>
+            </div>
+        </div>
+
+{% endblock %}
+
+{% block title %}
+Changer votre abonnement
+{% endblock %}
+

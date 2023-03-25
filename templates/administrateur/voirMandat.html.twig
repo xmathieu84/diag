@@ -1,0 +1,46 @@
+{% extends 'administrateur/baseA.html.twig' %}
+
+{% block title %}Facture sans Mandat{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-sm-12">
+            <p class="h4">Liste des facture sans mandat pour {{ institution.nom }}</p>
+        </div>
+
+        <div class="col-sm-12">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Type</th>
+                        <th>Facture</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for facture in factures %}
+                        <tr>
+                            <td>{{ facture.date|format_datetime('short', 'none', locale='fr') }}</td>
+                            <td>{% if facture.abonnment %}
+                                    Abonnement
+                                {% else %}
+                                    Pack supplémentaire
+                                {% endif %}</td>
+                            <td><a href="/uploads/factureInsti/{{ facture.nom }}" target="_blank">
+                                    <figure>
+                                        <img src="/css/css_site/img/pdf.png" alt="">
+                                        <figcaption>{{ facture.nom }}</figcaption>
+                                    </figure>
+                                </a></td>
+                            <td><a class="btn btn-outline-success btn-sm"
+                                   href="{{ path('validerMandat',{id:facture.id}) }}">Valider</a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,54 @@
+/* bootstrap dropdown menu */
+.dropdown-menu {
+  border: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+  border-radius: 0;
+  z-index: 1100;
+  margin-top: 0;
+  padding: 20px;
+  min-width: 10em;
+  font-Size: inherit;
+  line-height: 1.5;
+  > a {
+    display: block;
+    white-space: nowrap;
+    padding: 5px 0;
+    //for language flags
+    > img {
+      max-width: none;
+    }
+  }
+
+  .widget{
+    min-width: 320px;
+    @media(max-width: 575px){
+      min-width: 240px;
+    }
+  }
+
+  .dropdown & label,
+  .dropdown & h3,
+  .dropdown & h4 {
+    color: $darkgreyColor;
+  }
+
+  .dropdown.show & input {
+    border: 1px solid $borderColor;
+  }
+}
+
+.dropdown-menu > li > a:focus,
+.dropdown-menu > li > a:hover {
+  color: $darkgreyColor;
+  background-color: transparent;
+}
+
+.dropdwon-menu-title {
+  padding: 10px 30px;
+}
+
+.dropdown-toggle {
+  &:after {
+    display: none;
+  }
+}

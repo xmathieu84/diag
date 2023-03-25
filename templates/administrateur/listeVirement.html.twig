@@ -1,0 +1,40 @@
+<style>
+    .titre{
+        text-align: center;
+    }
+    table{
+        width: 100%;
+        border-collapse: collapse;
+        text-align: center;
+    }
+    td{
+        border: 1px solid black;
+        padding-top: 0.5em;
+        padding-bottom: 0.5em;
+    }
+</style>
+<div>
+    <img src="../public/css/css_site/images/logo-diagdrone.png" alt="" width="295.5px" height="115.5px">
+</div>
+<div class="titre">
+    <h2>Liste prélevement mensuel OTD</h2>
+</div>
+<table>
+        <tr>
+            <td>Nom entreprise</td>
+            <td>IBAN</td>
+            <td>BIC</td>
+            <td>Montant</td>
+        </tr>
+        {%for liste in listes %}
+
+
+            <tr>
+                <td>{{ liste.entreprise.denomination }}</td>
+                <td>{{ liste.entreprise.banque.IBAN }}</td>
+                <td>{{ liste.entreprise.banque.BIC }}</td>
+                <td>{{ liste.intervention * liste.entreprise.commission/100 + liste.abonnement }} €</td>
+            </tr>
+        {% endfor %}
+    </table>
+

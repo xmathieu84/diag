@@ -1,0 +1,183 @@
+<style>
+    @page  {
+        margin: 15px;
+    }
+    .diagdrone{
+        font-size: 1em;
+        width: 100%;
+        position:sticky;
+        bottom:3em;
+        text-align: center;
+        padding-top:50px;
+
+    }
+    .date{
+        margin-top: 1.2em;
+        text-align: center;
+        width: 100%;
+    }
+    .logo{
+        float: left;
+        width: 100%;
+    }
+    .client{
+        float: left;
+        width: 45%;
+        margin-left: 30em;
+        margin-top: 1.5em;
+    }
+    table{
+        width: 100%;
+        border-collapse: collapse;
+        text-align:center ;
+        margin-top: 1em;
+    }
+    th,td{
+        border: 1px solid black;
+        padding-top: 1.2em;
+        padding-bottom: 1.2em;
+    }
+    footer{
+
+        font-size: 0.6em;
+        position:sticky;
+        bottom:0;
+        width:100%;
+        padding-top:50px;
+        height:50px;
+
+    }
+    .premiere{
+        border: none;
+        width: 50%;
+    }
+    .total{
+        border: 1px solid blue;
+        border-radius: 5%;
+        margin-top: 5em;
+        padding-top: 1.5em;
+        padding-bottom: 1.5em;
+        width: 100%;
+    }
+    .phrase{
+        float: left;
+        width: 70%;
+        margin-left: 1em;
+    }
+    .montant{
+        float: right;
+        width: 23%;
+
+    }
+    .sousTotal{
+        float: right;
+        width: 25%;
+    }
+    .aujour{
+        float: left;
+        width: 50%;
+        margin-top: 1em;
+        margin-bottom: 1em;
+    }
+    .numeroFact{
+        width: 50%;
+        font-size: 1.3em;
+
+    }
+</style>
+
+<div class="logo">
+    <img src="../public/css/css_site/images/logo-diagdrone.png" alt="" width="493px" height="193px">
+</div>
+<div class="client">
+    <span>{{etat.demandeur.nom}}</span><br>
+    <span>{{etat.demandeur.adresse.numero}} {{etat.demandeur.adresse.nomVoie}}</span><br>
+    <span>{{etat.demandeur.adresse.codePostal}} {{etat.demandeur.adresse.ville}}</span><br>
+
+    <span>Numéro de siret : {{etat.demandeur.siretTva.siret}}</span><br>
+    {% if etat.demandeur.siretTva.tva %}
+        <span>TVA : {{ etat.demandeur.siretTva.tva }}</span>
+    {% endif %}
+
+</div>
+<div class="aujour">
+    Le {{ aujour|format_datetime('short', 'none', locale='fr') }}
+</div>
+<div class="numeroFact">
+    Facture n°{{ numero }} GCI
+</div>
+<div class="date">
+    <b >Facture de l' {{ etat.nom}} du {{ debut|format_datetime('short', 'none', locale='fr') }} au {{ fin|format_datetime('short', 'none', locale='fr') }}</b>
+</div>
+<table>
+    <tr>
+        <th class="premiere"></th>
+        <th>Quantité</th>
+        <th>Prix unitaire <br>HT</th>
+        <th>Prix HT</th>
+
+    </tr>
+    <tr>
+        <th>{{ etat.nom }}
+        </th>
+        <td>1</td>
+        <td>{{ etat.total }} €</td>
+        <td>{{ etat.total }} €</td>
+
+    </tr>
+    {% for pack in etat.packsupAboInstis %}
+        <tr>
+            <th>{{ pack.packSup.nom }}</th>
+            <td>1</td>
+            <td>{{ pack.packSup.prix }} €</td>
+            <td>{{ pack.packSup.prix }} €</td>
+
+        </tr>
+    {% endfor %}
+    <tr>
+
+    </tr>
+</table>
+<div class="sousTotal">
+    <p>Total HT : {{ ((etat.total + somme))|number_format(2) }} €</p>
+    <p>TVA 20% % :  {{ ( ((etat.total+somme)*1.2)-(etat.total+somme) )| number_format(2)}} €</p>
+    <hr>
+    <p>Total TTC : {{ ((etat.total + somme)*1.2)|number_format(2) }} €</p>
+</div>
+<div class="total">
+    <div class="ht">
+        <div class="phrase">Montant net à prélever le {{ fin|format_datetime('short', 'none', locale='fr') }} </div>
+        <div class="montant">{{ ((etat.total + somme)*1.2)|number_format(2) }} €</div>
+    </div>
+    <div class="tva">
+        <div class="phrase">
+            Dont TVA (20%)
+        </div>
+        <div class="montant">
+            {{ ( ((etat.total+somme)*1.2)-(etat.total+somme) )| number_format(2)}} €
+        </div>
+    </div>
+</div>
+<div class="diagdrone">
+    <span>SAS DIAG DRONE</span><br>
+    <span>200 rue Michel de Montaigne</span><br>
+    <span>84140 AVIGNON</span><br>
+    <span class="infoPdf">Numéro de SIREN
+	</span>
+    <span>
+		: 880431580</span><br>
+    <span class="infoPdf">Numéro de SIRET:
+	</span>
+    <span>88043158000013</span><br>
+    <span class="infoPdf">RSC AVIGNON</span>
+    <span>
+		 880431580</span><br>
+    <span class="infoPdf">Numéro TVA
+	</span>
+    <span>
+		: FR78880431580</span><br>
+
+</div>
+<footer>
+    <p>Vous pouvez retrouver votre facture dans votre espace  sur <a href="https://diag-drone.com/" target="_blank">DIAG-DRONE</a></p>
+</footer>

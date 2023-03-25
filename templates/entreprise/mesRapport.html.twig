@@ -1,0 +1,54 @@
+{% extends 'entreprise/baseAE.html.twig' %}
+{% block title %}
+Mes rapports d'interventions
+{% endblock %}
+{% block pageAccueil  %}
+    <h4>Mes rapports d'interventions</h4>
+{% endblock %}
+{% block contenu %}
+    {% if interventions is empty %}
+        <p class="h5 mt-5">Vous n'avez pas de rapport disponible</p>
+        {% else %}
+            <div id="accordion01" role="tablist">
+
+                {% for intervention in interventions %}
+                    <div class="card">
+                        <div class="card-header" role="tab" id="collapse{{ loop.index }}_header">
+                            <h5>
+                                <a class="collapsed" data-toggle="collapse" href="#collapse{{ loop.index }}" aria-expanded="false" aria-controls="collapse{{ loop.index }}">
+                                    Intervention réalisée le {{ intervention.rdvAT|format_datetime('short','none',locale='fr') }}
+                                </a>
+                            </h5>
+                        </div>
+                        <div id="collapse{{ loop.index }}" class="collapse" role="tabpanel" aria-labelledby="collapse{{ loop.index }}_header" data-parent="#accordion01">
+                            <div class="card-body">
+                                <div class="row">
+
+
+                                    {% for rapport in intervention.rapports %}
+                                        <div class="col-md-3 col-xs-12 text-center mb-2 mt-2">
+                                            <a href="/uploads/rapport/{{ rapport.archive }}" target="_blank">
+                                                <figure>
+                                                    <img src="/css/css_site/img/zipcouleur.png" alt="">
+                                                    <figcaption>{{ rapport.archive }}</figcaption>
+                                                </figure>
+                                            </a>
+                                        </div>
+                                    {% endfor %}
+                                    <div class="col-12 text-center">
+                                        <a href="{{ path('rapport',{id:intervention.id}) }}" class="btn btn-maincolor" style="width: 100%">Nouveau rapport d'intervention</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+            </div>
+    {% endif %}
+
+
+{% endblock %}
+
+
+

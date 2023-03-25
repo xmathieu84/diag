@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Fiche reponse de {{ reponse.entreprise.denomination }}</title>
+    <style>
+    .titre{
+        float: left;
+        width : 100%;
+        text-align: center;
+    }
+    .souligne{
+        text-decoration: underline;
+    }
+    .ssTitre,.soumission,.aContact{
+        float:left;
+        width : 100%;
+    }
+    .entreprise,.logo{
+        float:left;
+        width : 50%;
+        height:10em;
+    }
+    .contact,.denoAo{
+        float:left;
+        width : 100%;
+    }
+    .nom,.ordre{
+        float:left;
+        width : 50%;
+    }
+    .aContact{
+        text-align: center;
+    }
+
+    </style>
+</head>
+<body>
+<div class="titre">
+    <h2>Fiche retour sur {{ reponse.appel.type}} </h2>
+</div>
+<div class="ssTitre">
+    <p class="souligne"><b>FICHE d’information concernant le DOSSIER de REPONSE à l'{{ reponse.appel.type}} : </b></p>
+    <p><span class="souligne"><b>Date : </b></span>{{ reponse.date|format_datetime('short','none',locale='fr')}} </p>
+</div>
+<div class="soumission">
+    <p class="souligne"><b>NOM et COORDONNEES de l’OPERATEUR SOUMISSIONNAIRE à l’appel ci-dessous :</b></p>
+    <div class="entreprise">
+        <p><b>Information sur l'entreprise : </b></p>
+        <span class="souligne">Dénomination : </span><span> {{ reponse.entreprise.formJuridique}} {{ reponse.entreprise.denomination}}</span><br>
+        <span class="souligne">Adresse : </span><span>{{ reponse.entreprise.adresse.numero }} {{ reponse.entreprise.adresse.nomVoie }}</span><br>
+        <span>{{ reponse.entreprise.adresse.codePostal }} {{ reponse.entreprise.adresse.ville }}</span><br>
+        <span class="souligne">SIREN : </span><span>{{ reponse.entreprise.siretTva.siret }}</span>
+        {% if reponse.entreprise.siretTva.tva %}
+            <span class="souligne">{{ reponse.entreprise.siretTva.tva }}</span>
+        {% endif %}
+    </div>
+    {% if reponse.entreprise.logo %}
+        <div class="logo">
+            <img src="/public/uploads/logo/{{ reponse.entreprise.logo }}" alt="">
+        </div>
+    {% endif %}
+    <div class="aContact">
+        <h5>NOM du contact en charge de l’appel </h5>
+    </div>
+    {% for contact in reponse.contacts  %}
+        <div class="contact">
+            <div class="nom">
+                <p><b>Nom : </b>{{ contact.nom }}</p>
+            </div>
+            <div class="nom">
+                <p><b>Prénom : </b>{{ contact.prenom }}</p>
+            </div>
+            <div class="telephone">
+                <p><b>Téléphone : </b>{{ contact.telephone }}</p>
+            </div>
+            <div class="mail">
+                <p><b>Email : </b>{{ contact.email }}</p>
+            </div>
+        </div>
+        <hr style="width:50%">
+    {% endfor %}
+</div>
+{% if reponse.appel.ordre%}
+    <div class="ordre">
+        <p><b>Numéro d'ordre : </b>{{ reponse.appel.ordre }}</p>
+    </div>
+{% endif %}
+{% if reponse.appel.reference %}
+    <div class="ordre">
+        <p><b>Numéro de référence : </b>{{ reponse.appel.reference }}</p>
+    </div>
+{% endif %}
+<div class="denoAo">
+    <p><b>Dénomination de l'{{ reponse.appel.type }} : </b>{{ reponse.appel.denomination }}</p>
+</div>
+{% if reponse.appel.categorie %}
+    <div class="denoAo">
+        <p><b>Rappel de la catégorie } : </b>{{ reponse.appel.categorie }}</p>
+    </div>
+{% endif %}
+{% if reponse.appel.type =="Appel d'offre" %}
+    <div class="denoAo">
+        <p><b>Rappel du statut de l’appel d’offre : </b>{% if reponse.appel.restreint %}
+                Restreint
+            {% else %}
+            Ouvert
+            {% endif %}</p>
+        {% if reponse.appel.restreint %}
+            <p><b>Rappel du délai de dépôt des candidatures : </b>{{ reponse.appel.restreint.delaiDepotCandidaturedate('%d') }} jours à compter de la publication de l’appel d’offres</p>
+            <p><b>Rappel du délai de réponse à la candidature : </b>{{ reponse.appel.restreint.delaiReponseCandidature('%d') }} jours à compter de la publication de l’appel d’offres</p>
+        {% endif %}
+
+    </div>
+
+{% endif %}
+<div class="denoAo">
+    <p><b>Rappel des dates clés de l’APPEL : </b></p>
+    <span><b>Date maximum de remise de la proposition :</b>{{ reponse.appel.dateRemiseProp|format_datetime('short','none',locale='fr')}}</span><br>
+    <span><b>Date maximum de prise de décision  :</b>{{ reponse.appel.datePriseDecision|format_datetime('short','none',locale='fr')}}</span><br>
+    <span><b>Date de passation de la commande  :</b>{{ reponse.appel.datePassationCommande|format_datetime('short','none',locale='fr')}}</span><br>
+    <span><b>Date maximum de livraison  :</b>{{ reponse.appel.dateMaxLivraison|format_datetime('short','none',locale='fr')}}</span><br>
+    <hr style="width:50%">
+    <br><br>
+</div>
+<div class="opeSoum">
+    <p><b>Présentation succincte de l’opérateur soumissionnaire :</b></p>
+    <p>{{ reponse.presentation }}</p>
+    <p><b>Qualifications de l’entreprise à répondre  :</b></p>
+    <p>{{ reponse.qualification }}</p>
+    {% if reponse.contexte %}
+        <p><b>Contexte général de la réponse :</b></p>
+        <p>{{ reponse.contexte }}</p>
+    {% endif %}
+    <br>
+    <p><span class="souligne"><b>MONTANT FINANCIER GLOBAL de L’OFFRE :</b></span>{{ reponse.prix }} €</p>
+    {% if reponse.details %}
+        <p><b>Détails et/ou précisions financières au besoin :  :</b></p>
+        <p>{{ reponse.details }}</p>
+    {% endif %}
+    {% if reponse.precisionCom %}
+        <p><b>Renseignements et/ou précisions complémentaires d’ordre technique :  :</b></p>
+        <p>{{ reponse.precisionCom }}</p>
+    {% endif %}
+    <hr style="width:50%">
+    <p><b>Fiche établie le </b>{{ reponse.date|format_datetime('short','none',locale='fr') }} <b>par </b>{{ reponse.contacts[0].nom|capitalize}} {{ reponse.contacts[0].prenom|capitalize }} <b>pour le compte de </b>{{ reponse.entreprise.formJuridique}} {{ reponse.entreprise.denomination}}</p>
+    <p><b>A {{ reponse.entreprise.adresse.ville }}</b></p>
+</div>
+</body>
+</html>

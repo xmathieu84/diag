@@ -1,0 +1,23 @@
+{% extends 'administrateur/baseA.html.twig' %}
+{% block title %}{% endblock %}
+{% block body %}
+    <section class="wrapper site-min-height">
+
+        <div class="row text-center">
+            <div class="col-sm-12 mb-5">
+                <p class="h1">Liste des prélèvements DIAGDRONE</p>
+            </div>
+        {% for doc in docs %}
+            <div class="col-sm-2">
+                <a href="{{ path('telechargerFichierBanque',{id:doc.id}) }}" target="_blank">
+                    <figure>
+                        <img src="/css/css_admin/img/xml.png" alt="">
+                        <figcaption>{{ doc.nom }}</figcaption>
+                    </figure>
+                </a>
+
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}

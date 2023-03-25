@@ -1,0 +1,89 @@
+@page{
+    margin: 20px;
+}
+.logo,.titre{
+    float: left;
+    width: 50%;
+    height: 4em;
+}
+.titre{
+    text-align: center;
+    font-size: 2em;
+    font-weight: bold;
+}
+.entreprise,.client{
+    float: left;
+    width: 50%;
+}
+.client{
+    text-align: center;
+}
+.date{
+    font-size: 1.1em;
+    font-weight: bold;
+}
+.devis{
+    margin-top: 1.5em;
+}
+.devis,th,td{
+    border: 1px solid black;
+    border-collapse: collapse;
+    text-align: center;
+}
+.refDevis{
+    width: 20%;
+}
+.designDevis{
+    width: 30%;
+}
+.quantiteDevis{
+    width: 10%;
+}
+.prixdevis{
+    width: 10%;
+}
+.tvaDevis{
+    width: 10%;
+}
+.montantDevis{
+    width: 20%;
+}
+
+.footer{
+
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+
+    margin-left: -5em;
+    
+    
+}
+.totalHT,.totalTva,.totalTtc{
+    text-align: center;
+    width: 18em;
+    height: 3em;
+    border:1px solid black;
+
+    
+}
+.condotionL{
+    font-size: 0.5em;
+
+    padding-right: 30px;
+
+}
+.gfooter{
+    float: left;
+    width: 68%;
+
+}
+
+.footerPrix{
+
+    width: 30%;
+}
+td{
+    padding-top: 15px;
+    padding-bottom: 15px;
+}

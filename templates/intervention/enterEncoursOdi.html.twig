@@ -1,0 +1,104 @@
+{% extends 'entreprise/baseAE.html.twig' %}
+{% block title %}
+Diagnostics en cours
+{% endblock %}
+
+{% block bodyAccueil %}
+    <div id="accordion01" role="tablist">
+        {% for inter in inters %}
+            <div class="card">
+                <div class="card-header" role="tab" id="collapse{{ loop.index }}_header">
+                    <h5>
+                        <a data-toggle="collapse" href="#collapse{{ loop.index }}" aria-expanded="true" aria-controls="collapse{{ loop.index }}">
+                            Intervention le {{ inter.dateRdv|format_datetime('short','none',locale="fr") }}
+                        </a>
+                    </h5>
+                </div>
+
+                <div id="collapse{{ loop.index }}" class="collapse" role="tabpanel" aria-labelledby="collapse{{ loop.index }}_header" data-parent="#accordion{{ loop.index }}">
+                    <div class="card-body">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12 mb-4">
+                                    {% if inter.heureRdv ==null  %}
+                                        <div class="row">
+                                            <div class="col-6 pt-2"><span class="h5">Moment de l'intervention : </span><span class="h5">{{ inter.moment }}</span></div>
+                                            <div class="col-6 text-center"><button class="btn btn-maincolor" data-toggle="modal" data-target="#modalHeure{{ loop.index }}" data-inter="{{ inter.identifiat }}" data-date="{{ inter.dateRdv|date('d M Y') }}">Définir l'heure de l'intervention</button></div>
+                                        </div>
+
+                                    {% endif %}
+                                </div>
+                                <div class="col-12">
+                                    <p class="h5">Adresse de l'intervention : {{ inter.adresse.adresseComplete }}</p>
+                                </div>
+                                <div class="col-sm-6 col-12 mt-3">
+                                    <span class="h5">Missions demandées :</span>
+                                    <ul class="list-group mt-3">
+                                        {% for mission in inter.missions %}
+                                            <li class="list-group-item">{{ mission.nom }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                                <div class="col-sm-6 col-12 mt-3">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <a href="/uploads/factureDD/{{ inter.facture }}" target="_blank">
+                                                <button class="btn-success btn btn-block pt-3 pb-3">Facture d'intervention</button>
+                                            </a>
+                                        </div>
+                                        {% if inter.factureAcompte %}
+                                            <div class="col-12 mt-5">
+                                                <a href="/uploads/factureDD/{{ inter.factureAcompte }}" target="_blank">
+                                                    <button class="btn-success btn btn-block pt-3 pb-3">Facture d'acompte</button>
+                                                </a>
+                                            </div>
+                                        {% endif %}
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        {% endfor %}
+
+    </div>
+    {% for inter in inters %}
+<div class="modal fade" id="modalHeure{{ loop.index }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel{{ loop.index }}">Définissez l'heure de votre rendez vous pour l'intervention du {{ inter.dateRdv|format_datetime('short','none',locale="fr") }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row zoneDate"></div>
+                    <div class="row">
+                        <div class="col-12">
+                            <label for="">Choisissez l'heure du rendez vous</label>
+                            <input type="time" class="form-control form-control-sm">
+                        </div>
+                        <div class="col-12 mt-5">
+                            <p class="h5">Liste de vos interventions prévues le {{ inter.dateRdv|format_datetime('short','none',locale="fr") }}</p>
+                            <ul class="list-group listeInter">
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" >Annuler</button>
+                <button type="button" class="btn btn-primary validerHeure" data-inter="{{ inter.identifiat }}">Enregistrer</button>
+            </div>
+        </div>
+    </div>
+</div>
+    {% endfor %}
+{% endblock %}
+

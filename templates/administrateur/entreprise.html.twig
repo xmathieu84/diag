@@ -1,0 +1,83 @@
+{% extends 'administrateur/baseA.html.twig' %}
+{% block title %}Espace entreprise Admin{% endblock %}
+{% block body %}
+
+	<section class="wrapper">
+
+		<div class="row mt">
+			<div class="col-lg-12">
+
+
+				<h1>Liste des entreprises inscrites
+				</h1>
+				<div class="col-12">
+					<p class="h3">La modification des taux de commision se fait en direct</p>
+				</div>
+				<div class="table-reponsive">
+					<table class="table table-bordered table-striped table-condensed entreprisetest" >
+
+						<thead>
+							<tr>
+
+								<th >Forme juridique</th>
+								<th >Nom Entreprise</th>
+								<th >Representant légal</th>
+								<th >Contact</th>
+								<th >Commission</th>
+
+								<th width="25%">Abonnement</th>
+								<th></th>
+
+							</tr>
+							{% for entreprise in entreprises %}
+								<tr>
+									<td>{{entreprise.formJuridique}}</td>
+									<td>
+										<a href="{{path('listeSalarie',{entreprise:entreprise.id})}}">{{entreprise.denomination}}</a>
+									</td>
+									<td>{{entreprise.dirigeant.prenom}}
+										{{entreprise.dirigeant.nom}}
+									</td>
+									<td>Adresse :
+										{{entreprise.adresse.numero}}
+										{{entreprise.adresse.nomVoie}}
+										{{entreprise.adresse.codePostal}}
+										{{entreprise.adresse.ville}}<br>
+										Téléphone : {{entreprise.telephone.numero}}<br>
+
+										Mail:
+										{{entreprise.salaries[0].user.email}}
+									</td>
+									<td>
+										<div class="input-group mb-3">
+
+											<input type="text" class="form-control commission" aria-label="Amount (to the nearest dollar)" value="{{ entreprise.commission }}" data-id="{{ entreprise.id }}">
+											<div class="input-group-append">
+												<span class="input-group-text">%</span>
+											</div>
+										</div>
+									<td>
+										{% for etat in entreprise.etatAbonnements %}
+											{% if etat.abonne %}
+												{{ etat.abonnement.nom }}<br>
+												Du {{ etat.dateDebut|format_datetime('short','none',locale='fr') }} au {{ etat.dateFin|format_datetime('short','none',locale='fr') }}
+											{% endif %}
+										{% endfor %}
+									</td>
+									<td>
+										<a href="{{path('entrepriseInter',{id:entreprise.id})}}">
+											<button class="btn btn-sm btn-primary btn-round">Interventions</button>
+										</a>
+									</td>
+
+								</tr>
+							{% endfor %}
+
+						</thead>
+					</table>
+				</div>
+			</div>
+
+		</div>
+	</section>
+{% endblock %}

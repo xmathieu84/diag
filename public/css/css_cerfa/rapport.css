@@ -1,0 +1,673 @@
+@page{
+    margin:0;
+}
+.imageDD{
+    float: left;
+    width: 44.5%;
+    height: 13.6rem;
+    margin-left: 2em;
+    padding-top: 2em;
+
+}
+.bandeau,.sepaHeader{
+    float: left;
+    width: 5%;
+    height: 15.6rem;
+    background: #F7931D;
+
+}
+.slogan,.DDHeader{
+    padding-top: 2.5em;
+    padding-left: 1em;
+    padding-bottom: 2.95em;
+    float: left;
+    font-size: 1.5rem;
+    width: 43.5%;
+    color: #80838A;
+}
+.barre,.barre2,.barre3{
+    width: 92.5%;
+    height: 0.5em;
+    background: #0072BC;
+    margin-left: 2em;
+
+}
+.titre{
+    margin-top: 1.8em;
+    width: 92.5%;
+    height: 3em;
+    background: #B6B7BB;
+    margin-left: 2em;
+    text-align: center;
+}
+.ligne1{
+    font-size: 2em;
+}
+.ligne2{
+    font-size: 1.1em;
+}
+.soustitre{
+    margin-top: 1.5em;
+    width: 92.5%;
+    height: 2.5em;
+    background: #0072BC;
+    margin-left: 1.3em;
+    text-align: center;
+    font-size: 1.5em;
+}
+.vide1{
+    float: left;
+    width: 70%;
+    height: 2em;
+}
+.ref{
+    float: left;
+    width: 24%;
+    padding-top: 1em;
+    height: 2em;
+    font-size: 0.9em;
+    padding-left: 1.2em;
+    border-left: 1px solid #80838A;
+    border-right: 1px solid #80838A;
+    border-bottom: 1px solid #80838A;
+}
+.cadre{
+    width: 95%;
+    margin-left:1.5em;
+    border: 1px solid #00AEEF;
+    margin-top: 1.5em;
+    text-align: center;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+
+}
+.titreCadre{
+    font-size: 1.1em;
+    font-weight: bold;
+}
+.textCadre{
+    font-size: 0.85em;
+}
+.barre2{
+    margin-top: 1.5em;
+}
+.intervenant{
+    float: left;
+    width: 44.5%;
+    margin-left: 2em;
+
+}
+.photoSite{
+    float: left;
+    width: 43.5%;
+}
+.separation{
+    float: left;
+    width: 5%;
+    background:#F7931D ;
+    height: 5em;
+}
+.textIntervenant,.textPhoto{
+    text-align: center;
+    background: #B6B7BB;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+    margin-top: 0.5em;
+    font-size: 1.5em;
+    padding-top: 0.8em;
+    height: 2em;
+
+}
+.logoEnt{
+    float: left;
+    width: 48.2%;
+    border-top: 1px solid  #B6B7BB;
+
+}
+.imgEnt{
+    border: 1px solid #B6B7BB;
+    margin-left: 2.5em;
+    margin-top:5.5em;
+    margin-right: 1em;
+    height: 12.5em;
+}
+.sepa3{
+    float: left;
+    width: 5%;
+    background:#F7931D ;
+    height: 19em;
+}
+.imgSite {
+    float: left;
+    width: 46.7%;
+    border-top: 1px solid #B6B7BB;
+}
+.photoInter{
+    border: 1px solid #B6B7BB;
+    margin-left: 1em;
+    margin-top: 0.5em;
+    margin-right: 2.5em;
+
+}
+/** css header Rapport OTD**/
+.headerLogo{
+    float: left;
+    width: 44.5%;
+    height: 13.6rem;
+    margin-left: 2em;
+    padding-top: 2em;
+
+}
+.sepaHeader{
+    float: left;
+    width: 5%;
+    height: 15.6rem;
+    background: #F7931D;
+
+}
+.DDHeader{
+    padding-top: 2.5em;
+    padding-left: 1em;
+    padding-bottom: 2.95em;
+    float: right;
+    font-size: 1.5rem;
+    width: 43.5%;
+    color: #80838A;
+}
+.barre3{
+    margin-top: 0;
+}
+.imgHeader{
+    width: 60%;
+    margin-left: 3em;
+    margin-top: -1.5em;
+
+}
+.adressesite{
+    text-align: center;
+    font-size: 1.2em;
+    color: #03B7F5;
+
+}
+/** Fin css header **/
+.presentation{
+    float: left;
+    width: 92.5%;
+    margin-left: 1.25em;
+    height: 2.5em;
+    background: #B6B7BB;
+    font-size: 1.6em;
+    text-align: center;
+    padding-top: 1em;
+}
+.typeInter{
+    float: left;
+    width: 44.5%;
+    color: white;
+    height: 2.5em;
+    background: #7F828A;
+    margin-left: 1.8em;
+    text-align: center;
+    padding-top: 0.5em;
+    font-size: 1.1em;
+}
+.caracteristique{
+    float: right;
+    width: 42.5%;
+    color: white;
+    height: 2.5em;
+    background: #7F828A;
+    margin-right: 1.9em;
+    text-align: center;
+    padding-top: 0.5em;
+    font-size: 1.1em;
+}
+.drone{
+    float: left;
+    width: 44.6%;
+    background: #B6B7BB;
+    margin-left: 1.8em;
+    text-align: center;
+    padding-top: 1em;
+    font-size: 1.1em;
+    margin-top: 1.7em;
+    height: 5em;
+
+}
+.barre4{
+    float: left;
+    width: 5.18%;
+    background: #0072BC;
+    height: 10em;
+    margin-top: -1.8em;
+}
+.demandeur{
+    margin-top: 1.6em;
+    float: left;
+    width: 42.25%;
+    height: 5em;
+    font-size: 1.1em;
+    background: #B6B7BB;
+    margin-right: 2.1em;
+    text-align: center;
+    padding-top: 1em;
+}
+.emmission{
+    float: left;
+    width: 44.5%;
+    background: #B6B7BB;
+    padding-top: 1em;
+    margin-left: 1.8em;
+    height: 5em;
+    text-align: center;
+    font-size: 1.1em;
+    margin-top: 2.3em;
+}
+.barre5{
+    float: left;
+    width: 5.18%;
+    background: #F7931D;
+    height: 11em;
+    margin-top: -1.5em;
+
+}
+.consultant{
+    float: left;
+    width: 42.5%;
+    background: #B6B7BB;
+    height: 5em;
+    padding-top: 1em;
+    text-align: center;
+    font-size: 1.1em;
+    margin-top: 1.3em;
+}
+.barre6{
+    width: 100%;
+    background: #F7931D;
+    height: 0.5em;
+    margin-top: 1em;
+}
+.typeBien{
+    float: left;
+    width: 44.5%;
+    background: #B6B7BB;
+    padding-top: 1em;
+    margin-left: 1.8em;
+    height: 3.5em;
+    text-align: center;
+    font-size: 1.1em;
+    margin-top: 2.3em;
+}
+.denom{
+    float: left;
+    width: 42.5%;
+    background: #B6B7BB;
+    padding-top: 1em;
+    height: 3.5em;
+    text-align: center;
+    font-size: 1.1em;
+    margin-top: 0.9em;
+
+
+}
+.barre7{
+    float: left;
+    width: 5.15%;
+    background: #0072BC;
+    height: 6em;
+    margin-top: -1em;
+
+}
+.barre8{
+    float: left;
+    width: 5.15%;
+    background: #0072BC;
+    height: 13.5em;
+
+}
+.tableInter{
+    float: left;
+    width: 44.55%;
+    text-align: center;
+    height: 20em;
+    font-size: 1.1em;
+    margin-left: 1.8em;
+
+
+}
+.tableDem{
+    float: left;
+    width: 42.5%;
+    margin-right: 1.8em;
+    text-align: center;
+
+
+}
+.bien{
+    border: 1px solid #10B3F0;
+    width: 70%;
+    padding-top: 0.55em;
+    padding-bottom: 0.55em;
+    text-align: center;
+
+}
+.denomDem2{
+    border: 1px solid #10B3F0;
+    width: 65%;
+    padding-top: 0.55em;
+    padding-bottom: 0.55em;
+    text-align: center;
+}
+.denomDem{
+    border: 1px solid #10B3F0;
+    width: 35%;
+    padding-top: 0.55em;
+    padding-bottom: 0.55em;
+
+    text-align: center;
+
+
+}
+table{
+    border-collapse: collapse;
+}
+footer{
+    width: 100%;
+    height: 6em;
+    position: absolute;
+    bottom: 0;
+}
+.barre9{
+    width: 100%;
+    height: 0.25em;
+    background: #0072BC;
+
+}
+.footerLogoEnt{
+    float: left;
+    width: 20%;
+
+    height: 4.5em;
+
+
+}
+.footerLogoDD{
+    width: 20%;
+    float: right;
+    text-align: right;
+
+    height: 4.5em;
+
+}
+
+.numPage{
+    margin-top: 1.5em;
+    float: right;
+    width: 50%;
+
+    text-align: center;
+    height: 3.5em;
+}
+.juridique,.titrePage4,.titrePage5,.titrePage6{
+    float: left;
+    width: 92.5%;
+    margin-left: 1.65em;
+    height: 3em;
+    background: #B6B7BB;
+    font-size: 1.2em;
+    text-align: center;
+    padding-top: 1em;
+}
+.souligne{
+    text-decoration: underline;
+}
+.zoneTexte{
+    margin-top: 1em;
+    background: #ECEEEE;
+    float: left;
+    width: 89%;
+    margin-left: 2em;
+    padding-left: 1em;
+    padding-right: 1em;
+    font-size: 1.1em;
+    height: 35em;
+
+}
+.zone2{
+    height: 35em;
+}
+.tablePage3{
+    float: left;
+    width: 92.5%;
+    margin-left: 2em;
+}
+.tableRapport1{
+    width: 100%;
+
+}
+.tableTitre{
+    width: 25%;
+    text-align: center;
+    padding-top: 0.8em;
+    padding-bottom: 1em;
+    border: 1px solid black;
+}
+.barre10{
+    float: left;
+    width: 92.5%;
+    height: 0.5em;
+    background: #F7931D;
+    margin-left: 2em;
+}
+.titrePage4{
+    margin-top: 1em;
+}
+.videPage4,.vide2Page4{
+    float: left;
+    width: 32.5%;
+    height: 3.5em;
+
+
+}
+.vide2Page4{
+    float: right;
+    width: 31.9%;
+    height: 6em;
+
+}
+.intervenantPage4{
+    float: left;
+    width: 35%;
+    background:#B6B7BB ;
+    height: 3.5em;
+    margin-top: 2em;
+    padding-top: 1.5em;
+    font-size: 1.2em;
+    text-align: center;
+}
+.vide3Page4,.vide4Page4,.A1,.coorPresta{
+    float: left;
+}
+.A1{
+    margin-top: 2em;
+    width: 5%;
+    background: #C4C3C5;
+    padding: 1em;
+}
+.coorPresta{
+    padding: 1em;
+    width: 37.5%;
+    background: #DEDEE0;
+    color: #939598;
+}
+
+.vide3Page4{
+    margin-top: 2em;
+    width: 25%;
+    height: 3em;
+
+
+}
+.vide4Page4{
+    margin-top: 2.5em;
+    width: 20%;
+    height: 0.5em;
+
+
+}
+.vide5Page4{
+    float: left;
+    width: 25%;
+
+    height: 2em;
+}
+.tablePage4{
+    float: left;
+    width: 50%;
+    height: 33em;
+}
+.coordonnee{
+    width: 100%;
+    font-size: 0.95em;
+    text-align: center;
+
+}
+.caseTable{
+    border: 1px solid black;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    width: 45%;
+}
+.caseTable2{
+    border: 1px solid black;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    width: 55%;
+}
+.intervenantPage5,.demandeurPage6{
+    width: 35%;
+    background:#B6B7BB ;
+    height: 3.5em;
+    margin-top: 0.5em;
+    padding-top: 1.5em;
+    font-size: 1.2em;
+    text-align: center;
+    margin-left: 15em;
+}
+.suite{
+    font-size: 0.5em;
+}
+.A2,.A3,.B1,.B2{
+    float: left;
+    width: 5%;
+    background: #C4C3C5;
+    padding: 1em;
+}
+.caracPrestaPage5,.caracInterPage5,.demPage6,.caracPage6{
+    width: 70%;
+    background: #DEDEE0;
+    color: #939598;
+    padding: 1em;
+    text-align: center;
+}
+.prestatairePage5,.interPage5,.coorDemPage6,.caracDemPage6{
+    margin-top: 1em;
+    margin-left: 9em;
+}
+.tableCaracPrestaPage5,.tableCaracInterPage5,.tableCoordDemPage6,.tableCaracDemPage6{
+    margin-left: 9em;
+    margin-right: 8.2em;
+}
+.tableCaracInterPage5{
+    margin-left: 90em;
+}
+.tableCaracPage5{
+    width: 100%;
+    text-align: center;
+}
+.prestaCase1,.prestaCase2,.demCase1,.demCase2,.case1DemPage6,.case2DemPage6{
+    border: 1px solid black;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+}
+.demCase1{
+    width: 45%;
+}
+.prestaCase1{
+    width: 55%;
+}
+.tableCaracInterPage5{
+    font-size: 0.1em;
+}
+.interCase1,.interCase2{
+    border: 1px solid black;
+    padding-top: 0.25em;
+    padding-bottom: 0.25em;
+}
+.tableInterPage5{
+    width: 83%;
+    text-align: center;
+}
+.coordDemPage6,.caracDemandePage6,.donneeDem{
+    width: 100%;
+    text-align: center;
+}
+.donneCase1,.donneCase2,.meteoCase1,.meteoCase2{
+    border: 1px solid black;
+    padding-top: 0.8em;
+    padding-bottom: 0.8em;
+}
+.imageDem{
+    width: 75%;
+    text-align: center;
+    margin-left: 7.5em;
+    margin-top: 0.5em;
+    height: 35em;
+}
+
+.mapImageWrapper {
+    margin-top: 1em;
+    width: 100%;
+    text-align: center;
+    padding-bottom: 5em;
+}
+
+.mapImage {
+    width: 90%;
+    text-align: center;
+    max-height: 400px;
+}
+
+.fichierPDF{
+    width: 100%;
+    height: 35em;
+}
+.commentaire{
+    font-size: 0.8em;
+    height: 35em;
+}
+.commentaireDem{
+    font-size: 1em;
+    height: 35em;
+    padding-right: 3em;
+    padding-left: 3em;
+    padding-top: 3em;
+}
+.meteo{
+    width: 75%;
+    margin-left: 9em;
+    margin-top: 5em ;
+    height: 20em;
+
+}
+.tableMeteo{
+    border-collapse: collapse;
+    text-align: center;
+    width: 91%;
+}
+.meteoCase2,.meteoCase1{
+    width: 50%;
+}
+.listeAnnexe{
+ margin-top: 3.5em;
+}

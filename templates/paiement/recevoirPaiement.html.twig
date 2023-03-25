@@ -1,0 +1,36 @@
+{% extends 'entreprise/baseAE.html.twig' %}
+{% block title %}Recevoir un paiement
+{% endblock %}
+
+{% block pageAccueil %}
+<h4>Recevoir un paiement</h4>{% endblock %}
+{% block contenu %}
+	<div class="row text-center">
+		<div class="col-sm-12">
+
+			<p class="h5">Pour encaisser un client hors mission apportée par DIAG DRONE, renseigner son adresse mail puis le montant. Votre client recevra immédiatement un lien par pour effectuer son règlement en toute sécurité.</p>
+			<br><br></div>
+		<div class="col-sm-2"></div>
+		<div class="col-sm-8">
+			<p class="h6">Adresse mail du client</p>
+			<input type="email" class="form-control form-control-sm email" id="email">
+			<br>
+		</div>
+		<div class="col-sm-2"></div>
+		<div class="col-sm-2"></div>
+		<div class="col-sm-8">
+			<p class="h6">Montant :
+			</p>
+			<input type="number" name="" id="montant" class="form-control form-control-sm montant">
+			<br>
+		</div>
+		<div class="col-sm-2"></div>
+		<div class="col-sm-12">
+			<button class="btn btn-outline-maincolor" data-profil="{{profil}}">Valider</button>
+			<br>
+		</div>
+
+	</div>
+
+
+{% endblock %}

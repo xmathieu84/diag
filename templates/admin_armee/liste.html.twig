@@ -1,0 +1,29 @@
+{% extends 'administrateur/baseA.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-sm-12 text-center">
+            <h2>Liste des bases miltaires inscrites</h2>
+        </div>
+
+        <div class="col-sm-12">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <tr>
+                        <td>Nom de la base</td>
+                        <td>Email</td>
+                        <td>Ville</td>
+
+                    </tr>
+                    {% for base in bases %}
+                        <tr>
+                            <td>{{ base.nomBase }}</td>
+                            <td>{{ base.user.email }}</td>
+                            <td>{{ base.adresse.ville }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

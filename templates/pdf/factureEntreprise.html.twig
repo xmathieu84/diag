@@ -1,0 +1,86 @@
+</div>
+<div class="logoDD">
+	<img src="../public/css/css_site/images/logo-diagdrone.png" alt="" class="imgPdf">
+
+</div>
+<div class="logoEnt">
+	{% if facture.salarie.entreprise.logo %}
+		<img src="uploads/logo/{{ facture.salarie.entreprise.logo }}" alt="logo entreprise" style="height:100px; width:200px;text-align: left;">
+	{% endif %}
+
+</div>
+
+<div class="infoEnt">
+	<span class="listeEnt">{{facture.salarie.entreprise.enseigne}}
+		{{facture.salarie.entreprise.formJuridique}}
+		{{facture.salarie.entreprise.denomination}}</span><br>
+	<span class="listeEnt">{{facture.salarie.entreprise.adresse.numero}}
+		{{facture.salarie.entreprise.adresse.nomVoie}}</span><br>
+	<span class="listeEnt">{{facture.salarie.entreprise.adresse.codePostal}}
+		{{facture.salarie.entreprise.adresse.ville}}</span><br>
+	<span class="listeEnt">Téléphone:{{facture.salarie.entreprise.telephone.numero}}</span><br>
+
+	<span class="listeEnt">Email:{{facture.salarie.entreprise.user.email}}</span>
+
+</div>
+
+<div class="facture">
+	<span class="inofFact">Facture n°{{facture.intervention.id}}</span><br>
+	<span class="inofFact">Date :
+		{{facture.datestr}}</span><br>
+	<span class="infoFact">Code client :{{facture.intervention.intDem.id}}</span>
+</div>
+
+<div class="adresse">
+	<div class="adresseDem">
+		<p class="adresseDiag">Adresse de l'intervention:</p>
+		<span>{{facture.intervention.adresse.numero}}
+			{{facture.intervention.adresse.nomVoie}}</span><br>
+		<span>{{facture.intervention.adresse.codePostal}}
+			{{facture.intervention.adresse.ville}}</span>
+	</div>
+	<div class="adresseFact">
+		<p class="adresseDiag">Adresse de facturation:</p>
+		<span>{{facture.intervention.intDem.civilite.type}}
+			{{facture.intervention.intDem.civilite.nom}}
+			{{facture.intervention.intDem.civilite.prenom}}</span><br>
+		<span>{{facture.intervention.intDem.adresse.numero}}
+			{{facture.intervention.intDem.adresse.nomVoie}}</span><br>
+		<span>{{facture.intervention.adresse.codePostal}}
+			{{facture.intervention.intDem.adresse.ville}}</span>
+	</div>
+</div>
+<table class="prixInter factEnt">
+	<tr>
+		<th class="factEnt1">Secteur et type d'intervention demandés</th>
+		<th class="factEnt2">Prix HT</th>
+		<th class="factEnt3">Prix TTC</th>
+	</tr>
+	{% if facture.intervention.statuInter == 'Intervention validée' or facture.intervention.statuInter == 'termine'   %}
+		<tr>
+			<td class="factEnt1">{{facture.intervention.SecteurIntervention.nom}}
+				{{facture.Intervention.donneeType.nom}}</td>
+			<td class="factEnt2">{{(facture.montant /1.2) |number_format(2)}}€</td>
+			<td class="factEnt3">{{facture.montant}}</td>
+		</tr>
+		<tr>
+			<td class="factEnt3">Commission diag-drone.com</td>
+			{% set com = (facture.montant) * commission.taux /100 %}
+			{% set TVAent = ((facture.montant - com )-((facture.montant - com )/1.2))|number_format(2) %}
+
+
+			<td class="factEnt2">{{(com/1.2)|number_format(2)}}€</td>
+			<td class="factEnt3">{{com}}</td>
+		</tr>
+
+		<tr>
+			<td class="factEnt1">TVA entreprise 20%</td>
+
+			{% set montantNet = facture.montant - com %}
+			<td class="factEnt2">
+				{{ TVAent }}€
+			</td>
+
+		</tr>
+	{% endif %}
+</table>

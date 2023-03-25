@@ -1,0 +1,63 @@
+
+<div class="logo">
+
+    <img src="uploads/logo/{{ insitution.logo }}" alt="" width="200">
+
+</div>
+<div class="sepa" width="30";
+></div>
+<div class="cadre1">
+    <p>Créateur du dossier : </p>
+    <p class="createur"><b>{{ dossier.createur }}</b></p>
+    <p>Propriétaire du dossier : </p>
+    <p class="createur"><b>{{ dossier.proprietaire }}</b></p>
+    <p>Date de création : </p>
+    <p><b>{{ dossier.date|format_datetime('short','none',locale='fr') }}</b></p>
+</div>
+<div class="cadre2">
+    <p>Date de la dernière intervention sur le dossier : </p>
+    <p><b>{{ dossier.dateModif|format_datetime('short','none',locale='fr') }}</b></p>
+    <p>Effectuée par : </p>
+    <p><b>{{ dossier.nomModifiant }}</b></p>
+    <p>Type de modification effectuée : </p>
+    <p>{{ dossier.typeModif }}</p>
+</div>
+<div class="bleu"></div>
+<div class="cadreTitre">
+    <span class="titre1"><b>Dossier {{ dossier.type }}</b></span><br>
+    <span class="titre2"><b>{{ dossier.typeDeBien }} {{ dossier.nom }}</b></span>
+</div>
+<div class="cadre3">
+    <span>Nom : <span class="nom"><b>{{ dossier.nom }}</b></span></span><br>
+    <span>Type : <span class="type"><b>{{ dossier.typeDeBien }}</b></span></span><br>
+    <span>Adresse : <span class="adresse"><b>{{ dossier.adresse.numero }} {{ dossier.adresse.nomVoie }}</b></span></span><br>
+    <span>Code postal : <span class="cp"><b>{{ dossier.adresse.codePostal }}</b></span></span><br>
+    <span>Ville : <span class="ville"><b>{{ dossier.adresse.ville }}</b></span></span>
+</div>
+<div class="cadre4">
+    <p>test</p>
+</div>
+<div class="bleu"></div>
+<div class="cadre5Dossier">
+    <span>CONSTITUTION DU DOSSIER</span>
+</div>
+<div class="cadre6Dossier">
+    <span>ALERTES SUR DIAGNOSTIC</span>
+</div>
+<div class="cadreAlerte">
+    <table>
+        {% for Rdossier in Rdossiers %}
+            <tr>
+                <td>{{ Rdossier.type }}-{{ Rdossier.nom }}-{{ Rdossier.date }}</td>
+                <td>{% if Rdossier.alerte %}
+                        OUI
+                    {% endif %}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+
+
+
+
+

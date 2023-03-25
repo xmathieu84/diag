@@ -1,0 +1,24 @@
+{% extends 'entreprise/baseAE.html.twig' %}
+
+{% block title %}
+Type de modifcation
+{% endblock %}
+
+{% block contenu %}
+<div class="row">
+    <div class="col-12 mt-5">
+        <p class="h4">Quelle type de modification souhaitez vous apporter ?</p>
+    </div>
+    <div class="col-6 mt-5 text-center">
+        <a href="{{ path('modifierInter') }}">
+            <button class="btn btn-maincolor btn-prs">Vos types d'interventions</button>
+        </a>
+    </div>
+    <div class="col-6 mt-5 text-center">
+        <a href="{{ path('modLicence',{id:salarie.id}) }}">
+            <button class="btn btn-maincolor btn-prs">Votre licence DSAC</button>
+        </a>
+    </div>
+</div>
+{% endblock %}
+

@@ -1,0 +1,22 @@
+{% extends 'accueil/baseaccueil.html.twig' %}
+
+{% block bodyAccueil %}
+<section class="ls s-py-xl-150 s-py-lg-120 s-py-md-80 s-py-50">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 mb-5 text-center">
+                <p class="h4">Les identifiants sont incorrects</p>
+            </div>
+
+            <div class="col-sm-12 text-center mt-5">
+                <a href="{{ path('app_login') }}" class="btn btn-maincolor">Se connecter</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block title %}
+Mot de passe erroné
+{% endblock %}
+

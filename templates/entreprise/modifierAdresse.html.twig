@@ -1,0 +1,46 @@
+{% extends template %}
+{% block title %}
+	Modifer l'adresse
+{% endblock  %}
+
+
+{% block body %}
+
+	<section class="ls ms s-py-xl-150 s-py-lg-130 s-py-md-90 s-py-60">
+		<div class="container">
+			<div class="row">
+				<div class="col-12 contact-us animate" data-animation="scaleAppear">
+					{{form_start(form)}}
+					<div class="row">
+						<div class="col-sm-6 ">
+							<div class="form-group has-placeholder">
+								{{form_row(form.numero,{'label':' ' ,'attr':{'class':'form-control border-dark',"placeholder":"Numéro de la voie"}})}}
+							</div>
+						</div>
+						<div class="col-sm-6 ">
+
+							<div class="form-group has-placeholder">
+								{{form_row(form.nomVoie,{'label':' ' ,'attr':{'class':'form-control border-dark',"placeholder":"Nom de la voie"}})}}
+							</div>
+						</div>
+						<div class="col-sm-6 ">
+							<div class="form-group has-placeholder">
+								{{form_row(form.code_postal,{'label':' ' ,'attr':{'class':'form-control border-dark',"placeholder":"Code Postal"}})}}
+							</div>
+						</div>
+
+						<div class="col-sm-6 ">
+							<div class="form-group has-placeholder">
+								{{form_row(form.ville,{'label':' ' ,'attr':{'class':'form-control border-dark',"placeholder":"Tapez d'abord le code postal","list":"city"}})}}
+								<datalist id="city"></datalist>
+							</div>
+						</div>
+						<div class="col-sm-12">
+							<button class="btn btn-maincolor" type="submit">Valider</button>
+						</div>
+						{{form_end(form)}}
+					</div>
+				</div>
+			</div>
+		</section>
+	{% endblock  %}

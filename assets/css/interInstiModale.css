@@ -1,0 +1,35 @@
+.modal-container {
+    background: rgba(0, 0, 0, 0);
+    bottom: 0;
+    display: none;
+    left: 0;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 999;
+}
+.modal-container::before {
+     background: rgba(0, 0, 0, 0.5);
+     bottom: 0;
+     content: "";
+     left: 0;
+     position: fixed;
+     top: 0;
+     right: 0;
+     z-index: 999;
+ }
+.modalSurchargeInter {
+    background-color: #fff;
+    left: 50vw;
+    min-height: auto;
+    min-width: calc(640px - (15px * 2));
+    padding: 1.5rem;
+    position: absolute;
+    top: 10rem;
+    transform: translateX(-50%);
+    z-index: 1000;
+    margin-top :6em;
+}
+.modal__footer{
+    margin-top: 2em;
+}

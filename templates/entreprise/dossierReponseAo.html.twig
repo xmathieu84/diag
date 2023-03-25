@@ -1,0 +1,38 @@
+{% extends 'entreprise/baseAE.html.twig' %}
+{% block titrePage %}Dossier reponse{% endblock %}
+{% block titreSection %}Dossier de réponse à l' {{reponse.appel.type}}{% endblock %}
+{% block title %}Dossier reponse{% endblock %}
+{% block pageAccueil %}<p class="h2">Votre réponse à {{ reponse.appel.denomination }} {% if reponse.appel.restreint %}restreint
+
+{% endif %} pour {{ reponse.appel.agents.demandeur.nom }}</p>{% endblock %}
+
+{% block contenu %}
+<div class="row">
+    <div class="col-sm-12 text-center mb-5">
+        <p class="h6">Glissez ou cliquez dans la zone ci-dessous pour déposer votre dossier de réponse (pdf,zip, ou image)</p>
+    </div>
+    <div class="col-sm-12">
+        <div id="dropzone" class="row" data-id="{{ reponse.id }}">
+
+        </div>
+    </div>
+    <div class="col-sm-12 mt-2">
+        <p class="h5">Fichiers déja téléchargés</p>
+    </div>
+    {% for dossier in reponse.dossierOtdAos %}
+    <div class="col-sm-2 mt-2">
+        <a href="/uploads/appelOffre/{{ dossier.fichier }}" target="_blank">
+            <figure>
+                <img data-dz-thumbnail src='/css/css_site/img/filepetit.png'/>
+                <figcaption class="color-dark">{{ dossier.fichier }}</figcaption>
+
+            </figure>
+        </a>
+        <img src="/css/css_site/images/supprimer.png" alt="" class="mt--50 delete" data-id="{{ dossier.id }}">
+    </div>
+    {% endfor %}
+    <div class="col-sm-12 text-center mt-5">
+        <a href="{{ path('mesReponseAo') }}" class="btn btn-maincolor">Terminer</a>
+    </div>
+</div>
+{% endblock %}

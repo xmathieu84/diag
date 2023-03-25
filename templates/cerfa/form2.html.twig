@@ -1,0 +1,474 @@
+<body>
+	<div class="imgDrapeau">
+		<img src="../public/css/css_cerfa/1/img/drapeau.jpg" alt="">
+		<div class="sousDrapeau">
+			<div>Ministère chargé
+			</div>de l’aviation civile<div></div>
+		</div>
+	</div>
+
+	<div class="titre1">
+		<span class="titre">Déclaration préalable</span><br>
+		<span class="sousTitre">au vol en zone peuplée d’un aéronef circulant sans personne à bord</span>
+	</div>
+	<div class="imgCerfa">
+		<img class="cerfa" src="../public/css/css_cerfa/1/img/2.png" alt=""><br>
+		<span class="sousCerfa">N° 15476*02</span>
+
+	</div>
+	<div class="accroche">
+		<span>Arrêté du 17/12/2015 relatif à l’utilisation de l’espace aérien par les aéronefs qui circulent sans
+						            personne à bord (DEVA1528469A)</span>
+	</div>
+	<div class="table1">
+		<div class="fond1">1. L’exploitant</div>
+		{% if reservation.salarie.entreprise.formJuridique == 'auto-entrepreneur' %}
+
+			<div class="table1case1">
+				<div class="boldcase1">L’exploitant est un particulier :</div>
+				{% if reservation.salarie.civilite.type == 'Monsieur' %}
+
+					<div class="madamecase1">
+						<input type="checkbox" class="checkbox">Madame</div>
+					<div class="monsieurcase1"><input type="checkbox" class="checkbox" checked="checked">Monsieur</div>
+				{% else %}
+					<div class="madamecase1">
+						<input type="checkbox" class="checkbox" checked="checked">Madame</div>
+					<div class="monsieurcase1"><input type="checkbox" class="checkbox">Monsieur</div>
+				{% endif %}
+				<div class="nomcase1">Nom:{{reservation.salarie.civilite.nom}}</div>
+				<div class="prenomcase1">Prénom:{{reservation.salarie.civilite.prenom}}</div>
+			{% endif %}
+		</div>
+		<div class="table1case2">
+			<div class="blodcase2">L’exploitant est une personne morale :</div>
+			{% if reservation.salarie.entreprise.formJuridique != 'auto-entrepreneur' %}
+				<div class="demsoc">Dénomination sociale:{{reservation.salarie.entreprise.formJuridique}}</div>
+				<div class="nomcom">Nom commercial:{{reservation.salarie.entreprise.enseigne}}
+					{{reservation.salarie.entreprise.denomination}}</div>
+			{% else %}
+				<div class="demsoc">Dénomination sociale:</div>
+				<div class="nomcom">Nom commercial:</div>
+			{% endif %}
+
+
+		</div>
+		<div class="table1case3">
+			<div class="boldcase3">Contact général :</div>
+			{% if reservation.salarie.entreprise.dirigeant.type == 'Monsieur' %}
+				<div class="madamecase3"><input type="checkbox" class="checkbox">Madame</div>
+				<div class="monsieurcase3"><input type="checkbox" class="checkbox" checked="checked">Monsieur</div>
+			{% else %}
+				<div class="madamecase3"><input type="checkbox" class="checkbox" checked="checked">Madame</div>
+				<div class="monsieurcase3"><input type="checkbox" class="checkbox">Monsieur</div>
+			{% endif %}
+			<div class="nomcase3">Nom:
+				{{reservation.salarie.entreprise.dirigeant.nom}}</div>
+			<div class="prenomcase3">Prénom:
+				{{reservation.salarie.entreprise.dirigeant.prenom}}</div>
+			<div class="fonctioncase3">Fonction:
+				{% if reservation.salarie.entreprise.formJuridique == 'auto-entrepreneur' %}Indépendant
+					{% else %}Gérant
+				{% endif %}
+			</div>
+			<div class="telportcase3">Téléphone portable:
+				{{reservation.salarie.entreprise.telephone.numero}}</div>
+
+			<div class="mailcase3">Courriel:
+				{{dirigeant.user.email}}</div>
+		</div>
+		<div class="table1case4">
+
+			<div class="boldcase4">Contact présent lors des vols prévus :
+			</div>
+
+			<div class="choixcase4">
+				{% if reservation.salarie.entreprise.formJuridique == 'auto-entrepreneur' %}
+					<input type="checkbox" class="checkbox" checked="checked">Idem ci-dessus
+
+				</div>
+
+				<div class="madamecase4"><input type="checkbox" class="checkbox">Madame</div>
+				<div class="monsieurcase4"><input type="checkbox" class="checkbox">Monsieur</div>
+				<div class="nomcase3">Nom:</div>
+				<div class="prenomcase4">Prénom:</div>
+				<div class="telportcase4">Téléphone portable:</div>
+				<div class="mailcase4">Courriel:</div>
+			{% else %}
+				{% if reservation.salarie.civilite.type == 'Monsieur' %}
+					<div class="madamecase4"><input type="checkbox" class="checkbox">Madame</div>
+					<div class="monsieurcase4"><input type="checkbox" class="checkbox" checked="checked">Monsieur</div>
+				{% else %}
+					<div class="madamecase4"><input type="checkbox" class="checkbox" checked="checked">Madame</div>
+					<div class="monsieurcase4"><input type="checkbox" class="checkbox">Monsieur</div>
+				{% endif %}
+				<div class="nomcase3">Nom:{{reservation.salarie.civilite.nom}}</div>
+				<div class="prenomcase4">Prénom:
+					{{reservation.salarie.civilite.prenom}}</div>
+				<div class="telportcase4">Téléphone portable:{{reservation.salarie.telephone.numero}}</div>
+				<div class="mailcase4">Courriel:{{reservation.salarie.user.email}}</div>
+			{% endif %}
+		</div>
+	</div>
+
+	<div class="table2">
+		<div class="fond2">
+			2. Nature des vols
+		</div>
+		<div class="table2choix1">
+			<div class="annotationdebut"><input type="checkbox" class="checkbox" checked="checked">Activités
+								                particulières</div>
+			<div class="annotation">(joindre une copie de l’accusé de réception de déclaration d’activité, émis par la
+								                DGAC</div>
+			<div class="indice">1</div>
+			<div class="finannotation">)</div>
+			<div class="explicationtable2">(1) ou à défaut, jusqu’au 30/06/2016, d’une attestation de dépôt du manuel
+								                d’activités particulières, émise par la DGAC avant le 1er janvier 2016</div>
+		</div>
+		<div class="table2choix2">
+			<input type="checkbox" class="checkbox">Expérimentation<span class="annotation2">(joindre une copie du
+								                laissez-passer délivré par la DGAC)</span>
+		</div>
+	</div>
+
+	<div class="table3">
+		<div class="fond3">3. Date(s) des vols (préavis maximal de 1 mois)</div>
+		<div class="table3Hdebut">
+			<div class="debut">
+				<span>Date :{{reservation.intervention.rdvAt|format_datetime('short','none',locale='fr')}}</span><br>
+				<span class="datestr">(JJ/MM/AAAA)</span>
+			</div>
+			<div class="date">
+				<span>Heure :{{reservation.intervention.rdvAt|format_datetime('none','short',locale='fr')}}</span><br>
+				<span class="heureformat">(heure locale, au format 24h)</span>
+			</div>
+
+		</div>
+		<div class="table3explication">
+			<span>Voir possibles exclusions au § 5,</span><br>
+			<span>en fonction du site</span>
+		</div>
+
+		<div class="table3Hfin">
+			<div class="debut">
+				<span>Date :{{reservation.depart| format_datetime('short','none',locale='fr')}}</span><br>
+				<span class="datestr">(JJ/MM/AAAA)</span>
+			</div>
+			<div class="date">
+				<span>Heure :
+					{{reservation.depart|format_datetime('none','short',locale='fr')}}</span><br>
+				<span class="heureformat">(heure locale, au format 24h)</span>
+			</div>
+		</div>
+		<div class="duree">
+			<input type="checkbox" class="checkbox">Durée supérieure à
+			<span class="jours">sept jours</span>
+			<span class="italic">(jours de début et de fin compris)</span>
+			<span>joindre les justifications appropriées
+								                (voir notice)</span>
+		</div>
+		<div class="derniertable3">
+			<span class="bold">Rappel important
+			</span>
+			<span>
+				: Les vols de nuit nécessitent
+								                l’obtention préalable d’une dérogation (réf. article 10.4 de l’arrêté)</span>
+		</div>
+	</div>
+
+	<div class="table4">
+		<div class="fond4">4. Les aéronefs</div>
+		<div class="numerodrone">1</div>
+		<div class="table4case1">
+			<div class="constructeur">Constructeur :{{reservation.intervention.drone.nomFabriquant}}</div>
+			<div class="modele">Modèle :
+				{{reservation.intervention.drone.typeDrone}}</div>
+			<div class="infoDrone">
+				<div class="classe">Classe :
+					{{reservation.intervention.drone.classe}}</div>
+				<div class="captif">Aéronef captif:
+					{% if reservation.intervention.drone.captif %}
+						<input type="checkbox" class="checkbox" checked="checked">oui
+						<input type="checkbox" class="checkbox">non
+					{% else %}
+						<input type="checkbox" class="checkbox">oui
+						<input type="checkbox" class="checkbox" checked="checked">non
+					{% endif %}
+				</div>
+				<div class="poids">Masse maximale prévue pour les vols :
+					{{reservation.intervention.drone.poidDrone}}
+				</div>
+				<div class="unitepoids">kg</div>
+			</div>
+
+		</div>
+		<div class="numerodrone">2</div>
+		<div class="table4case1">
+			<div class="constructeur">Constructeur :</div>
+			<div class="modele">Modèle :</div>
+			<div class="infoDrone">
+				<div class="classe">Classe :</div>
+				<div class="captif">Aéronef captif:
+					<input type="checkbox" class="checkbox">oui
+					<input type="checkbox" class="checkbox">non
+				</div>
+				<div class="poids">Masse maximale prévue pour les vols :</div>
+				<div class="unitepoids">kg</div>
+			</div>
+
+		</div>
+		<div class="numerodrone">3</div>
+		<div class="table4case1">
+			<div class="constructeur">Constructeur :</div>
+			<div class="modele">Modèle :</div>
+			<div class="infoDrone">
+				<div class="classe">Classe :</div>
+				<div class="captif">Aéronef captif:
+					<input type="checkbox" class="checkbox">oui
+					<input type="checkbox" class="checkbox">non
+				</div>
+				<div class="poids">Masse maximale prévue pour les vols :</div>
+				<div class="unitepoids">kg</div>
+			</div>
+
+		</div>
+		<div class="numerodrone">4</div>
+		<div class="table4case1">
+			<div class="constructeur">Constructeur :</div>
+			<div class="modele">Modèle :</div>
+			<div class="infoDrone">
+				<div class="classe">Classe :</div>
+				<div class="captif">Aéronef captif:
+					<input type="checkbox" class="checkbox">oui
+					<input type="checkbox" class="checkbox">non
+				</div>
+				<div class="poids">Masse maximale prévue pour les vols :</div>
+				<div class="unitepoids">kg</div>
+			</div>
+
+		</div>
+		<div class="numerodrone">5</div>
+		<div class="table4case1">
+			<div class="constructeur">Constructeur :</div>
+			<div class="modele">Modèle :</div>
+			<div class="infoDrone">
+				<div class="classe">Classe :</div>
+				<div class="captif">Aéronef captif:
+					<input type="checkbox" class="checkbox">oui
+					<input type="checkbox" class="checkbox">non
+				</div>
+				<div class="poids">Masse maximale prévue pour les vols :</div>
+				<div class="unitepoids">kg</div>
+			</div>
+
+		</div>
+	</div>
+	<div class="page">1/2</div>
+
+	<div class="table5">
+		<div class="fond5">5. Description des vols</div>
+		<div class="site1">
+			<div class="titretable5">Site n°1</div>
+			<div class="agglo">
+				<input type="checkbox" class="checkbox" checked="checked">En agglomération
+			</div>
+			<div class="personne">
+				<input type="checkbox" class="checkbox">A proximité d’un rassemblement de personnes
+				<span class="italic">(décrire)</span>
+			</div>
+			<div class="localisation">
+				<table>
+					<tr>
+						<th class="codePostalTable">Code postal</th>
+						<th class="villeTable">Localité</th>
+						<th class="adresseTable">Adresse</th>
+					</tr>
+					<tr>
+						<td class="villetd">{{reservation.intervention.adresse.codePostal}}</td>
+						<td class="codepostaltd">{{reservation.intervention.adresse.ville}}</td>
+						<td class="adressetd">{{reservation.intervention.adresse.numero}}
+							{{reservation.intervention.adresse.nomVoie}}</td>
+					</tr>
+				</table>
+
+			</div>
+			<div class="espacepublic">
+				<input type="checkbox" class="checkbox">Cocher la case si les vols auront lieu exclusivement en dehors
+								                de l’espace public
+				<span class="decriretable5">(voir notice)</span>:
+			</div>
+			<div class="decriptionsite">
+				<span class="sitetable5">Description du site :{{reservation.intervention.interPrecision}}</span>
+			</div>
+			<div class="aeronef">Aéronefs susceptibles d’être utilisés :</div>
+			<div class="toutaeronef">
+				<input type="checkbox" class="checkbox" checked="checked">Tous ceux indiqués au § 4
+			</div>
+			<div class="choixaeronef">
+				Sinon, préciser :
+				<input type="checkbox" class="checkbox">1
+				<input type="checkbox" class="checkbox">2
+				<input type="checkbox" class="checkbox">3
+				<input type="checkbox" class="checkbox">4
+				<input type="checkbox" class="checkbox">5
+			</div>
+			<div class="datetable5">
+				<span class="datebold">Dates :
+				</span><input type="checkbox" class="checkbox" checked="checked">Selon §
+								                3
+			</div>
+			<div class="autretable5">
+				<input type="checkbox" class="checkbox">Selon § 3, sauf :
+			</div>
+			<div class="conditionvol">Conditions de réalisation des vols :</div>
+			<div class="volvue">
+				<input type="checkbox" class="checkbox">Vols en vue du télépilote, à une distance horizontale de ce
+								                télépilote inférieure ou égale à 100 m (scénario S-3)
+			</div>
+			<div class="volautre">
+				<input type="checkbox" class="checkbox">Autres cas
+				<span class="suitreautrecas">(décrire et joindre
+										                    l’autorisation spécifique, le cas échéant)</span>
+				:
+			</div>
+			<div class="hauteurVol">Hauteur maximale de vol : 120</div>
+			<div class="unitevol">
+				m</div>
+			<div class="objetmission">Objet de la mission :{{reservation.intervention.typeInter.nom}}</div>
+		</div>
+
+		<div class="site2">
+			<div class="titretable5">Site n°2</div>
+			<div class="agglo">
+				<input type="checkbox" class="checkbox">En agglomération
+			</div>
+			<div class="personne">
+				<input type="checkbox" class="checkbox">A proximité d’un rassemblement de personnes
+				<span class="italic">(décrire)</span>
+			</div>
+			<div class="localisation">
+				<table>
+					<tr>
+						<th class="codePostalTable">Code postal</th>
+						<th class="villeTable">Localité</th>
+						<th class="adresseTable">Adresse</th>
+					</tr>
+					<tr>
+						<td class="villetd"></td>
+						<td class="codepostaltd"></td>
+						<td class="adressetd"></td>
+					</tr>
+				</table>
+
+			</div>
+			<div class="espacepublic">
+				<input type="checkbox" class="checkbox">Cocher la case si les vols auront lieu exclusivement en dehors
+								                de l’espace public
+				<span class="decriretable5">(voir notice)</span>:
+			</div>
+			<div class="decriptionsite">
+				<span class="sitetable5">Description du site :</span>
+			</div>
+			<div class="aeronef">Aéronefs susceptibles d’être utilisés :</div>
+			<div class="toutaeronef">
+				<input type="checkbox" class="checkbox">Tous ceux indiqués au § 4
+			</div>
+			<div class="choixaeronef">
+				Sinon, préciser :
+				<input type="checkbox" class="checkbox">1
+				<input type="checkbox" class="checkbox">2
+				<input type="checkbox" class="checkbox">3
+				<input type="checkbox" class="checkbox">4
+				<input type="checkbox" class="checkbox">5
+			</div>
+			<div class="datetable5">
+				<span class="datebold">Dates :
+				</span><input type="checkbox" class="checkbox">Selon § 3
+			</div>
+			<div class="autretable5">
+				<input type="checkbox" class="checkbox">Selon § 3, sauf :
+			</div>
+			<div class="conditionvol">Conditions de réalisation des vols :</div>
+			<div class="volvue">
+				<input type="checkbox" class="checkbox">Vols en vue du télépilote, à une distance horizontale de ce
+								                télépilote inférieure ou égale à 100 m (scénario S-3)
+			</div>
+			<div class="volautre">
+				<input type="checkbox" class="checkbox">Autres cas
+				<span class="suitreautrecas">(décrire et joindre
+										                    l’autorisation spécifique, le cas échéant)</span>
+				:
+			</div>
+			<div class="hauteurVol">Hauteur maximale de vol :
+			</div>
+			<div class="unitevol">
+				m</div>
+			<div class="objetmission">Objet de la mission :
+			</div>
+		</div>
+	</div>
+	<div class="exterieurtable">
+		<input type="checkbox" class="checkbox">Suite de la liste des sites en annexe. Nombre de pages supplémentaires
+				        jointes :
+	</div>
+	<div class="table6">
+		<div class="fond6">6. Engagement de l’exploitant</div>
+		<div class="textetable6">
+			<span>« Je soussigné, représentant l’exploitant identifié au § 1 ci-dessus</span><br>
+			<input type="checkbox" class="checkbox" checked="checked">certifie l’exactitude des renseignements figurant
+						            dans la présente déclaration<br>
+			<input type="checkbox" class="checkbox avantli" checked="checked">m’engage à respecter l’ensemble des
+						            dispositions réglementaires applicables pour les opérations prévues, et en particulier :
+			<br>
+			<div class="liste">
+				<ul>
+					<li>respecter les exigences applicables aux aéronefs et aux conditions de leur exploitation ;
+												                        notamment ne pas mettre en oeuvre l’aéronef dans des conditions où il y aurait un risque pour
+												                        les autres aéronefs ou pour les personnes et les biens au sol, y compris en cas de panne
+												                        probable</li>
+					<li>respecter les interdictions de survol prévues par la réglementation et le cas échéant avoir
+												                        obtenu les accords requis</li>
+					<li>respecter les droits à l’image, à la vie privée et à la propriété privée des autres personnes.
+					</li>
+				</ul>
+			</div>
+			<input type="checkbox" class="checkbox" checked="checked">déclare qu’une assurance couvrant les risques liés
+						            aux opérations prévues a été contractée. »
+		</div>
+		<div class="table6case2">
+			<div class="lieu">A
+				{{reservation.salarie.entreprise.adresse.ville}}</div>
+			<div class="datetable6">Le
+				{{date|format_datetime('short','none',locale='fr')}}<br><span class="personnemorale">(JJ/MM/AAAA)</span>
+			</div>
+		</div>
+		<div class="table6case3">
+			<span>Nom :
+				{{reservation.salarie.entreprise.dirigeant.nom}}</span><br>
+			<span>Prénom :
+				{{reservation.salarie.entreprise.dirigeant.prenom}}</span><br>
+			<span>Qualité :
+				{% if reservation.salarie.entreprise.formJuridique !='auto-entrepreneur' %}Gérant
+				{% endif %}
+			</span>
+			<span class="personnemorale">(personnes morales)</span>:
+		</div>
+		<div class="table6case4">
+			<img src="{{signature.adresse}}" alt="" height="43" width="175">
+		</div>
+	</div>
+	<div class="table7">
+		<span>Consulter la notice d’information relative à ce formulaire.</span><br>
+		<span>Le formulaire doit être adressé avec un préavis minimal de
+			<span class="table7bold">cinq jours
+								                ouvrables</span>
+			(et un préavis maximal de un mois) à la préfecture territorialement
+						            compétente.</span><br>
+		<span>Pour obtenir plus d’informations sur les aéronefs circulant sans personne à bord, consulter le site de la
+						            direction générale de l’Aviation civile :
+		</span><br>
+		<span class="table7site">http://www.developpement-durable.gouv.fr/-Drones-aeronefs-telepilotes-.html.</span>
+
+	</div>
+	<div class="fin">2/2</div>
+</body>

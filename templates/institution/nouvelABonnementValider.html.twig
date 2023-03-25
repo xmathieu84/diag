@@ -1,0 +1,22 @@
+{% extends 'institution/baseInsti.html.twig' %}
+
+{% block title %}
+Abonnement validé
+{% endblock %}
+
+{% block contenu %}
+<div class="row bg-white pb-5">
+    <div class="col-12 mt-5">
+        <p class="h4">Votre nouvel abonnement est pris en compte.</p>
+        <p class="h4">Veuillez vous déconnecter et vous reconnecter afin de profiter de vos nouvelles fonctionnalités</p>
+    </div>
+
+    <div class="col-sm-6 col-12 mt-5">
+        <a href="{{ path('app_logout') }}"><button class="btn btn-info">Se déconnecter</button></a>
+    </div>
+    <div class="col-sm-6 text-right col-12 mt-5">
+        <a href="{{ path('homeInsti') }}"><button class="btn btn-maincolor">Retour à l'accueil</button></a>
+    </div>
+</div>
+{% endblock %}
+

@@ -1,0 +1,213 @@
+{% extends "entreprise/baseAE.html.twig" %}
+
+{% block title %}
+Remises
+{% endblock %}
+
+{% block contenu %}
+<div class="row bg-white">
+    <div class="col-12">
+        <ul class="nav nav-tabs">
+
+            <li class="lienTemps"><a href="#onglet1" class="nav-link active show" data-toggle="tab">Remise journée</a></li>
+            <li class="lienTemps"><a href="#onglet2" class="nav-link" data-toggle="tab">Remise exceptionnelle</a></li>
+            <li class="lienTemps"><a href="#onglet3" class="nav-link" data-toggle="tab">Partipation marketPlace</a></li>
+
+        </ul>
+        <div class="tab-content ">
+
+            <div id="onglet1" class="tab-pane fade in active show">
+                <div class="row">
+                    <div class="col-12">
+                        <p class="h3">Dans le cadre de plages horaires d'interventions plus importantes acceptées par le demandeur, souhaitez vous appliquer un pourcentage de remise de 5 à 10 %</p>
+                    </div>
+                    <div class="col-12 mt-5 text-center">
+                        <p class="h5">de 8h à 18h => 10 % de remise</p>
+
+                        {% if app.user.salarie.remiseTemps== null %}
+                            <label for="ouiJournee">Oui</label>
+                            <input type="radio" name="journee" id="ouiJournee" value="1">
+                            <label for="nonJournee">Non</label>
+                            <input type="radio" name="journee" id="nonJournee" value="0">
+                            {% else %}
+                                {% if app.user.salarie.remiseTemps.journee %}
+                                    <label for="ouiJournee">Oui</label>
+                                    <input type="radio" name="journee" id="ouiJournee" value="1" checked="checked">
+                                    <label for="nonJournee">Non</label>
+                                    <input type="radio" name="journee" id="nonJournee" value="0">
+                                    {% else %}
+                                        <label for="ouiJournee">Oui</label>
+                                        <input type="radio" name="journee" id="ouiJournee" value="1" >
+                                        <label for="nonJournee">Non</label>
+                                        <input type="radio" name="journee" id="nonJournee" value="0" checked="checked">
+                                {% endif %}
+                        {% endif %}
+
+                    </div>
+                    <div class="col-12 mt-5 text-center">
+                        <p class="h5">de 8h à 13h ou 14h à 18h => 5% remise</p>
+                        {% if app.user.salarie.remiseTemps== null %}
+                            <label for="ouiDemiJournee">Oui</label>
+                            <input type="radio" name="demijournee" id="ouiDemiJournee" value="1" >
+                            <label for="nonDemiJournee">Non</label>
+                            <input type="radio" name="demijournee" id="nonDemiJournee" value="0">
+                            {% else %}
+                                {% if app.user.salarie.remiseTemps.demiJournee %}
+                                    <label for="ouiDemiJournee">Oui</label>
+                                    <input type="radio" name="demijournee" id="ouiDemiJournee" value="1" checked="checked">
+                                    <label for="nonDemiJournee">Non</label>
+                                    <input type="radio" name="demijournee" id="nonDemiJournee" value="0">
+                                    {% else %}
+                                        <label for="ouiDemiJournee">Oui</label>
+                                        <input type="radio" name="demijournee" id="ouiDemiJournee" value="1" >
+                                        <label for="nonDemiJournee">Non</label>
+                                        <input type="radio" name="demijournee" id="nonDemiJournee" value="0" checked="checked">
+                                {% endif %}
+                        {% endif %}
+
+                    </div>
+                    <div class="col-12 text-right mt-5">
+                        <button class="btn btn-maincolor validerRemiseTemps">Valider</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="onglet2" class="tab-pane fade">
+                {% if remises is empty %}
+                    <p class="h5">Vous n'avez pas de remise en cours .</p>
+                {% endif %}
+                <div class="row">
+                    <div class="col-4 tableAccueil">
+                        <span class="h5">Nom du pack/mission</span>
+                    </div>
+                    <div class="col-4 tableAccueil">
+                        <span class="h5">Durée</span>
+                    </div>
+                    <div class="col-2 tableAccueil">
+                        <span class="h5">Taux</span>
+                    </div>
+                    <div class="col-2 tableAccueil"></div>
+                    {% for remise in remises %}
+                        <div class="col-4 tableAccueil">
+                            <span class="text-dark">{{ remise.mission.mission.nom }}</span>
+                        </div>
+                        <div class="col-4 tableAccueil">
+                            <span class="text-dark">Du {{ remise.debut|format_datetime("short","none",locale="fr") }} au {{ remise.debut|format_datetime("short","none",locale="fr") }} inclus</span>
+                        </div>
+                        <div class="col-2 tableAccueil">
+                            <span class="text-dark">{{ remise.taux}}%</span>
+                        </div>
+                        <div class="col-2 tableAccueil"></div>
+                    {% endfor %}
+                    <div class="col-12 mt-5">
+                        <button class="btn btn-maincolor btnModal" data-toggle="modal" data-target="#modaleRemise">Ajouter une remise tarifaire</button>
+                    </div>
+
+                </div>
+            </div>
+            <div id="onglet3" class="tab-pane fade">
+                <div class="row">
+                    <div class="col-12 mt-5">
+                        <p class="h3">Souhaitez vous être inscrit à notre MarketPlace diagnostic immobilier en temps réel ?</p>
+                    </div>
+                    <div class="col-12 mt-4 text-center">
+                        {% if app.user.salarie.marketPlace ==null %}
+                            <label for="ouiMarketPlace">Oui</label>
+                            <input type="radio" name="marketPlace" id="ouiMarketPlace" value="1">
+                            <label for="nonMarketPlace">Non</label>
+                            <input type="radio" name="marketPlace" id="nonMarketPlace" value="0">
+                            {% else %}
+                                {% if app.user.salarie.marketPlace ==true %}
+                                    <label for="ouiMarketPlace">Oui</label>
+                                    <input type="radio" name="marketPlace" id="ouiMarketPlace" value="1" checked="checked">
+                                    <label for="nonMarketPlace">Non</label>
+                                    <input type="radio" name="marketPlace" id="nonMarketPlace" value="0">
+                                    {% else %}
+                                        <label for="ouiMarketPlace">Oui</label>
+                                        <input type="radio" name="marketPlace" id="ouiMarketPlace" value="1">
+                                        <label for="nonMarketPlace">Non</label>
+                                        <input type="radio" name="marketPlace" id="nonMarketPlace" value="0" checked="checked">
+                                {% endif %}
+                        {% endif %}
+                    </div>
+
+                    <div class="col-12 text-right mt-5">
+                        <button class="btn btn-maincolor validerMarket">Valider</button>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="modaleRemise" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Remises exceptionnelles</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <span class="h5">Sur quoi souhaitez vous appliquer un remise ?</span>
+                        </div>
+                        <div class="col-12 mt-5 mb-5">
+                            <div class="row">
+                                <div class="col-sm-4 col-12">
+                                    <input type="radio" name="typeRemise" id="tout" value="tout">
+                                    <label for="tout" style="background: none">Tout (packs + diagnostics)</label>
+                                </div>
+                                <div class="col-sm-4 col-12">
+                                    <input type="radio" name="typeRemise" id="pack" value="pack">
+                                    <label for="pack" style="background: none">Packs</label>
+                                </div>
+                                <div class="col-sm-4 col-12">
+                                    <input type="radio" name="typeRemise" id="tout" value="diag">
+                                    <label for="tout" style="background: none">Diagnostics</label>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                        <div class="col-sm-6 col-12">
+                            <label for="">Date de début</label>
+                            <input type="date" name="" id="dateDebut" class="form-control form-control-sm">
+                        </div>
+                        <div class="col-sm-6 col-12">
+                            <label for="">Date de fin</label>
+                            <input type="date" name="" id="dateFin" class="form-control form-control-sm">
+                        </div>
+                        <div class="col-12 mt-5">
+                            <label for="">Montant de la remise</label>
+                            <div class="input-group">
+
+                                <input type="number" class="form-control montantRemise" aria-label="Montant de la remise">
+                                <div class="input-group-append">
+                                    <span class="input-group-text">%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 pl-4 mt-4">
+                            <div class="row zoneRemise"></div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                    <button type="button" class="btn btn-primary validerRemise">Valider</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+

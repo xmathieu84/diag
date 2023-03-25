@@ -1,0 +1,178 @@
+{% extends 'entreprise/baseAE.html.twig' %}
+{% block title %}
+	Mes Interventions
+{% endblock  %}
+
+{% block pageAccueil %}
+	<h4>Mes interventions </h4>
+{% endblock %}
+{% block contenu %}
+
+	<div class="row">
+		<div class="col-12">
+			<div id="accordion01" role="tablist">
+				{% for reservation in reservations %}
+					<div class="card mb-2">
+						<div class="card-header" role="tab" id="collapse{{ loop.index }}_header">
+							<div class="row">
+								<div class="col-6">
+									<h5>
+										<a class="collapsed" data-toggle="collapse" href="#collapse{{ loop.index }}" aria-expanded="false" aria-controls="collapse{{ loop.index }}">
+											{{reservation.intervention.rdvAt|format_datetime('full', 'none', locale='fr')}}
+										</a>
+
+									</h5>
+								</div>
+								<div class="col-6 text-center">
+									<button class="btn-inter" data-inter="{{reservation.intervention.id}}">Modifier la date</button>
+								</div>
+							</div>
+
+						</div>
+						<div id="collapse{{ loop.index }}" class="collapse" role="tabpanel" aria-labelledby="collapse{{ loop.index }}_header" data-parent="#accordion01">
+							<div class="card-body">
+								<div class="row">
+									<div class="col-sm-6">
+										<h6 class="card-title souligne">Demandeur :
+										</h6>
+										{% if reservation.intervention.intDem %}
+
+											{% if reservation.intervention.intDem.civilite %}
+												{% if reservation.intervention.intDem.profil =='Particulier propriétaire' %}
+													<p class="h6">{{ reservation.intervention.intDem.civilite.prenom }}
+														{{ reservation.intervention.intDem.civilite.nom }}</p>
+													{% else %}
+													<p class="h6">{{ reservation.intervention.intDem.nom }} ({{ reservation.intervention.intDem.civilite.prenom }} {{ reservation.intervention.intDem.civilite.nom }})</p>
+												{% endif %}
+
+											{% else %}
+												<p class="h6">{{ reservation.intervention.intDem.profil }}
+													{{ reservation.intervention.intDem.nom }}</p>
+											{% endif %}
+
+										{% endif %}
+										<span class="h6">Téléphone : {{ reservation.intervention.intDem.telephon.numero }}</span>
+									</div>
+									<div class="col-sm-6">
+										<h6 class="souligne card-title">Adresse :
+										</h6>
+										<p class="h6">{{reservation.intervention.adresse.numero}}
+											{{reservation.intervention.adresse.nomVoie}}
+											{{reservation.intervention.adresse.codePostal}}
+											{{reservation.intervention.adresse.ville}}
+										</p>
+										<br>
+									</div>
+									<div class="col-sm-6">
+										<h6 class="souligne card-title">Date et heure de départ :
+										</h6>
+										<p class="h6">{{reservation.debut|format_datetime('short', 'short', locale='fr')}}</p>
+										<br>
+									</div>
+									<div class="col-sm-6">
+										<h6 class="souligne card-title">Heure de fin</h6>
+
+										<p class="h6">
+											{% if reservation.depart == null %}
+												<a href="{{path('temps',{id:reservation.id})}}">
+													<button class=" btn btn-warning btn-sm">Définir</button>
+												</a>
+											{% else %}
+												{{reservation.depart|format_datetime('full', 'short',locale='fr')}}
+											{% endif %}
+										</p>
+										<br>
+									</div>
+
+									<div class="col-sm-6">
+										<h6 class="souligne card-title">Type d'intervention :
+										</h6>
+
+										<p class="h6 changer">
+											{{reservation.intervention.listeInter.nom}}
+											{{reservation.intervention.typeInter.nom}}</p>
+										<br>
+									</div>
+									{% if  reservation.intervention.listeInter.nom =='interventions aériennes' %}
+										<div class="col-sm-6">
+											<h6 class="souligne">Drone utilisé :
+											</h6>
+											{% if reservation.intervention.drone %}
+												<span class="h6">{{reservation.intervention.drone.nomFabriquant}}
+													{{reservation.intervention.drone.typeDrone}}
+											</span>
+												<button class="btn btn-changer">Changer</button>
+											{% else %}
+												<button class="btn btn-changer">Choisir</button>
+
+											{% endif %}
+
+
+										</div>
+									{% endif %}
+									{# Envoie du cerfa d'intervention par diag drone#}
+									{% if reservation.salarie.alphaTango and  reservation.depart  %}
+
+										{% if reservation.intervention.mandatCerfa == null  %}
+											<div class="col-sm-12">
+												<a href="{{path('mandatCerfa',{entreprise:reservation.salarie.entreprise.id,intervention:reservation.intervention.id})}}">
+
+													<button class="btn btn-mandat">Je souhaite que DIAG-DRONE réalise les démarches administratives de déclaration de vol</button>
+												</a>
+											</div>
+
+										{% else %}
+											<div class="col-sm-12 text-center">
+
+												<p class="h6">DIAG-DRONE s'occupe de toute vos démarches dans les plus brefs délai</p>
+											</div>
+
+										{% endif %}
+
+
+									{% endif %}
+									{% if reservation.intervention.drone %}
+										<div class="col-sm-12 text-center">
+											<a href="{{path('rapport',{id:reservation.intervention.id})}}" class="btn btn-maincolor">Éditez le rapport d'intervention</a>
+
+										</div>
+									{% endif %}
+
+
+
+								</div>
+							</div>
+						</div>
+					</div>
+					<dialog class="dateInter">
+						<p class="h6">Date de l'intervention :
+							{{reservation.intervention.rdvAt|format_datetime('full', 'short',locale='fr')}}</p>
+						<label for="dateInter">Nouvelle date :</label>
+						<input type="date" class="form-control form-control-sm dateIntervention">
+						<label for="heureInter">Changer l'heure de l'intervention :</label>
+						<input type="time" step="900" class="form-control form-control-sm heureInter">
+
+						<button class="btn btn-maincolor change">Valider</button>
+					</dialog>
+					<dialog class="appareil">
+						<p class="h6">Choisir votre appareil pour votre intervention</p>
+
+						<select class="choixAppareil" data-inter="{{reservation.intervention.id}}">
+							<option value="{{null}}">Choisissez votre drone</option>
+							{% for drone in drones %}
+								<option value="{{drone.id}}">{{drone.nomfabriquant}}-{{drone.typeDrone}}</option>
+							{% endfor %}
+						</select>
+					</dialog>
+				{% endfor %}
+
+				
+			</div>
+		</div>
+
+
+
+
+
+    </div>
+{% endblock %}

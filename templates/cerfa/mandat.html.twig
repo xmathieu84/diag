@@ -1,0 +1,215 @@
+{% extends 'entreprise/baseAE.html.twig' %}
+{% block title %}
+	Mandat pour le cerfa
+{% endblock %}
+{% block TitreEntreprise %}
+	<h1>Contrat de mandat</h1>
+
+{% endblock %}
+
+{% block contenu %}
+
+	<div class="row mandatCerfa bg-white">
+		<div class="col-sm-12 text-center">
+			<p class="h6">Veulliez lire et verifier les informations du contrat ci-aprés.</p>
+			<p class="h6">Vous pourrez le signer électroniquement au moyen de notre mandataire Yousign.</p>
+			<p class="h6">Toute les instruction pour la signature vous serons envoyées sur votre adresse Email</p>
+		</div>
+
+		<div class="col-sm-1"></div>
+		<div class="col-sm-10">
+			<p class="h3 text-center">
+				<b>CONTRAT DE MANDAT</b>
+			</p>
+
+
+			<br>
+			<p class="h6">
+				<b>ENTRE LES SOUSSIGNES :
+				</b>
+			</p>
+			{% if entreprise.formJuridique == 'auto-entrepreneur' %}
+				<div>
+					<span>{{entreprise.denomination}}</span>
+				</div>
+
+			{% else %}
+				<div>
+					<span>{{entreprise.formJuridique}}
+						{{entreprise.enseigne}}
+						{{entreprise.denomination}}</span>
+				</div>
+
+			{% endif %}
+
+			<div>
+				<span>{{entreprise.adresse.numero}}
+					{{entreprise.adresse.nomVoie}}</span>
+			</div>
+
+			<div>
+				<span>{{entreprise.adresse.codePostal}}
+					{{entreprise.adresse.ville}}</span>
+			</div>
+
+			<div>
+				<span>SIRET :
+					{{entreprise.siretTva.siret}}</span>
+
+			</div>
+
+			<p>Ci-après désigné "le Mandant",</p>
+			<br>
+			<p>
+				<b>D'une part,</b>
+			</p>
+			<p>
+				<b>ET</b>
+			</p>
+			<div>
+				<b>DIAG DRONE,
+				</b>
+
+			</div>
+			<div>
+				<span>Siège social :200 Rue Michel de Montaigne Technopole Secteur Agroparc</span>
+
+			</div>
+
+			<div>
+				<span>Bâtiment a Montfavet</span>
+
+			</div>
+
+			<div>
+				<span>84911 AVIGNON CEDEX,</span>
+
+			</div>
+
+			<div>
+				<span>RCS Avignon B 880 431 580.</span>
+			</div>
+
+
+			<p>Ci-après désignée "le Mandataire",</p>
+			<p>
+				<b>D'autre part,</b>
+			</p>
+			<p>Il a été convenu ce qui suit :</p>
+
+			<p>
+				<b>Article 1 - Mandat</b>
+			</p>
+		</p>
+		<p>Le Mandant confie au Mandataire qui accepte, le soin d'accomplir les opérations définies à l'article 2 de la présente convention, au nom et pour le compte du Mandant, dans les termes prévus par les articles 1986 et suivants du Code civil, sauf les dérogations qui découlent des présentes.</p>
+
+		<p>Dans le cas ou le Mandant ne dispose pas de compte d’utilisateur auprès du portail web mis à disposition par la Direction Civile de l’Aviation à l’adresse suivante :
+			<a href="https://alphatango.aviation-civile.gouv.fr">https://alphatango.aviation-civile.gouv.fr</a>, le présent mandat donne pouvoir au Mandataire de procéder aux démarches d’inscription, au nom et pour le compte du Mandant afin d’obtenir les identifiants et mots de passe pour pouvoir y accéder.</p>
+		<p>
+			<b>Article 2 - Objet du mandat</b>
+		</p>
+		<p>Le Mandataire procédera au nom et pour le compte du Mandant via le portail web mis à disposition par la Direction Civile de l’Aviation à l’adresse suivante :
+			<a href="https://alphatango.aviation-civile.gouv.fr">https://alphatango.aviation-civile.gouv.fr</a>, les démarches règlementaires préalables à la réalisation d’une Prestation de vol de Drone situé à</p>
+		<p>{{intervention.adresse.numero}}
+			{{intervention.adresse.nomVoie}}
+			{{intervention.adresse.codePostal}}
+			{{intervention.adresse.ville}}</p>
+		<p>Le
+			{{intervention.rdvAT|format_datetime('full', 'short', locale='fr')}}</p>
+		<br>
+		<p>Les pouvoirs du Mandataire sont strictement limités aux actes ci-dessus indiqués.</p>
+		<p>Le Mandataire agira conformément aux instructions que le Mandant lui fournira en temps utile. Il mettra en oeuvre tous les moyens dont il dispose pour mener à bien sa mission, s'engageant à exécuter son mandat en bon professionnel, et à apporter à l'exécution de celui-ci toute sa diligence et ses meilleurs efforts. Il devra rendre compte au Mandant de la bonne exécution de ses obligations.</p>
+		<p>
+			<b>Article 3 - Pouvoirs du Mandataire</b>
+		</p>
+		<p>Pour remplir efficacement son mandat, le Mandataire pourra procéder au nom et pour le compte du Mandant à l’ensemble des déclarations administratives préalables à la réalisation d’une mission de vol de drone au lieu, à la date et dans les conditions sus énoncées et représenter le Mandant à l'égard de la Direction Générale de l’Aviation Civile et de la préfecture concernée par la mission.</p>
+		<p>
+			<b>Article 4 - Information du Mandant</b>
+		</p>
+		<p>Le Mandataire s'engage, pendant toute la durée du contrat à tenir informé à tout moment le Mandant des difficultés rencontrées qui risqueraient de rendre l'opération illégale, et généralement de tous événements susceptibles d'affecter l'exécution de sa mission.</p>
+		<p>
+			<b>Article 5 - Rémunération du Mandataire</b>
+		</p>
+		<p>La rémunération due est indiquée dans le cadre des conditions générales OTD conclue entre les parties ou sur la base d’accords dérogatoires le cas échéant</p>
+
+		<p>En tout état de cause, la rémunération est due si l'inexécution ou la mauvaise exécution provient de circonstances imputables au Mandant.</p>
+		<p>
+			<b>Article 6 - Responsabilité du Mandataire</b>
+		</p>
+		<p>Le Mandataire répond de ses fautes dans l'accomplissement de son mandat conformément aux dispositions des articles 1991 et suivants du Code civil.</p>
+
+		<p>Il est précisé que les démarches effectuées par DIAG DRONE seront réalisées sur la base des renseignements donnés par le Mandant sur les caractéristiques du vol prévu. DIAG DRONE ne saurait être tenu responsable d’une erreur dans la déclaration, d’une omission, d’une fausse déclaration dans l’hypothèse où il ne lui aurait pas donné l’ensemble des renseignements nécessaires à la parfaite réalisation de ce service. De convention expresse entre les Parties, DIAG DRONE n’est astreint qu’à une obligation de moyens et non de résultats.
+		</p>
+
+		<p>DIAG DRONE ne pourra non plus être tenu responsable dans le cas ou l’OTD ne respecterait pas le plan de vol déclaré par l’intermédiaire du Mandataire.</p>
+
+		<p>Pour la réalisation de ce service, l’OTD confiera à DIAG DRONE ses identifiants pour accéder au portail mentionné ci-dessus</p>
+
+		<p>DIAG DRONE s’engage à n’utiliser lesdits identifiants que dans le cadre de la réalisation de ce service. Il les détruira à première demande de l’OTD.</p>
+
+		<p>Envers les tiers, le Mandataire est responsable des délits et quasi-délits civils commis soit spontanément, soit sur instructions du Mandant. En outre, le Mandataire est pénalement responsable des infractions qu'il pourrait commettre dans l'accomplissement de sa mission.</p>
+
+		<p>
+			<b>Article 7 - Confidentialité</b>
+		</p>
+		<p>Les parties s'engagent à considérer comme strictement confidentielles toutes les informations, de quelque nature que ce soit et sur quelque support que ce soit, transmises par l'une des parties à l'autre, à l'occasion de l'exécution de la présente convention, réserve étant cependant faite des informations à l'égard desquelles la partie qui les reçoit peut apporter la preuve :
+		</p>
+		<p>- qu'elles étaient licitement en sa possession avant de les recevoir de l'autre partie ;</p>
+
+		<p>- ou qu'elles étaient, à la date de signature de la présente convention ou ultérieurement, tombées, dans le domaine public ;</p>
+
+		<p>- ou qu'elles lui auraient été communiquées par un tiers de bonne foi sans que ce tiers ait exigé d'engagement de confidentialité à leur égard.</p>
+
+		<p>Chacune des parties s'engage à prendre toutes les mesures pour assurer le respect de cette obligation de confidentialité et s'interdit de divulguer, à toute personne physique ou morale, soit directement, soit indirectement, les informations confidentielles dont elle aurait connaissance dans le cadre de la présente convention et/ou de les reproduire et/ou de les utiliser, tant pour son propre compte que pour le compte de tiers, à d'autres fins que l'exécution de la présente convention.</p>
+
+		<p>Chacune des parties s'engage à ne transmettre les informations confidentielles reçues qu'aux seuls membres de son personnel, chargés de participer à l'exécution de la présente convention, qui auront été informés de la nature confidentielle de ces informations.</p>
+
+		<p>Les engagements souscrits par les parties dans le cadre du présent article survivront à l'expiration de la présente convention pendant une période de cinq ans.</p>
+
+		<p>
+			<b>Article 7 - Durée du mandat</b>
+		</p>
+		<p>Le présent mandat n’est valable que pendant la durée de la réalisation de la Prestation confiée au Mandataire sans pouvoir excéder un mois.</p>
+		<br>
+		<p>
+			<b>Article 8 - Divers</b>
+		</p>
+		<p>En cas de force majeure ou toute autre cause échappant à la prévision et au contrôle de l'une des parties et de nature à l'empêcher d'exécuter ses obligations contractuelles, la partie empêchée devra en informer l'autre partie par tout moyen dans les plus brefs délais.</p>
+
+		<p>Les obligations des parties seront alors suspendues pendant toute la durée de la force majeure et les parties emploieront tous leurs efforts pour limiter la durée et les effets de la cause de la force majeure.
+		</p>
+
+		<p>Toutefois, si cette durée devait excéder plus d’un mois, les parties se concerteront sur les conditions de la poursuite ou de la résiliation éventuelle de la présente convention.</p>
+
+		<p>
+			<b>Article 9 - Résiliation</b>
+		</p>
+		<p>En cas de résiliation anticipée, le Mandataire devra restituer immédiatement au Mandant l'ensemble des documents et/ou matériels qui lui auront été confiés dans le cadre de l'exécution du présent contrat. Il devra également restituer immédiatement, en bon état d'entretien, les marchandises en sa possession selon les conditions de reprise définies en annexe.</p>
+
+		<p>
+			<b>Article 10 - Loi applicable</b>
+		</p>
+		<p>De convention expresse entre les parties, la présente convention est régie par les lois et règlements de la République française.</p>
+
+		<div class="row">
+			<div class="col-sm-6">
+				<p>Le Mandant</p>
+
+				<img src="{{signature.adresse}}" alt="" width="600" height="300">
+
+			</div>
+
+			<div class="col-sm-6">
+				<p>Le Mandataire</p>
+				<a href="{{path('cerfaPdf',{entreprise:entreprise.id,intervention:intervention.id})}}">
+					<button class="btn btn-maincolor3">Signer le Mandat</button>
+				</a>
+			</div>
+
+
+		</div>
+
+
+	</div>
+
+{% endblock %}

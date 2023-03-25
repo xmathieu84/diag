@@ -1,0 +1,57 @@
+{% extends 'administrateur/baseA.html.twig' %}
+{% block title %}Abonnement admin OTD{% endblock %}
+{% block body %}
+
+
+	<div class="row table-responsive">
+		<table class="table">
+			<thead>
+			<tr>
+				<th>Nom</th>
+				<th>Prix</th>
+				<th>OTD supplémentaire</th>
+				<th>OTD maximum</th>
+				<th>Fonctionnalités</th>
+
+			</tr>
+			</thead>
+			<tbody>
+			{% for abonnement in abonnements %}
+				<tr class="idAbo" data-id="{{ abonnement.id }}">
+					<td><input type="text"  class="form-control nomAboOtd" value="{{ abonnement.nom }}"></td>
+					<td>
+						<div class="input-group mb-2">
+
+							<input type="text" class="form-control prixAboOtd" id="" value="{{ abonnement.prix }}">
+							<div class="input-group-prepend">
+								<div class="input-group-text">€</div>
+							</div>
+						</div>
+					</td>
+					<td>
+						<div class="input-group mb-2">
+
+							<input type="text" class="form-control prixOtdSup"  value="{{ abonnement.otdSup }}">
+							<div class="input-group-prepend">
+								<div class="input-group-text">€</div>
+							</div>
+						</div>
+					</td>
+					<td>
+						<input type="text" value="{{ abonnement.otdMax }}" class="form-control form-control-sm otdMax">
+					</td>
+					<td>
+						<ul>
+							{% for particularite in abonnement.particularites %}
+								<li>{{ particularite }}</li>
+							{% endfor %}
+						</ul>
+					</td>
+				</tr>
+			{% endfor %}
+			</tbody>
+		</table>
+
+	</div>
+
+{% endblock  %}

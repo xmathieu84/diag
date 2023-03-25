@@ -1,0 +1,80 @@
+{% extends template %}
+{% block pageAccueil %}
+		<h4>Localisation de l'intervention <span class="color_blue">- (2/3)</span></h4>
+{% endblock %}
+{% block title %}
+		Demande d'intervention (phase 2)
+{% endblock %}
+{% block titreSection %}
+		Adresse de l'intervention
+{% endblock %}
+{% block titrePage %}
+		Adresse de l'intervention
+{% endblock %}
+
+{% block contenu %}
+	<div class="row">
+		<div class="col-12 mb-3">
+			<p class="h5">Type d'intervention : <span class="color_blue">{{ intervention.listeInter.nom|capitalize }} {{ intervention.typeInter.nom }} </span></p>
+		</div>
+		<div class="col-sm-6 col-12">
+			<p class="h5">Type de bien : <span class="color_blue">{{ intervention.typeDeBien }}</span></p>
+		</div>
+		<div class="col-sm-6 col-12">
+			<p class="h5">Zone de décollage : <span class="color_blue">{% if intervention.decollage %}
+			    Oui {% else %} Non
+			{% endif %}
+				</span>
+			</p>
+		</div>
+	</div>
+<div class="row">
+
+	{{form_start(form,{'attr':{'id':'formInter'}})}}
+
+	<div class="row align-items-end">
+		<div class="col-12">
+			<p class="h5">L'adresse d'intervention est-elle la même que l'adresse de facturation ? <br> (Adresse de facturation : {{ adresseFact.adresseComplete }}) </p>
+		</div>
+		<div class="col-12 text-center mb-4">
+			{{ form_row(form.sameFact,{'label':' '}) }}
+		</div>
+		<div class="col-6 mb-4">
+
+			{{ form_row (form.numero,{'label':'Numéro de la voie : ','label_attr':{'class':'h6'},'attr':{'placeholder' : 'N° de la voie','class': 'form-control form-control border-dark',}})}}
+
+
+		</div>
+
+		<div class="col-6 mb-4">
+
+			{{ form_row (form.nomVoie,{'label': 'Nom de la voie* :  ','label_attr':{'class':'h6'},'attr':{'placeholder' : 'Nom de la voie *','class': 'form-control form-control-lg border-dark'}})}}
+
+		</div>
+
+		<div class="col-6 mb-4">
+
+
+			{{ form_row (form.codePostal,{'label': 'Code postal* : ','label_attr':{'class':'h6'},'attr':{'placeholder' : 'Code postal *','class': 'form-control form-control-lg border-dark'}})}}
+
+		</div>
+
+
+		<div class="col-6 mb-4">
+
+			{{ form_row (form.ville,{'label': "Ville*(indiquez d'abord le code postal):",'label_attr':{'class':'h6'},'attr':{'placeholder' : "Indiquez d'abord le code postal *",'class': 'form-control form-control-lg border-dark','list':"city"}})}}
+			<datalist id="city"></datalist>
+
+		</div>
+
+
+	</div>
+	<div class="d-flex justify-content-between">
+		<a href="{{path('etape2',{id:intervention.id,code:code})}}" class="btn btn-outline-darkgrey" data-inter="{{intervention.id}}">Page précédente</a>
+		<button type="submit" class="btn btn-maincolor">Page suivante</button>
+	</div>
+</div>
+{{form_end(form)}}
+
+
+{% endblock %}

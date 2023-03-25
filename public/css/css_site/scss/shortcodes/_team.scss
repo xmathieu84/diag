@@ -1,0 +1,43 @@
+.shortcode-Equipe {
+  /***ITEM Equipe***/
+  .item-Equipe {
+    &.content-absolute {
+      .item-content {
+        background-color: rgba($colorMain, 0.8);
+
+        h6 {
+          margin-bottom: 0.2em;
+        }
+
+        .small-text {
+          margin-bottom: 2.5em;
+        }
+
+        .social-icons {
+          a:hover {
+            transform: scale(1.5);
+          }
+        }
+      }
+    }
+  }
+  &.Equipe-layout2{
+    [class*="col-xl-4"]:nth-child(3n+3), [class*="col-xl-3"]:nth-child(4n+4), [class*="col-xl-6"]:nth-child(2n+2){
+      .vertical-item{
+        @media(min-width: 1200px){
+
+
+          background: $darkgreyColor;
+          .item-media{
+            opacity: 0.2;
+            transition: opacity 0.5s ease-in-out;
+          }
+          &:hover{
+            opacity: 1;
+          }
+        }
+
+      }
+    }
+  }
+}

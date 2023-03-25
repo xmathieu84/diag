@@ -1,0 +1,206 @@
+{% extends template %}
+
+{% block pageAccueil %}
+		<h4>Détails de l'intervention <span class="color_blue">- (3/3)</span></h4>
+{% endblock %}
+
+{% block title %}
+	Détails intervention
+{% endblock %}
+
+{% block contenu %}
+	<div class="row">
+		<div class="col-12 mb-3">
+			<p class="h5">Type d'intervention : <span class="color_blue">{{ intervention.listeInter.nom|capitalize }} {{ intervention.typeInter.nom }} </span></p>
+		</div>
+		<div class="col-sm-6 col-12 mb-3">
+			<p class="h5">Type de bien : <span class="color_blue">{{ intervention.typeDeBien }}</span></p>
+		</div>
+		<div class="col-sm-6 col-12 mb-3">
+			<p class="h5">Zone de décollage : <span class="color_blue">{% if intervention.decollage %}
+						Oui {% else %} Non
+					{% endif %}
+				</span>
+			</p>
+		</div>
+		<div class="col-12">
+			<p class="h5">Adresse de l'intervention : <span class="color_blue">{{ intervention.adresse.adresseComplete }}</span></p>
+		</div>
+	</div>
+	{{form_start(form,{'attr':{'id':'formInter','data-inter':intervention.id}})}}
+
+	<div class="row">
+		<div class="col-12 mb-5">
+			<p class="h5">Les champs marqués d'une * sont obligatoires</p>
+		</div>
+		<div class="col-sm-12 col-12">
+			{{ form_label(form.intemp, 'Votre demande fait-elle suite à une intempérie ? *', {'label_attr':{'class':'h5 mb-3'}}) }}
+			<div class="form-group text-center mb-3">
+				
+				{% for child in form.intemp %}
+			        <div class="form-check form-check-inline">
+			            <label for="{{ child.vars.id }}" class="form-check-label required">
+			                {{ child.vars.label }}
+			            </label>
+			            <input type="radio" id="{{ child.vars.id }}" name="{{ form.vars.id ~ '[' ~ form.intemp.vars.name ~ ']' }}" required="required" class="form-check-input m-2" value="{{ child.vars.value }}">
+			        </div>
+			    {% endfor %}
+
+
+				<div hidden>{{ form_widget(form.intemp) }}</div>
+			</div>
+
+
+		</div>
+		 {% if liti.typeInter.nom == "Captation audiovisuelle" %}
+			<div class="col-12 mt-3 mb-3">
+				<span class="h5">Quels médias souhaitez-vous obtenir ?</span>
+			</div>
+			<div class="col-6 text-center">
+				{{ form_row(form.photoOnly) }}
+			</div>
+			<div class="col-6">
+				{{ form_row(form.videoOnly) }}
+			</div>
+			<div class="col-6 mb-3 nbrePhotoInter">
+				{{ form_row(form.nbrePhoto,{"label":"Nombre de photos",'label_attr':{'class':'h5'}}) }}
+			</div>
+			<div class="col-6 mb-3 nbreVideoInter">
+				{{ form_row(form.nbreVideo,{"label":"Nombre de vidéos (2 vidéos maximum)",'label_attr':{'class':'h5'},'attr':{'max':2}}) }}
+			</div>
+		{% endif %}
+
+
+
+
+		<div id="intemperie" class="col-12">
+			<div class="row align-items-end mb-3">
+				<div class="col-xl-9 col-lg-8 col-md-8 col-12">
+					<div class="form-group mb-3">
+						<p class="h6 mb-2">Type d'intempérie <span class="h7">(plusieurs choix possibles)</span></p>
+						<div class="form-group text-center">
+							{% for child in form.intemperie %}
+						        <div class="form-check form-check-inline">
+						        	<input type="checkbox" id="{{ child.vars.id }}" name="{{ form.vars.id ~ '[' ~ form.intemperie.vars.name ~ '][]' }}" class="form-check-input m-2" value="{{ child.vars.value }}">
+						            <label for="{{ child.vars.id }}" class="form-check-label font-weight-normal">
+						                {{ child.vars.label }}
+						            </label>
+						        </div>
+						    {% endfor %}
+							<div hidden>{{ form_widget(form.intemperie) }}</div>
+						</div>
+
+
+						{{ form_row (form.autreIntemp,{'label':' ','attr':{'class':'form-control-sm ', 'placeholder': 'autre'}})}}
+					</div>
+				</div>
+				<div class="col-xl-3 col-lg-4 col-md-4 col-12 mb-3">	
+					<p class="h6 mb-0">Date de l'intempérie</p>
+					{{ form_row (form.dateIntemperie,{'label': ' ','attr':{'class':'border-gray form-control', 'max': "now"|date("Y-m-d")}})}}
+				</div>
+			</div>
+		</div>
+		<div id="ajout1"></div>
+		<div id="ajout2"></div>
+		<div class="col-12 mt-5 mb-3">
+			{{ form_label(form.besoinBudget, 'Souhaitez définir un budget maximum pour votre intervention ? *', {'label_attr':{'class':'h5 mb-3'}}) }}
+			<div class="form-group text-center mb-3">
+				{% for child in form.besoinBudget %}
+					<div class="form-check form-check-inline">
+						<label for="{{ child.vars.id }}" class="form-check-label required">
+							{{ child.vars.label }}
+						</label>
+						<input type="radio" id="{{ child.vars.id }}" name="{{ form.vars.id ~ '[' ~ form.besoinBudget.vars.name ~ ']' }}" required="required" class="form-check-input m-2" value="{{ child.vars.value }}">
+					</div>
+				{% endfor %}
+			</div>
+			<div hidden>{{ form_widget(form.besoinBudget) }}</div>
+		</div>
+		<div class="col-12 text-center budgetInter mb-4">
+					{{ form_row(form.budgetInter,{'label':'Montant'}) }}
+
+
+		</div>
+		<div class="col-sm-12" id="inter" >
+			<label class="h5">Votre demande concerne :</label>
+		</div>
+
+		<div class="col-sm-12 form-group travaux">
+			{#  {{ form_row(form.travaux) }} #}
+			<div class="row">
+
+				{% for child in form.travaux %}
+					<div class="col-12 col-sm-6">
+						<div class="form-check form-check-inline">
+							<input type="checkbox" id="{{ child.vars.id }}" name="{{ form.vars.id ~ '[' ~ form.travaux.vars.name ~ '][]' }}" class="form-check-input m-2" value="{{ child.vars.value }}">
+							<label for="{{ child.vars.id }}" class="form-check-label font-weight-normal">
+								{{ child.vars.label }}
+							</label>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+			{#  <select id="{{ form.travaux.vars.id }}" class="form-control selectpicker" data-size="4" title="Cochez une ou plusieurs options si besoin" multiple>
+			  	{% for child in form.travaux %}
+			  		<option data-id="#{{ child.vars.id }}" value="{{ child.vars.value }}">{{ child.vars.label }}</option>
+				{% endfor %}
+			</select>#}
+		</div>
+
+		<div class="col-12 ">
+			{#  <div hidden>{{ form_row(form.travaux,{'label':' '}) }}</div>#}
+		</div>
+
+		<div class="col-12">
+			<p class="h6 mb--10 mt-2">Autre : </p>
+			{{ form_row(form.autreType,{'label':' ','attr':{'class':'form-control form-control-lg'}}) }}
+		</div>
+
+
+
+		<div class="col-sm-12 mt-5">
+			<div class="row">
+				<div class="col-xl-12 col-12 mb-5">
+					<p class="h5 mb-0">Pour qu'un opérateur puisse vous établir une proposition adaptée, merci d'indiquer le maximum de précisions concernant vos besoins * :</p>
+					<p class="h6 mt-2">{{ liti.message|capitalize }}</p>
+
+					{{ form_row (form.inter_precision,{'label': ' ','attr':{'class':'form-control border-dark','rows':'5'}})}}
+				</div>
+				<div class="col-xl-8 col-12 mb-4">
+
+					<label class="h5 mb-4">Pour faciliter l'intervention de l'opérateur, vous pouvez:</label>
+					<div class="form-group text-center">
+						<button class="boutonRemplace" type="button">Télécharger des photos du site d'intervention (5 photos maximums)</button>
+
+						{{form_row(form.photos,{'label':' '})}}
+					</div>
+					<div>
+						<p class="h6 infoFichier"></p>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<div class="col-sm-6 col-12">
+			<a href="{{path('etape3',{id:intervention.id,code:code})}}" class="btn btn-outline-darkgrey" data-inter="{{intervention.id}}">Page précédente</a>
+
+		</div>
+		<div class="col-sm-6 col-12 text-right">
+			<button type="submit" class="btn btn-maincolor">Page suivante</button>
+		</div>
+
+	</div>
+	{{ form_widget(form._token) }}
+	{{form_end(form,{"render_rest": false})}}
+
+{% endblock %}
+
+{% block js_intervention %}
+<script type="text/javascript">
+	$('#{{ form.travaux.vars.id }}').selectpicker().on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
+		let clickedOption = e.target[clickedIndex];
+		let checkBox = document.querySelector(clickedOption.getAttribute('data-id'));
+	  	checkBox.checked = isSelected;
+	});
+</script>
+{% endblock %}

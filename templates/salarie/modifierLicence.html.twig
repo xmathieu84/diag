@@ -1,0 +1,139 @@
+{% extends 'entreprise/baseAE.html.twig' %}
+
+{% block contenu %}
+    {% if salarie.licenceDgac  %}
+        {% set licence = "true" %}
+        {% else %}
+        {% set licence = "false" %}
+    {% endif %}
+    {% if salarie.alphaTango  %}
+        {% set catt = "true" %}
+    {% else %}
+        {% set catt = "false" %}
+    {% endif %}
+    <div class="container bg-white">
+        <div class="row">
+            <input type="hidden" name="" id="catt" value="{{ catt }}">
+            <input type="hidden" name="" id="dsac" value="{{ licence }}">
+            <input type="hidden" name="" id="salarie" value="{{ salarie.id }}">
+            <div class="col-sm-12 text-center">
+                <p class="h7">Les champs marqués d'une * sont obligatoires</p>
+            </div>
+
+            <div class="col-sm-12 text-center mt-3 mb-5">
+                <br><br>
+                {% if salarie.licenceDgac %}
+                    <p class="h2">Modifier votre Certificat d'Aptitude CATT
+                    </p>
+                    {% else %}
+                        <p class="h2">Ajouter votre Certificat d'Aptitude CATT
+                        </p>
+                {% endif %}
+
+
+
+            </div>
+            <div class="col-sm-5">
+                <label for="numeroLicence" style="margin-bottom: 1.4em">Numéro de Certificat d'Aptitude CATT *</label>
+                {% if salarie.licenceDgac and salarie.licenceDgac.numeroDeLicence %}
+                    <input type="text" class='form-control form-control-sm numeroLicence ' id="numeroLicence" data-type="aptitutde" value="{{ salarie.licenceDgac.numeroDeLicence }}" >
+                    {% else %}
+                        <input type="text" class='form-control form-control-sm numeroLicence ' id="numeroLicence" data-type="aptitutde" value="" >
+                {% endif %}
+
+
+            </div>
+            <div class="col-sm-7">
+                <label for="realLicence">Télécharger votre Certificat d'Aptitude CATT (format PDF) *</label>
+
+                <button id="licence">
+                    {% if salarie.licenceDgac and salarie.licenceDgac.fichierLicence %}
+                        {{salarie.licenceDgac.fichierLicence}}
+                    {% else %}
+                        Certificat d'Aptitude CATT
+
+                    {% endif %}
+                </button>
+                <input type="file" name="" id="realLicence" accept='.pdf'data-type="catt">
+
+                <br><br>
+            </div>
+            <div class="col-12 mt-3 mb-3 text-center">
+                <p class="h2">Votre numéro d'exploitant *</p>
+                <div class="row">
+                    <div class="col-3"></div>
+                    <div class="col-6 mt-3">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">FRA</span>
+                            </div>
+                            {% if salarie.licenceDgac and salarie.licenceDgac.exploitant %}
+                            <input type="text" class="form-control" placeholder="Numéro d'exploitant" aria-label="exploitant" aria-describedby="basic-addon1"  data-type="exploitant" id="exploitant" minlength="13" maxlength="13" value="{{ salarie.licenceDgac.exploitant }}">
+                                {% else %}
+                                    <input type="text" class="form-control" placeholder="Numéro d'exploitant" aria-label="exploitant" aria-describedby="basic-addon1"  data-type="exploitant" id="exploitant" minlength="13" maxlength="13" value="">
+                            {% endif %}
+                        </div>
+
+                    </div>
+                    <div class="col-3"></div>
+                </div>
+            </div>
+            <div class="col-sm-6 mt-5">
+                <p class="h6">Justificatif de formation Alpha Tango *</p>
+                <button id="justificatif">
+
+                    {% if salarie.alphaTango and salarie.alphaTango.attestationFormation %}
+
+
+                        {{salarie.alphaTango.attestationFormation}}
+
+                    {% else %}
+                        Justificatif de formation Alpha Tango
+
+
+                    {% endif %}
+
+                </button>
+
+                <input type="file" class='form-control form-control-sm justificatifAT' id="realJustificatif" accept='.pdf' data-type="alpha">
+
+            </div>
+            <div class="col-sm-6 mt-5">
+                <label for="date" class="h6">Fin de validité *</label>
+                <input type="date" class="form-control form-control-sm validite" min="{{ limite }}" data-type="validite" value="{{ validite }}">
+
+
+            </div>
+            <div class="col-sm-12 text-center">
+                <br><br>
+                <p class="h2">AlphaTango</p>
+            </div>
+            <div class="col-sm-12 mb-5">
+
+
+                <br><br><p class="h6">Indiquer ici vos identifiants de connexion au service Alpha Tango. Ces éléments permettront à DIAG-DRONE de gérer pour vous et si vous le souhaitez toutes vos démarches auprès de la DSAC. Ces informations ne sont pas obligatoires . Elles peuvent être modifiées à tout moment depuis votre espace personnel.</p>
+
+            </div>
+
+            <div class="col-sm-6">
+                <p class="h6">Identifiant</p>
+                <input type="text" name="" class='form-control form-control-sm identifiantAT'>
+
+            </div>
+            <div class="col-sm-6">
+                <p class="h6">Mot de passe</p>
+                <input type="text" name="" class='form-control form-control-sm passwordAT'>
+
+            </div>
+
+            <div class="col-sm-12 text-center btnAt">
+                <button class='btn btn-maincolor' data-salarie="{{salarie.id}}">Valider</button>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block title %}
+Modifier licence
+{% endblock %}
+

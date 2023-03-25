@@ -1,0 +1,27 @@
+{
+    "destination_addresses": [
+        "55 Avenue Julien Fabre, 13300 Salon-de-Provence, France"
+    ],
+    "origin_addresses": [
+        "12 Rue Charmilles,
+        13800 Istres, France"
+    ],
+    "rows": [
+        {
+            "elements": [
+                {
+                    "distance": {
+                        "text": "28,4 km",
+                        "value": 28356
+                    },
+                    "duration": {
+                        "text": "29 minutes",
+                        "value": 1768
+                    },
+                    "status": "OK"
+                }
+            ]
+        }
+    ],
+    "status": "OK"
+}

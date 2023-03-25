@@ -1,0 +1,33 @@
+{% extends "accueil/baseaccueil.html.twig" %}
+{% block nomPage %}Paiement effectué
+{% endblock %}
+{% block title %}Paiement effectué
+{% endblock %}
+
+{% block bodyAccueil %}
+	<section class="ls service-single s-py-xl-150 s-py-lg-130 s-py-md-90 s-py-60 bg-white">
+		<div class="container">
+			<div class="row text-center">
+
+
+				<div class="text mt-50">
+					<p class="text-black h3">
+						Votre paiement a été effectué. Inscrivez-vous pour profiter des services de DIAG-DRONE.
+					</p>
+
+				</div>
+				<div class="col-sm-6 text-center">
+					<a href="{{path('inscriptionDem',{type:'demandeur'})}}" class="btn btn-maincolor">J' m'inscris</a>
+
+				</div>
+				<div class="col-sm-6 text-center">
+					<a href="{{path('lesProfils',type:'DemandeursJe vien')}}" class="btn btn-maincolor">Decouvrez nos profils</a>
+
+
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+{% endblock %}

@@ -1,0 +1,40 @@
+#listeInter_1,
+#listeInter_2,
+#listeInter_0,
+#typeInter_1IA,
+#typeInter_2IA,
+#typeInter_4IA,
+#typeInter_5IA,
+#typeInter_3IA,
+#typeInter_16IA,
+#typeInter_6IA,
+#typeInter_7IA,
+#typeInter_13IA,
+#typeInter_15IA,
+#typeInter_14IA,
+#typeInter_12IA,
+#typeInter_1IT,
+#typeInter_7IT,
+#typeInter_2IT,
+#typeInter_2IM,
+#typeInter_16IM,
+#typeInter_9IM,
+#typeInter_8IM,
+#typeInter_7IM,
+#typeInter_1IM,
+#typeInter_16IM,
+#typeInter_17IA
+
+{
+    display: none;
+}
+#formInter,#formSalarie,#formDemandeur{
+    background:white;
+    padding: 5%;
+}
+#inter_etape3_intemp_1{
+    margin-left: 2.5em;
+}
+input[type=text]:focus{
+    background: silver;
+}

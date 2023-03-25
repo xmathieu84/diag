@@ -1,0 +1,16 @@
+.shortcode-gallery {
+  /***ITEM Gallery***/
+  .item-gallery {
+    &.content-absolute {
+      .item-content {
+        background-color: rgba($colorMain, 0.8);
+        .icon-styled{
+          margin-right: 20px;
+        }
+        h6 {
+          margin-bottom: 0.7em;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,167 @@
+{% extends "base.html.twig" %}
+{% block mobileConnect %}{{path('app_logout')}}{% endblock %}
+{% block stylesheets %}
+    <style type="text/css">
+        .page_header_side.header_side_sticked, .toggle_menu_side {
+            z-index: 100!important;
+        }
+    </style>
+{% endblock %}
+{% block connexion %}
+
+    <nav class="top-nav justify-nav-end ">
+        {% block menu %}
+            <div class="d-xl-none right">
+                <a class="login-form-btn" href="{{path('app_logout')}}">
+                    <small>Se déconnecter</small>
+                    <i class="fas fa-user"></i>
+                </a>
+            </div>
+        {% endblock %}
+
+        <ul class="nav sf-menu">
+            <li>
+                <a href="{{ path('homeInsti') }}"class="liensSyndic">Espace Personnel</a>
+            </li>
+            <li>
+                <a href="{{ path('infoInsti') }}"class="liensSyndic">Mes infos</a>
+            </li>
+            <li>
+                <a href="/DIAG DRONE - Guide de l'utilisateur - Interface Institutionnels et Grands Comptes.pdf" target="_blank">Guide d'utilisation</a>
+            </li>
+
+            <li class="mr-3 onMobile text-center">
+
+                <div class="row d-inline-flex align-items-center">
+                    <span class="left logoMenu">
+
+                    </span>
+                    <span class="right">
+                        <a class="login-form-btn" href="{{path('app_logout')}}">
+                            <small>Se déconnecter</small>
+                            <i class="fas fa-user"></i>
+                        </a>
+                    </span>
+                </div>
+
+            </li>
+
+        </ul>
+
+        <ul class="list-unstyled d-flex align-items-center">
+
+        </ul>
+
+    </nav>
+{% endblock %}
+
+{% block body %}
+    {% if is_granted('ROLE_INSTITUTION') %}
+        {% set noms ='Agents' %}
+        {% set nom = 'agent' %}
+        {% else %}
+            {% set noms ='collaborateurs' %}
+            {% set nom = 'collaborateur' %}
+    {% endif %}
+    {% if is_granted('ROLE_SYNDIC') %}
+        <input type="hidden" name="" class="codeSyndic" value ={{ code }}>
+    {% else %}
+        {% set code = null %}
+    {% endif %}
+    <section class=" bg-grey-light py-5">
+        <div class="container-fluid pt-5">
+            <div class="d-lg-none">
+                <header class="page_header_side header_side_sticked ls mt-108">
+                    <span class="toggle_menu toggle_menu_side header-slide"><span></span></span>
+                    <div class="scrollbar-macosx">
+                        <div class="side_header_inner pt-0">
+                            <div class="header-side-menu">
+                                <!-- main side nav start -->
+                                <nav class="mainmenu_side_wrapper bg-white">
+                                    {% include 'institution/navMenu.html.twig' %}
+                                </nav>
+                                <!-- main side nav end -->
+                            </div>
+                        </div>
+                    </div>
+                </header>
+            </div>
+
+         
+            <div class="row mt-2 ml-1 mr-1">
+                <div class="col-lg-3 col-xl-3 pl-0 d-none d-lg-block">
+                    <h5 class="title_side_dashboard mb-0 mt-2" id="headMenuInsti">Navigation</h5>
+                    <nav class="bg-white">
+                        {% include 'institution/navMenu.html.twig' %}
+                    </nav>
+
+				</div>
+
+				<main class="col-lg-9 col-md-12">
+                    <div class="breadcrumb-wrap mt-2 justify-content-start mb-1">
+                        <ol class="breadcrumb">
+                            {% if app.request.attributes.get('_route') != "homeInsti" %}
+                            <li class="breadcrumb-item">
+                                <a href="{{path('homeInsti')}}">Accueil</a>
+                            </li>
+                            {% endif %}
+                            <li class="breadcrumb-item active">
+                                {% block title %}{% endblock %}
+                            </li>
+                        </ol>
+                    </div>
+                    {% block pageAccueil %}{% endblock %}
+					{% block contenu %}{% endblock %}
+
+				</main>
+
+				<aside class="col-lg-3 col-sm-12 col-xs-12">
+                    {% if is_granted('ROLE_SYNDIC') %}
+                        <h5 class="title_side_dashboard">Menu Syndic de co-propriété
+                        </h5>
+                        <nav class="bg-white">
+                            <ul class="menu-click dashbord">
+
+                                <li>
+                                    <a href="{{ path('demandeAccès') }}">Rechercher un syndicat de co-propriété</a>
+
+                                </li>
+                                <li>
+                                    <a href="{{ path('mesDemandesAcces') }}">Mes demandes</a>
+
+                                </li>
+                                <li>
+                                    <a href="{{ path('homeSyndic') }}">Mes syndic de co-propriétés</a>
+
+                                </li>
+
+
+                            </ul>
+
+
+                        </nav>
+                    {% endif %}
+
+				</aside>
+
+
+			</div>
+
+		</div>
+	</section>
+
+
+{% endblock %}
+{% block cg %}
+    <li class="mt-3"><a href="{{ path('consultCg') }}">Conditions générales</a></li>
+{% endblock %}
+{% block javascripts %}
+	<script src="/js/js_site/nombreInter.js"></script>
+    <script src="/js/js_site/logoEnt.js"></script>
+    {#<script src="/js/js_site/navMenu.js" route="{{ path(app.request.attributes.get('_route')) }}"></script>#}
+    <script type="text/javascript">
+        $('.page_header ').find('.toggle_menu').hide();
+    </script>
+    {% block js_intervention %}{% endblock  %}
+{% endblock  %}
+{% block contact %}{% endblock  %}

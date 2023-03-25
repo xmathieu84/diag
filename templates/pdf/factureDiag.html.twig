@@ -1,0 +1,274 @@
+<style>
+    @page  {
+        margin: 15px;
+    }
+    .imgPdf {
+        width: 40%;
+        height: 16%;
+    }
+    .image {
+        text-align: center;
+    }
+    .logoEntreprise{
+        width: 6.5em;
+    }
+
+    .entreprise {
+        float: left;
+        width: 40%;
+        font-size: 1.1em;
+    }
+
+    .demandeur {
+        width: 45%;
+        float: right;
+        text-align: right;
+        font-size: 1em;
+
+    }
+    .intitule {
+        text-decoration: underline;
+    }
+    .intitule-entreprise {
+        margin-bottom: 0;
+        margin-top: 0.5em;
+    }
+    .date {
+        text-align: center;
+        font-size: 1.5em;
+    }
+
+    .facture{
+        float: left;
+        width: 100%;
+    }
+    .tableFacture{
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.9em;
+    }
+    .total{
+        float: right;
+        width: 40%;
+        margin-top: 1em;
+
+    }
+    .prixFinal{
+        width: 100%;
+        border-collapse: collapse;
+    }
+    th,td{
+        border: 1px solid black;
+        padding-top:0.5em;
+        padding-bottom: 0.5em;
+        text-align: center;
+    }
+    th{
+        background: #DADADA;
+    }
+    .designation{
+        width: 50%;
+    }
+    #piedDepage2 {
+        position: absolute;
+        bottom: 0;
+        height: 50px;
+    }
+    .versement {
+        margin: 0;
+    }
+    th.premiere{
+        border: none;
+    }
+
+    .adresse {
+        margin-top: 3em;
+        width: 100%;
+    }
+
+
+</style>
+<div class="image">
+    <img src="../public/css/css_site/images/logo-diagdrone.png" alt="" class="imgPdf">
+
+    {% if inter.odi.entreprise.logo %}
+        <img src="../public/uploads/logo/{{ inter.odi.entreprise.logo }}" alt="logo entreprise" class="logoEntreprise">
+    {% endif %}
+    {% if type =='acompte' %}
+        {% set nom = 'acc' %}
+        {% else %}
+            {% set nom = 'inter' %}
+    {% endif %}
+    <h1>Facture n° {{ nom }}{{ numero }}</h1>
+
+</div>
+<div>
+    <div class="entreprise fact">
+        {% if inter.odi.entreprise.formJuridique =='auto-entrepreneur' %}
+            <span class="denominEnseigne">{{inter.odi.entreprise.enseigne}}
+                {{inter.odi.entreprise.denomination}}</span><br>
+        {% else %}
+            <span class="formeJuridique">{{inter.odi.entreprise.formJuridique}}</span><br>
+            <span class="denominEnseigne">{{inter.odi.entreprise.enseigne}}
+                {{inter.odi.entreprise.denomination}}</span><br>
+        {% endif %}
+
+        <p class="intitule intitule-entreprise">Adresse:</p>
+        <span>{{inter.odi.entreprise.adresse.numero}}
+            {{inter.odi.entreprise.adresse.nomVoie}}</span><br>
+        <span>{{inter.odi.entreprise.adresse.codePostal}}
+            {{inter.odi.entreprise.adresse.ville}}</span>
+        <p class="intitule intitule-entreprise">Email:</p>
+        <span>{{inter.odi.user.email}}</span>
+
+        <p class="intitule intitule-entreprise">Téléphone:</p>
+        <span>{{inter.odi.entreprise.telephone.numero}}</span>
+
+
+    </div>
+
+    <div class="demandeur">
+        <p class="intitule">Adresse de facturation:</p>
+        {% if inter.demandeur.profil =='Particulier propriétaire' %}
+            <span>{{inter.demandeur.civilite.type}}
+                {{inter.demandeur.civilite.nom}}
+                {{inter.demandeur.civilite.prenom}}</span>
+        {% else %}
+            <span>{{inter.demandeur.nom|capitalize}}</span>
+        {% endif %}
+        <br><span>{{inter.demandeur.adresse.numero}}
+            {{inter.demandeur.adresse.nomVoie}}</span><br>
+        <span>{{inter.demandeur.adresse.codePostal}}
+            {{inter.demandeur.adresse.ville}}</span>
+        {% if inter.demandeur.siretTva %}
+            <br><span>SIRET : {{ inter.demandeur.siretTva.siret }}</span><br>
+            <span>TVA : {{ inter.demandeur.siretTva.tva }}</span>
+        {% endif %}
+        <p class="intitule">Adresse du diagnostic:</p>
+        <span class="adresse">{{inter.adresse.numero}}
+            {{inter.adresse.nomVoie}}</span><br>
+        <span class="adresse">{{inter.adresse.codepostal}}
+            {{inter.adresse.ville}}</span>
+
+    </div>
+
+</div>
+<div class="date">
+    <p>Diagnostic(s) réalisé(s) le
+        {{inter.dateRdv|format_datetime('short', 'none', locale='fr')}}</p>
+</div>
+<div class="facture">
+    <table class="tableFacture">
+        <tr>
+            <th class="designation">Désignation</th>
+            <th>Qté</th>
+            <th>PU TTC</th>
+            <th>Remise</th>
+            {% if inter.odi.entreprise.siretTva.assujeti %}
+                <th>TVA</th>
+            {% endif %}
+
+        </tr>
+            {% for diag in liste %}
+                <tr>
+                    <td>{{ diag.nom }}</td>
+                    <td>1</td>
+                    <td>{{ diag.prix }} €</td>
+                    <td>{% if diag.remise %}
+                            {{ (diag.remise/100)*diag.prix }} € ({{ diag.remise }} %)
+                        {% else %}
+                            0 €
+                        {% endif %}</td>
+                    {% if inter.odi.entreprise.siretTva.assujeti %}
+                        <td>20 %</td>
+                    {% endif %}
+
+                </tr>
+            {% endfor %}
+
+
+
+
+        {% if type =='acompte' %}
+            <tr>
+                <td>Accompte pour intervention 35%</td>
+                {% if inter.odi.entreprise.siretTva.assujeti %}
+                    <td colspan="4" >{{ inter.acompte }}</td>
+                {% else %}
+                    <td colspan="3" >{{ inter.acompte }}</td>
+                {% endif %}
+
+            </tr>
+        {% endif %}
+
+    </table>
+</div>
+{% if type=='acompte' %}
+    {% set prixFinal = inter.acompte %}
+    {% else %}
+        {% set prixFinal = inter.prix %}
+{% endif %}
+
+{% if inter.remiseTemps !=0 %}
+
+    {% set prixInter = prixFinal - prixFinal * inter.remiseTemps/100 %}
+    {% else  %}
+        {% set prixInter = prixFinal %}
+{% endif %}
+
+<div class="total">
+    <table class="prixFinal">
+        <tr>
+            {% if inter.odi.entreprise.siretTva.assujeti %}
+                <th>Total TTC</th>
+                {% else %}
+                    <th>Total NET</th>
+            {% endif %}
+
+            <td>{{ (prixInter)|number_format(2) }} €</td>
+        </tr>
+        <tr>
+            <th>Remise globale</th>
+            <td>{{ (prixFinal * inter.remiseTemps/100)|number_format(2) }} € ({{ inter.remiseTemps }} %)</td>
+        </tr>
+        {% if type =='acompte' %}
+            {% set prixHt = prixInter/1.2 %}
+
+            {% else %}
+                <tr>
+                    <th>Déjà versé</th>
+                    <td>{{ inter.acompte }}</td>
+                </tr>
+                {% set prixHt = prixInter/1.2 - inter.acompte/1.2 %}
+        {% endif %}
+        {% if inter.odi.entreprise.siretTva.assujeti %}
+
+            <tr>
+                <th>Total HT</th>
+                <td>{{ prixHt|number_format(2)  }} €</td>
+            </tr>
+            <tr>
+                <th>Total TVA</th>
+                <td>{{ (prixInter-prixInter/1.2)|number_format(2)}} €</td>
+            </tr>
+        {% endif %}
+        <tr>
+            <th>Montant à payer</th>
+
+            <td>{{ prixInter|number_format(2) }} €</td>
+        </tr>
+
+    </table>
+</div>
+
+
+<footer id="piedDepage2">
+    {% if inter.odi.entreprise.siretTva.assujeti == false %}
+        <p class="versement">TVA non applicable selon l’article 293 B du Code Général des Impôts</p>
+    {% endif %}
+
+
+    <p class="versement">Pensez à télécharger ou imprimer votre facture.</p>
+</footer>
+
+

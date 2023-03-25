@@ -1,0 +1,32 @@
+{% extends template %}
+
+{% block title %}{% endblock %}
+{% block titre %}
+	<h1 class="titreForum">Bienvenue sur le forum DIAG-DRONE!</h1>
+
+{% endblock %}
+{% block contenu %}
+
+
+	<div class="row">
+		<div class="col-12 mb-5">
+			<p class="h2">Liste des forums</p>
+		</div>
+		{% for theme in themes %}
+			<div class="col ">
+				<div class="col-12 bg-white border border-dark pt-5 pb-5">
+					<span class="h5">{{ theme.nom }}</span>
+					<p class="h7 mt-5">{{ theme.description }}</p>
+					<div class="col-12 text-right">
+						<a href="{{ path('categorie',{id:theme.id}) }}">
+							<button class="btn btn-primary btn-sm">Accéder</button>
+						</a>
+					</div>
+				</div>
+
+			</div>
+		{% endfor %}
+	</div>
+
+
+{% endblock %}

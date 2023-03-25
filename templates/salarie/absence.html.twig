@@ -1,0 +1,50 @@
+{% extends 'entreprise/baseAE.html.twig' %}
+{% block title %}indisponibilite
+{% endblock %}
+{% block pageAccueil %}
+	<h4>Renseignez vos créneaux d'indisponibilités</h4>
+{% endblock %}
+
+{% block contenu %}
+
+
+	{{form_start(form,{'attr':{'id':'formSalarie'}})}}
+
+	<div class="row">
+		<div class="col-12 mt--15 mb-5">
+			<p class="h5">Les champs marqués d'une * sont obligatoires .</p>
+		</div>
+		<div class="col-sm-6 col-12">
+
+
+
+				{{form_row(form.debut,{'label':'Date et heure de début * ','attr':{'class':'form-control'},"lable_attr":{"class":"h6"}})}}
+
+		</div>
+
+
+
+		<div class="col-sm-6 col-12">
+
+				{{form_row(form.fin,{'label':'Date et heure de fin * ','attr':{'class':'form-control'},"label_attr":{"class":"h6"}})}}
+
+		</div>
+
+
+
+		<div class="col-12 mt-5 mb-5">
+
+				{{form_row(form.raison,{'label':'Raison de votre indisponibilité ','attr':{'class':'form-control',"placeholder":"raison de votre indisponibilité"},"label_attr":{"class":"h6"}})}}
+
+		</div>
+
+
+		<div class="col-sm-12">
+			<button type="submit" class="btn btn-maincolor">valider</button>
+		</div>
+
+	</div>
+
+	{{form_end(form)}}
+
+{% endblock %}

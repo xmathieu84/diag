@@ -1,0 +1,38 @@
+{% extends 'institution/baseInsti.html.twig' %}
+
+{% block title %}
+Révoquer un accès
+{% endblock %}
+
+{% block contenu %}
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8">
+            {% if syndic %}
+                
+
+            <div class="card text-center">
+                <div class="card-header text-dark">
+                    <span class="h4">Accès accordé</span>
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title">
+                        {{syndic.civilite.nom}} {{ syndic.civilite.prenom }}
+                    </h4>
+                    <p class="card-text">
+                        Demande d'accès faite le  : {{ demande.date|format_datetime('full',"none",locale='fr') }}
+                    </p>
+                    <p class="card-text">
+                        <a href="{{ path('annulerAcces',{code:code}) }}" class="btn btn-danger">Annuler l'accès à votre espace</a>
+                    </p>
+                </div>
+            </div>
+                {% else %}
+
+                <p class="h4">Vous n'avez acun syndic de co-propriétés renseigné</p>
+            {% endif %}
+        </div>
+        <div class="col-2"></div>
+    </div>
+{% endblock %}
+

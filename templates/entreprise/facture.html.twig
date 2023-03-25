@@ -1,0 +1,68 @@
+{% extends 'entreprise/baseAE.html.twig' %}
+{% block title %}
+	Mes factures
+{% endblock %}
+
+
+{% block contenu %}
+
+	<div class="row">
+			<div class="col-sm-12">
+				<div class="row text-center">
+
+					<div class="col-12 text-center mb-5">
+						<p class="h1">Mes factures</p>
+					</div>
+					<div class="col-sm-12 header__prev_next">
+
+							<button id="precedent" class="btn btn-maincolor">&#60 &#60</button>
+							<span id="mois" class="h1 text-center"></span>
+							<button id="suivant" class="btn btn-maincolor">&#62 &#62</button>
+
+					</div>
+
+					<div class="col-sm-12">
+						<br><br>
+						<div class="row text-center zoneFacture"></div>
+					</div>
+
+
+				</div>
+
+			</div>
+
+			<div class="col-sm-12 text-center ">
+				<div class="row">
+					<div class="col-sm-12  mb-5">
+						<br>
+						<br>
+						<br>
+						<p class="h1">Mes devis</p>
+					</div>
+
+
+					<div class="col-sm-12 header__prev_next">
+
+							<button id="precedentDevis" class="btn btn-maincolor">&#60 &#60</button>
+							<span id="moisDevis" class="h1 text-center"></span>
+							<button id="suivantDevis" class="btn btn-maincolor">&#62 &#62</button>
+
+					</div>
+
+
+					<div class="col-sm-12">
+						<br><br>
+						<div class="row textCenter zoneDevis"></div>
+					</div>
+
+
+				</div>
+
+			</div>
+
+
+
+
+
+	</div>
+{% endblock %}

@@ -1,0 +1,284 @@
+{% extends 'institution/baseInsti.html.twig' %}
+
+{% block title %}
+    Modifier mes infos
+{% endblock %}
+{% block pageAccueil %}
+    <h3>Modifier les informations du compte</h3>
+{% endblock %}
+{% block contenu %}
+    <div class="table-responsive bg-white pl-5 pr-5 pt-5 pb-5">
+        <table>
+            <tr class="text-dark">
+                <th class="text-center" width="33%">Email</th>
+                <td class="text-center email" width="33%">{{ responsable.user.email }}</td>
+                <td class="text-center"><button class="btn btn-maincolor" data-toggle="modal" data-target="#mailModal">Modifier</button></td>
+            </tr>
+            <tr class="text-dark">
+                <th class="text-center">Mot de passe</th>
+                <td class="text-center password">*******</td>
+                <td class="text-center"><button class="btn btn-maincolor" data-toggle="modal" data-target="#passwordModal">Modifier</button></td>
+            </tr>
+            <tr class="text-dark">
+                <th class="text-center">Adresse</th>
+                <td class="text-center modif"><span class="adresseModif">{{ responsable.demandeur.adresse.numero }}</span> <span class="adresseModif">{{ responsable.demandeur.adresse.nomVoie }}</span>
+                    <br><span class="adresseModif">{{ responsable.demandeur.adresse.codePostal }}</span> <span class="adresseModif">{{ responsable.demandeur.adresse.ville }}</span></td>
+                <td class="text-center"><button class="btn btn-maincolor" data-toggle="modal" data-target="#adresseModal">Modifier</button></td>
+            </tr>
+            <tr class="text-dark">
+                <th class="text-center">Numéro de téléphone</th>
+                <td class="text-center telephone">{{ responsable.demandeur.telephon.numero }}</td>
+                <td class="text-center"><button class="btn btn-maincolor"data-toggle="modal" data-target="#telephoneModal">Modifier</button></td>
+            </tr>
+            <tr class="text-dark">
+                <th class="text-center">Logo</th>
+                <td class="text-center modifLogo">{{ responsable.demandeur.logo }}</td>
+                <td class="text-center"><button class="btn btn-maincolor"data-toggle="modal" data-target="#logoModal">Modifier</button></td>
+            </tr>
+            {% if is_granted('ROLE_BTP') %}
+                <tr class="text-dark">
+                    <th class="text-center">Bandeau publicitaire</th>
+                    <td class="text-center modifBandeau">{{ responsable.demandeur.proBtp.bandeauPub }}</td>
+                    <td class="text-center"><button class="btn btn-maincolor"data-toggle="modal" data-target="#bandeauModal">Modifier</button></td>
+                </tr>
+                <tr class="text-dark">
+                    <th class="text-center">Site web</th>
+                    <td class="text-center modifSite">{{ responsable.demandeur.proBtp.siteWeb }}</td>
+                    <td class="text-center"><button class="btn btn-maincolor"data-toggle="modal" data-target="#siteModal">Modifier</button></td>
+                </tr>
+                <tr class="text-dark">
+                    <th class="text-center">Distance d'intervention</th>
+                    <td class="text-center "><span class="distance">{{ responsable.demandeur.proBtp.distanceInter }}</span> km</td>
+                    <td class="text-center"><button class="btn btn-maincolor"data-toggle="modal" data-target="#distanceModal">Modifier</button></td>
+                </tr>
+                <tr class="text-dark">
+                    <th class="text-center">Type de travaux</th>
+                    <td class="text-center modif"><ul class="modifTravaux">
+                            {% for  travaux in responsable.demandeur.proBtp.travaux %}
+                                    <li>{{ travaux.nom }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                    <td class="text-center"><button class="btn btn-maincolor"data-toggle="modal" data-target="#travauxModal">Modifier</button></td>
+                </tr>
+            {% endif %}
+
+
+        </table>
+    </div>
+    <div class="modal fade" id="mailModal" tabindex="-1" aria-labelledby="mailModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Changer mon E-mail</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <label for="mail">Nouvelle adresse E-mail</label>
+                    <input type="email"  id="mail" class="form-control form-control-lg" value="{{ responsable.user.email }}">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary closeMail" data-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary modifEmail">Valider</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="passwordModal" tabindex="-1" aria-labelledby="modalPasswordLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Changer le mot de passe</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <label for="mail">Nouveau mot de passe</label>
+                <input type="text" name="" id="password" class="form-control form-control-lg" value="*******">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary closePassword" data-dismiss="modal">Annuler</button>
+                <button type="button" class="btn btn-primary modifPassword">Valider</button>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <div class="modal fade" id="adresseModal" tabindex="-1" aria-labelledby="modalAdresseLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modifier l'adresse</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-3 col-1">
+                            <label for="numero">Numéro de la rue</label>
+                            <input type="text" name="" id="numero" value="{{ responsable.demandeur.adresse.numero }}">
+                        </div>
+                        <div class="col-sm-9 col-11">
+                            <label for="rue">Nom de la rue</label>
+                            <input type="text" name="" id="rue" value="{{ responsable.demandeur.adresse.nomVoie }}">
+                        </div>
+                        <div class="col-sm-6 col-12">
+                            <label for="cp">Code postal</label>
+                            <input type="text" name="" id="cp" value="{{ responsable.demandeur.adresse.codePostal }}">
+                        </div>
+                        <div class="col-sm-6 col-12">
+                            <label for="ville">Ville</label>
+                            <input type="text" name="" id="ville" value="{{ responsable.demandeur.adresse.ville }}">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary closeAdresse" data-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary validerAdresse">Valider</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="telephoneModal" tabindex="-1" aria-labelledby="modalTelephoneLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Changer le mot de passe</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <label for="telephone">Changer le numéro téléphone</label>
+                    <input type="text" name="" id="telephone" class="form-control form-control-lg" value="{{ responsable.demandeur.telephon.numero }}">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary closeTelephone" data-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary modifTelephone">Valider</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="logoModal" tabindex="-1" aria-labelledby="modalTelephoneLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Changer le logo</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <label for="logoInsti">Changer le logo</label>
+                    <input type="file" name="" id="logoInsti">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary closeLogo" data-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary validerLogo">Valider</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% if is_granted('ROLE_BTP') %}
+        <div class="modal fade" id="bandeauModal" tabindex="-1" aria-labelledby="modalTelephoneLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Changer votre bandeau publicitaire</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <label for="bandeauPub">Changer votre bandeau publicitaire</label>
+                        <input type="file" name="" id="bandeauPub" accept="image/jpeg">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary closeBandeau" data-dismiss="modal">Annuler</button>
+                        <button type="button" class="btn btn-primary validerBandeau">Valider</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="siteModal" tabindex="-1" aria-labelledby="modalTelephoneLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modifier votre site web</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <label for="telephone">Modifier votre site web</label>
+                        <input type="text" name="" id="siteWeb" class="form-control form-control-lg" value="{{ responsable.demandeur.proBtp.siteWeb }}">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary closeSite" data-dismiss="modal">Annuler</button>
+                        <button type="button" class="btn btn-primary modifSite">Valider</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="distanceModal" tabindex="-1" aria-labelledby="modalTelephoneLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modifier votre rayon d'intervention</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <label for="telephone">Modifier votre rayon d'intervention</label>
+                        <input type="text" name="" id="distanceInter" class="form-control form-control-lg" value="{{ responsable.demandeur.proBtp.distanceInter }}">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary closeDistance" data-dismiss="modal">Annuler</button>
+                        <button type="button" class="btn btn-primary modifDistance">Valider</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="travauxModal" tabindex="-1" aria-labelledby="modalTelephoneLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable"id="modaleTravaux" >
+                <div class="modal-content" >
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Liste des interventions que vous pouvez réaliser</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12 texte-center">
+                                <p class="h5">
+                                    Liste des interventions que vous pouvez réaliser
+                                </p>
+                            </div>
+
+
+                            {% for travail in travaux %}
+                                <div class="col-sm-6 col-12">
+                                    <input type="checkbox" name="" id="id{{ travail.id }}" class="checkPerso" value="{{ travail.id }}">
+                                    <label for="id{{ travail.id }}">{{ travail.nom }}</label>
+                                </div>
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary closeTravaux" data-dismiss="modal">Annuler</button>
+                        <button type="button" class="btn btn-primary validerTravaux">Valider</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
+
+

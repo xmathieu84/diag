@@ -1,0 +1,33 @@
+{% extends "administrateur/baseA.html.twig" %}
+
+{% block body %}
+<div class="row">
+		<div class="table-responsive text-center">
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th>Date du paiement</th>
+						<th>Type de paiement</th>
+						<th>Montant</th>
+						<th>Identifiant demandeur</th>
+                        <th>Identifiant wallet</th>
+                        <th></th>
+
+					</tr>
+				</thead>
+                {% for mango in mangos %}
+                    <td> {{mango.date|format_datetime('short', 'none', locale='fr')}}</td>
+                    <td>{% if mango.intervention.intRap %}Intervention {% else %}
+                        acompte {% endif %}</td>
+                    <td>{{mango.montant}} €</td>
+                    <td>{{mango.intervention.intDem.user.mangoPayId}} </td>
+                    <td>{{mango.walletId}}</td>
+                    <td><a href="{{path('validerInter',{id:mango.id})}}" class="btn btn-success sm">Valider l'intervention</a></td>
+                {% endfor %}
+            </table>
+        </div>
+</div>
+
+
+
+{% endblock %}

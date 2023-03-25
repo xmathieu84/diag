@@ -1,0 +1,55 @@
+{% extends 'administrateur/baseA.html.twig' %}
+
+{% block title %}Ajouter Armee{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-sm-12 text-center">
+            <h3>Ajout d'une base militaire</h3>
+            <br><br>
+        </div>
+        {{ form_start(form) }}
+        <div class="row">
+            <div class="col-sm-6 text-center">
+                <span class="h6">Nom de la base</span>
+                {{ form_row(form.nomBase,{'label':' ','attr':{'class':'form-control form-control-sm form-militaire'}}) }}
+            </div>
+            <div class="col-sm-6 text-center">
+                <span>Adresse mail de contact</span>
+                {{ form_row(form.user.email,{'label':' ','attr':{'class':'form-control form-control-sm form-militaire'}}) }}
+            </div>
+            <div class="col-sm-6 text-center">
+                <span>Mot de passe (provisoire)</span>
+                {{ form_row(form.user.password,{'label':' ','attr':{'class':'form-control form-control-sm form-militaire'}}) }}
+
+            </div>
+            <div class="col-sm-6 text-center">
+                <span>Répéter le mot de passe</span>
+                {{ form_row(form.user.confirm_password,{'label':' ','attr':{'class':'form-control form-control-sm form-militaire'}}) }}
+            </div>
+            <div class="col-sm-6 text-center">
+                <span>Numéro de la rue</span>
+                {{ form_row(form.adresse.numero,{'label':' ','attr':{'class':'form-control form-control-sm form-militaire'}}) }}
+            </div>
+            <div class="col-sm-6 text-center">
+                <span>Nom de la rue</span>
+                {{ form_row(form.adresse.nomVoie,{'label':' ','attr':{'class':'form-control form-control-sm form-militaire'}}) }}
+            </div>
+            <div class="col-sm-6 text-center">
+                <span>Code postal</span>
+                {{ form_row(form.adresse.code_postal,{'label':' ','attr':{'class':'form-control form-control-sm form-militaire'}}) }}
+            </div>
+            <div class="col-sm-6 text-center">
+                <span>Ville</span>
+                {{ form_row(form.adresse.ville,{'label':' ','attr':{'class':'form-control form-control-sm form-militaire'}}) }}
+            </div>
+            <div class="col-sm-12 text-center">
+                <button class="btn btn-success">Valider</button>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+
+
+
+{% endblock %}

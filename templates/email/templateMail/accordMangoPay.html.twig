@@ -1,0 +1,16 @@
+{% extends 'email/templateMail/baseMail.html.twig' %}
+
+{% block sujet %}validation de votre solution d'encaissement MangoPay{% endblock %}
+
+{% block body %}
+    <p style="font-size: 14px; line-height: 140%;">Bonjour,</p>
+    <p style="font-size: 14px; line-height: 140%;">&nbsp;</p>
+    <p style="font-size: 14px; line-height: 140%;">Les services de contrôle de MangoPay viennent de valider les informations transmises et concernant votre entreprise.</p>
+    <p style="font-size: 14px; line-height: 140%;">&nbsp;</p>
+    <p style="font-size: 14px; line-height: 140%;">Votre solution d'encaissement est donc active.</p>
+    <p style="font-size: 14px; line-height: 140%;">&nbsp;</p>
+    <p style="font-size: 14px; line-height: 140%;">Pour consulter votre solde et opérer un retrait, rdv sur votre espace personnel.</p>
+    <p style="font-size: 14px; line-height: 140%;">&nbsp;</p>
+    <p style="font-size: 14px; line-height: 140%;">Cordialement</p>
+
+{% endblock %}

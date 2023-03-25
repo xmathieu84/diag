@@ -1,0 +1,132 @@
+{% extends 'institution/baseInsti.html.twig' %}
+{% block title %}Appel d'offre{% endblock %}
+
+{% block pageAccueil  %} <h4>FICHE d’information </h4>{% endblock %}
+{% block contenu %}
+    {{ form_start(form,{'attr':{'class':'bg-white pr-2 pl-2'}}) }}
+    <div class="row pt-5 pb-5">
+        <div class="col-sm-12">
+            <p class="h5">Les champs marqués * sont obligatoires</p>
+        </div>
+        <div class="col-sm-5 text-center mt-5">
+         {{ form_row(form.ordre,{'label':'Votre numéro d’Ordre '}) }}
+        </div>
+        <div class="col-sm-2 text-center mt-5">
+            <p class="h6">et/ou</p>
+        </div>
+        <div class="col-sm-5 text-center mt-5">
+            {{ form_row(form.reference,{'label':'Votre numéro de référence'}) }}
+        </div>
+        <div class="col-sm-12  mt-5">
+            {{ form_row(form.denomination,{'label':'Dénomination  *'}) }}
+        </div>
+        <div class="col-sm-12 text-center  mt-5">
+            {{ form_row(form.type,{'label':"S'agit-il *:"}) }}
+        </div>
+        <div class="col-sm-12 appel  mt-5">
+            <div class="row">
+                <div class="col-sm-6 mt-5">
+                    {{ form_row(form.categorie,{'label':"Catégorie de l’APPEL D’OFFRES : "}) }}
+                </div>
+                <div class="col-sm-6 mt-5">
+                    {{ form_row(form.ouvert,{'label':"L’appel d’offres est-il * :"}) }}
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 restreint  mt-5">
+            <div class="row">
+                <div class="col-sm-5  mt-5">
+                    {{ form_row(form.restreint.delaiDepotCandidature,{'label':"Délai de dépôt des candidatures *"}) }}
+                </div>
+                <div class="col-sm-7 pt-60  mt-5">
+                    <p class="h6">jours à compter de la publication de l’appel d’offres</p>
+                </div>
+                <div class="col-sm-5  mt-5">
+                    {{ form_row(form.restreint.delaiReponseCandidature,{'label':"Délai de réponse à la candidature *"}) }}
+                </div>
+                <div class="col-sm-7 pt-60  mt-5">
+                    <p class="h6">jours à compter de date de fin des candidatures </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 text-center  mt-5">
+            <legend>Dates clés de l’APPEL</legend>
+        </div>
+        <div class="col-sm-6  mt-5">
+            {{ form_row(form.DateRemiseProp,{'label':"Date maximum de remise de la proposition*",'attr':{'class':'form-control'}}) }}
+        </div>
+        <div class="col-sm-6  mt-5">
+            {{ form_row(form.datePriseDecision,{"label":'Date maximum de prise de décision *','attr':{'class':'form-control'}}) }}
+        </div>
+        <div class="col-sm-6  mt-5">
+            {{ form_row(form.datePassationCommande,{"label":'Date de passation de la commande ','attr':{'class':'form-control'}}) }}
+        </div>
+        <div class="col-sm-6  mt-5">
+            {{ form_row(form.dateMaxLivraison,{"label":'Date maximum de livraison ','attr':{'class':'form-control'}}) }}
+        </div>
+        <div class="col-sm-12  mt-5">
+            {{ form_row(form.critereSelection,{"label":"Principaux critères de sélection des offres"}) }}
+        </div>
+        <div class="col-sm-12  mt-5">
+            {{ form_row(form.presentation,{"label":"Préambule – présentation – contexte général *"}) }}
+        </div>
+        <div class="col-sm-12 text-center  mt-5">
+            {{ form_row(form.budgetExistant,{'label':'Souhaitez-vous alloué un budget *'}) }}
+        </div>
+
+        <div class="col-sm-12 budget  mt-5">
+            <div class="row">
+                <div class="col-sm-12 text-center  mt-5">
+                    <Legend>BUDGET ALLOUÉ</Legend>
+                </div>
+                <div class="col-sm-2"></div>
+                <div class="col-sm-8  mt-5">
+                    {{ form_row(form.budget.prevu,{'label':'MONTANT'}) }}
+                </div>
+                <div class="col-sm-2"></div>
+                <div class="col-sm-12 text-center  mt-5 mb-3">
+                    <p class="h5">Ou</p>
+                </div>
+                <div class="col-sm-3 pt-3 text-center  mt-5">
+                    <p class="h6">compris entre</p>
+                </div>
+                <div class="col-sm-4  mt-5">
+                    {{ form_row(form.budget.minimum,{'label':' '}) }}
+                </div>
+                <div class="col-sm-1 pt-3  mt-5">
+                    <p class="h6">et</p>
+                </div>
+                <div class="col-sm-4  mt-5">
+                    {{ form_row(form.budget.maximum,{'label':' '}) }}
+                </div>
+
+
+            </div>
+        </div>
+        <div class="col-sm-12 text-center  mt-5">
+            <legend>Si vous le souhaitez, vous pouvez ajouter un gestionnaire supplémentaire</legend>
+        </div>
+        <div class="col-sm-12 mt-5">
+            <div class="contacts row" data-prototype="{{ form_widget(form.contacts.vars.prototype)|e('html_attr') }}"></div>
+        </div>
+        <div class="col-sm-12  mt-5 text-center">
+            <button type="button" class="add_item_link btn btn-maincolor" data-collection-holder-class="contacts">Ajouter un contact</button>
+        </div>
+        <div class="col-sm-12 text-center mt-5">
+            <legend>Votre dossier <span class="dossier"></span></legend>
+        </div>
+        <div class="col-sm-12 dossier text-center  mt-5">
+            <label for="appel_dossier">Télécharger votre dossier * (.pdf,.zip,.rar,.7zip)</label>
+            <button class="btn btn-maincolor btn-dossierAo" type="button">Télécharger votre dossier</button>
+            {{ form_row(form.dossier,{'label':' '}) }}
+        </div>
+
+
+        <div class="col-sm-12 text-center mt-5">
+            <button class="btn btn-maincolor" type="submit">Passez à l'étape suivante</button>
+        </div>
+        {{ form_end(form) }}
+    </div>
+
+
+{% endblock %}

@@ -1,0 +1,120 @@
+.shortcode-quote {
+
+  &.quote-layout-1{
+    &.owl-carousel{
+      .owl-stage-outer{
+        margin-bottom: -10px;
+        .owl-stage{
+          margin-bottom: 10px;
+        }
+      }
+    }
+    .quote-item {
+      padding: 60px;
+      position: relative;
+      overflow: hidden;
+      @media(max-width: 575px){
+        padding: 30px;
+      }
+      &:after{
+        content: '';
+        width: 270px;
+        height: 220px;
+        -webkit-mask:url('../img/quote2.png') no-repeat center / cover;
+        background-color: $darkgreyColor;
+        opacity: 0.1;
+        position: absolute;
+        top: -32px;
+        right: -34px;
+        font-Size: 900px;
+        line-height: 0.9;
+        z-index: 0;
+        font-family: "Poppins", sans-serif;
+      }
+      .quote-image {
+        max-width: 140px;
+        border-radius: 50%;
+        overflow: hidden;
+        position: relative;
+        z-index: 2;
+        margin-bottom: 20px;
+        @media(max-width: 575px){
+          margin: 0 auto 20px;
+        }
+      }
+      h5{
+        margin-top: 0;
+        margin-bottom: 10px;
+      }
+      .position{
+
+        color: $colorMain;
+        font-weight: 500;
+        margin-bottom: 10px;
+        display: inline-block;
+        @media(min-width: 1200px){
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          right: 10%;
+          padding-left: 50px;
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+  &.quote-layout-2{
+    &.owl-carousel{
+      .owl-stage-outer{
+        margin-bottom: -10px;
+        .owl-stage{
+          margin-bottom: 10px;
+        }
+      }
+    }
+    .quote-item {
+      padding: 50px 40px;
+      position: relative;
+      overflow: hidden;
+      @media(max-width: 575px){
+        padding: 30px;
+      }
+      &:after{
+        content: '';
+        width: 150px;
+        height: 120px;
+        -webkit-mask:url('../img/quote2.png') no-repeat center / cover;
+        background-color: $darkgreyColor;
+        opacity: 0.1;
+        position: absolute;
+        top: 5px;
+        right: -45px;
+        line-height: 0.9;
+        z-index: 0;
+
+      }
+      .quote-image {
+        max-width: 140px;
+        border-radius: 50%;
+        overflow: hidden;
+        position: relative;
+        z-index: 2;
+        margin: 0 auto 27px;
+      }
+      h6{
+        margin-top: 0;
+        margin-bottom: 0;
+        text-transform: uppercase;
+      }
+      .position{
+        color: $colorMain;
+        font-weight: 500;
+        margin-bottom: 20px;
+        display: inline-block;
+        @media(max-width: 575px){
+          margin-bottom: 10px;
+        }
+      }
+    }
+  }
+}

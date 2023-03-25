@@ -1,0 +1,195 @@
+{% extends  "entreprise/terminerInscription.html.twig" %}
+{% block title %}Mandat SEPA
+{% endblock %}
+
+{% block nomSection %}Mandat SEPA
+{% endblock %}
+{% block lienSection %}
+	<a href="{{path('home')}}">Accueil</a>
+{% endblock %}
+{% block nomPage %}Mandat SEPA
+{% endblock %}
+
+
+{% block contenu %}
+	<section class="ls s-pt-xl-150 s-pt-lg-130 s-pt-md-90 s-pt-60 s-pb-xl-100 s-pb-lg-80 s-pb-md-40 s-pb-10 c-mb-50">
+		<div class="container">
+			<div class="row">
+				{% if  entreprise.cgv == false %}
+
+
+				<div class="col-sm-2"></div>
+				<div class="col-sm-8 text-center">
+					<h5>Progression de votre Inscription</h5>
+					<div class="progress">
+						<div class="progress-bar" role="progressbar" style="width: 90%;" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">90%</div>
+					</div>
+
+
+				</div>
+				<div class="col-sm-2"></div>
+				{% endif %}
+				<div class="col-sm-12 text-center">
+					<p>
+						Pour le prélèvement mensuel de votre abonnement  ,veuillez vérifier le mandat SEPA suivant.
+
+					</p>
+					<p class="h4">Un mail de notre mandataire Yousign vous sera envoyé afin que vous puissiez signer éléctroniquement votre mandat SEPA</p>
+				</div>
+				<div class="col-sm-12 text-center">
+					<button class="btn btn-maincolor" style="height: 5em" ><a href="{{path('sepaPDF')}}" style="color: white" >Recevoir l'email de signature</a></button>
+
+				</div>
+				<div class="col-sm-2"></div>
+
+				<div class="col-sm-8 text-center sepa">
+
+					<p class="h5">Mandat de Prélèvement SEPA</p>
+					<br>
+					<div class="row">
+						<div class="col-sm-6 L1">Référence Unique de Mandat (RUM)*</div>
+						<div class="col-sm-6 L1">{{nom}}{{date|format_datetime('short', 'none', locale='fr')}}Diag-Drone</div>
+
+						<div class="col-sm-6 L2">Type de paiement</div>
+
+						<div class="col-sm-6 L2">
+							<div class="row">
+								<div class="col-sm-6">
+									<span>Récurent
+										<input type="checkbox" name="" id="recurent" checked disabled="disabled">
+
+										<label for="recurent"></label>
+									</span>
+
+								</div>
+
+								<div class="col-sm-6">
+									<span>Ponctuel
+										<input type="checkbox" name="" id="ponctuel" disabled="disabled">
+
+										<label for="ponctuel"></label>
+									</span>
+
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-12">
+							<p>En signant ce formulaire de mandat, vous autorisez (A] SAS DIAG-DRONE à envoyer des instructions à votre banque pour débiter votre compte, et (B) votre banque à débiter votre compte conformément aux instructions de SAS DIAG-DRONE.</p>
+
+
+						</div>
+						<div class="col-sm-12">
+							Vous bénéficiez du droit d’être remboursé par votre banque selon les conditions décrites dans la convention que vous avez passée avec elle. Toute demande de remboursement doit être présentée dans les 8 semaines suivant la date de débit de votre compte pour un prélèvement autorisé.
+
+						</div>
+						<div class="col-sm-6 L1" id="sepa1">Nom du CREANCIER</div>
+						<div class="col-sm-6 L1" id="sepa1">SAS DIAG-DRONE</div>
+						<div class="col-sm-6 Lvide" id="sepa1"></div>
+						<div class="col-sm-6 Lvide" id="sepa1"></div>
+						<div class="col-sm-6 L1" id="sepa1">N° d’Identifiant Créancier SEPA (ICS)</div>
+
+						<div class="col-sm-6 L1" id="sepa1">FR 80 ZZZ 872CAB</div>
+
+
+						<div class="col-sm-6 Lvide" id="sepa1"></div>
+						<div class="col-sm-6 Lvide" id="sepa1"></div>
+						<div class="col-sm-6 L1" id="sepa1">Adresse du créancier</div>
+
+						<div class="col-sm-6 L1" id="sepa1">200 rue Michel de Montaigne</div>
+						<div class="col-sm-6 L1" id="sepa1">Code Postal</div>
+						<div class="col-sm-6 L1" id="sepa1">84140</div>
+						<div class="col-sm-6 L1" id="sepa1">Ville</div>
+						<div class="col-sm-6 L1" id="sepa1">Avignon</div>
+						<div class="col-sm-6 L1" id="sepa1">Pays</div>
+						<div class="col-sm-6 L1" id="sepa1">FRANCE</div>
+
+
+						<div class="col-sm-6 L1" id="sepa21">DEBITEUR</div>
+
+						<div class="col-sm-6 L1" id="sepa21">
+							{% if formJuridique=='auto-entrepreneur' %}
+								{{entreprise.dirigeant.nom}}
+								{{entreprise.dirigeant.prenom}}
+							{% elseif formJuridique=='gc' %}
+								{{nom }}
+							{% else %}
+								{{entreprise.formJuridique}}
+								{{entreprise.enseigne}}
+								{{entreprise.denomination}}
+
+
+							{% endif %}
+						</div>
+						<div class="col-sm-6 Lvide" id="sepa2"></div>
+						<div class="col-sm-6 Lvide" id="sepa2"></div>
+						<div class="col-sm-6 L1" id="sepa2">Adresse du débiteur</div>
+
+						<div class="col-sm-6 L1" id="sepa2">{{entreprise.adresse.numero}}
+							{{entreprise.adresse.nomVoie}}</div>
+
+						<div class="col-sm-6 L1" id="sepa2">Code Postal</div>
+						<div class="col-sm-6 L1" id="sepa2">{{entreprise.adresse.codePostal}}</div>
+						<div class="col-sm-6 L1" id="sepa2">Ville</div>
+						<div class="col-sm-6 L1" id="sepa2">{{entreprise.adresse.ville}}</div>
+
+						<div class="col-sm-6 L1" id="sepa2">Pays</div>
+						<div class="col-sm-6 L1" id="sepa2">France</div>
+						<div class="col-sm-6 Lvide" id="sepa2"></div>
+						<div class="col-sm-6 Lvide" id="sepa2"></div>
+						<div class="col-sm-6 L1" id="sepa2">Nom et prénom du titulaire du compte / Débiteur</div>
+
+						<div class="col-sm-6 L1" id="sepa2">
+							{% if formJuridique=='auto-entrepreneur' %}
+								{{entreprise.dirigeant.nom}}
+								{{entreprise.dirigeant.prenom}}
+							{% elseif formJuridique=='gc' %}
+								{{nom }}
+							{% else %}
+								{{entreprise.formJuridique}}
+								{{entreprise.enseigne}}
+								{{entreprise.denomination}}
+
+
+							{% endif %}
+						</div>
+
+						<div class="col-sm-6 L1" id="sepa2">Banque</div>
+
+						<div class="col-sm-6 L1" id="sepa2">{{banque.nom}}</div>
+						<div class="col-sm-6 L1" id="sepa2">Adresse de la banque</div>
+
+						<div class="col-sm-6 L1" id="sepa2">{{ banque.adresse}}</div>
+						<div class="col-sm-6 L1" id="sepa2">Code BIC de la banque</div>
+
+						<div class="col-sm-6 L1" id="sepa2">{{banque.bic}}</div>
+						<div class="col-sm-6 L1" id="sepa2">IBAN du débiteur</div>
+
+						<div class="col-sm-6 L1" id="sepa2">{{banque.iban}}</div>
+
+						<div class="col-sm-4 L1" id="sepa32">Lieu</div>
+						<div class="col-sm-4 L1" id="sepa32">Date</div>
+						<div class="col-sm-4 L1" id="sepa32">Signature du débiteur</div>
+						<div class="col-sm-4 L3" id="sepa33">
+							<p class="lieu">{{lieu}}</p>
+						</div>
+						<div class="col-sm-4 L3" id="sepa33">
+							<p class="dateJour">{{date|format_datetime('short', 'none', locale='fr')}}</p>
+
+						</div>
+						<div class="col-sm-4 L3" id="sepa33"></div>
+					</div>
+
+
+				</div>
+				<div class="col-sm-2"></div>
+				<br><br>
+				<div class="col-sm-12 text-center">
+					<button class="btn btn-maincolor" style="height: 5em" ><a href="{{path('sepaPDF')}}" style="color: white" >Recevoir l'email de signature</a></button>
+
+				</div>
+
+
+			</div>
+		</div>
+	</section>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'institution/baseInsti.html.twig' %}
+{% block title %}Votre planning{% endblock %}
+{% block titreSection %}Votre planning{% endblock %}
+{% block titrePage %}Votre planning{% endblock %}
+ {% block pageAccueil %}{% endblock %}
+
+{% block contenu %}
+
+<div id="calendrier"></div>
+ <input type="hidden" name="" id="idAgent" value="{{ agent.id }}">
+{% endblock %}

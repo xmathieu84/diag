@@ -1,0 +1,36 @@
+{% extends "administrateur/baseA.html.twig" %}
+
+{% block body %}
+	<section class="wrapper">
+		<div class="row">
+			<div class="col-lg-12">
+
+				<table class="table table-bordered table-striped table-condensed">
+					<tr>
+						<th>Type d'intervention</th>
+						<th>Date de l'intervention</th>
+						<th>Demandeur</th>
+						<th>Ville de l'intervention</th>
+
+					</tr>
+					{% for intervention in interventions %}
+						<tr>
+							<td>{{intervention.typeInter.nom}}
+								{{intervention.listeInter.nom}}</td>
+							<td>{{intervention.rdvAt|format_datetime('full', 'short', locale='fr')}}</td>
+
+							<td>{{intervention.intDem.civilite.prenom}}
+								{{intervention.intDem.civilite.nom}}</td>
+
+							<td>{{intervention.adresse.codePostal}}
+								{{intervention.adresse.ville}}</td>
+							<td>
+								<a href="{{path('supprimerInterDepasse',{id:intervention.id})}}" class="btn btn-danger btn-round">Supprimer</a>
+							</td>
+						</tr>
+					{% endfor %}
+				</table>
+			</div>
+		</div>
+	</section>
+{% endblock %}

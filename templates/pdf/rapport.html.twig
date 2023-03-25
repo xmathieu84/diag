@@ -1,0 +1,69 @@
+
+<div class="imageDD">
+
+	<img src="../public/css/css_site/images/logo-diagdrone.png" alt="" width="100%" height="50%">
+
+</div>
+<div class="bandeau"></div>
+<div class="slogan">
+	<p>Intervenir, constater, réaliser !</p>
+</div>
+<div class="barre"></div>
+<div class="titre">
+	<p class="ligne1">
+		<b>DOSSIER DE DIAGNOSTIC TECHNIQUE
+		</b>
+	</p>
+	<p class="ligne2">
+		<b>Type : {{ rapport.intervention.listeInter.nom }} {{ rapport.intervention.typeInter.nom }}</b>
+	</p>
+</div>
+<div class="soustitre">
+<p><b>RAPPORT VALANT CONSTAT VISUEL</b></p>
+</div>
+<div class="vide1"></div>
+<div class="ref">
+	<span>Ref DIAG DRONE DD {{ rapport.id }}</span>
+</div>
+<div class="cadre">
+	<span class="titreCadre">Contexte juridique de la présente intervention : Constat visuel – état des lieux</span><br>
+	<span class="textCadre">Cette intervention a été réalisée à la demande et pour le compte du demandeur dans le cadre strict d’établir un constat visuel à un instant « T ». Ce constat ne présume en rien de l’origine d’un éventuel désordre ni de son étendue et/ou de ses conséquences.
+Le présent rapport ne constitue ni une expertise ni un diagnostic technique au sens de la conformité ou non du bâtiment à son usage propre ou de son état, même apparent.
+Pour plus d’informations, veuillez-vous reporter à la page « Contexte juridique…………………… »
+</span>
+</div>
+<div class="barre2"></div>
+<div class="intervenant">
+	<div class="textIntervenant">
+		<span>INTERVENANT</span>
+	</div>
+</div>
+
+<div class="separation"></div>
+<div class="photoSite">
+	<div class="textPhoto">
+		<span>PHOTO DU SITE</span>
+	</div>
+</div>
+<div class="logoEnt">
+	{% if rapport.intervention.reservation.salarie.entreprise.logo %}
+		<div class="imgEnt">
+			<img src="../public/uploads/logo/{{ rapport.intervention.reservation.salarie.entreprise.logo}}" alt="" max-width="380px" max-height="150px">
+		</div>
+
+	{% endif %}
+</div>
+<div class="sepa3">
+
+</div>
+<div class="imgSite">
+	<div class="photoInter">
+
+			<img src="../public/uploads/photoInter/{{ rapport.photos[0].nom }}" alt="" width="700px">
+	</div>
+
+</div>
+<div class="barre" ></div>
+
+
+

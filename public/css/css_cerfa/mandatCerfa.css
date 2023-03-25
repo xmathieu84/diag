@@ -1,0 +1,7 @@
+.titre,.mandataire{
+    text-align: center;
+}
+.mandant,.mandataire{
+    float: left;
+    width: 50%;
+}

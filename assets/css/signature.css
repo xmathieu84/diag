@@ -1,0 +1,11 @@
+canvas{
+    border: 1px solid black;
+    width: 900;
+    height: 300;
+    background-color: #ffffff;
+}
+.enregistrer{
+    width: 8em;
+    height: 3em;
+    background-color: mediumpurple;
+}

@@ -1,0 +1,226 @@
+{% extends template %}
+
+{% block title %}
+Tarif Odi
+{% endblock %}
+
+{% block contenu %}
+    {% if app.user.salarie.entreprise.cgv %}
+<div class="row">
+    <input type="hidden" name="" value=true>
+    {%else%}
+<input type="hidden" name="" value=false>
+    <div class="row mt--70">
+    {% endif %}
+       
+    <div class="col-12 mb-5 text-center">
+        <span class="h3">Tarifs de {{salarie.civilite.fullName|upper}}</span>
+    </div>
+    <div class="col-12">
+        <p class="h5 mb-2">Nous vous proposons deux formules d'assistance à l'enregistrement de vos tarifs :</p>
+        <ul class="mb-5">
+            <li class="h6" style="list-style: decimal">Recollement des tarifs par nos services. Nous proposons une assistance à la collecte de vos données tarifaires.</li>
+            <span class="h7">Souhaitez vous en bénéficier pour un cout forfaitaire de XX €</span> <br>
+            <input type="radio" name="serviceCollecte" id="ouiService" value="Oui"><label for="ouiService" class="mr-5">Oui</label>
+            <input type="radio" name="serviceCollecte" id="nonService" value="Non"><label for="nonService">Non</label>
+            <li class="h6 mt-2" style="list-style: decimal">Nous vous proposons un tableau des Tarifs prérempli (totalement ou partiellement) en fonction de nos connaissances du marché ({{nombre}} tarif(s) disponible(s))</li>
+
+            <span class="h7">Souhaitez vous en bénéficier pour un cout forfaitaire de XX €</span> <br>
+            <input type="radio" name="serviceMoyen" id="ouiMoyen" value="Oui"><label for="ouiMoyen" class="mr-5">Oui</label>
+            <input type="radio" name="serviceMoyen" id="nonMoyen" value="Non"><label for="nonMoyen">Non</label>
+        </ul>
+    </div>
+    <div id="saisieTaridOdi" class="col-12">
+        <div class="col-12 text-center">
+            <h3>Vos missions</h3>
+        </div>
+
+        {% for type in types %}
+       <div class="col-12 mb-3">
+           <div id="accordion01" role="tablist">
+               <div class="card">
+                   <div class="card-header" role="tab" id="collapse{{loop.index}}_header">
+                       <h5>
+                           <a data-toggle="collapse" href="#collapse{{loop.index}}" aria-expanded="false" aria-controls="collapse{{loop.index}}" class="collapsed">
+                               {{type.nom|upper}}
+                           </a>
+                       </h5>
+                   </div>
+
+                   <div id="collapse{{loop.index}}" class="collapse" role="tabpanel" aria-labelledby="collapse{{loop.index}}_header" data-parent="#accordion{{loop.index}}">
+                       <div class="card-body">
+                           <div class="row">
+                               <div class="table-responsive">
+                                   <table class="table">
+                                       <tr>
+                                           <th></th>
+                                           {% for bien in type.taille %}
+
+                                               <th>{{bien.taille}}</th>
+                                           {% endfor %}
+                                       </tr>
+                                       {% for tarif in details %}
+                                           <tr>
+
+                                               <td>{{tarif.mission.nom}}</td>
+                                               {% for bien in type.taille %}
+                                                   {% if tarif.mission not in bien.missionExclues %}
+                                                       <td>
+                                                           <input type="number" name="" id="" data-mission="{{tarif.id}}" data-type="{{bien.id}}" data-missionodi="{{tarif.mission.id}}" class="prixOdi" style="padding: 0.25rem 0.5rem;
+        font-Size: .875rem;
+        line-height: 1.5;
+        border-radius: 0.2rem;">
+                                                       </td>
+                                                       {%else%}
+                                                       <td></td>
+                                                       {% endif %}
+                                               {% endfor %}
+                                           </tr>
+
+                                       {% endfor %}
+                                       {% if details[0].mission.typeDiag.prelevement  %}
+                                           <tr>
+                                               <td>{{ details[0].mission.typeDiag.nom }} <br>{{ details[0].mission.typeDiag.prelevement.nom }} </td>
+                                           {% for bien in type.taille %}
+                                               <td >
+                                                   <input type="number" name="" data-prelev="{{ details[0].mission.typeDiag.prelevement.id }}"  style="padding: 0.25rem 0.5rem;
+        font-Size: .875rem;
+        line-height: 1.5;
+        border-radius: 0.2rem;" class="prelevement" data-type="{{bien.id}}">
+                                               </td>
+
+                                           {% endfor %}
+                                           </tr>
+                                       {% endif %}
+
+                                   </table>
+                               </div>
+                           </div>
+                           <br>
+
+                       </div>
+                   </div>
+
+               </div>
+           </div>
+       </div>
+        {% endfor %}
+        {% if salarie.packOdis is not empty %}
+            <div class="col-12 text-center">
+                <h3>Vos packs</h3>
+            </div>
+            {% for type in types %}
+                <div class="col-12 mb-3">
+                    <div id="accordion02" role="tablist">
+                        <div class="card">
+                            <div class="card-header" role="tab" id="collapse1{{loop.index}}_header">
+                                <h5>
+                                    <a data-toggle="collapse" href="#collapse1{{loop.index}}" aria-expanded="false" aria-controls="collapse1{{loop.index}}" class="collapsed">
+                                        {{type.nom|upper}}
+                                    </a>
+                                </h5>
+                            </div>
+
+                            <div id="collapse1{{loop.index}}" class="collapse" role="tabpanel" aria-labelledby="collapse1{{loop.index}}_header" data-parent="#accordion{{loop.index}}">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <tr>
+                                                    <th></th>
+                                                    {% for bien in type.taille %}
+                                                        <th>{{bien.taille}}</th>
+                                                    {% endfor %}
+                                                </tr>
+                                                {% for pack in packs %}
+                                                    <tr>
+                                                        <td>{{pack.pack.nom}}</td>
+                                                        {% for bien in type.taille %}
+
+                                                            {% if pack.pack not in bien.packExclu %}
+                                                                <td>
+                                                                    <input type="number" name="" id="" data-pack="{{pack.id}}" data-taille="{{bien.id}}" data-packodi="{{ pack.pack.id }}" class="prixPackOdi" style="padding: 0.25rem 0.5rem; font-Size: .875rem;
+        line-height: 1.5;
+        border-radius: 0.2rem;"></td>
+                                                            {%else%}
+                                                                <td></td>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    </tr>
+                                                {% endfor %}
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <br>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <div class="col-12 btn-block mt-5">
+            <button class="btn btn-maincolor validerTarif btn-block pt-5 pb-5">Valider</button>
+        </div>
+    </div>
+</div>
+    <button type="button" class="btn btn-primary d-none btnTarif" data-toggle="modal" data-target="#modalFcihierTarif">
+    </button>
+    <div class="modal fade" id="modalFcihierTarif" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p class="h5">Le service de recollement des tarifs par nos services vous sera facturé XX € HT (XX € TTC)</p>
+                    <p class="h5">Si vous êtes d'accord veuillez choisir votre ou vos fichier(s) à l'aide du bouton ci-dessous</p>
+
+                    <input type="file" name=""  multiple="multiple" class="d-none" id="fichierPrix" accept=".docx,.odt,.xlsx,.ods,.pdf,.txt">
+                    <div class="row">
+                        <div class="col-12 mt-5">
+                            <button class="btn-maincolor btn buttonFichierPrixOdi btn-block">Ajouter vos fichiers prix</button>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary FichierTarifOdiService" data-dismiss="modal">Fermer</button>
+                    <button type="button" class="btn btn-primary" id="buttonFichierTarifOdiService">Valider</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button type="button" class="btn btn-primary d-none btnTarifMoyen" data-toggle="modal" data-target="#modalTarifMoyen">
+    </button>
+    <div class="modal fade" id="modalTarifMoyen" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p class="h5">Le service de Tarifs prérempli (totalement ou partiellement) en fonction de nos connaissances du marché vous sera facturé XX € HT (XX € TTC) </p>
+                    <p class="h5">Si vous êtes d'accord veuillez cliquer sur le bouton valider</p>
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="d-none fermerModal" data-dismiss="modal"></button>
+                    <button type="button" class="btn btn-secondary TarifMoyenOdiService" data-dismiss="modal">Fermer</button>
+                    <button type="button" class="btn btn-primary" id="buttonTarifMoyenOdiService">Valider</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

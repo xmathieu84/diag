@@ -1,0 +1,32 @@
+{% extends "administrateur/baseA.html.twig" %}
+{% block body %}
+<section class="wrapper">
+    <div class="row mt">
+        <div class="col-lg-12">
+            <table class="table table-bordered table-striped table-condensed">
+                <tr>
+                    <th>Date</th>
+                    <th>Expediteur</th>
+                    <th>Sujet</th>
+                    <th>Reponse envoyée</th>
+                </tr>
+                {% for message in messages %}
+                <tr>
+                    <td>{{message.date|format_datetime('short', 'short', locale = 'fr')}}
+                    </td>
+                    <td>{{ message.expediteur }}</td>
+                    <td><a href="{{path('repondre',{id: message.id})}}">{{ message.sujet }}
+                        </a>
+                    </td>
+                    {% if message.reponse %}
+                    <td>Reponse envoyée</td>
+                    {% else %}
+                    <td>En attente de la réponse</td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</section>
+{% endblock  %}

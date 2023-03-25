@@ -1,0 +1,55 @@
+{% extends 'entreprise/baseAE.html.twig' %}
+{% block title %}Historique{% endblock %}
+
+{% block pageAccueil %}
+    <h4>Historique de vos propositions d'intervention</h4>
+<p class="h4">Les lignes colorées sont vos propositions d'intervention acceptées.</p>
+{% endblock %}
+{% block contenu %}
+    <div class="container">
+        <div class="row">
+
+            <div class="col-12">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <tr>
+                            <th>Intervention</th>
+                            <th>Date</th>
+                            <th>Prix proposé</th>
+                            <th>Prix accepté</th>
+                        </tr>
+                        {% for proposition in propositions %}
+                            {% if proposition == proposition.inter.propositionChoisie %}
+                                <tr style="background:#FFFBA9">
+                                    <td><span class="h6">Intervention à {{ proposition.inter.adresse.ville }}</span><br>
+                                    <span class="h6">{{ proposition.inter.listeInter.nom }} {{ proposition.inter.typeInter.nom }}</span></td>
+                                    <td><span class="h6">{{ proposition.inter.rdvAt|format_datetime('short','short',locale='fr') }}</span></td>
+                                    <td><span class="h6">{{ proposition.prix }} €</span></td>
+                                    <td>
+                                    {% if proposition.inter.propositionChoisie %}
+                                        <span class="h6">{{ proposition.inter.propositionChoisie.prix }} €</span>
+                                    {% endif %}
+                                    </td>
+                                </tr>
+                                {% else %}
+                                    <tr>
+                                        <td><span class="h6">Intervention à {{ proposition.inter.adresse.ville }}</span>
+                                            <br>
+                                            <span class="h6">{{ proposition.inter.listeInter.nom }} {{ proposition.inter.typeInter.nom }}</span></td>
+                                        <td><span class="h6">{{ proposition.inter.rdvAt|format_datetime('short','short',locale='fr') }}</span></td>
+                                        <td><span class="h6">{{ proposition.prix }} €</span></td>
+                                        <td>
+                                            {% if proposition.inter.propositionChoisie %}
+                                                <span class="h6">{{ proposition.inter.propositionChoisie.prix }} €</span>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                            {% endif %}
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

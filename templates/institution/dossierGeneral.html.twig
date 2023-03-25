@@ -1,0 +1,334 @@
+{% extends 'institution/baseInsti.html.twig' %}
+
+{% block title %}
+Dossier Général
+{% endblock %}
+
+{% block titrePage %}
+    Dossier Général
+{% endblock %}
+
+{% block contenu %}
+    <div class="row">
+        <div class="col-3">
+            <button class="btn btn-maincolor2" data-toggle="modal" data-target="#noteGenerales">Contenu des notes générales</button>
+        </div>
+        {% if is_granted('ROLE_NIVEAU1') %}
+            <div class="col-3">
+                <button class="btn btn-maincolor" data-toggle="modal" data-target="#ajoutNoteGen">Ajouter une note générale</button>
+            </div>
+
+
+        {% if (dossierGeneral.piecesgenerales|length)<=5 %}
+            <div class="col-3">
+                <button class="btn btn-info" data-toggle="modal" data-target="#ajoutPieceGenerale">Ajouter une pièce</button>
+            </div>
+        {% endif %}
+        {% endif %}
+        <div class="col-sm-12 mt-5 mb-5">
+            <p class="h5">Fichiers présents dans votre dossier général</p>
+            <div class="row zoneSuppression">
+                {% for piece in dossierGeneral.piecesgenerales %}
+                    <div class="col-3 text-right elementDelete">
+                        <a href="/uploads/dossier/{{ piece.fichier }}" target="_blank">
+                            <figure>
+                                <img src="/css/css_site/img/filepetit.png" alt="">
+                                <figcaption class="text-dark text-right pr-2">{{ piece.nom }}</figcaption>
+                            </figure>
+                        </a>
+
+                    </div>
+                    <div class="col-1 text-left">
+                        <div class="btn-group " role="group" >
+                            <button  type="button" class="btnMenu dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">+</button>
+                            <div class="dropdown-menu" aria-labelledby="btnGroupDrop1"style="z-index: 1000000;">
+                                <a class="dropdown-item"  data-toggle="modal" data-target="#voirNote{{ loop.index }}">Voir les notes</a>
+                                <a class="dropdown-item" href="/uploads/dossier/{{ piece.fichier }}" target="_blank">Ouvrir dans un nouvel onglet</a>
+                                {% if is_granted('ROLE_NIVEAU1') %}
+                                    <a href="#" class="dropdown-item"data-toggle="modal" data-target="#ajoutPieceGenerale">Ajouter une pièce</a>
+                                    <a href="#"class="dropdown-item" data-toggle="modal" data-target="#ajoutNoteGen">Ajouter une note générale</a>
+                                {% endif %}
+
+                                <a href="#" class="dropdown-item" data-toggle="modal" data-target="#noteGenerales">Consulter les notes générales</a>
+                                {% if is_granted('ROLE_NIVEAU1') %}
+                                    <a href="#" class="dropdown-item delete">Supprimer la piéce</a>
+                                {% endif %}
+
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+    <div class="row"></div>
+    <div class="modal fade" id="noteGenerales" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modaleNoteGen">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Contenu de la note générale</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+
+
+                            <!-- tabs start -->
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="tab01" data-toggle="tab" href="#tab01_pane" role="tab" aria-controls="tab01_pane" aria-expanded="true">Note générale</a>
+                                </li>
+                                <li class="nav-item">
+
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="tab03" data-toggle="tab" href="#tab03_pane" role="tab" aria-controls="tab03_pane">Données générales relatives au dossier {{ dossierGeneral.dossier.nom }}</a>
+                                </li>
+
+                            </ul>
+                            <div class="tab-content">
+
+                                <div class="tab-pane fade show active in" id="tab01_pane" role="tabpanel" aria-labelledby="tab01">
+
+                                    <div class="row zoneDelete">
+                                        {% if dossierGeneral.noteGens is not empty %}
+                                            {% for noteGen in dossierGeneral.noteGens %}
+                                                <div class="col-12 lineDelete" data-id="{{ noteGen.id }}">
+                                                    <div class="row ">
+                                                        <div class="col-10">
+                                                            <p>Créée le {{ noteGen.date|format_datetime('short','none',locale='fr') }} par <b>{{ noteGen.auteur|capitalize }}</b></p>
+                                                        </div>
+                                                        <div class="col-2 text-center">
+                                                            <figure>
+                                                                <img src="/css/css_site/img/poubelle.png" alt="" class="delete">
+                                                                <figcaption class="h7">Supprimer</figcaption>
+                                                            </figure>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <p class="h4">{{ noteGen.titre }}</p>
+                                                        </div>
+                                                        <div class="col-12"><p>{{ noteGen.texte }}</p></div>
+                                                    </div>
+
+                                                    <hr>
+
+                                                </div>
+
+                                            {% else %}
+                                                <div class="col-sm-12">
+                                                    <p class="h6">Vous n'avez pas encore de notes</p>
+                                                </div>
+                                            {% endfor %}
+                                        {% endif %}
+                                    </div>
+
+                                </div>
+
+
+                                {% if dossierGeneral.donneeGenerale %}
+                                    
+
+                                <div class="tab-pane fade" id="tab03_pane" role="tabpanel" aria-labelledby="tab03" data-id="{{ dossierGeneral.donneeGenerale.id }}">
+                                    
+                                    <h5>Données générales relatives au dossier {{ dossierGeneral.dossier.nom }}</h5>
+                                    <div class="row">
+                                        <div class="col-8">
+
+                                        </div>
+                                        <div class="col-4">
+                                            <p class="h6">N° de référence interne : {{ dossierGeneral.dossier.reference }}</p>
+                                        </div>
+                                        <div class="col-12 mt-3 contentDonneeGen">
+                                            <p class="h5 mb-3 mt-3">Présentation du dossier :</p>
+                                            <p class="donneeGen">{{ dossierGeneral.donneeGenerale.presentation }}</p>
+
+
+                                        </div>
+                                        <div class="col-6 text-center mt-3 zoneValider">
+                                            <button class="btn btn-primary btn-sm" data-type="presentation">Modifier</button>
+                                        </div>
+                                        <div class="col-6 text-center annuler mt-3"></div>
+                                        <hr style="width: 100%;height: 0.8em">
+
+                                        <div class="col-12 mt-3 contentDonneeGen">
+                                            <p class="h5 mb-3 mt-3">Informations générales :</p>
+                                            <p class="donneeGen">{{ dossierGeneral.donneeGenerale.information }}</p>
+                                        </div>
+                                        <div class="col-6 text-center mt-3 zoneValider">
+                                            <button class="btn btn-primary btn-sm" data-type="information">Modifier</button>
+                                        </div>
+                                        <div class="col-6 text-center annuler mt-3"></div>
+                                        <hr style="width: 100%;height: 0.8em">
+                                        <div class="col-12 mt-3 contentDonneeGen">
+                                            <p class="h5 mb-3 mt-3">Intervenants au dossier (Collaborateurs ou agents / entreprises sous-traitante) :</p>
+                                            <p class="donneeGen">{{ dossierGeneral.donneeGenerale.intervenant }}</p>
+
+                                        </div>
+                                        <div class="col-6 text-center mt-3 zoneValider">
+                                            <button class="btn btn-primary btn-sm" data-type="intervenant">Modifier</button>
+                                        </div>
+                                        <div class="col-6 text-center annuler mt-3"></div>
+                                        <hr style="width: 100%;height: 0.8em">
+                                        <div class="col-12 mt-3 contentDonneeGen">
+                                            <p class="h5 mb-3 mt-3">Informations financières :</p>
+                                            <p class="donneeGen">{{ dossierGeneral.donneeGenerale.finance }}</p>
+                                        </div>
+                                        <div class="col-6 text-center mt-3 zoneValider">
+                                            <button class="btn btn-primary btn-sm" data-type="finance">Modifier</button>
+                                        </div>
+                                        <div class="col-6 text-center annuler mt-3"></div>
+                                        <hr style="width: 100%;height: 0.8em">
+                                        <div class="col-12 mt-3 contentDonneeGen">
+                                            <p class="h5 mb-3 mt-3">Informations juridiques :</p>
+                                            <p class="donneeGen">{{ dossierGeneral.donneeGenerale.juridique }}</p>
+                                        </div>
+                                        <div class="col-6 text-center mt-3 zoneValider">
+                                            <button class="btn btn-primary btn-sm" data-type="juridique">Modifier</button>
+                                        </div>
+                                        <div class="col-6 text-center annuler mt-3"></div>
+                                        <hr style="width: 100%;height: 0.8em">
+                                        <div class="col-12 mt-3 contentDonneeGen">
+                                            <p class="h5 mb-3 mt-3 ">Note complémentaire  :</p>
+                                            <p class="donneeGen">{{ dossierGeneral.donneeGenerale.complement }}</p>
+                                        </div>
+                                        <div class="col-6 text-center mt-3 zoneValider">
+                                            <button class="btn btn-primary btn-sm" data-type="complement">Modifier</button>
+                                        </div>
+                                        <div class="col-6 text-center annuler mt-3"></div>
+
+                                    </div>
+
+                                </div>
+                                {% endif %}
+                            </div>
+                            <!-- tabs end-->
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="ajoutNoteGen" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modalAjoutNote">
+            <div class="modal-content">
+                <div class="modal-header">
+                    {% if dossierGeneral.donneeGenerale %}
+                        <h5 class="modal-title" id="staticBackdropLabel">Ajouter une note générale</h5>
+                        {% else %}
+                            <h5 class="modal-title" id="staticBackdropLabel">Données générales relatives au dossier {{ dossierGeneral.dossier.nom }}</h5>
+                    {% endif %}
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                  <div class="row">
+                      {% if dossierGeneral.donneeGenerale %}
+                          <div class="col-6">
+                              <label for="titreNote">Titre</label>
+                              <input type="text" name="" id="titre">
+                          </div>
+                          <div class="col-6">
+                              <label for="texte">Contenu</label>
+                              <textarea name="" id="texte" cols="30" rows="7" spellcheck="true" wrap="hard"></textarea>
+                          </div>
+                          {% else %}
+                              <div class="col-12">
+                                  <label for="presentation">Présentation du dossier</label>
+                                  <textarea name="" id="presentation" cols="30" rows="7" spellcheck="true" wrap="hard"></textarea>
+                              </div>
+                              <div class="col-12">
+                                  <label for="information">Informations générales </label>
+                                  <textarea name="" id="information" cols="30" rows="7" spellcheck="true" wrap="hard"></textarea>
+                              </div>
+                              <div class="col-12">
+                                  <label for="intervenant">Intervenants au dossier (Collaborateurs ou agents / entreprises sous-traitante)</label>
+                                  <textarea name="" id="intervenant" cols="30" rows="7" spellcheck="true" wrap="hard"></textarea>
+                              </div>
+                              <div class="col-12">
+                                  <label for="finance">Informations financières</label>
+                                  <textarea name="" id="finance" cols="30" rows="7" spellcheck="true" wrap="hard"></textarea>
+                              </div>
+                              <div class="col-12">
+                                  <label for="juridique">Informations juridiques</label>
+                                  <textarea name="" id="juridique" cols="30" rows="7" spellcheck="true" wrap="hard"></textarea>
+                              </div>
+                              <div class="col-12">
+                                  <label for="complement">Note complémentaire </label>
+                                  <textarea name="" id="complement" cols="30" rows="7" spellcheck="true" wrap="hard"></textarea>
+                              </div>
+                      {% endif %}
+
+                  </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                    {% if dossierGeneral.donneeGenerale %}
+                        <button type="button" class="btn btn-primary valider" data-id="{{ dossierGeneral.id }}">Valider</button>
+                        {% else %}
+                            <button type="button" class="btn btn-primary validerDonnee" data-id="{{ dossierGeneral.id }}">Valider</button>
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="ajoutPieceGenerale" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-centered modalPieceGenerale">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Ajoutez une pièce</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12 mb-5">
+                            <p>Vous pouvez ajouter encore {{ (5-(dossierGeneral.piecesgenerales|length)) }} pièce(s)</p>
+                        </div>
+                        <div class="col-6">
+                            <label for="nom">Nom de la pièce</label>
+                            <input type="text" name="" id="nom">
+                        </div>
+                        <div class="col-6">
+                            <label for="fichier">Fichier</label>
+                            <button class="btn btn-fichier">Ajouter un fichier</button>
+                            <input type="file" name="" id="fichier" accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,video/*,application/pdf,image/*,.xls,.xlsx">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                    <button type="button" class="btn btn-primary envoyer">Valider</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" tabindex="-1" id="modalUpload">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Progression du téléchargement</h5>
+
+                </div>
+                <div class="modal-body">
+                    <div class="progress">
+                        <div class="progress-bar upload" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

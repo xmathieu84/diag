@@ -1,0 +1,56 @@
+{% extends "entreprise/baseAE.html.twig" %}
+
+{% block title %}
+Résumé de vos missions
+{% endblock %}
+
+{% block contenu %}
+
+
+
+    <div class="row">
+        <div class="col-12 mb-4">
+            <p class="h3">Voici la liste des missions auxquelles vous avez souscrites : </p>
+        </div>
+
+        <div class="col-12">
+            <div class="row text-dark bg-white pt-5 pb-5 pr-3 pl-3">
+                {% for mission in missions %}
+                   <div class="col-sm-4 col-6 tableAccueil">{{mission.nom}}</div>
+                {% endfor %}
+            </div>
+
+
+        </div>
+        <div class="col-6 mt-4">
+            {% if app.user.salarie.entreprise.cgv %}
+
+                <a href="{{path('modifierInter',{id:id})}}">
+                    <button class="btn btn-maincolor">Modifier les missions</button>
+                </a>
+                {%else%}
+                    <a href="{{path('phase2')}}">
+                        <button class="btn btn-maincolor">Modifier les missions</button>
+                    </a>
+            {% endif %}
+
+        </div>
+        <div class="col-12 text-center mt-5">
+            <p class="h5">Souhaitez vous créer des PACKS regroupant plusieurs diagnostics ou souscrire à des packs existants ?</p>
+            <div class="row mt-5">
+                <div class="col-6 text-center">
+                    <a href="{{path('tarifOdi',{id:id})}}">
+                        <button class="btn btn-danger pt-5 pb-5 pr-5 pl-5">Non</button>
+                    </a>
+                </div>
+                <div class="col-6 text-center">
+                    <a href="{{path('listePack',{id:id})}}">
+                        <button class="btn btn-success pt-5 pb-5 pr-5 pl-5">Oui</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+

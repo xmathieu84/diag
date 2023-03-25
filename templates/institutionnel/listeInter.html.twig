@@ -1,0 +1,63 @@
+{% extends 'institution/baseInsti.html.twig' %}
+
+{% block title %}Intervention institutionnel
+{% endblock %}
+{% block titreSection %}Liste des interventions
+{% endblock %}
+{% block pageAccueil %} <h4>Interventions prévues</h4>
+{% endblock %}
+
+
+{% block contenu %}
+
+	<div class="row">
+		<div class="col-sm-12 text-center mb-5">
+			<p class="h5">Indiquez une période</p>
+
+		</div>
+		<div class="col-sm-4"></div>
+		<div class="col-sm-4 mb-5">
+			<select name="" id="duree" style="background:white">
+
+				<option value="P7D">1 semaine</option>
+				<option value="P14D">2 semaines</option>
+				<option value="P31D">1 mois</option>
+			</select>
+		</div>
+		<div class="col-sm-4"></div>
+		<div class="table-reponsive">
+			<table>
+
+				<thead>
+					<tr>
+						<th>Date de l'intervention</th>
+						<th>Lieu de l'intervention</th>
+						<th>Type d'intervention</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody class="corpsTable"></tbody>
+
+
+			</table>
+
+		</div>
+	</div>
+	<div id="modalInterInsti" class="modal-container" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+		<div class="modalSurchargeInter">
+
+
+			<section class="modal__content">
+				<p>Diag Drone a bien détecté qu'un Opérateur Télépilote de Drone (OTD) est disponible et ce à partir de l'horaire indiqué. </p>
+				<p>Vous pouvez, en quelques clics, demander un devis à cet opérateur ou consulter ses propositions définitives. Pour ce faire, cliquez sur "Continuer" et remplissez les champs.</p>
+				<p>Attention, le type intervention sera identique à celle affichée dans la case "Type d'intervention".  </p>
+			</section>
+
+			<footer class="modal__footer">
+				<button class="btn btn-maincolor2" id="continuer">Continuer</button>
+				<button id="close-modal" class="btn btn-maincolor3">Annuler</button>
+			</footer>
+		</div>
+	</div>
+
+{% endblock %}

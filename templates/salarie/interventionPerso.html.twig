@@ -1,0 +1,121 @@
+{% extends 'entreprise/baseAE.html.twig' %}
+
+{% block title %}Créer une intervention
+{% endblock %}
+
+{% block pageAccueil %}
+	<h4>Ajouter une intervention</h4>
+{% endblock %}
+
+{% block contenu %}
+
+
+	<div class="row text-center" id="formSalarie">
+		<div class="col-sm-12">
+			<p class="h6">Date de l'intervention</p>
+			<input type="datetime-local" class="form-control form-control-sm Date">
+		</div>
+		<div class="col-sm-6">
+			<br>
+			<p class="h6">Choisissez votre type d'intervention</p>
+			<select class="form-control form-control-lg listeinter">
+
+				<option value={{null}}>Type d'intervention</option>
+
+				{% for listeInter in listeInters %}
+
+					<option value="{{listeInter.id}}" data-nom="{{listeInter.nom}}">{{listeInter.nom}}</option>
+
+				{% endfor %}
+			</select>
+		</div>
+		<div class="col-sm-6">
+			<br>
+			<p class="h6">Précisez :
+			</p>
+			<select class="form-control form-control-lg typeInter"></select>
+		</div>
+		<legend>Localisation de l'intervention</legend>
+		<div class="col-sm-12 text-center">
+			<p class="h6 mb-3">Civilité</p>
+			<label for="monsieur">Monsieur</label>
+			<input type="radio" name="civilite" id="monsieur" class="form-control-input civilite" value="monsieur" data-identifiant="genre">
+			<label for="madame">Madame</label>
+			<input type="radio" name="civilite" id="madame" class="form-control-input civilite" value="madame" data-identifiant="genre">
+		</div>
+
+		<div class="col-sm-6">
+			<p class="h6">Nom du demandeur</p>
+			<input type="text" class="form-control form-control-lg civilite" data-identifiant="nom">
+		</div>
+
+		<div class="col-sm-6">
+			<p class="h6">Prénom du demandeur</p>
+			<input type="text" class="form-control form-control-lg civilite" data-identifiant="prenom">
+		</div>
+
+		<div class="col-sm-6">
+			<p class="h6">Numéro de la voie</p>
+			<input type="text" class="form-control form-control-lg adresses mb--45" data-identifiant="numero">
+		</div>
+		<div class="col-sm-6">
+			<p class="h6">Nom de la voie</p>
+			<input type="text" class="form-control form-control-lg adresses" data-identifiant="nomVoie"></div>
+
+		<div class="col-sm-6">
+			<p class="h6">Code Postal</p>
+			<input type="text" class="form-control form-control-lg adresses" data-identifiant="codePostal"></div>
+
+		<div class="col-sm-6">
+			<p class="h6">Ville</p>
+			<input type="text" class="form-control form-control-lg adresses" data-identifiant="ville"></div>
+		<legend>Précisions sur l'intervention</legend>
+		<div class="col-sm-6">
+			<p class="h6">Détails de l'intervention</p>
+			<textarea class="form-control precision" cols="40" rows="12" value></textarea>
+		</div>
+		<div class="col-6">
+			<p class="h6">L'intervention fait elle suite à une intemperie ?</p>
+			<input type="radio" name="intemperie" id="ouiIntemp"><label for="ouiIntemp">Oui</label>
+			<input type="radio" name="intemperie" id="nonIntemp"><label for="ouiIntemp">Non</label>
+			<div class="typeintemp row">
+				<div class="col-12 text-center">
+					<label for="dateItemp">Date de l'intempérie</label>
+					<input type="date" name="" id="dateItemp" class="form-control">
+				</div>
+				<div class="col-12 text-center mt-3">
+					<p class="h6">Type d'intemperie : </p>
+				</div>
+				<div class="col-sm-4 mt-4"><input type="checkbox" name="" id="neige" class='intemp' value="Neige"><label for="neige">Neige</label></div>
+				<div class="col-sm-4 mt-4"><input type="checkbox" name="" id="grêle" class='intemp' value="Grêle"><label for="grêle">Grêle</label></div>
+				<div class="col-sm-4 mt-4"><input type="checkbox" name="" id="vent" class='intemp' value="Vent"><label for="vent">Vent</label></div>
+				<div class="col-sm-4 mt-4"><input type="checkbox" name="" id="pluie" class='intemp' value="Pluie"><label for="pluie">Pluie</label></div>
+				<div class="col-sm-4 mt-4"><input type="checkbox" name="" id="canicule" class='intemp' value="Canicule"><label for="canicule">Canicule</label></div>
+				<div class="col-sm-4 mt-4"><input type="checkbox" name="" id="grandFroid" class='intemp' value="Grand froid"><label for="grandFroid">Grand froid</label></div>
+				<div class="col-sm-12 mt-4">
+					<label for="autre">Autres</label>
+					<input type="text" name="" id="autre">
+				</div>
+
+
+
+			</div>
+		</div>
+		<div class="col-sm-6 mt-4">
+			<p class="h6">Choix du drone </p>
+			<select class="form-control form-control-lg drone">
+				<option value={{null}}>Choisissez votre appareil</option>
+				{% for drone in drones %}
+					<option value="{{drone.id}}">{{drone.typeDrone}}</option>
+				{% endfor %}
+			</select>
+		</div>
+		<div class="col-sm-12">
+			<br>
+			<button class="btn btn-maincolor" data-salarie="{{salarie.id}}">Valider</button>
+		</div>
+
+	</div>
+
+
+{% endblock %}

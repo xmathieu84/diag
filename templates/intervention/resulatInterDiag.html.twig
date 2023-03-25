@@ -1,0 +1,92 @@
+{% extends template %}
+{% block title %}
+Vos diagnostics immobilier
+{% endblock %}
+
+{% block bodyAccueil %}
+<section class="ls service-single s-py-xl-150 s-py-lg-130 s-py-md-90 s-py-60 bg-white">
+    <div class="container pb-5" style="padding-top: 8em">
+        <div class="row">
+
+            <div class="col-12 mb-5 text-center">
+                <p class="h3">Vos diagnostics</p>
+            </div>
+            <input type="hidden" name="" value="{{ inter.id }}">
+            <div class="col-12">
+                <div class="row tableAccueil">
+                    {% for mission in missions %}
+
+                        {% if inter.ageElec and mission.nomSimple =="electricite" %}
+                            <div class="col-sm-2"></div>
+                            <div class="can-toggle can-toggle--size-small col-sm-8 col-12">
+                                <input id="b{{ loop.index }}" type="checkbox" checked value="{{ mission.id }}">
+                                <label for="b{{ loop.index }}">
+                                    <div class="can-toggle__switch" data-checked="Oui" data-unchecked="Non"></div>
+                                    <div class="can-toggle__label-text h6 pt-1 "> {{ mission.nom }}</div>
+
+                                </label>
+                            </div>
+                            <div class="col-sm-2"></div>
+
+                            {% elseif inter.plomb and mission.nomSimple =="plomb vente" %}
+                                <div class="col-sm-2"></div>
+                                <div class="can-toggle can-toggle--size-small col-sm-8 col-12">
+                                    <input id="b{{ loop.index }}" type="checkbox" checked value="{{ mission.id }}">
+                                    <label for="b{{ loop.index }}">
+                                        <div class="can-toggle__switch" data-checked="Oui" data-unchecked="Non"></div>
+                                        <div class="can-toggle__label-text h6 pt-1 "> {{ mission.nom }}</div>
+
+                                    </label>
+                                </div>
+                                <div class="col-sm-2"></div>
+                            {% elseif inter.amiante and mission.nomSimple =="amiante vente" %}
+                                <div class="col-sm-2"></div>
+                                <div class="can-toggle can-toggle--size-small col-sm-8 col-12">
+                                    <input id="b{{ loop.index }}" type="checkbox" checked value="{{ mission.id }}">
+                                    <label for="b{{ loop.index }}">
+                                        <div class="can-toggle__switch" data-checked="Oui" data-unchecked="Non"></div>
+                                        <div class="can-toggle__label-text h6 pt-1 "> {{ mission.nom }}</div>
+
+                                    </label>
+                                </div>
+                                <div class="col-sm-2"></div>
+                            {% elseif inter.gaz and mission.nomSimple =="gaz vente" %}
+                                <div class="col-sm-2"></div>
+                                <div class="can-toggle can-toggle--size-small col-sm-8 col-12">
+                                    <input id="b{{ loop.index }}" type="checkbox" checked value="{{ mission.id }}">
+                                    <label for="b{{ loop.index }}">
+                                        <div class="can-toggle__switch" data-checked="Oui" data-unchecked="Non"></div>
+                                        <div class="can-toggle__label-text h6 pt-1 "> {{ mission.nom }}</div>
+
+                                    </label>
+                                </div>
+                                <div class="col-sm-2"></div>
+                                {% else %}
+                                    <div class="col-sm-2"></div>
+                                    <div class="can-toggle can-toggle--size-small col-sm-8 col-12">
+                                        <input id="b{{ loop.index }}" type="checkbox" checked value="{{ mission.id }}">
+                                        <label for="b{{ loop.index }}">
+                                            <div class="can-toggle__switch" data-checked="Oui" data-unchecked="Non"></div>
+                                            <div class="can-toggle__label-text h6 pt-1 "> {{ mission.nom }}</div>
+
+                                        </label>
+                                    </div>
+                                    <div class="col-sm-2"></div>
+                        {% endif %}
+
+
+
+
+
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-12 text-right mt-5">
+                <button class="btn btn-maincolor">Valider</button>
+            </div>
+        </div>
+
+    </div>
+</section>
+{% endblock %}
+

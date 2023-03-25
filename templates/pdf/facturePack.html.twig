@@ -1,0 +1,181 @@
+<style>
+    @page  {
+        margin: 15px;
+    }
+    .diagdrone{
+        font-size: 1em;
+        width: 100%;
+        position:sticky;
+        bottom:3em;
+        text-align: center;
+        padding-top:25px;
+
+    }
+    .date{
+        margin-top: 1.2em;
+        text-align: center;
+        width: 100%;
+    }
+    .logo{
+        float: left;
+        width: 100%;
+    }
+    .client{
+        float: left;
+        width: 45%;
+        margin-left: 30em;
+        margin-top: 1.5em;
+    }
+    table{
+        width: 100%;
+        border-collapse: collapse;
+        text-align:center ;
+        margin-top: 1em;
+    }
+    th,td{
+        border: 1px solid black;
+        padding-top: 1.2em;
+        padding-bottom: 1.2em;
+    }
+    footer{
+
+        font-size: 0.6em;
+        position:sticky;
+        bottom:0;
+        width:100%;
+        padding-top:30px;
+        height:50px;
+
+    }
+    .premiere{
+        border: none;
+        width: 50%;
+    }
+    .total{
+        border: 1px solid blue;
+        border-radius: 5%;
+        margin-top: 3.5em;
+        padding-top: 1.5em;
+        padding-bottom: 1.5em;
+        width: 100%;
+
+    }
+    .phrase{
+        float: left;
+        width: 70%;
+        margin-left: 1em;
+    }
+    .montant{
+        float: right;
+        width: 23%;
+
+    }
+    .sousTotal{
+        float: right;
+        width: 25%;
+        text-align: right;
+    }
+    .aujour{
+        float: left;
+        width: 50%;
+        margin-top: 1em;
+        margin-bottom: 1em;
+    }
+    .numeroFact{
+        width: 50%;
+        font-size: 1.3em;
+
+    }
+    hr{
+        width: 50%;
+        margin-left: 15em;
+    }
+</style>
+
+<div class="logo">
+    <img src="../public/css/css_site/images/logo-diagdrone.png" alt="" width="493px" height="193px">
+</div>
+<div class="client">
+    <span>{{ demandeur.profil }} {{ demandeur.nom }}</span><br>
+    <span>{{ demandeur.adresse.numero }} {{ demandeur.adresse.nomVoie }}</span><br>
+    <span>{{ demandeur.adresse.codePostal }} {{ demandeur.adresse.ville }}</span><br>
+
+    <span>Numéro de siret : {{ demandeur.siretTva.siret}}</span><br>
+    {% if demandeur.siretTva.tva %}
+        <span>TVA : {{ demandeur.siretTva.tva }}</span>
+    {% endif %}
+
+</div>
+<div class="aujour">
+    Le {{ date|format_datetime('short', 'none', locale='fr') }}
+</div>
+<div class="numeroFact">
+    Facture n°{{ numero }} GCI
+</div>
+<div class="date">
+    <b >Facture des packs supplémentaires</b>
+</div>
+<table>
+    <tr>
+        <th class="premiere"></th>
+        <th>Quantité</th>
+        <th>Prix unitaire <br>HT</th>
+        <th>Prix HT</th>
+
+    </tr>
+    {% for pack in packs %}
+        <tr>
+            <td>{{ pack.packSup.nom}}</td>
+            <td>1</td>
+            <td>{{ pack.packSup.prix*1.2 }} € TTC</td>
+            <td>{{ ((pack.packSup.prix))|number_format(2) }} € HT</td>
+        </tr>
+    {% endfor %}
+
+
+
+
+</table>
+<div class="sousTotal">
+    <p>Total HT : {{ (total)|number_format(2) }} € €</p>
+    <p>TVA 20% % :  {{ (total-total/1.2)|number_format(2) }} € €</p>
+    <hr style="width: 50%">
+    <p>Total TTC : {{ (total/1.2)|number_format(2) }} € €</p>
+</div>
+<div class="total">
+    <div class="ht">
+        <div class="phrase">Montant TTC à payer : </div>
+        <div class="montant">{{ (total/1.2)|number_format(2) }} €</div>
+    </div>
+    <div class="tva">
+        <div class="phrase">
+            Dont TVA (20%)
+        </div>
+        <div class="montant">
+            {{ (total-total/1.2)|number_format(2) }} € €
+        </div>
+    </div>
+</div>
+<div class="diagdrone">
+    <span>SAS DIAG DRONE</span><br>
+    <span>200 rue Michel de Montaigne</span><br>
+    <span>84140 AVIGNON</span><br>
+    <span class="infoPdf">Numéro de SIREN
+	</span>
+    <span>
+		: 880431580</span><br>
+    <span class="infoPdf">Numéro de SIRET:
+	</span>
+    <span>88043158000013</span><br>
+    <span class="infoPdf">RSC AVIGNON</span>
+    <span>
+		 880431580</span><br>
+    <span class="infoPdf">Numéro TVA
+	</span>
+    <span>
+		: FR78880431580</span><br>
+
+</div>
+<footer>
+    <p>Vous pouvez retrouver votre facture dans votre espace  sur <a href="https://diag-drone.com/" target="_blank">DIAG-DRONE</a></p>
+</footer>

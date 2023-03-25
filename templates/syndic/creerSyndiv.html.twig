@@ -1,0 +1,45 @@
+{% extends 'accueil/baseaccueil.html.twig' %}
+
+{% block title %}
+Créer syndic de co-propriéte
+{% endblock %}
+
+{% block bodyAccueil %}
+<section class="ls bg-grey-light">
+    <div class="container mt-108 pt-7 mb-108">
+    {{ form_start(form) }}
+    <div class="row">
+        <div class="col-12 text-center">
+            <legend>Inscription d'un syndicat de co-propriété</legend>
+        </div>
+        <div class="col-sm-12 col-12 text-center mb-3">
+
+            {{ form_row(form.civilite.type,{'label':' '}) }}
+        </div>
+        <div class="col-sm-6 col-12 mb-3">
+            {{ form_row(form.civilite.nom,{'label':'Nom','attr':{'placeholder':'Nom'}}) }}
+        </div>
+        <div class="col-sm-6 col-12 mb-3 text-center">
+            {{ form_row(form.civilite.prenom,{'label':'Prénom','attr':{'placeholder':'Prénom'}}) }}
+        </div>
+        <div class="col-sm-4 col-12 mb-3 text-center">
+            {{ form_row(form.user.email,{'label':'Adresse Email de contact','attr':{'placeholder':'Adresse email'}}) }}
+        </div>
+        <div class="col-sm-4 col-12 mb-3 text-center">
+            {{ form_row(form.user.password,{'label':'Mot de passe','attr':{'placeholder':'Mot de passe'}}) }}
+        </div>
+        <div class="col-sm-4 col-12 mb-3 text-center">
+            {{ form_row(form.user.confirm_password,{'label':'Confirmez le mot de passe','attr':{'placeholder':'Confirmez le mot de passe'}}) }}
+        </div>
+        <div class="col-sm-12 col-12 mb-3 text-center">
+            {{ form_row(form.cgv,{'label':' '}) }}
+        </div>
+        <div class="col-sm-12 col-12 mt-5 text-center">
+            <button type="submit" class="btn btn-maincolor">Valider</button>
+        </div>
+    </div>
+    {{ form_end(form) }}
+    </div>
+</section>
+{% endblock %}
+

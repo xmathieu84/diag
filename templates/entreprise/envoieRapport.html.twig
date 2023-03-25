@@ -1,0 +1,46 @@
+{% extends 'entreprise/baseAE.html.twig' %}
+{% block title %}
+    Envoyer un rapport d'intervention
+{% endblock %}
+
+    {% block pageAccueil %}
+       <p class="h5">Pour transmettre votre rapport, renseignez les champs qui suivent. Chaque destinataire recevra un mail lui permettant de consulter le rapport en ligne ou de le télécharger.</p>
+    {% endblock %}
+
+    {% block contenu %}
+
+        <div class="row text-center bg-white pt-5 pb-5">
+
+            <div class="col-sm-6">
+                <label for="idRapport" class="h6">Sélectionnez un rapport</label>
+                <select name="" id="idRapport" >
+                    <option value="">Vos rapports</option>
+                    {% for rapport in rapports %}
+                        {% if (rapport) %}
+                            <option value="{{ rapport.id }}">{{ rapport.archive }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-sm-6">
+                <label for="refDossier" class="h6">Référence du dossier (le cas échéant)</label>
+                <input type="text" name="" id="refDossier">
+            </div>
+            <div class="col-sm-12 mt-5">
+
+                <p class="h5">Adresse mail : </p>
+                <p class="h7">Appuyer sur Entrée pour valider chaque adresse email</p>
+                <input type="text" id="tag-input1" class="form-control form-control-sm">
+
+
+
+            </div>
+            <div class="col-sm-12 mt-3">
+                <button class="btn btn-outline-maincolor">Valider</button>
+            </div>
+        </div>
+    {% endblock %}
+
+
+
+

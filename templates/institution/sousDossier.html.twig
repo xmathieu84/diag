@@ -1,0 +1,375 @@
+{% extends "institution/baseInsti.html.twig" %}
+{% block title %}Sous dossier{% endblock %}
+
+{% block titreSection %}Sous dossier{% endblock %}
+{% block titrePage %}Sous dossier{% endblock %}
+
+{% block pageAccueil %}
+
+        <a href="{{ path('listeDossier',{code:code}) }}">ListeDossier</a><span class="color-dark">-></span><a href="{{ path('indossier',{nom:dossier.type,code:code}) }}">{{ dossier.type }}</a><span class="color-dark">->Sous dossier</span>
+
+
+
+{% endblock %}
+{% block contenu %}
+    <div class="row zoneSupprimer">
+        {% if dossier.dossierGeneral ==null %}
+            <div class="col-12 col-sm-4 text-center mb-3">
+                <button class="btn btn-maincolor" data-toggle="modal" data-target="#ajoutPiece" data-id="{{ dossier.id }}">Ajouter sous dossier</button>
+            </div>
+            <div class="col-12 col-sm-4 text-center">
+                <button class="btn btn-danger btn-sm"  data-toggle="modal" data-target="#DossierGenaral">Créer dossier général</button>
+            </div>
+
+            <div class="col-12 col-sm-4 text-center">
+                <button data-target="#modalDossier" data-toggle="modal" class="btn btn-maincolor2">Voir le dossier</button>
+            </div>
+            {% else %}
+                <div class="col-sm-6 col-12 text-center mb-3">
+                    <button class="btn btn-maincolor" data-toggle="modal" data-target="#ajoutPiece" data-id="{{ dossier.id }}">Créer un sous dossier</button>
+                </div>
+
+
+                <div class="col-sm-6 col-12 text-center">
+                    <button data-target="#modalDossier" data-toggle="modal" class="btn btn-maincolor2">Voir le dossier</button>
+                </div>
+
+        {% endif %}
+
+
+        {% if dossier.dossierGeneral  %}
+        <div class="col-sm-2 col-12 text-center dossierGen">
+            <div class="row">
+                <div class="col-sm-6 col-12">
+                    <a href="{{ path('dossierGeneral',{nom:dossier.type,id:dossier.id,code:code}) }}">
+                        <figure>
+                            <img src="/css/css_site/img/dossierJaune.png" alt="">
+                            <figcaption>Dossier Général</figcaption>
+                        </figure>
+                    </a>
+                </div>
+                <div class="col-sm-6 col-12 text-left">
+                    <div class="btn-group " role="group" >
+                        <button  type="button" class="btnMenu dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">+</button>
+                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1"style="z-index: 1000000;">
+                            <a class="dropdown-item"  href="{{ path('dossierGeneral',{nom:dossier.type,id:dossier.id,code:code}) }}" >Ouvrir</a>
+                            <a class="dropdown-item" href="{{ path('dossierGeneral',{nom:dossier.type,id:dossier.id,code:code}) }}" target="_blank">Ouvrir dans un nouvel onglet</a>
+                            <a href="#" class="dropdown-item" data-toggle="modal" data-target="#ajoutPiece">Créer un sous dossier</a>
+                            <a href="#" class="dropdown-item" data-target="#modalDossier" data-toggle="modal">Voir le dossier complet</a>
+                            {% if is_granted("ROLE_NIVEAU1") %}
+                                <a href="#" class="dropdown-item deleteDg" data-id="{{ dossier.dossierGeneral.id }}">Supprimer le dossier</a>
+                            {% endif %}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        {% endif %}
+
+        {% for sousDossier in dossier.sousDossiers %}
+
+           <div class="col-sm-2 col-12 sousDos">
+               <div class="row">
+                   <div class="col-6">
+                       <a href="{{ path('docSousDossier',{id:dossier.id,type:sousDossier.type,code:code}) }}">
+                           <figure>
+                               <img src="/css/css_site/img/dossierJaune.png" alt="">
+                               <figcaption>{{sousDossier.type}}</figcaption>
+                           </figure>
+                       </a>
+                   </div>
+                   <div class="col-6">
+                       <button  type="button" class="btnMenu dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">+</button>
+                       <div class="dropdown-menu" aria-labelledby="btnGroupDrop1"style="z-index: 1000000;">
+                           <a class="dropdown-item"  href="{{ path('docSousDossier',{id:dossier.id,type:sousDossier.type,code:code}) }}" >Ouvrir</a>
+                           <a class="dropdown-item" href="{{ path('docSousDossier',{id:dossier.id,type:sousDossier.type,code:code}) }}" target="_blank">Ouvrir dans un nouvel onglet</a>
+                           <a href="#" class="dropdown-item" data-toggle="modal" data-target="#ajoutPiece">Créer un sous dossier</a>
+                           <a href="#" class="dropdown-item" data-target="#modalDossier" data-toggle="modal">Voir le dossier</a>
+                           <a href="#" class="dropdown-item deleteDossier" data-id="{{ sousDossier.id }}">Supprimer le dossier</a>
+                       </div>
+                   </div>
+               </div>
+
+           </div>
+
+        {% endfor %}
+    </div>
+    <div class="modal fade" id="ajoutPiece" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" id="sousDossier">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Créer un sous dossier</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-3"></div>
+                        <div class="col-sm-6 text-center">
+                            <label for="typeDossier">Sélectionner un type</label>
+                            <select name="" id="typeDossier">
+                                <option value="" disabled selected>Sélectionner un type</option>
+                                <option value="Intervention drone">Intervention drone</option>
+                                <option value="Diagnostic technique">Diagnostic technique </option>
+                                <option value="Plan">Plan</option>
+                                <option value="Photo">Photo</option>
+                                <option value="Autres documents">Autre doc</option>
+                            </select>
+                        </div>
+                        <div class="col-3"></div>
+                        <div class="col-sm-6 droneDossier mt-5 interDrone">
+                            <label for="">Sélectionner un type d'intervention</label>
+                            <select name="" id="listeinter">
+                                <option value="" disabled selected>Sélectionner un type d'intervention</option>
+                                {% for intervention in interventions %}
+                                    <option value="{{ intervention.id }}" data-nom="{{ intervention.nom }}">{{ intervention.nom }}</option>
+                                {% endfor %}
+                            </select>
+
+                        </div>
+                        <div class="col-sm-6 typeInterDossier mt-5 interDrone">
+                            <label for="typeInter">Précisez</label>
+                            <select name="" id="typeInter">
+
+                            </select>
+                        </div>
+                        <div class="col-3 diagTechnique"></div>
+                        <div class="col-6 diagTechnique">
+                            <label for="diagTech">Sélectionner un type de diagnostic technique</label>
+                            <select name="" id="diagTech">
+                                <option value="Plomb">Plomb</option>
+                                <option value="Amiante">Amiante</option>
+                                <option value="Termites">Termites</option>
+                                <option value="Gaz">Gaz</option>
+                                <option value="Risques">Risques</option>
+                                <option value="Performance énergétique">Performance énergétique</option>
+                                <option value="Électricité">Électricité</option>
+                                <option value="Assainissement">Assainissement</option>
+                                <option value="Mérules">Mérules</option>
+                                <option value="ERP">ERP</option>
+                                <option value="Bruit">Bruit</option>
+                            </select>
+                        </div>
+                        <div class="col-3 diagTechnique"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                    <button type="button" class="btn btn-primary">Valider</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modalDossier" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog vueDossier">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Vue du dossier -</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="logoDossier">
+
+
+                        <img src="/uploads/logo/{{ dossier.institution.logo }}" alt="" width="200">
+
+                    </div>
+                    <div class="sepaDossier"></div>
+                    <div class="cadre1Dossier">
+                        <p>Créateur du dossier : </p>
+                        <p class="createur"><b>{{ dossier.createur }}</b></p>
+                        <p>Propriétaire du dossier : </p>
+                        <p class="createur"><b>{{ dossier.proprietaire }}</b></p>
+                        <p>Date de création : </p>
+                        <p><b>{{ dossier.date|format_datetime('short','none',locale='fr') }}</b></p>
+                    </div>
+                    <div class="cadre2Dossier">
+                        <p>Date de la dernière intervention sur le dossier : </p>
+                        <p><b>{{ dossier.dateModif|format_datetime('short','none',locale='fr') }}</b></p>
+                        <p>Effectuée par : </p>
+                        <p><b>{{ dossier.nomModifiant }}</b></p>
+                        <p>Type de modification effectuée : </p>
+                        <p>{{ dossier.typeModif }}</p>
+                    </div>
+
+                   </div>
+                <div class="bleuDossier"></div>
+                <div class="cadreTitreDossier">
+                    <span class="titre1"><b>Dossier {{ dossier.type }}</b></span><br>
+                    <span class="titre2"><b>{{ dossier.nom }}</b></span>
+                </div>
+                <div class="row">
+
+                <div class="col-5  text-center cadre3Dossier">
+                    <span>Nom :<span class="nom">{{ dossier.nom }}</span></span><br>
+
+                    <span>Parcelle cadastrale : <span>{{ dossier.parcelle }}</span></span>
+
+                </div>
+                <div class=" col-5  text-center cadre4Dossier">
+                    <span>Adresse : <span class="adresse"><b>{{ dossier.adresse.numero }} {{ dossier.adresse.nomVoie }}</b></span></span><br>
+                    <span>Code postal : <span class="cp"><b>{{ dossier.adresse.codePostal }}</b></span></span><br>
+                    <span>Ville : <span class="ville"><b>{{ dossier.adresse.ville }}</b></span></span>
+                </div>
+                </div>
+                <hr style="height:1em;background-color: #3680CB ">
+                <div class="row">
+
+                    <div class="col-5 cadre5Dossier text-center">
+                        <span>CONSTITUTION DU DOSSIER</span>
+                    </div>
+                    <div class="col-5 cadre6Dossier text-center">
+                        <span>ALERTES SUR DIAGNOSTIC</span>
+                    </div>
+
+                </div>
+
+                <div class="cadreAlerte">
+                    <div class="row">
+                        {% for Rdossier in Rdossiers %}
+                            <div class="col-6 text-center rDossier pt-2 pb-2">
+                                {{ Rdossier.type }}-{{ Rdossier.nom }}-{{ Rdossier.date }}</div>
+                                <div class="col-6 text-center rDossier pt-2 pb-2">{% if Rdossier.alerte %}
+                                        OUI
+                                    {% endif %}</div>
+                            </tr>
+                        {% endfor %}
+                    </div>
+                </div>
+                <hr style="background-color: black;height: 1px">
+                <hr style="height:1em;background-color: #3680CB ">
+                <div class="row">
+                    <div class="col-sm-8 cadrePage2 text-center">
+                        <p>Nom du dossier {{ dossier.nom }} </p>
+                        <p><b>Référence : {{ dossier.reference }}</b></p>
+                    </div>
+                    <div class="col-sm-10 bg-dossier cadre1Page2 text-center">
+                        <p><b>Annotations du dossier </b>(de la plus ancienne à la plus récente)</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 pl-5">
+                        <div id="accordion02" role="tablist">
+                            {% for note in notes %}
+                                <div class="mb-3">
+                                    <div role="tab" id="collapse04_header">
+                                        <div class="row mt-5 text-center">
+                                            <div class="col-sm-3">
+                                                <h6>
+                                                    <a data-toggle="collapse" href="#collapse{{ loop.index }}" aria-expanded="false" aria-controls="collapse{{ loop.index }}" class="collapsed">
+                                                        {{ note.titre }}
+                                                    </a>
+                                                </h6>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                {{ note.auteur }}
+                                            </div>
+                                            <div class="col-sm-3">
+                                                {{ note.date|format_datetime('short','none',locale='fr') }}
+                                            </div>
+
+                                            <div class="col-sm-3">
+                                                <a href="/uploads/dossier/{{ note.docSousDossier.fichier }}" target="_blank">
+                                                    <figure>
+                                                        <img src="/css/css_site/img/fichier.png" alt="">
+                                                        <figcaption>{{ note.docSousDossier.libelle }}</figcaption>
+                                                    </figure>
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div id="collapse{{ loop.index }}" class="collapse" role="tabpanel" aria-labelledby="collapse{{ loop.index }}_header" data-parent="#accordion02" style="">
+                                        <div class="card-body">
+                                            {{ note.texte }}
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-5">
+                    <div class="col-sm-8 cadrePage2 text-center">
+                        <p>Nom du dossier  {{ dossier.nom }} </p>
+                        <p><b>Référence : {{ dossier.reference }}</b></p>
+                    </div>
+                    <div class="col-sm-10 bg-dossier cadre1Page2 text-center">
+                        <p><b>Annotations du dossier </b>(de la plus ancienne à la plus récente)</p>
+                    </div>
+                </div>
+                <div class="row text-center">
+                    {% for dossierR in Rdossiers %}
+                            <div class="col-sm-6 mt-5 pl-3">
+                                <span>Type :  {{ dossierR.type }}</span><br>
+                                <span>Nom :  {{ dossierR.nom }} </span><br>
+                                <span>Date d'enregistrement : {{ dossierR.piece.date|format_datetime('short','none',locale='fr') }}</span><br>
+                                <span>Date derniere annotation : {{ dossierR.date|format_datetime('short','none',locale='fr') }}</span><br>
+                                <span>Nom du dernier intervenant : {{ dossierR.nom }}</span>
+                                <span></span>
+                            </div>
+                            <div class="col-sm-6 mt-5">
+                                {% if dossierR.alerte %}
+                                <span>Alerte : OUI</span><br>
+                                <span>Date de l'alerte : {{ dossierR.dateA|format_datetime('short','none',locale='fr') }} </span><br>
+                                <span>{% for contact in dossierR.piece.contact %}
+                                    Nom : {{ contact.nom }} {{ contact.prenom }}
+                                     </span><br>
+
+                                {% endfor %}
+                                    <span>Type d'alerte : SMS,Email,Agenda</span>
+                                {% else %}
+                                <span>NON</span>
+
+
+
+                                {% endif %}
+                            </div>
+                        <div class="col-sm-12 text-center">
+                            <hr style="background-color: black;height: 1px;width: 100%">
+                        </div>
+
+
+
+                    {% endfor %}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="DossierGenaral" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ajout d'un dossier général</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p class="h4">Souhaitez vous ajouter un dossier général ?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary dossierGeneral" data-id="{{ dossier.id }}">Créer un dossier général</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

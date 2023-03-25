@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="/css/css_site/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/css_site/css/animations.css">
+    <link rel="stylesheet" href="/css/css_site/css/font-awesome5.css">
+    <link rel="stylesheet" href="/css/css_site/css/icomoon.css">
+    <link rel="stylesheet" href="/css/css_site/css/main.css" class="color-switcher-link">
+    <link rel="stylesheet" href="/css/css_site/css/shop.css" class="color-switcher-link">
+    <script src="/js/js_site/vendor/modernizr-2.6.2.min.js"></script>
+    {{ encore_entry_link_tags('app') }}
+
+
+    {% block stylesheets %}{% endblock %}
+    {% block js %}{% endblock %}
+</head>
+<body>
+{% block contenu %}{% endblock%}
+{{ encore_entry_script_tags('app') }}
+
+<script src="/js/js_site/vendor/modernizr-2.6.2.min.js"></script>
+<script src="/js/js_site/compressed.js"></script>
+
+<script src="/js/js_site/main.js"></script>
+</body>
+</html>

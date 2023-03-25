@@ -1,0 +1,128 @@
+{% extends 'institution/baseInsti.html.twig' %}
+
+
+{% block title %}{% if is_granted('ROLE_INSTITUTION') %}
+    Accueil institution
+  {% else %}
+    Accueil grand compte
+{% endif %}{% endblock %}
+{% block pageAccueil %}
+
+{% endblock %}
+{% block contenu %}
+    {% if is_granted('ROLE_GRANDCOMPTE') %}
+        {% set lien = 'gcListeInter'%}
+        {% else %}
+            {% set lien = 'instituListeInter'%}
+
+    {% endif %}
+    <div class="row">
+        <div class="col-12 bg-orange color-light text-center pt-2 pb-2">
+            INTERFACE <br>
+            <span class="commune">{{ institution.demandeur.profil }} {{ institution.demandeur.nom }}</span>
+        </div>
+        <div class="col-12">
+            <div class="row mt-2 bg-white">
+
+
+                <div class="col-lg-6 col-sm-12 color-dark mt-2">
+                    <p class="h6">Responsable du compte</p>
+                    <div class="table-responsive mb-2">
+                        <table class="dataTable">
+                            <tr>
+                                <th class="table-primary text-center">Prénom Nom </th>
+                                <td>{{ institution.demandeur.agents[0].civilite.prenom }} {{ institution.demandeur.agents[0].civilite.nom }}</td>
+                            </tr>
+                            <tr>
+                                <th class="table-primary text-center">Fonction</th>
+                                <td>Administrateur</td>
+                            </tr>
+                            <tr>
+                                <th class="table-primary text-center">Numéro de téléphone</th>
+                                <td>{{ institution.demandeur.telephon.numero}}</td>
+                            </tr>
+                            <tr>
+                                <th class="table-primary text-center">Email </th>
+                                <td>{{ institution.demandeur.agents[0].user.email }}</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                </div>
+                <div class="col-lg-6 col-sm-12 color-dark mt-2 text-center">
+                    <div class="table-responsive mb-2">
+                        <table class="mt-3 dataTable">
+                            <tr>
+                                <th class="text-center table-warning">Intervention drone à proximité</th>
+
+                            </tr>
+                            <tr>
+                                <td class="text-center"> {{ intervention }} <br><a href="{{ path('instituListeInter') }}">Voir</a></td>
+                            </tr>
+                        </table>
+
+                        <table class="mt-3 dataTable">
+                            <tr>
+                                <th class="text-center table-warning">Accès partenaires locaux</th>
+
+                            </tr>
+                            <tr>
+                                <td class="text-center">
+                                    <a href="">Voir</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                </div>
+
+
+
+
+                <div class="col-sm-4 color-dark mt-2 mb-2 text-center table-responsive">
+                    <table class="dataTable">
+                        <tr>
+                           <th class="text-center table-info">{% if is_granted('ROLE_INSTITUTION') %}
+                                Nombre <br> d'agents :
+                            {% else %}
+                                Nombre <br> de collaborateurs :
+                            {% endif %}</th>
+
+                        </tr>
+                        <tr>
+                            <td class="text-center">{{ nombreAgent }}</td>
+                        </tr>
+                    </table>
+
+                </div>
+                <div class="col-sm-4 color-dark mt-2 mb-2 text-center table-responsive">
+                    <table class="dataTable">
+                        <tr>
+                            <th class="text-center table-info">Nombre de dossier <br> en gestion</th>
+
+                        </tr>
+                        <tr>
+                            <td class="text-center">{{ institution.demandeur.dossiers|length }}</td>
+                        </tr>
+                    </table>
+
+                </div>
+                <div class="col-sm-4 color-dark mt-2 mb-2 text-center table-responsive">
+                    <table class="dataTable">
+                        <tr>
+                            <th class="text-center table-info">Nombre d’interventions drones réalisées</th>
+
+                        </tr>
+                        <tr>
+                            <td class="text-center">{{ institution.demandeur.interventions|length }}</td>
+                        </tr>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+{% endblock %}

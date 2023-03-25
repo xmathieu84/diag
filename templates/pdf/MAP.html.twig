@@ -1,0 +1,87 @@
+<div class="titre">
+	<h2>Manuel d'activité particulière de
+		{{salarie.civilite.prenom|capitalize}}
+		{{salarie.civilite.nom|capitalize}}</h2>
+	<h4>Année
+		{{annee}}</h4>
+</div>
+
+<div class="corps">
+	<table class="tableMap">
+		<thead>
+
+			<tr>
+				<th class="encadre">Date</th>
+				<th class="encadre">Appareil</th>
+				<th class="encadre">Nature du vol</th>
+				<th class="encadre">Lieu de décollage</th>
+				<th class="encadre">Lieu d'atterissage</th>
+				<th class="encadre">Durée</th>
+				<th class="encadre">Observations</th>
+
+			</tr>
+		</thead>
+		<tbody>
+			{% for map in maps %}
+				<tr>
+					<td class="encadre">
+						<span class="h7">{{map.intervention.rdvAT|format_datetime('short', 'short', locale='fr')}}</span>
+					</td>
+
+
+					<td class="encadre">
+						<span class="h7">{{map.intervention.drone.nomFabriquant}}-{{map.intervention.drone.typeDrone}}</span>
+					</td>
+
+
+					<td class="encadre">
+						<span class="h7">{{map.intervention.typeInter.nom}}</span>
+					</td>
+
+
+					<td class="encadre">
+						<span class="h7">{{map.intervention.adresse.numero}}
+							{{map.intervention.adresse.nomVoie}}</span><br>
+						<span class="h7">{{map.intervention.adresse.codePostal}}
+							{{map.intervention.adresse.ville}}</span>
+
+					</td>
+
+
+					<td class="encadre">
+						<span class="h7">{{map.intervention.adresse.numero}}
+							{{map.intervention.adresse.nomVoie}}</span><br>
+						<span class="h7">{{map.intervention.adresse.codePostal}}
+							{{map.intervention.adresse.ville}}</span>
+
+					</td>
+
+
+					<td class="encadre">
+						<span class="h7">{{ map.dureeVol|date(" %h h %i ") }}</span>
+
+
+					</td>
+
+					<td class="encadre">
+
+
+						<span class="h7 ">{{map.observation}}</span>
+
+
+					</td>
+				</tr>
+			{% endfor %}
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td class="encadreTotal">Total heure de vol:
+					{{total}}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

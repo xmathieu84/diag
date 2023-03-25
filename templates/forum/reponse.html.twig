@@ -1,0 +1,77 @@
+{% extends "forum/baseForum.html.twig" %}
+{% block title %}reponse du forum
+{% endblock %}
+
+{% block titreSection %}
+	{{sujet.nom}}
+{% endblock %}
+{% block titrePage %}
+	{{sujet.nom}}
+{% endblock %}
+
+
+{% block contenu %}
+
+	<div class="row">
+
+		<div class="col-sm-12 chemin">
+			<a href="{{path('forum')}}">Forum --></a>
+
+			<a href="{{path('categorie',{id:sujet.categorie.id})}}">{{sujet.categorie.nom}}
+				--></a>
+			<a href="{{path('reponseForum',{id:sujet.id})}}">{{sujet.nom}}</a>
+		</div>
+	</div>
+	<div class="container">
+
+		<div class="row text-center">
+			<div class="col-sm-12 sujetReponse">
+
+				<p>{{sujet.contenu}}</p>
+				<p>Publié par
+					{{sujet.redacteur}}
+					le
+					{{sujet.dateCreation| format_datetime('full', 'short', locale='fr')}}</p>
+
+			</div>
+			{% if reponses is empty %}
+
+				<div class="col-sm-12">
+					<p class="h5">Il n'y a pas encore de réponse postée</p>
+				</div>
+			{% endif %}
+
+			<div class="col-sm-12 zoneReponse">
+				<div class="row">
+					{% for reponse in reponses %}
+
+						<div class="col-sm-12 reponse">
+
+							<p class="h4">{{reponse.auteur}}</p>
+							<p>{{reponse.contenu}}
+							</p>
+							<p class="h7">Publié le
+								{{reponse.date|format_datetime('full', 'short', locale='fr') }}
+							</p>
+
+						</div>
+					{% endfor %}
+				</div>
+
+
+			</div>
+			<div class="col-sm-12">{{ knp_pagination_render(reponses) }}</div>
+			<br><br>
+			<div class="col-sm-12">
+				<p class="h6">Poster ici votre réponse</p>
+				<textarea cols="30" rows="10" class="form-control"></textarea>
+			</div>
+			<div class="col-sm-9"></div>
+			<div class="col-sm-3">
+				<button class="btn btn-outline-dark" data-sujet="{{sujet.id}}">Publier</button>
+			</div>
+		</div>
+	</div>
+
+
+{% endblock %}

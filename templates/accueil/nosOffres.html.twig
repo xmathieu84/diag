@@ -1,0 +1,150 @@
+{% extends 'accueil/baseaccueil.html.twig' %}
+
+{% block referencement %}
+	<title>interventions par drone│trouvez votre télépilote de drone </title>
+	<meta name="description" content="Vous vous demandez où peut-on trouver un drone avec son télépilote ?
+La réponse est Diag-Drone ! La plateforme qui assure tous les types d’interventions possibles !">
+	<meta name="keywords" content="Drone, Aérien, Terreste, Aquatique"/>
+	<link rel="canonical" href="https://diag-drone.com/trouver-un-telepilote-de-drone.html" />
+{% endblock %}
+
+{% block bodyAccueil %}
+
+	<section class="ls service-single s-py-xl-150 s-py-lg-130 s-py-md-90 s-pb-60 s-pt-120 bg-white">
+		<div class="container pb-5">
+			<div class="row">
+				<div class="col-12">
+					<h4 class="title_connect">
+						Découvrez
+						<span class="color_blue">les types d'interventions par Drone</span> <span> !</span>
+					</h4>
+				</div>
+
+				<div class="text mt-50 pl-4">
+					<ul class="text-dark" style="list-style-type: circle">
+							<li>Captation audiovisuelle</li>
+							<li>Intervention drone pour inspection et entretien</li>
+							<li>Intervention drone pour l’arpentage</li>
+							<li>Production de cartes 2D/3D à partir d’images aériennes</li>
+							<li>Bilan thermique</li>
+							<li>Intervention drone pour suivi de chantier</li>
+							<li>Intervention drone pour détection de défaut et entretien d’installations solaires</li>
+							<li>Lutte contre les indésirables</li>
+							<li>Applications agricoles telles que l’épandage, l’ensemencement, la détection de maladie, le suivi de la croissance des cultures, la pulvérisation de traitement phytosanitaire</li>
+							<li>Inspection, étude et entretien des ponts, barrages, grandes usines, lignes électriques et autres zones dangereuses.</li>
+							<li>
+								Intervention drone pour réaliser des enquêtes sur les catastrophes
+							</li>
+							<li>
+								Évaluation des dommages et identification des survivants en cas de catastrophe
+							</li>
+							<li>
+								Intervention pour reportages et films</li>
+							<li>Intervention en zone difficile ou inaccessible </li>
+						</ul>
+					<p class="text-dark">Découvrez, ci-dessous et en détail, les types d’intervention par drone aujourd’hui disponibles.
+					</p>
+					<p class="text-dark">Selon le type d’intervention, DIAG DRONE va identifier des Opérateurs Télépilotes de Drone (OTD) en mesure de réaliser la mission.</p>
+					<p class="text-dark">Vous pourrez choisir la date et l’heure de l’intervention et ainsi, en cas de disponibilité, réserver votre intervention.</p>
+					<p class="text-dark">Sans surprise, un tarif sur devis vous sera communiqué vous garantissant les meilleures conditions.</p>
+					<p class="text-dark">Une question, une incompréhension ? Prenez contact avec nous, un équipier de DIAG DRONE est à votre écoute par mail, par téléphone du lundi au vendredi de 8 h à 18 h.</p>
+				</div>
+			</div>
+			<div class="col-12 text-center mt-5">
+				<a href="/DIAG DRONE - Guide de l'utilisateur - Comment trouver et réserver un drone.pdf" class="btn btn-outline-maincolor" target="_blank">Comment trouver et réserver une intervention drone</a>
+			</div>
+			<div class="col-lg-12 mt-5">
+				<div id="accordion01" role="tablist">
+					<div class="card">
+						<div class="card-header" role="tab" id="demandeur_header">
+							<h5>
+								<a data-toggle="collapse" href="#inter99" aria-expanded="false" aria-controls="demandeur" class="text-capitalize">
+									Demande de diagnostics immobiliers et techniques
+								</a>
+							</h5>
+						</div>
+
+						<div id="inter99" class="collapse bg-white" role="tabpanel" aria-labelledby="demandeur_header" data-parent="#accordion01">
+							<div class="row text-center">
+								<div class="col-sm-6 col-12">
+									<a href="{{path('app_login')}}" class="btn btn-maincolor2">Se connecter</a>
+								</div>
+								<div class="col-sm-6 col-12">
+									<a href="{{path('createDiag')}}" class="btn btn-maincolor">Réservez une intervention</a>
+								</div>
+							</div>
+							<div class="card-body">
+								<div class="row">
+									<div class="col-sm-5 col-6 text-dark tableAccueil text-center">
+										Type
+									</div>
+									<div class="col-sm-7 col-6 text-dark tableAccueil text-center">
+										Missions
+									</div>
+								  	{% for famille in familles %}
+										<div class="col-sm-5 col-6 text-dark tableAccueil text-center">
+											{{ famille.nom|capitalize }}
+										</div>
+										<div class="col-sm-7 col-6 text-dark tableAccueil ">
+											<ul>
+												{% for mission in famille.mission %}
+													<li style="list-style: none;">{{ mission.nom }}</li>
+												{% endfor %}
+											</ul>
+										</div>
+
+									{% endfor %}
+								</div>
+							</div>
+						</div>
+					</div>
+					{% for intervention in intervention %}
+						<div class="card">
+							<div class="card-header" role="tab" id="demandeur_header">
+								<h5>
+									<a data-toggle="collapse" href="#inter{{ loop.index }}" aria-expanded="false" aria-controls="demandeur" class="text-capitalize">
+										{{ intervention.nom }}
+									</a>
+								</h5>
+							</div>
+
+							<div id="inter{{ loop.index }}" class="collapse bg-white" role="tabpanel" aria-labelledby="demandeur_header" data-parent="#accordion01">
+								<div class="row text-center">
+									<div class="col-sm-6 col-12">
+										<a href="{{path('app_login')}}" class="btn btn-maincolor2">Se connecter</a>
+									</div>
+									<div class="col-sm-6 col-12">
+										<a href="{{path('rechercheDrone')}}" class="btn btn-maincolor">Réservez une intervention</a>
+									</div>
+								</div>
+								<div class="card-body">
+									<div class="row">
+										<div class="col-sm-5 col-6 text-dark tableAccueil text-center">
+											Type
+										</div>
+										<div class="col-sm-7 col-6 text-dark tableAccueil text-center">
+											Description
+										</div>
+										{% for liste in intervention.listeInterTypeInters %}
+											<div class="col-sm-5 col-6 text-dark tableAccueil text-center">
+												{{ liste.typeInter.nom|capitalize }}
+											</div>
+											<div class="col-sm-7 col-6 text-dark tableAccueil ">
+												{{ liste.description}}
+											</div>
+
+										{% endfor %}
+									</div>
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+
+
+		</div>
+
+	</section>
+{% endblock %}
+

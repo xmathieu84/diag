@@ -1,0 +1,185 @@
+{% extends 'accueil/baseaccueil.html.twig' %}
+
+{% block title %}
+	Diag-drone - Inscription
+{% endblock %}
+{% block titrePage %}
+	<h1>Création de compte</h1>
+
+{% endblock %}
+{% block nomPage %}Création de compte
+{% endblock %}
+{% block bodyAccueil %}
+<section class="ls ms s-pt-xl-150 s-pt-lg-130 s-pt-md-90 s-pt-60 s-pb-xl-140 s-pb-lg-120 s-pb-md-80 s-pb-50 c-mb-10 c-gutter-60">
+
+	<div class="container">
+
+	<div class="row">
+
+
+		<div class="col-lg-12">
+			<div class="row ">
+
+				<div class="col-md-4 col-sm-12">
+					<div class="product profile_choice">
+						<a class="woocommerce-LoopProduct-link" href="{{path('lesProfils',{type : "Opérateurs Télé-pilotes de Drone"})}}">
+
+									<div class="img-wrap">
+										<img src="/css/css_site/images/INTERFACE OTD.jpg" alt="">
+									</div>
+									<h2 class="profil">Opérateurs Télé-pilotes de Drones</h2>
+							<p class="h7 text-center mb-3">Gérez et boostez votre activité ! </p>
+								</a>
+								<a rel="nofollow" href="{{path('lesProfils',{type : "Opérateurs Télé-pilotes de Drone"})}}" class="button profil_choice">Choisir ce
+									profil</a>
+					</div>
+				</div>
+				<div class="col-md-4 col-sm-12">
+					<div class="product profile_choice">
+						<a class="woocommerce-LoopProduct-link" href="{{path('rechercheDrone')}}">
+
+
+									<div class="img-wrap">
+										<img src="/css/css_site/images/BESOIN DRONE.jpg" alt="">
+
+									</div>
+									<h2 class="profil">Demandeurs</h2>
+							<p class="h7 text-center mb-3 marginInterface">Réservez une intervention par drone.</p>
+								</a>
+								<a rel="nofollow" href="{{path('rechercheDrone')}}"
+								   class="button profil_choice">Choisir ce profil</a>
+					</div>
+				</div>
+				<div class="col-md-4 col-sm-12">
+					<div class="product profile_choice">
+						<a class="woocommerce-LoopProduct-link" href="{{path('lesProfils',{type:'Consultants'})}}">
+
+									<div class="img-wrap">
+										<img src="/css/css_site/images/INTERFACE-CONSULTANT-PRO-BTP.jpg" alt="">
+
+									</div>
+									<h2 class="profil">Consultants</h2>
+							<p class="h7 text-center mb-3 marginInterface">Consultez et partagez tous les diags.</p>
+								</a>
+								<a rel="nofollow" href="{{path('lesProfils',{type:'Consultants'})}}"
+								   class="button profil_choice">Choisir ce profil</a>
+
+					</div>
+				</div>
+				<div class="col-md-4 col-sm-12">
+					<div class="product profile_choice">
+						<a class="woocommerce-LoopProduct-link" href="{{path('lesProfils',{type:'Institutionnels'})}}">
+
+
+							<div class="img-wrap">
+								<img src="/css/css_site/images/INTERFACE INSTITUTIONNEL.jpg" alt="">
+
+							</div>
+							<h2 class="profil">Institutionnels</h2>
+							<p class="h7 text-center mb-3 marginInterface">Commune, Agglomération, Département..</p>
+						</a>
+						<a rel="nofollow" href=""{{path('lesProfils',{type:'Institutionnels'})}}"
+						   class="button profil_choice">Choisir ce profil</a>
+
+					</div>
+				</div>
+				<div class="col-md-4 col-sm-12">
+					<div class="product profile_choice">
+						<a class="woocommerce-LoopProduct-link"
+						   href="{{ path('lesProfils',{type:'Grands Comptes'}) }}">
+
+
+							<div class="img-wrap">
+								<img src="/css/css_site/images/INTERFACE GRAND COMPTE.jpg" alt="">
+
+							</div>
+							<h2 class="profil">Grands Comptes</h2>
+							<p class="h7 text-center mb-3 marginInterface">Assureur, Expert, Syndic, Entreprise...</p>
+						</a>
+						<a rel="nofollow" href="{{ path('lesProfils',{type:'Grands Comptes'}) }}"
+						   class="button profil_choice">Choisir ce profil</a>
+
+					</div>
+				</div>
+				<div class="col-md-4 col-sm-12">
+					<div class="product profile_choice">
+						<a class="woocommerce-LoopProduct-link"
+						   href="{{ path('lesProfils',{type:"Diagnostiqueurs"}) }}">
+
+
+							<div class="img-wrap">
+								<img src="/css/css_site/images/consultant2.jpg" alt="">
+
+							</div>
+							<h2 class="profil">Diagnostiqueurs</h2>
+							<p class="h7 text-center mb-3 marginInterface">Gérez et boostez votre activité !</p>
+						</a>
+						<a rel="nofollow" href="{{ path('lesProfils',{type:"Diagnostiqueurs"}) }}"
+						   class="button profil_choice">Choisir ce profil</a>
+
+					</div>
+				</div>
+				<div class="col-md-4 col-sm-12">
+					<div class="product profile_choice">
+						<a class="woocommerce-LoopProduct-link"
+						   href="">
+
+
+							<div class="img-wrap">
+								<img src="/css/css_site/images/consultant2.jpg" alt="">
+
+							</div>
+							<h2 class="profil">Annonceurs Pro BTP </h2>
+							<p class="h7 text-center mb-3 marginInterface">Diffusion nationale ou géolocalisée</p>
+						</a>
+						<a rel="nofollow" href=""
+						   class="button profil_choice">Á venir ...</a>
+
+					</div>
+				</div>
+				<div class="col-md-4 col-sm-12">
+					<div class="product profile_choice">
+						<a class="woocommerce-LoopProduct-link"
+						   href="">
+
+
+							<div class="img-wrap">
+								<img src="/css/css_site/images/consultant2.jpg" alt="">
+
+							</div>
+							<h2 class="profil">Annonceurs actvités sportives</h2>
+							<p class="h7 text-center mb-3 marginInterface">Diffusion nationale ou géolocalisée</p>
+						</a>
+						<a rel="nofollow" href=""
+						   class="button profil_choice">Á venir ...</a>
+
+					</div>
+				</div>
+				<div class="col-md-4 col-sm-12">
+					<div class="product profile_choice">
+						<a class="woocommerce-LoopProduct-link"
+						   href="">
+
+
+							<div class="img-wrap">
+								<img src="/css/css_site/images/consultant2.jpg" alt="">
+
+							</div>
+							<h2 class="profil">Annonceurs actvités culturelles</h2>
+							<p class="h7 text-center mb-3 marginInterface">Diffusion nationale ou géolocalisée</p>
+						</a>
+						<a rel="nofollow" href=""
+						   class="button profil_choice">A venir ...</a>
+
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+	</div>
+</section>
+
+
+{% endblock %}

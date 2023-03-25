@@ -1,0 +1,144 @@
+
+.logoDossier{
+    width: 25%;
+    float: left;
+    text-align: center;
+    padding-right: 0.5em;
+    padding-top: 1.5em;
+}
+.sepaDossier{
+    float: left;
+    width: 2%;
+    height: 20em;
+    background: #F68446;
+}
+.createur{
+    text-transform: uppercase;
+}
+.cadre1Dossier{
+    height: 20em;
+}
+.cadre2Dossier{
+    height: 20em;
+}
+.cadre1Dossier,.cadre2Dossier{
+    float: left;
+    width: 30%;
+    background: #CBCDCA;
+    margin-left: 0.5em;
+    padding-left: 0.5em;
+    padding-top: 0.5em;
+    font-size: 0.9em;
+}
+.bleuDossier{
+    height: 1em;
+    width: 100%;
+    background: #3680CB ;
+}
+.cadreTitre{
+    width: 100%;
+    height: 110px;
+    background: #CBCDCA;
+    text-align: center;
+    padding-top: 25px;
+    font-size: 27px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.titre1{
+    text-transform: uppercase;
+}
+.cadre3{
+    float: left;
+    width: 49%;
+    height: 110px;
+    background: #CBCDCA;
+
+}
+.cadre4{
+    float: left;
+    width: 49%;
+    margin-left: 15px;
+    height: 110px;
+    background: #CBCDCA;
+    margin-bottom: 10px;
+}
+.nom{
+    padding-left: 40px;
+}
+.cadre5,.cadre6{
+    float: left;
+    width: 40%;
+    background: #CBCDCA;
+    height: 100px;
+    text-align: center;
+    font-size: 30px;
+
+}
+.cadre5{
+    margin-right: 15px;
+    margin-top: 10px;
+    margin-left: 40px;
+}
+.cadre6{
+    margin-left: 80px;
+}
+.cadreAlerte{
+    width: 100%;
+}
+td{
+    width: 50%;
+    text-align: center;
+    border-bottom: 1px dotted black;
+    font-size: 0.9em;
+}
+
+.cadrePage2{
+    float: left;
+    width: 75%;
+    background:#CBCDCA ;
+    margin-left: 95px;
+    height: 70px;
+    text-align: center;
+    padding-top: 5px;
+
+    margin-bottom: 10px;
+}
+
+.content{
+
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 10em;
+
+}
+.cadre1Page2{
+    float: left;
+    width: 100%;
+    height: 40px;
+    background:#CBCDCA ;
+    text-align: center;
+    margin-top: 10px;
+
+}
+.notes {
+    margin-top: 40px;
+    border-collapse: collapse;
+}
+.texte{
+    margin-bottom: 20px;
+    width: 100%;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.footer{
+    height: 60px;
+}
+.cadre1Page3,.cadre2Page3{
+    float: left;
+    width: 50%;
+    height: 40px;
+    background:#CBCDCA ;
+    text-align: center;
+
+}

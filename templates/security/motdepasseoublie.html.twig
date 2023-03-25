@@ -1,0 +1,29 @@
+{% extends 'accueil/baseaccueil.html.twig' %}
+{% block title %}Mot de passe oublié{% endblock %}
+{% block body %}
+
+<section id="about"
+    class="about_us ls s-pt-xl-150 s-pt-lg-130 s-pt-md-90 s-pt-60 s-pb-xl-120 s-pb-lg-100 s-pb-md-60 s-pb-30 c-mb-30 bg-grey-light">
+    <div class="container">
+        <div class="row align-items-center bg-white">
+            <div class="col-lg-3 text-center text-sm-left order-2 order-lg-1"></div>
+            <div class="col-lg-6 text-center text-sm-left order-2 order-lg-1">
+            <p class="h6">Indiquez votre adresse email</p>
+                <input type="email" placeholder="Email" id="mail">
+               
+               
+            </div>
+            <div class="col-lg-3 text-center text-sm-left order-2 order-lg-1"></div>
+            <div class="col-lg-3 text-center text-sm-left order-2 order-lg-1"></div>
+            <div class="col-lg-6 text-center text-sm-left order-2 order-lg-1">
+
+
+            <p class="h6 message"></p>
+            <div class="col-lg-3 text-center text-sm-left order-2 order-lg-1"></div>
+            <div class="col-sm-12 text-center">
+                 <br><br><button type="button" class="btn btn-maincolor3 btn-pswd">Envoyer</button>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock  %}

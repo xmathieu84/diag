@@ -1,0 +1,44 @@
+{% extends 'administrateur/baseA.html.twig' %}
+
+
+{% block title %}Liste facutre grands comptes{% endblock %}
+{% block body %}
+    <div class="row">
+        <div class="col-sm-12 mb-5">
+            <p class="h4">Liste des factures Grands Comptes</p>
+        </div>
+        {% for institution in institutions %}
+            <div id="accordion">
+                <div class="card">
+                    <div class="card-header" id="heading-{{ loop.index }}">
+                        <h5 class="mb-0">
+                            <a role="button" data-toggle="collapse" href="#collapse-{{ loop.index }}"
+                               aria-expanded="true" aria-controls="collapse-{{ loop.index }}">
+                                {{ institution.profil }} {{ institution.nom }}
+                            </a>
+                        </h5>
+                    </div>
+                    <div id="collapse-{{ loop.index }}" class="collapse" data-parent="#accordion"
+                         aria-labelledby="heading-{{ loop.index }}">
+                        <div class="card-body">
+                            <div class="row">
+                                {% for fichier in institution.factureInstis %}
+                                    <div class="col-sm-3">
+                                        <a href="/uploads/factureInsti/{{ fichier.nom }}" target="_blank">
+                                        <figure>
+                                            <img src="/css/css_site/img/pdf.png" alt="">
+                                            <figcaption>{{ fichier.nom }}</figcaption>
+                                        </figure>
+                                        </a>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

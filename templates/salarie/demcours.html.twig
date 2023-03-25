@@ -1,0 +1,56 @@
+{% extends 'entreprise/baseAE.html.twig' %}
+
+
+{% block title %}Demandes en cours de validation
+{% endblock %}
+
+{% block pageAccueil %}
+	<h4>Interventions en attente de proposition tarifaire.</h4>
+{% endblock %}
+
+{% block contenu %}
+
+	<div class="row">
+
+
+				{#  <div class="col-sm-12 mb-5">
+					<p class="h6">Indiquez votre proposition tarifaire pour chacune des interventions en attente.
+						Vos frais de déplacement seront ajoutés à votre proposition.
+						Votre proposition sera immédiatement transmise au demandeur qui pourra réserver l'intervention.
+					</p>
+				</div>#}
+		{% if propositions is not empty %}
+			{% for proposition in propositions %}
+		{% if proposition.inter.propositionChoisie == null or proposition.dateFin < date %}
+				{% if proposition.prix %}
+					<div class="col-sm-12 col-12  priceDone pt-3 pb-3 mb-2">
+					{% else %}
+						<div class="col-sm-12 col-12 pt-3 pb-3 priceNone mb-2">
+				{% endif %}
+
+					<div class="row">
+						<div class="col-6" >
+							<p class="h5">Intervention  à {{ proposition.inter.adresse.ville|capitalize}}</p>
+							{% if proposition.prix %}
+								<p class="h5">Prix proposé hors déplacement : {{ proposition.prix }} €</p>
+							{% endif %}
+						</div>
+
+						<div class="col-6 text-right pt-2">
+							<a href="{{ path('detailInter',{id:proposition.id}) }}">
+								<button class="btn btn-maincolor btn-sm">Voir plus d'information</button>
+							</a>
+
+						</div>
+					</div>
+
+				</div>
+			{% endif %}
+			{% endfor %}
+			{% else %}
+			<div class="col-12 mt-5">
+				<p class="h4">Vous n'avez aucune proposition tarifaire en attente</p>
+			</div>
+		{% endif %}
+
+{% endblock %}

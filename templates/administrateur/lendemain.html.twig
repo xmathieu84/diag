@@ -1,0 +1,108 @@
+{% extends "administrateur/baseA.html.twig" %}
+{% block title %}Rappel intervention{% endblock %}
+{% block body %}
+
+<section class="wrapper">
+    <div class="row mt">
+      <div class="col-lg-12">
+       <h1>Intervention du {{lendemain|format_datetime('short', 'none', locale='fr')}}</h1>
+        <section id="unseen">
+          <table class="table table-bordered table-striped table-condensed ">
+            <thead>
+              <tr class="table-danger">
+                <th>Demandeur</th>
+              <th>Prix intervention</th>
+              <th>Intervenant</th>
+              <th>Date de l'intervention</th>
+                <th></th>
+              </tr>
+              
+            </thead>
+            <tbody>
+              {% for intervention in interventions1D %}
+                  <tr>
+                    <td>{{intervention.intDem.civilite.nom}} {{intervention.intDem.civilite.prenom}}<br>
+                      {{intervention.intDem.adresse.numero}}  {{intervention.intDem.adresse.nomVoie}}  {{intervention.intDem.adresse.codePostal}}  {{intervention.intDem.adresse.ville}}</td>
+                      <td>{{intervention.prix}}€</td>
+                      <td>{{intervention.reservation.salarie.civilite.nom}} {{intervention.reservation.salarie.civilite.prenom}}</td>
+                      <td>{{intervention.rdvAT|format_datetime('short', 'none', locale='fr')}}</td>
+                      {% if intervention.rappelSMS == null %}
+                      <td><button type="button" class="btn btn-sm btn-warning sms" data-intervention="{{intervention.id}}">Envoyer SMS de rappel</button></td>
+                      {% else %}
+                        <td>{{intervention.rappelSMS}}</td>
+                      {% endif %}
+                    </tr>
+              {% endfor %}
+            </tbody>
+          </table> 
+          </section> 
+     </div>
+      <div class="col-lg-12">
+       <h1>Intervention du {{deuxJours|format_datetime('short', 'none', locale='fr')}}</h1>
+        <section id="unseen">
+          <table class="table table-bordered table-striped table-condensed ">
+            <thead>
+              <tr class="table-danger">
+                <th>Demandeur</th>
+              <th>Prix intervention</th>
+              <th>Intervenant</th>
+              <th>Date de l'intervention</th>
+                <th></th>
+              </tr>
+              
+            </thead>
+            <tbody>
+              {% for intervention in interventions2D %}
+                  <tr>
+                    <td>{{intervention.intDem.civilite.nomDemandeur}} {{intervention.intDem.civilite.prenom}}<br>
+                      {{intervention.intDem.adresse.numero}}  {{intervention.intDem.adresse.nomVoie}}  {{intervention.intDem.adresse.codePostal}}  {{intervention.intDem.adresse.ville}}</td>
+                      <td>{{intervention.prix}}€</td>
+                      <td>{{intervention.reservation.salarie.civilite.nom}} {{intervention.reservation.salarie.civilite.prenom}}</td>
+                      <td>{{intervention.rdvAT|format_datetime('short', 'none', locale='fr')}}</td>
+                       {% if intervention.rappelSMS == null %}
+                      <td><button type="button" class="btn btn-sm btn-warning sms" data-intervention="{{intervention.id}}">Envoyer SMS de rappel</button></td>
+                      {% else %}
+                        <td>{{intervention.rappelSMS}}</td>
+                      {% endif %}
+                    </tr>
+              {% endfor %}
+            </tbody>
+          </table> 
+          </section> 
+     </div>
+      <div class="col-lg-12">
+       <h1>Intervention du {{troisJours|format_datetime('short', 'none', locale='fr')}}</h1>
+        <section id="unseen">
+          <table class="table table-bordered table-striped table-condensed ">
+            <thead>
+              <tr class="table-danger">
+                <th>Demandeur</th>
+              <th>Prix intervention</th>
+              <th>Intervenant</th>
+              <th>Date de l'intervention</th>
+                <th></th>
+              </tr>
+              
+            </thead>
+            <tbody>
+              {% for intervention in interventions3D %}
+                  <tr>
+                    <td>{{intervention.intDem.civilite.nom}} {{intervention.intDem.civilite.prenom}}<br>
+                      {{intervention.intDem.adresse.numero}}  {{intervention.intDem.adresse.nomVoie}}  {{intervention.intDem.adresse.codePostal}}  {{intervention.intDem.adresse.ville}}</td>
+                      <td>{{intervention.prix}}€</td>
+                      <td>{{intervention.reservation.civilite.salarie.nom}} {{intervention.reservation.salarie.civilite.prenom}}</td>
+                      <td>{{intervention.rdvAT|format_datetime('short', 'none', locale='fr')}}</td>
+                       {% if intervention.rappelSMS == null %}
+                      <td><button type="button" class="btn btn-sm btn-warning sms" data-intervention="{{intervention.id}}">Envoyer SMS de rappel</button></td>
+                      {% else %}
+                        <td>{{intervention.rappelSMS}}</td>
+                      {% endif %}
+                    </tr>
+              {% endfor %}
+            </tbody>
+          </table> 
+        </section> 
+     </div>
+    </div>
+</section>
+{% endblock %}

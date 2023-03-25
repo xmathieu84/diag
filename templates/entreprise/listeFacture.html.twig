@@ -1,0 +1,22 @@
+{% extends 'entreprise/baseAE.html.twig' %}
+{% block title %}Factures reçues{% endblock %}
+{% block titreSection %}Factures reçues{% endblock %}
+{% block titrePage %}Factures reçues{% endblock %}
+{% block pageAccueil %}
+<h4>Factures reçues</h4>
+{% endblock %}
+
+{% block contenu %}
+    <div class="row">
+        {% for facture in factures %}
+            <div class="col-sm-2" style="text-align: center">
+                <a href="/uploads/factureDD/{{ facture.nom }}" target="_blank">
+                    <figure>
+                        <img src="/css/css_site/img/pdf.png" alt="">
+                        <figcaption>{{ facture.type }} {{ facture.date|format_datetime('short','none',locale='fr') }}</figcaption>
+                    </figure>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

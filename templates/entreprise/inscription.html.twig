@@ -1,0 +1,190 @@
+{% extends "accueil/baseaccueil.html.twig" %}
+
+{% block title %}Inscription entreprise
+{% endblock %}
+{% block titrePage %}
+<h1>Création de compte Opérateur téle-pilote de drone</h1>
+{% endblock %}
+{% block nomPage %}Création de compte
+{% endblock %}
+{% block nomSection %}Accueil
+{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="/css/css_site/css/inscription.css">
+{% endblock %}
+
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{% block bodyAccueil %}
+
+<section class="ls bg-grey-light">
+	<div class="container">
+		<div class="row mt-108">
+			<div class="col-12">
+				<div class="py-2 px-5 text-center">
+					<h4 class="d-inline">Inscription</h4>
+					<p class="h6">Les champs marqués d'une * sont obligatoires</p>
+					{% for message in app.flashes('alerte') %}
+						<div class="alert alert-danger">
+							{{ message }}
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+
+		</div>
+		<div class="col-12 mt-3 mb-3 bg-white">
+			{{form_start(form)}}
+			<div class="stepwizard">
+				<div class="row align-items-top justify-content-around pt-3 text-center">
+					<div class="col-4">
+						<div>
+							<span class="page-item active">
+								<a class="page-link mb-1" href="#" onclick="goToTab(0)">
+									1
+								</a>
+							</span>
+							<div class="h7">
+								<a onclick="goToTab(0)">
+									Informations société
+									<i class="text-success fa fa-check d-none"></i>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="col-4">
+						<div>
+							<span class="page-item">
+								<a class="page-link mb-1"  href="#" onclick="goToTab(1)">
+									2
+								</a>
+							</span>
+							
+							<div class="h7">
+								<a onclick="goToTab(1)">
+									Civilité
+									<i class="text-success fa fa-check d-none"></i>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="col-4">
+						<div>
+							<span class="page-item">
+								<a class="page-link mb-1" href="#" onclick="goToTab(2)">
+									3
+								</a>
+							</span>
+							
+							<div class="h7">
+								<a onclick="goToTab(2)">
+									Adresse de facturation
+									<i class="text-success fa fa-check d-none"></i>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<hr class=" float-top mb-0 mt-2" />
+			</div>
+			<div class="tab">
+				
+				<div class="row align-items-center">
+					<div class="col-sm-6 col-12 mt-4">
+						{{form_row(form.form_juridique,{'label' : "Forme juridique * " ,'attr':{'class':"form-control form-control-lg"}})}}
+					</div>
+					<div class="col-sm-6 col-12 mt-4">
+						{{form_row(form.denomination,{'label' : 'Dénomination *(Nom de famille pour les auto-entreprises)' ,'attr':{'class':"form-control border-dark","size":"30",'placeholder':'dénomination *','autocomplete':'off'}})}}
+					</div>
+				</div>
+				<div class="row align-items-end">
+					<div class="col-sm-6 col-12 mt-4">
+						{{form_row(form.enseigne,{'label' : 'Enseigne (si différent de la dénomination) ' , 'attr':{'class':"form-control",'placeholder':'Enseigne si différent de Dénomination','autocomplete':'off'}})}}
+
+					</div>
+					<div class="col-sm-6 col-12 mt-4">
+						<label for="entreprise_logo">Télécharger votre logo</label>
+						<button id="logo" type="button" class="btn">Télécharger votre logo</button>
+						<div class="d-none">
+							{{form_row(form.logo,{ 'label' : ' ','attr':{'class':"form-control-file"}})}}
+						</div>
+					</div>
+				</div>
+				<div class="row align-items-center">
+					<div class="col-sm-4 col-12 mt-4">
+						{{form_row(form.siretTva.siret,{'label' : 'Numéro de SIRET * ' , 'attr':{'class':"form-control",'placeholder':'Numéro de siret *','minlength':'14', 'maxlength':'14','autocomplete':'off'}})}}
+					</div>
+					<div class="col-sm-4 col-12 mt-4 form-group text-center">
+						{{form_row(form.siretTva.assujeti,{'label' : 'Êtes-vous assujétis à la TVA ? * ' , 'label_attr':{'for': form.vars.id ~ '[' ~ form.siretTva.vars.name ~ ']' ~ '[' ~ form.siretTva.assujeti.vars.name ~ ']'}})}}
+					</div>
+					<div class="col-sm-4 col-12 mt-4 tva">
+						{{form_row(form.siretTva.tva,{'label' : 'Numéro de TVA intracommunautaire * ' , 'attr':{'class':"form-control",'placeholder':'Numéro de TVA *','autocomplete':'off'}})}}
+					</div>
+				</div>
+			</div>
+			<div class="tab">
+				<div class="row align-items-center">
+					<div class="col-xl-4 col-lg-4 col-12 text-center">
+						{{form_row(form.dirigeant.type,{'label_attr':{'for': form.vars.id ~ "[" ~ form.dirigeant.vars.name ~ "]" ~ "[" ~ form.dirigeant.type.vars.name ~ "]"}})}}
+					</div>
+					<div class="col-xl-4 col-lg-4 col-md-6 col-12 mt-4">
+						{{form_row(form.dirigeant.nom,{'label' : 'Nom du reponsable légal * ' ,'attr':{'class':"form-control form-control-lg","placeholder":"Nom du reponsable légal *",'autocomplete':'off'}})}}
+					</div>
+					<div class="col-xl-4 col-lg-4 col-md-6 col-12 mt-4">
+						{{form_row(form.dirigeant.prenom,{'label' : 'Prénom du reponsable légal * ' ,'attr':{'class':"form-control form-control-lg","placeholder":"Prénom du reponsable légal *",'autocomplete':'off'}})}}
+					</div>
+				</div>
+				<div class="row align-items-start">
+					<div class="col-sm-6 col-12 mt-4">
+						{{form_row(form.telephone.numero,{'label' : 'Numéro de téléphone mobile * (Sans espace entre les nombres) ' ,'attr':{'class':"form-control form-control-lg","placeholder":"Numéro de téléphone *",'autocomplete':'off'}})}}
+					</div>
+					<div class="col-sm-6 col-12 mt-4">
+						{{form_row(form.user.email,{'label' : 'Adresse E-mail de contact * ' ,'attr':{'class':"form-control form-control-lg","placeholder":"Email *","pattern":"[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"}})}}
+					</div>
+					<div class="col-sm-6 col-12 mt-4">
+						{{form_row(form.user.password,{'label' : 'Mot de passe *(8 caractères min.) ' ,'attr':{'class':"password form-control form-control-lg","placeholder":"Mot de passe *"}})}}
+						<i class="fa fa-eye-slash text-muted float-right togglePassword" onclick="togglePasswordVisibility(event)"></i>
+					</div>
+					<div class="col-sm-6 col-12 mt-4">
+						{{form_row(form.user.confirm_password,{'label' : 'Confirmez votre mot de passe * ' ,'attr':{'class':"confirm_password form-control form-control-lg","placeholder":"Confirmez le mot de passe *"}})}}
+
+						<div class="passwordHelper h7 text-danger d-none">Les mots de passe saisis doivent correspondre</div>
+					</div>
+				</div>
+			</div>
+			<div class="tab">
+				<div class="row align-items-start">
+					<div class="col-sm-3 col-12 mt-4">
+						{{form_row(form.adresse.numero,{'label' : 'Numéro de votre voie ' ,'attr':{'class':"form-control form-control-lg","placeholder":"Numéro de la voie *"}})}}
+					</div>
+					<div class="col-sm-9 col-12 mt-4">
+						{{form_row(form.adresse.nomVoie,{'label' : 'Nom de votre voie * ' ,'attr':{'class':"form-control form-control-lg","placeholder":"Nom de la voie *"}})}}
+
+					</div>
+					<div class="col-sm-6 col-12 mt-4">
+						{{form_row(form.adresse.codePostal,{'label' : 'Code postal * ' ,'attr':{'class':" form-control-lg","placeholder":"Code postal *"}})}}
+
+					</div>
+					<div class="col-sm-6 col-12 mt-4">
+						{{form_row(form.adresse.ville,{'label' : "Ville*(Tapez d'abord votre code postal)" ,'attr':{'class':"form-control form-control-lg","placeholder":"Ville*(Tapez d'abord votre code postal)",'list':"city"}})}}<datalist id="city"></datalist>
+
+					</div>
+				</div>
+			</div>
+			<div class="d-flex flex-row-reverse justify-content-between mt-3 pb-3">
+				<button class="btn btn-maincolor" type="button" id="nextBtn" onclick="nextPrev(1)">Suivant</button>
+				<button class="btn btn-outline-darkgrey" type="button" id="prevBtn" onclick="nextPrev(-1)">Précédent</button>
+			</div>
+			{{form_end(form)}}
+		</div>
+	</div>
+
+
+</section>
+
+{% endblock  %}
+
+{% block javascripts %}
+<script src="/js/js_site/inscription.js"></script>
+{% endblock %}

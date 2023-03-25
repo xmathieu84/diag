@@ -1,0 +1,143 @@
+{% extends 'administrateur/baseA.html.twig' %}
+
+{% block body %}
+<div class="row mt-5">
+    <div class="col-12">
+        <p class="h3">Voici les contraintes de vol pour l'intervention du {{ intervention.rdvAT|format_datetime('short','short',locale='fr') }} à {{ intervention.adresse.numero }} {{ intervention.adresse.nomVoie }} {{ intervention.adresse.codePostal }} {{ intervention.adresse.ville }}</p>
+    </div>
+    <div class="col-12">
+        <p class="h4 souligne">Ajouter une contrainte de vol</p>
+        <div class="row">
+            <div class="col-4">
+                <label for="">Contrainte de vol</label>
+                <select class="form-control form-control-lg type">
+                    <option value="" disabled="" selected="">Sélectionne la contrainte</option>
+                    <option value="Espace aérien">Espace aérien</option>
+                    <option value="Aérodrome">Aérodrome</option>
+                    <option value="Zone urbaine">Zone urbaine</option>
+                    <option value="Zone densément peuplée">Zone densément peuplée</option>
+                    <option value="Route">Route</option>
+                    <option value="Antenne">Antenne</option>
+                    <option value="Chemin de fer">Chemin de fer</option>
+                    <option value="Lignes électriques">Lignes électriques</option>
+                    <option value="Réserve naturelle">Réserve naturelle</option>
+                    <option value="Zone militaire">Zone militaire</option>
+                    <option value="Notam">Notam</option>
+                    <option value="Construction isolée">Construction isolée</option>
+                    <option value="Photo / Vidéo interdite">Photo / Vidéo interdite</option>
+                </select>
+            </div>
+            <div class="col-4">
+                <label for="">Altitude ou indication</label>
+                <input type="text" class="form-control form-control-lg altitutde" data-inter="{{ intervention.id }}">
+            </div>
+            <div class="col-4">
+                <label for="">Spécifités</label>
+                <input type="text" class="form-control form-control-lg specificite" data-inter="{{ intervention.id }}">
+            </div>
+            <div class="col-12 text-center pt-5">
+                <button class="btn btn-success">Valider</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="row zoneModif">
+
+            <div class="col-12 mt-5 mb-5">
+                <p class="h3 souligne">Modifier les contraintes vol</p>
+                <p class="h4">Toutes les modifications effectuées sur les contraintes de vols se fait en direct sur l'application.</p>
+                <p class="h4">Les OTD ne reçoivent pas de mails pour des changements de contraintes de vol .</p>
+            </div>
+            {% for contrainte in intervention.contrainteInters %}
+                <div class="col-3 mb-3 zoneContr">
+                    <label for="">Contrainte</label>
+                    <select class="form-control form-control-lg typeM" data-type="type" data-id="{{ contrainte.id }}">
+                        {% if contrainte.type == "Espace aérien" %}
+                            <option value="Espace aérien" selected="selected">Espace aérien</option>
+                        {% else %}
+                            <option value="Espace aérien">Espace aérien</option>
+                        {% endif %}
+                        {% if contrainte.type == "Aérodrome" %}
+                            <option value="Aérodrome" selected="selected">Aérodrome</option>
+                        {% else %}
+                            <option value="Aérodrome">Aérodrome</option>
+                        {% endif %}
+                        {% if contrainte.type == "Zone urbaine" %}
+                            <option value="Zone urbaine" selected="selected">Zone urbaine</option>
+                        {% else %}
+                            <option value="Zone urbaine">Zone urbaine</option>
+                        {% endif %}
+                        {% if contrainte.type == "Zone densément peuplée" %}
+                            <option value="Zone densément peuplée" selected="selected">Zone densément peuplée</option>
+                        {% else %}
+                            <option value="Zone densément peuplée">Zone densément peuplée</option>
+                        {% endif %}
+                        {% if contrainte.type == "Route" %}
+                            <option value="Route" selected="selected">Route</option>
+                        {% else %}
+                            <option value="Route">Route</option>
+                        {% endif %}
+                        {% if contrainte.type == "Antenne" %}
+                            <option value="Antenne" selected="selected">Antenne</option>
+                        {% else %}
+                            <option value="Antenne">Antenne</option>
+                        {% endif %}
+                        {% if contrainte.type == "Chemin de fer" %}
+                            <option value="Chemin de fer" selected="selected">Chemin de fer</option>
+                        {% else %}
+                            <option value="Chemin de fer">Chemin de fer</option>
+                        {% endif %}
+                        {% if contrainte.type == "Lignes électriques" %}
+                            <option value="Lignes électriques" selected="selected">Lignes électriques</option>
+                        {% else %}
+                            <option value="Lignes électriques">Lignes électriques</option>
+                        {% endif %}
+                        {% if contrainte.type == "Réserve naturelle" %}
+                            <option value="Réserve naturelle" selected="selected">Réserve naturelle</option>
+                        {% else %}
+                            <option value="Réserve naturelle">Réserve naturelle</option>
+                        {% endif %}
+                        {% if contrainte.type == "Construction isolée" %}
+                            <option value="Construction isolée" selected="selected">Construction isolée</option>
+                        {% else %}
+                            <option value="Construction isolée">Construction isolée</option>
+                        {% endif %}
+                        {% if contrainte.type == "Zone militaire" %}
+                            <option value="Zone militaire" selected="selected">Zone militaire</option>
+                        {% else %}
+                            <option value="Zone militaire">Zone militaire</option>
+                        {% endif %}
+                        {% if contrainte.type == "Notam" %}
+                            <option value="Notam" selected="selected">Notam</option>
+                        {% else %}
+                            <option value="Notam">Notam</option>
+                        {% endif %}
+                        {% if contrainte.type == "Photo / Vidéo interdite" %}
+                            <option value="Photo / Vidéo interdite" selected="selected">Photo / Vidéo interdite</option>
+                        {% else %}
+                            <option value="Photo / Vidéo interdite">Photo / Vidéo interdite</option>
+                        {% endif %}
+                    </select>
+                </div>
+                <div class="col-3 zoneSpec">
+                    <label for="">Spécificité</label>
+                    <input type="text" class="form-control form-control-lg specificiteM" value="{{ contrainte.specificite }}" data-type="specificite" data-id="{{ contrainte.id }}">
+                </div>
+                <div class="col-3 zoneAlt ">
+                    <label for="altitude">Altitude</label>
+                    <input type="text" class="form-control form-control-lg altitutdeM" value="{{ contrainte.distance }}" data-type="altitude" data-id="{{ contrainte.id }}">
+                </div>
+                <div class="col-3 pt-5 zoneBtn">
+                    <button class="btn btn-danger btn-sm deleteContrainte" data-contrainte="{{ contrainte.id }}">Supprimer cette contrainte</button>
+                </div>
+
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block title %}
+Voir contrainte
+{% endblock %}
+

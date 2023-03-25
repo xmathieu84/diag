@@ -1,0 +1,70 @@
+{% extends template %}
+
+{% block title %}Liste diagnostiqueur
+{% endblock %}
+{% block titredemandeur %}
+	<h1>Liste des télé-opérateur correspondant à votre demande</h1>
+{% endblock  %}
+{% block body %}
+
+	<section class="ls s-py-xl-150 s-py-lg-130 s-py-md-90 s-py-60 c-gutter-30">
+		<div class="container">
+			<div class="row">
+				<main class="col-lg-7 col-xl-9">
+					<div class="columns-3">
+						<ul class="products">
+							{% set somme = 0 %}
+							{% set nombre = 0 %}
+
+							{% for salarie in listes %}
+								<li class="product">
+									<a class="woocommerce-LoopProduct-link" href="shop-product-right.html">
+										<div class="img-wrap">
+											<img src="/css/css_site/images/shop/{{loop.index}}.jpg" alt="">
+										</div>
+									</a>
+
+									<h2 class="text-center">Opérateur Télé-pilote de Drone n°{{loop.index}}</h2>
+									<div class="star-rating">
+										{% for notes in salarie.notes %}
+											{% if notes %}
+												{% set somme = (somme + notes.note) %}
+												{% set nombre = loop.length %}
+												{{(somme / nombre)/2 |number_format(2) }}/10
+												{% else %}
+											{% endif %}
+										{% endfor %}
+									</div>
+									<span class="price">
+										{% for tarif in salarie.entreprise.TarifAdmin  %}
+											{% if tarif.TypeDonnee == intervention.donneeType %}
+
+												{{tarif.prix }}€
+											{% endif %}
+										{% endfor %}
+										{% for Tarif in salarie.entreprise.tarifPerso %}
+											{% if Tarif.typeInter == intervention.donneeType %}
+												{{Tarif.prix }}€
+											{% endif %}
+										{% endfor %}
+									</span>
+
+									{% if salarie.propsition.prix is not null %}
+										<a href="{{path ('association',{inter:intervention.id , operateur: salarie.id})}}" class="button product_type_simple add_to_cart_button">Choisir ce télé-pilote</a>
+
+
+									{% endif %}
+
+								</li>
+
+
+							{% endfor %}
+						</ul>
+					</div>
+				</main>
+			</div>
+		</div>
+	</section>
+
+
+{% endblock %}
